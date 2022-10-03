@@ -5,11 +5,57 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-09-28T11:52:05.643Z\n"
-"PO-Revision-Date: 2022-09-28T11:52:05.643Z\n"
+"POT-Creation-Date: 2022-10-03T10:13:52.058Z\n"
+"PO-Revision-Date: 2022-10-03T10:13:52.058Z\n"
 
-msgid "Hello {{name}}"
-msgstr "Hello {{name}}"
+msgid "Aggregate data exchange information is not accessible"
+msgstr "Aggregate data exchange information is not accessible"
 
-msgid "Welcome to DHIS2!"
-msgstr "Welcome to DHIS2!"
+msgid ""
+"There was a problem retrieving aggregate data exchanges. Refresh the page "
+"to try again."
+msgstr ""
+"There was a problem retrieving aggregate data exchanges. Refresh the page "
+"to try again."
+
+msgid "There was a problem submitting data"
+msgstr "There was a problem submitting data"
+
+msgid "1 data report"
+msgstr "1 data report"
+
+msgid "{{requestsCount}} data reports"
+msgstr "{{requestsCount}} data reports"
+
+msgid "Exchange content not accessible"
+msgstr "Exchange content not accessible"
+
+msgid "Submitting..."
+msgstr "Submitting..."
+
+msgid "No, cancel"
+msgstr "No, cancel"
+
+msgid "Yes, submit"
+msgstr "Yes, submit"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Try again"
+msgstr "Try again"
+
+msgid "Data submitted successfully"
+msgstr "Data submitted successfully"
+
+msgid "Are you sure you want to submit this data?"
+msgstr "Are you sure you want to submit this data?"
+
+msgid "Submitting data"
+msgstr "Submitting data"
+
+msgid "Exchange"
+msgstr "Exchange"
+
+msgid "Choose a data exchange"
+msgstr "Choose a data exchange"

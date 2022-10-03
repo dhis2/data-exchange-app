@@ -1,0 +1,51 @@
+import { useConfig } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
+import { IconInfo16, IconDimensionDataSet16 } from '@dhis2/ui'
+import { formatDistance } from 'date-fns'
+import React from 'react'
+import { useExchangeContext } from '../../exchange-context/index.js'
+import styles from './title-bar.module.css'
+
+const getRelativeTimeDifference = ({ startTimestamp, endTimestamp }) => {
+    if (!startTimestamp || !endTimestamp) {
+        return undefined
+    }
+    const startTime = new Date(startTimestamp)
+    const endTime = new Date(endTimestamp)
+    return formatDistance(startTime, endTime)
+}
+
+const TitleBar = () => {
+    const { systemInfo } = useConfig()
+    const { exchange } = useExchangeContext()
+    const requestsCount = exchange.source?.requests?.length
+
+    return (
+        <div className={styles.titleBar}>
+            <span className={styles.workflowName}>{exchange?.displayName}</span>
+            <span className={styles.workflowDataSetsCount}>
+                <IconDimensionDataSet16 />
+                {requestsCount === 1 &&
+                    i18n.t('1 data report', {
+                        requestsCount,
+                    })}
+
+                {requestsCount > 1 &&
+                    i18n.t('{{requestsCount}} data reports', {
+                        requestsCount,
+                    })}
+            </span>
+            <div className={styles.analyticsRunStamp}>
+                <IconInfo16 />
+                <div>{`Analytics tables last generated ${getRelativeTimeDifference(
+                    {
+                        startTimestamp: systemInfo.lastAnalyticsTableSuccess,
+                        endTimestamp: systemInfo.serverDate,
+                    }
+                )} ago`}</div>
+            </div>
+        </div>
+    )
+}
+
+export { TitleBar }
