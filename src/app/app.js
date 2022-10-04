@@ -1,5 +1,9 @@
 import { CssVariables } from '@dhis2/ui'
+import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import { HashRouter, Route } from 'react-router-dom'
+import { QueryParamProvider } from 'use-query-params'
+import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
 import { AppProvider } from '../app-context/index.js'
 import { BottomBar } from '../bottom-bar/index.js'
 import { DataWorkspace } from '../data-workspace/index.js'
@@ -8,7 +12,7 @@ import { SubmitModal } from '../submit-modal/index.js'
 import { TopBar } from '../top-bar/index.js'
 import { Layout } from './layout.js'
 
-const App = () => {
+const App = ({ router: Router }) => {
     const [submitModalOpen, setSubmitModalOpen] = useState(false)
     const closeSubmitModal = () => {
         setSubmitModalOpen(false)
@@ -19,27 +23,48 @@ const App = () => {
     return (
         <>
             <CssVariables spacers colors theme />
-            <AppProvider>
-                <Layout.Container>
-                    <Layout.Top>
-                        <TopBar />
-                    </Layout.Top>
-                    <ExchangeProvider>
-                        <Layout.Content>
-                            <DataWorkspace />
-                            <SubmitModal
-                                open={submitModalOpen}
-                                onClose={closeSubmitModal}
-                            />
-                        </Layout.Content>
-                        <Layout.Bottom>
-                            <BottomBar openSubmitModal={openSubmitModal} />
-                        </Layout.Bottom>
-                    </ExchangeProvider>
-                </Layout.Container>
-            </AppProvider>
+            <Router>
+                <QueryParamProvider
+                    adapter={ReactRouter6Adapter}
+                    ReactRouterRoute={Route}
+                >
+                    <AppProvider>
+                        <Layout.Container>
+                            <Layout.Top>
+                                <TopBar />
+                            </Layout.Top>
+                            <ExchangeProvider>
+                                <Layout.Content>
+                                    <DataWorkspace />
+                                    <SubmitModal
+                                        open={submitModalOpen}
+                                        onClose={closeSubmitModal}
+                                    />
+                                </Layout.Content>
+                                <Layout.Bottom>
+                                    <BottomBar
+                                        openSubmitModal={openSubmitModal}
+                                    />
+                                </Layout.Bottom>
+                            </ExchangeProvider>
+                        </Layout.Container>
+                    </AppProvider>
+                </QueryParamProvider>
+            </Router>
         </>
     )
 }
 
-export { App }
+App.defaultProps = {
+    router: HashRouter,
+}
+
+App.propTypes = {
+    router: PropTypes.elementType,
+}
+
+const AppWrapper = () => {
+    return <App />
+}
+
+export { AppWrapper }

@@ -4,6 +4,10 @@ import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
 import { Loader, Warning } from '../shared/index.js'
+import {
+    useExchangeId,
+    useRequestName,
+} from '../use-context-selection/index.js'
 import { ExchangeContext } from './exchange-context.js'
 
 const query = {
@@ -20,16 +24,21 @@ const query = {
 }
 
 const ExchangeProvider = ({ children }) => {
-    const { fetching, error, data, called, refetch } = useDataQuery(query, {
+    const { loading, error, data, called, refetch } = useDataQuery(query, {
         lazy: true,
     })
-    const fetchExchange = () => refetch({ id: 'ioHMBgeK50L' })
+    const [exchangeId] = useExchangeId()
+    const [, setRequestName] = useRequestName()
+    const fetchExchange = () => refetch({ id: exchangeId })
 
     useEffect(() => {
-        fetchExchange()
-    }, [])
+        setRequestName(null)
+        if (exchangeId) {
+            fetchExchange()
+        }
+    }, [exchangeId])
 
-    if (fetching || !called) {
+    if (loading) {
         return <Loader />
     }
 
@@ -48,10 +57,18 @@ const ExchangeProvider = ({ children }) => {
         )
     }
 
-    const { exchange } = data
+    const { exchange } = data || {}
 
     const providerValue = {
         exchange,
+    }
+
+    if (!called) {
+        return (
+            <ExchangeContext.Provider value={{ exchange: null }}>
+                {children}
+            </ExchangeContext.Provider>
+        )
     }
 
     return (

@@ -13,7 +13,7 @@ import {
     Tag,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useExchangeContext } from '../exchange-context/index.js'
 import { Warning } from '../shared/index.js'
 import styles from './submit-modal.module.css'
@@ -146,11 +146,31 @@ ConfirmModalContent.propTypes = {
 
 const SubmitModal = ({ open, onClose }) => {
     const { exchange } = useExchangeContext()
-    const [submitExchange, { called, loading, error, data }] = useDataMutation(
-        create_mutation({ id: exchange.id })
+    const [called, setCalled] = useState(false)
+    const [data, setData] = useState(null)
+    const [error, setError] = useState(null)
+
+    const [submitExchange, { loading }] = useDataMutation(
+        create_mutation({ id: exchange?.id }),
+        {
+            onComplete: (data) => {
+                setCalled(true)
+                setData(data)
+            },
+            onError: (error) => {
+                setCalled(true)
+                setError(error)
+            },
+        }
     )
 
-    return (
+    useEffect(() => {
+        setCalled(false)
+        setData(null)
+        setError(null)
+    }, [open])
+
+    return !exchange ? null : (
         <Modal
             hide={!open}
             medium
@@ -158,7 +178,7 @@ const SubmitModal = ({ open, onClose }) => {
             onClose={loading ? null : onClose}
         >
             <ModalTitle>{i18n.t('Submitting data')}</ModalTitle>
-            {!called && (
+            {!called && !loading && (
                 <ConfirmModalContent
                     exchange={exchange}
                     onClose={onClose}

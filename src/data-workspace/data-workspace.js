@@ -1,7 +1,11 @@
 import { CenteredContent } from '@dhis2/ui'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useAppContext } from '../app-context/index.js'
 import { useExchangeContext } from '../exchange-context/index.js'
+import {
+    useExchangeId,
+    useRequestName,
+} from '../use-context-selection/index.js'
 import { Display } from './display/index.js'
 import { RequestsNavigation } from './requests-navigation/index.js'
 import { TitleBar } from './title-bar/title-bar.js'
@@ -9,12 +13,17 @@ import { TitleBar } from './title-bar/title-bar.js'
 const DataWorkspace = () => {
     const { aggregateDataExchanges } = useAppContext()
     const { exchange } = useExchangeContext()
+    const [exchangeId] = useExchangeId()
 
     // to replace with appropriate hook for parameters
-    const [selectedRequest, setSelectedRequest] = useState(null)
+    const [selectedRequest, setSelectedRequest] = useRequestName()
+
     useEffect(() => {
-        setSelectedRequest(exchange?.source?.requests?.[0]?.name)
-    }, [exchange])
+        // auto select the first?
+        if (!selectedRequest) {
+            setSelectedRequest(exchange?.source?.requests?.[0]?.name)
+        }
+    }, [exchange, selectedRequest, setSelectedRequest])
 
     if (aggregateDataExchanges.length === 0) {
         return (
@@ -24,7 +33,7 @@ const DataWorkspace = () => {
         )
     }
 
-    if (exchange) {
+    if (exchange && exchangeId) {
         return (
             <>
                 <TitleBar />
