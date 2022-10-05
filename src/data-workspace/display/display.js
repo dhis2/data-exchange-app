@@ -5,51 +5,112 @@ import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
 import { useExchangeContext } from '../../exchange-context/index.js'
 import { Loader, Warning } from '../../shared/index.js'
+import { Table } from '../table/index.js'
 import styles from './display.module.css'
 
-// cannot pass multiple params of the same value (i.e. dimension cannot be repeated)
-export const create_query = ({ dx, pe, ou, filters }) => {
-    const formattedFilters =
-        filters.length === 0
-            ? ''
-            : '&' +
-              filters.map(
-                  (filter) =>
-                      `filter=${filter.dimension}:${filter.items.join(';')}`
-              )
-    return {
-        resource: `analytics/dataValueSet.json?dimension=dx:${dx.join(
-            ';'
-        )}&dimension=pe:${pe.join(';')}&dimension=ou:${ou.join(
-            ';'
-        )}&includeMetadataDetails:true&includeNumDen:true${formattedFilters}`,
+const query = {
+    dataValueSet: {
+        resource: 'analytics/dataValueSet.json',
+        params: ({ dx, pe, ou, filters }) => ({
+            dimension: `dx:${dx.join(';')},pe:${pe.join(';')},ou:${ou.join(
+                ';'
+            )}`,
+            filter: filters
+                ? filters
+                      .map(
+                          (filter) =>
+                              `${filter.dimension}:${filter.items.join(';')}`
+                      )
+                      .join(',')
+                : '',
+        }),
+    },
+}
+
+// TBD re: data conversion for formatting
+
+const convertToObjectFormat = (data) => {
+    const objectFormat = {}
+    for (const row of data) {
+        if (!Object.prototype.hasOwnProperty.call(objectFormat, row.orgUnit)) {
+            objectFormat[row.orgUnit] = {}
+        }
+        if (
+            !Object.prototype.hasOwnProperty.call(
+                objectFormat[row.orgUnit],
+                row.dataElement
+            )
+        ) {
+            objectFormat[row.orgUnit][row.dataElement] = {}
+        }
+        if (
+            !Object.prototype.hasOwnProperty.call(
+                objectFormat[row.orgUnit][row.dataElement],
+                row.period
+            )
+        ) {
+            objectFormat[row.orgUnit][row.dataElement][row.period]
+        }
+        objectFormat[row.orgUnit][row.dataElement][row.period] = row.value
     }
+    return objectFormat
+}
+
+const formatData = ({ data, ou, dx, filters }) => {
+    const objectFormatData = convertToObjectFormat(data)
+    let actualPeriods = [...new Set(data.map((datum) => datum.period))]
+    // TBD: natural sort
+    actualPeriods = actualPeriods.sort((a, b) =>
+        a.localeCompare(b, 'en', { numeric: true })
+    )
+
+    const tableFormat = []
+    for (const orgUnit of ou) {
+        const table = {}
+
+        table.title = !filters
+            ? orgUnit
+            : `${orgUnit} - ${filters
+                  .map((filter) => filter.dimension)
+                  .join(',')}`
+        table.headers = [
+            { name: i18n.t('Data') },
+            ...actualPeriods.map((period) => ({ name: period })),
+        ]
+        const rows = []
+        for (const dataElement of dx) {
+            const rowData = actualPeriods.map(
+                (period) =>
+                    objectFormatData?.[orgUnit]?.[dataElement]?.[period] || ''
+            )
+            rows.push([dataElement, ...rowData])
+        }
+
+        table.rows = rows
+        tableFormat.push(table)
+    }
+
+    return tableFormat
 }
 
 const Display = ({ requestName }) => {
     const { exchange } = useExchangeContext()
 
-    // placeholder for actual code (need to resolve approach given repeated parameters)
     const request = exchange.source?.requests?.find(
         (request) => request.name === requestName
     )
-    const dx = ['fbfJHSPpUQD', 'cYeuwXTCPkU', 'Jtf34kNZhzP']
-    const pe = ['LAST_12_MONTHS', '202201']
-    const ou = ['ImspTQPwCqd']
-    const filters = [
-        { dimension: 'Bpx0589u8y0', items: ['oRVt7g429ZO', 'MAs88nJc9nL'] },
-    ]
 
-    const { loading, error, data, refetch } = useDataQuery(
-        { dataValueSets: create_query({ dx, pe, ou, filters }) },
-        {
-            lazy: true,
-        }
-    )
+    const { dx, pe, ou, filters } = request || {}
+
+    const { loading, error, data, refetch } = useDataQuery(query, {
+        lazy: true,
+    })
 
     useEffect(() => {
-        refetch({})
-    }, [exchange, refetch, requestName])
+        if (dx && pe && ou) {
+            refetch({ dx, pe, ou, filters })
+        }
+    }, [exchange, refetch, dx, pe, ou, filters])
 
     if (loading) {
         return <Loader />
@@ -69,7 +130,16 @@ const Display = ({ requestName }) => {
         )
     }
 
-    if (data) {
+    if (data && request) {
+        const sortedPE = [...pe]
+        sortedPE.sort()
+        const formattedData = formatData({
+            data: data.dataValueSet.dataValues,
+            ou,
+            dx,
+            pe: sortedPE,
+            filters,
+        })
         return (
             <div className={styles.display}>
                 {!request?.visualization && (
@@ -77,17 +147,21 @@ const Display = ({ requestName }) => {
                         target="_blank"
                         rel="noreferrer noopener"
                         href={'https://www.dhis2.org'}
-                        style={{ textDecoration: 'none' }}
+                        className={styles.linkNoDecoration}
                     >
-                        <Button>
+                        <Button className={styles.visualizationButton}>
                             {i18n.t('Open this data in data visualizer')}
                         </Button>
                     </a>
                 )}
-                {data.dataValueSets?.dataValues.map((dv) => (
-                    <p key={`${dv.dataElement}-${dv.period}-${dv.orgUnit}`}>
-                        {JSON.stringify(dv)}
-                    </p>
+                {/* {JSON.stringify(formattedData)} */}
+                {formattedData.map((table) => (
+                    <Table
+                        key={table.title}
+                        title={table.title}
+                        columns={table.headers.map((h) => h.name)}
+                        rows={table.rows}
+                    />
                 ))}
             </div>
         )

@@ -1,6 +1,6 @@
 import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { IconInfo16, IconDimensionDataSet16 } from '@dhis2/ui'
+import { IconInfo16, IconDimensionDataSet16, Tooltip } from '@dhis2/ui'
 import { formatDistance } from 'date-fns'
 import React from 'react'
 import { useExchangeContext } from '../../exchange-context/index.js'
@@ -15,8 +15,17 @@ const getRelativeTimeDifference = ({ startTimestamp, endTimestamp }) => {
     return formatDistance(startTime, endTime)
 }
 
+const formatTimestamp = ({ timestamp, timezone }) => {
+    return `${timestamp.substring(0, 10)} T ${timestamp.substring(
+        11,
+        16
+    )} ${timezone}`
+}
+
 const TitleBar = () => {
     const { systemInfo } = useConfig()
+    const { lastAnalyticsTableSuccess, serverDate, serverTimeZoneId } =
+        systemInfo
     const { exchange } = useExchangeContext()
     const requestsCount = exchange.source?.requests?.length
 
@@ -37,12 +46,23 @@ const TitleBar = () => {
             </span>
             <div className={styles.analyticsRunStamp}>
                 <IconInfo16 />
-                <div>{`Analytics tables last generated ${getRelativeTimeDifference(
-                    {
-                        startTimestamp: systemInfo.lastAnalyticsTableSuccess,
-                        endTimestamp: systemInfo.serverDate,
-                    }
-                )} ago`}</div>
+                <div>
+                    <Tooltip
+                        content={formatTimestamp({
+                            timestamp: lastAnalyticsTableSuccess,
+                            timezone: serverTimeZoneId,
+                        })}
+                    >
+                        <span>
+                            {`Analytics tables last generated ${getRelativeTimeDifference(
+                                {
+                                    startTimestamp: lastAnalyticsTableSuccess,
+                                    endTimestamp: serverDate,
+                                }
+                            )} ago`}
+                        </span>
+                    </Tooltip>
+                </div>
             </div>
         </div>
     )

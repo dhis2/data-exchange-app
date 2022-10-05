@@ -34,5 +34,5 @@
 }
 
 .analyticsRunStamp * {
-    margin-left: var(--spacers-dp4);
+    margin-left: 2px;
 }

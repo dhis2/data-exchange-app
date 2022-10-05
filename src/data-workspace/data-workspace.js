@@ -14,16 +14,20 @@ const DataWorkspace = () => {
     const { aggregateDataExchanges } = useAppContext()
     const { exchange } = useExchangeContext()
     const [exchangeId] = useExchangeId()
+    // memoize for stable reference?
+    const requests = exchange?.source?.requests.map((request) => ({
+        name: request.name,
+    }))
 
     // to replace with appropriate hook for parameters
     const [selectedRequest, setSelectedRequest] = useRequestName()
 
     useEffect(() => {
-        // auto select the first?
-        if (!selectedRequest) {
+        // auto select the first? // this is not working when exchange selected, cleared, selected again
+        if (exchange && exchangeId && !selectedRequest) {
             setSelectedRequest(exchange?.source?.requests?.[0]?.name)
         }
-    }, [exchange, selectedRequest, setSelectedRequest])
+    }, [exchange, exchangeId, selectedRequest, setSelectedRequest])
 
     if (aggregateDataExchanges.length === 0) {
         return (
@@ -38,9 +42,7 @@ const DataWorkspace = () => {
             <>
                 <TitleBar />
                 <RequestsNavigation
-                    requests={exchange?.source?.requests.map((request) => ({
-                        name: request.name,
-                    }))}
+                    requests={requests}
                     selected={selectedRequest}
                     onChange={setSelectedRequest}
                 />
@@ -52,6 +54,19 @@ const DataWorkspace = () => {
     return (
         <CenteredContent>
             <span>Choose an exchange to get started</span>
+            <div>
+                <a
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    href={
+                        'https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-master/data-exchange.html#data-exchange'
+                    }
+                >
+                    <span style={{ fontSize: '12px' }}>
+                        Learn more about data exchange
+                    </span>
+                </a>
+            </div>
         </CenteredContent>
     )
 }

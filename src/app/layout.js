@@ -14,7 +14,7 @@ LayoutSection.propTypes = {
 const Container = (props) => (
     <LayoutSection {...props} className={classes.container} />
 )
-const Top = (props) => <LayoutSection {...props} className={classes.top} />
+const Top = (props) => <LayoutSection {...props} />
 const Content = (props) => (
     <LayoutSection {...props} className={classes.content} />
 )
