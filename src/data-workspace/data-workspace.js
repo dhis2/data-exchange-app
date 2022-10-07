@@ -1,10 +1,10 @@
 import { CenteredContent } from '@dhis2/ui'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useAppContext } from '../app-context/index.js'
 import { useExchangeContext } from '../exchange-context/index.js'
 import {
     useExchangeId,
-    useRequestName,
+    useRequestIndex,
 } from '../use-context-selection/index.js'
 import { Display } from './display/index.js'
 import { RequestsNavigation } from './requests-navigation/index.js'
@@ -19,15 +19,7 @@ const DataWorkspace = () => {
         name: request.name,
     }))
 
-    // to replace with appropriate hook for parameters
-    const [selectedRequest, setSelectedRequest] = useRequestName()
-
-    useEffect(() => {
-        // auto select the first? // this is not working when exchange selected, cleared, selected again
-        if (exchange && exchangeId && !selectedRequest) {
-            setSelectedRequest(exchange?.source?.requests?.[0]?.name)
-        }
-    }, [exchange, exchangeId, selectedRequest, setSelectedRequest])
+    const [selectedRequest, setSelectedRequest] = useRequestIndex(0) //auto-select first
 
     if (aggregateDataExchanges.length === 0) {
         return (
@@ -46,7 +38,7 @@ const DataWorkspace = () => {
                     selected={selectedRequest}
                     onChange={setSelectedRequest}
                 />
-                <Display requestName={selectedRequest} />
+                <Display requestIndex={selectedRequest} />
             </>
         )
     }

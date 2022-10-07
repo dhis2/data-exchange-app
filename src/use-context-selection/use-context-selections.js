@@ -1,16 +1,21 @@
 import { useCallback } from 'react'
-import { StringParam, useQueryParams, useQueryParam } from 'use-query-params'
+import {
+    StringParam,
+    NumberParam,
+    useQueryParams,
+    useQueryParam,
+} from 'use-query-params'
 
 export const PARAMS_SCHEMA = {
     exchangeId: StringParam,
-    requestName: StringParam,
+    requestIndex: NumberParam,
 }
 
 export const useExchangeId = () => {
     return useQueryParam('exchangeId', PARAMS_SCHEMA.exchangeId)
 }
-export const useRequestName = () => {
-    return useQueryParam('requestName', PARAMS_SCHEMA.requestName)
+export const useRequestIndex = () => {
+    return useQueryParam('requestIndex', PARAMS_SCHEMA.requestIndex)
 }
 
 export const useContextSelection = () => {
@@ -23,7 +28,7 @@ export const useClearEntireSelection = () => {
     return useCallback(() => {
         setSelectionContext({
             exchangeId: undefined,
-            requestName: undefined,
+            requestIndex: undefined,
         })
     }, [setSelectionContext])
 }

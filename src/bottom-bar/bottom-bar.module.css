@@ -3,3 +3,12 @@
     align-items: center;
     margin-right: var(--spacers-dp8);
 }
+
+.tooltipReference {
+    display: inline-flex;
+    pointer-events: all;
+    cursor: not-allowed;
+  }
+  .tooltipReference > button:disabled {
+    pointer-events: none;
+  }

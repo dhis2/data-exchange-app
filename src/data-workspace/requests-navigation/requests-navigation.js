@@ -5,11 +5,11 @@ import React from 'react'
 const RequestsNavigation = ({ requests, selected, onChange }) =>
     requests && requests?.length > 0 ? (
         <TabBar scrollable>
-            {requests.map((request) => (
+            {requests.map((request, index) => (
                 <Tab
                     key={request.name}
-                    onClick={() => onChange(request.name)}
-                    selected={request.name === selected}
+                    onClick={() => onChange(index)}
+                    selected={index === selected}
                 >
                     {request.name}
                 </Tab>
@@ -24,7 +24,7 @@ RequestsNavigation.propTypes = {
             name: PropTypes.string,
         })
     ),
-    selected: PropTypes.string,
+    selected: PropTypes.number,
 }
 
 export { RequestsNavigation }

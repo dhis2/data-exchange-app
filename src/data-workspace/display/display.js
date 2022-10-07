@@ -1,89 +1,115 @@
-import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useExchangeContext } from '../../exchange-context/index.js'
-import { Loader, Warning } from '../../shared/index.js'
 import { Table } from '../table/index.js'
 import styles from './display.module.css'
 
-const query = {
-    dataValueSet: {
-        resource: 'analytics/dataValueSet.json',
-        params: ({ dx, pe, ou, filters }) => ({
-            dimension: `dx:${dx.join(';')},pe:${pe.join(';')},ou:${ou.join(
-                ';'
-            )}`,
-            filter: filters
-                ? filters
-                      .map(
-                          (filter) =>
-                              `${filter.dimension}:${filter.items.join(';')}`
-                      )
-                      .join(',')
-                : '',
-        }),
-    },
-}
-
 // TBD re: data conversion for formatting
 
-const convertToObjectFormat = (data) => {
+const convertToObjectFormat = ({
+    data,
+    dx_index,
+    ou_index,
+    pe_index,
+    value_index,
+}) => {
     const objectFormat = {}
-    for (const row of data) {
-        if (!Object.prototype.hasOwnProperty.call(objectFormat, row.orgUnit)) {
-            objectFormat[row.orgUnit] = {}
+
+    for (const row of data?.rows) {
+        if (
+            !Object.prototype.hasOwnProperty.call(objectFormat, row[ou_index])
+        ) {
+            objectFormat[row[ou_index]] = {}
         }
         if (
             !Object.prototype.hasOwnProperty.call(
-                objectFormat[row.orgUnit],
-                row.dataElement
+                objectFormat[row[ou_index]],
+                row[dx_index]
             )
         ) {
-            objectFormat[row.orgUnit][row.dataElement] = {}
+            objectFormat[row[ou_index]][row[dx_index]] = {}
         }
         if (
             !Object.prototype.hasOwnProperty.call(
-                objectFormat[row.orgUnit][row.dataElement],
-                row.period
+                objectFormat[row[ou_index]][row[dx_index]],
+                row[pe_index]
             )
         ) {
-            objectFormat[row.orgUnit][row.dataElement][row.period]
+            objectFormat[row[ou_index]][row[dx_index]][row[pe_index]] = {}
         }
-        objectFormat[row.orgUnit][row.dataElement][row.period] = row.value
+        objectFormat[row[ou_index]][row[dx_index]][row[pe_index]] =
+            row[value_index]
     }
     return objectFormat
 }
 
-const formatData = ({ data, ou, dx, filters }) => {
-    const objectFormatData = convertToObjectFormat(data)
-    let actualPeriods = [...new Set(data.map((datum) => datum.period))]
+const formatData = (data) => {
+    const constantDimensions = ['dx', 'pe', 'ou', 'co']
+    const dx_index = data?.headers.findIndex((header) => header.name === 'dx')
+    const ou_index = data?.headers.findIndex((header) => header.name === 'ou')
+    const pe_index = data?.headers.findIndex((header) => header.name === 'pe')
+    const value_index = data?.headers.findIndex(
+        (header) => header.name === 'value'
+    )
+    const filters = Object.keys(data?.metaData?.dimensions).filter(
+        (key) => !constantDimensions.includes(key)
+    )
+
+    const objectFormatData = convertToObjectFormat({
+        data,
+        dx_index,
+        ou_index,
+        pe_index,
+        value_index,
+    })
+
+    const orgUnits = data.metaData?.dimensions?.ou.map((orgUnit) => ({
+        id: orgUnit,
+        name: data.metaData?.items[orgUnit]?.name,
+    }))
+    // TBD: locale compare?
+    orgUnits.sort((a, b) => a.name > b.name)
+
+    const dataElements = data.metaData?.dimensions?.dx.map((dataElement) => ({
+        id: dataElement,
+        name: data.metaData?.items[dataElement]?.name,
+    }))
+    // TBD: locale compare?
+    dataElements.sort((a, b) => a.name > b.name)
+
     // TBD: natural sort
-    actualPeriods = actualPeriods.sort((a, b) =>
-        a.localeCompare(b, 'en', { numeric: true })
+    let periods = data.metaData?.dimensions?.pe.map((period) => ({
+        id: period,
+        name: data.metaData?.items[period]?.name,
+    }))
+    periods = periods.sort((a, b) =>
+        a.id.localeCompare(b.id, 'en', { numeric: true })
     )
 
     const tableFormat = []
-    for (const orgUnit of ou) {
+    for (const orgUnit of orgUnits) {
         const table = {}
 
         table.title = !filters
-            ? orgUnit
-            : `${orgUnit} - ${filters
-                  .map((filter) => filter.dimension)
+            ? orgUnit.name
+            : `${orgUnit.name} - ${filters
+                  .map((filter) => data?.metaData?.items?.[filter]?.name)
                   .join(',')}`
         table.headers = [
             { name: i18n.t('Data') },
-            ...actualPeriods.map((period) => ({ name: period })),
+            ...periods.map(({ name }) => ({ name })),
         ]
         const rows = []
-        for (const dataElement of dx) {
-            const rowData = actualPeriods.map(
+        for (const dataElement of dataElements) {
+            const rowData = periods.map(
                 (period) =>
-                    objectFormatData?.[orgUnit]?.[dataElement]?.[period] || ''
+                    objectFormatData?.[orgUnit.id]?.[dataElement.id]?.[
+                        period.id
+                    ] || ''
             )
-            rows.push([dataElement, ...rowData])
+            rows.push([dataElement.name, ...rowData])
         }
 
         table.rows = rows
@@ -93,53 +119,13 @@ const formatData = ({ data, ou, dx, filters }) => {
     return tableFormat
 }
 
-const Display = ({ requestName }) => {
-    const { exchange } = useExchangeContext()
+const Display = ({ requestIndex }) => {
+    const { exchange, exchangeData } = useExchangeContext()
+    const request = exchange.source?.requests?.[requestIndex]
 
-    const request = exchange.source?.requests?.find(
-        (request) => request.name === requestName
-    )
+    const formattedData = formatData(exchangeData[requestIndex])
 
-    const { dx, pe, ou, filters } = request || {}
-
-    const { loading, error, data, refetch } = useDataQuery(query, {
-        lazy: true,
-    })
-
-    useEffect(() => {
-        if (dx && pe && ou) {
-            refetch({ dx, pe, ou, filters })
-        }
-    }, [exchange, refetch, dx, pe, ou, filters])
-
-    if (loading) {
-        return <Loader />
-    }
-
-    if (error) {
-        return (
-            <div className={styles.display}>
-                <Warning
-                    error={true}
-                    title={i18n.t(
-                        'There was a problem retrieving data for this report'
-                    )}
-                    message={error.message}
-                />
-            </div>
-        )
-    }
-
-    if (data && request) {
-        const sortedPE = [...pe]
-        sortedPE.sort()
-        const formattedData = formatData({
-            data: data.dataValueSet.dataValues,
-            ou,
-            dx,
-            pe: sortedPE,
-            filters,
-        })
+    if (exchangeData) {
         return (
             <div className={styles.display}>
                 {!request?.visualization && (
@@ -154,7 +140,6 @@ const Display = ({ requestName }) => {
                         </Button>
                     </a>
                 )}
-                {/* {JSON.stringify(formattedData)} */}
                 {formattedData.map((table) => (
                     <Table
                         key={table.title}
@@ -171,7 +156,7 @@ const Display = ({ requestName }) => {
 }
 
 Display.propTypes = {
-    requestName: PropTypes.string,
+    requestIndex: PropTypes.string,
 }
 
 export { Display }

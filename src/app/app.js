@@ -14,11 +14,13 @@ import { Layout } from './layout.js'
 
 const App = ({ router: Router }) => {
     const [submitModalOpen, setSubmitModalOpen] = useState(false)
+    const [timeOfLastSubmit, setTimeOfLastSubmit] = useState(null)
+
     const closeSubmitModal = () => {
         setSubmitModalOpen(false)
     }
     const openSubmitModal = () => {
-        setSubmitModalOpen(Math.random())
+        setSubmitModalOpen(true)
     }
     return (
         <>
@@ -39,11 +41,15 @@ const App = ({ router: Router }) => {
                                     <SubmitModal
                                         open={submitModalOpen}
                                         onClose={closeSubmitModal}
+                                        setTimeOfLastSubmit={
+                                            setTimeOfLastSubmit
+                                        }
                                     />
                                 </Layout.Content>
                                 <Layout.Bottom>
                                     <BottomBar
                                         openSubmitModal={openSubmitModal}
+                                        timeOfLastSubmit={timeOfLastSubmit}
                                     />
                                 </Layout.Bottom>
                             </ExchangeProvider>

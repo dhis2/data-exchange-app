@@ -6,16 +6,22 @@ import React, { useEffect } from 'react'
 import { Loader, Warning } from '../shared/index.js'
 import {
     useExchangeId,
-    useRequestName,
+    useRequestIndex,
 } from '../use-context-selection/index.js'
 import { ExchangeContext } from './exchange-context.js'
 
 const query = {
     exchange: {
-        // This is generic enpoint but will only return
-        // workflows a user is allowed to see
         resource: 'aggregateDataExchanges',
         id: ({ id }) => id,
+        params: {
+            paging: false,
+            fields: ['source, target', 'id', 'displayName'],
+        },
+    },
+    exchangeData: {
+        resource: 'aggregateDataExchanges',
+        id: ({ id }) => `${id}/sourceData`,
         params: {
             paging: false,
             fields: ['source, target', 'id', 'displayName'],
@@ -28,11 +34,11 @@ const ExchangeProvider = ({ children }) => {
         lazy: true,
     })
     const [exchangeId] = useExchangeId()
-    const [, setRequestName] = useRequestName()
+    const [, setRequestIndex] = useRequestIndex()
     const fetchExchange = () => refetch({ id: exchangeId })
 
     useEffect(() => {
-        setRequestName(null)
+        setRequestIndex(0)
         if (exchangeId) {
             fetchExchange()
         }
@@ -57,15 +63,18 @@ const ExchangeProvider = ({ children }) => {
         )
     }
 
-    const { exchange } = data || {}
+    const { exchange, exchangeData } = data || {}
 
     const providerValue = {
         exchange,
+        exchangeData,
     }
 
     if (!called) {
         return (
-            <ExchangeContext.Provider value={{ exchange: null }}>
+            <ExchangeContext.Provider
+                value={{ exchange: null, exchangeData: null }}
+            >
                 {children}
             </ExchangeContext.Provider>
         )
