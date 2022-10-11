@@ -40,7 +40,7 @@ const SummaryBox = ({ importType, importCount }) => {
             <div className={boxStyle}>
                 <div className={styles.count}>{importCount}</div>
                 <div className={styles.label}>
-                    <span>{text}</span>
+                    <span>{text.toLowerCase()}</span>
                 </div>
             </div>
         </div>
@@ -143,7 +143,7 @@ const SuccessContent = ({ data }) => {
     return (
         <>
             <Tag positive icon={<IconCheckmarkCircle24 />}>
-                {i18n.t('Data submitted successfully')}
+                {i18n.t('Data submitted successfully.')}
             </Tag>
             <div className={styles.summaryBoxTitle}>{i18n.t('Summary')}</div>
 
