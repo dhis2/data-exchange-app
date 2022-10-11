@@ -1,5 +1,6 @@
+import i18n from '@dhis2/d2-i18n'
 import { CenteredContent } from '@dhis2/ui'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAppContext } from '../app-context/index.js'
 import { useExchangeContext } from '../exchange-context/index.js'
 import {
@@ -19,7 +20,16 @@ const DataWorkspace = () => {
         name: request.name,
     }))
 
-    const [selectedRequest, setSelectedRequest] = useRequestIndex(0) //auto-select first
+    const [selectedRequest, setSelectedRequest] = useRequestIndex(undefined)
+
+    useEffect(() => {
+        if (!exchangeId) {
+            setSelectedRequest(undefined)
+        }
+        if (exchangeId && !selectedRequest) {
+            setSelectedRequest(0)
+        }
+    }, [exchangeId, selectedRequest, setSelectedRequest])
 
     if (aggregateDataExchanges.length === 0) {
         return (
@@ -33,19 +43,23 @@ const DataWorkspace = () => {
         return (
             <>
                 <TitleBar />
-                <RequestsNavigation
-                    requests={requests}
-                    selected={selectedRequest}
-                    onChange={setSelectedRequest}
-                />
-                <Display requestIndex={selectedRequest} />
+                {!isNaN(selectedRequest) && (
+                    <>
+                        <RequestsNavigation
+                            requests={requests}
+                            selected={selectedRequest}
+                            onChange={setSelectedRequest}
+                        />
+                        <Display requestIndex={selectedRequest} />
+                    </>
+                )}
             </>
         )
     }
 
     return (
         <CenteredContent>
-            <span>Choose an exchange to get started</span>
+            <span>{i18n.t('Choose a data exchange to get started')}</span>
             <div>
                 <a
                     target="_blank"
@@ -55,7 +69,7 @@ const DataWorkspace = () => {
                     }
                 >
                     <span style={{ fontSize: '12px' }}>
-                        Learn more about data exchange
+                        {i18n.t('Learn more about data exchange')}
                     </span>
                 </a>
             </div>

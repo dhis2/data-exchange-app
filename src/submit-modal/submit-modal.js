@@ -1,28 +1,21 @@
-import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     Button,
     ButtonStrip,
     CenteredContent,
     CircularLoader,
-    IconCheckmarkCircle24,
     Modal,
     ModalActions,
     ModalContent,
     ModalTitle,
-    Tag,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useExchangeContext } from '../exchange-context/index.js'
 import { Warning } from '../shared/index.js'
 import styles from './submit-modal.module.css'
-
-// cannot current pass id to 'create' mutation or interpolate id
-export const create_mutation = ({ id }) => ({
-    resource: `aggregateDataExchanges/${id}/exchange`,
-    type: 'create',
-})
+import { SuccessContent } from './success-content.js'
+import { useAggregateDataExchangeMutation } from './use-aggregate-data-exchange-mutation.js'
 
 const LoadingStateModalContent = () => (
     <>
@@ -76,14 +69,7 @@ ErrorModalContent.propTypes = {
 const SuccessModalContent = ({ onClose, data }) => (
     <>
         <ModalContent>
-            <Tag positive icon={<IconCheckmarkCircle24 />}>
-                {i18n.t('Data submitted successfully')}
-            </Tag>
-            {data.importSummaries.map((importSummary) => (
-                <p key={importSummary.description}>
-                    {JSON.stringify(importSummary.importCount)}
-                </p>
-            ))}
+            <SuccessContent data={data} />
         </ModalContent>
 
         <ModalActions>
@@ -99,24 +85,103 @@ SuccessModalContent.propTypes = {
     onClose: PropTypes.func,
 }
 
-const ConfirmModalContent = ({ exchange, onClose, onSubmit }) => {
-    const requests = exchange?.source?.requests
+const getReportText = (request) => {
+    const { name, orgUnits, periods } = request
+    const orgUnitText =
+        orgUnits.length === 1
+            ? i18n.t('{{orgUnitCount}} organisation unit', {
+                  orgUnitCount: orgUnits.length,
+              })
+            : i18n.t('{{orgUnitCount}} organisation units', {
+                  orgUnitCount: orgUnits.length,
+              })
+    let periodsText = ''
+    if (periods.length === 1) {
+        periodsText = i18n.t('{{periodsCount}} period: {{periods}}', {
+            periodsCount: periods.length,
+            periods: periods[0],
+            nsSeparator: '-:-',
+        })
+    }
+    if (periods.length > 1 && periods.length <= 3) {
+        periodsText = i18n.t('{{periodsCount}} periods: {{periods}}', {
+            periodsCount: periods.length,
+            periods: periods.join(', '),
+            nsSeparator: '-:-',
+        })
+    }
+    if (periods.length > 3) {
+        periodsText = i18n.t(
+            '3+ periods: {{periods}}, and {{periodsCountLessThree}} more',
+            {
+                periodsCount: periods.length,
+                periods: periods.slice(0, 3).join(', '),
+                periodsCountLessThree: periods.length - 3,
+                nsSeparator: '-:-',
+            }
+        )
+    }
+    return `${name}, ${orgUnitText}, ${periodsText}`
+}
+
+const ConfirmModalContent = ({ exchange, requests, onClose, onSubmit }) => {
+    // this is very wordy, but did not have luck with i18nextscanner picking up from more compact versions...
+    let reportTranslationsString
+    const reportCount = requests.length
+    const exchangeName = exchange?.displayName
+    const exchangeURL = exchange?.target?.api?.url
+
+    if (exchange?.target?.type === 'INTERNAL') {
+        if (requests.length > 1) {
+            reportTranslationsString = i18n.t(
+                '{{reportCount}} reports to {{-exchangeName}}',
+                {
+                    reportCount,
+                    exchangeName,
+                }
+            )
+        } else {
+            reportTranslationsString = i18n.t(
+                '{{reportCount}} report to {{-exchangeName}}',
+                {
+                    reportCount,
+                    exchangeName,
+                }
+            )
+        }
+    } else {
+        if (requests.length > 1) {
+            reportTranslationsString = i18n.t(
+                '{{reportCount}} reports to {{-exchangeName}} at {{-exchangeURL}}',
+                {
+                    reportCount,
+                    exchangeName,
+                    exchangeURL,
+                }
+            )
+        } else {
+            reportTranslationsString = i18n.t(
+                '{{reportCount}} report to {{-exchangeName}} at {{-exchangeURL}}',
+                {
+                    reportCount,
+                    exchangeName,
+                    exchangeURL,
+                }
+            )
+        }
+    }
 
     return (
         <>
             <ModalContent>
                 <div className={styles.submitModalSummaryWrapper}>
-                    {i18n.t(
-                        `This action submits data for the ${requests.length} reports of ${exchange?.displayName}`
-                    )}
+                    {reportTranslationsString}
                     <ul>
                         {requests.map((request) => {
                             return (
-                                <li key={request.name}>{`${
-                                    request.name
-                                } , organisation units: ${
-                                    request?.ou?.length
-                                } , periods: ${request.pe.join(', ')} `}</li>
+                                <li key={request.name}>
+                                    {getReportText(request)}
+                                </li>
                             )
                         })}
                     </ul>
@@ -140,40 +205,42 @@ const ConfirmModalContent = ({ exchange, onClose, onSubmit }) => {
 
 ConfirmModalContent.propTypes = {
     exchange: PropTypes.object,
+    requests: PropTypes.array,
     onClose: PropTypes.func,
     onSubmit: PropTypes.func,
 }
 
-const SubmitModal = ({ open, onClose }) => {
-    const { exchange } = useExchangeContext()
-    const [called, setCalled] = useState(false)
-    const [data, setData] = useState(null)
-    const [error, setError] = useState(null)
+const SubmitModal = ({ open, onClose, setTimeOfLastSubmit }) => {
+    const { exchange, exchangeData } = useExchangeContext()
 
-    const [submitExchange, { loading }] = useDataMutation(
-        create_mutation({ id: exchange?.id }),
-        {
-            onComplete: (data) => {
-                setCalled(true)
-                setData(data)
-            },
-            onError: (error) => {
-                setCalled(true)
-                setError(error)
-            },
-        }
-    )
+    // TBD: refactor to use common code from display.js?
+    const requests = exchangeData?.map((request, index) => ({
+        name: exchange.source?.requests?.[index]?.name,
+        orgUnits: request.metaData?.dimensions?.ou,
+        periods: request.metaData?.dimensions?.pe.map(
+            (period) => request.metaData?.items[period]?.name
+        ),
+    }))
 
+    const [
+        submitExchange,
+        { called, data, error, loading, submitTimestamp, cleanUp },
+    ] = useAggregateDataExchangeMutation({ id: exchange?.id })
+
+    // clean up whenever modal is toggled
     useEffect(() => {
-        setCalled(false)
-        setData(null)
-        setError(null)
+        cleanUp()
     }, [open])
+
+    // set time of last submission upon update
+    useEffect(() => {
+        setTimeOfLastSubmit(submitTimestamp)
+    }, [submitTimestamp, setTimeOfLastSubmit])
 
     return !exchange ? null : (
         <Modal
             hide={!open}
-            medium
+            large
             position="middle"
             onClose={loading ? null : onClose}
         >
@@ -181,6 +248,7 @@ const SubmitModal = ({ open, onClose }) => {
             {!called && !loading && (
                 <ConfirmModalContent
                     exchange={exchange}
+                    requests={requests}
                     onClose={onClose}
                     onSubmit={submitExchange}
                 />
@@ -200,6 +268,7 @@ const SubmitModal = ({ open, onClose }) => {
 
 SubmitModal.propTypes = {
     open: PropTypes.bool,
+    setTimeOfLastSubmit: PropTypes.func,
     onClose: PropTypes.func,
 }
 

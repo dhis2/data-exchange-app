@@ -18,7 +18,7 @@ const ExchangeSelect = () => {
     return (
         <div data-test="data-set-selector">
             <SelectorBarItem
-                label={i18n.t('Exchange')}
+                label={i18n.t('Data exchange')}
                 value={
                     dataExchangeOptions.find(
                         (dExchange) => dExchange.value === exchangeId

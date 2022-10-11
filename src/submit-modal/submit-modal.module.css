@@ -9,7 +9,7 @@
     margin: 0;
     padding: var(--spacers-dp12) 0 0 var(--spacers-dp32);
     display: grid;
-    gap: 2rem;
+    gap: var(--spacers-dp8);
 }
 
 .loadingWrapper {

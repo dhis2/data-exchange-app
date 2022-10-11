@@ -1,0 +1,57 @@
+.summaryBoxWrapper {
+    display: flex;
+}
+
+.summaryBoxTitle {
+    font-weight: 400;
+    margin-top: 12px;
+}
+
+.summaryBox {
+    display: flex;
+    flex-direction: column;
+    min-width: 130px;
+    align-items: center;
+    padding-top: 12px; 
+    padding-bottom: 12px;
+    margin-right: 8px;
+}
+
+.label {
+    font-size: 14px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.summaryBox .count {
+    color: var(--colors-grey900);
+    font-size: 21px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.success {
+    composes: summaryBox;
+    background-color: var(--colors-green050);
+    border: 2px solid var(--colors-green300);
+    border-radius: 4px;
+}
+
+.deleted {
+    composes: summaryBox;
+    background-color: var(--colors-red050);
+    border: 2px solid var(--colors-red600);
+    border-radius: 4px;
+}
+
+.ignored {
+    composes: summaryBox;
+    background-color: var(--colors-grey100);
+    border: 2px solid var(--colors-grey400);
+    border-radius: 4px;
+}
+
+.copyButton {
+    margin-top: var(--spacers-dp8);
+}

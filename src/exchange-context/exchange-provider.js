@@ -42,7 +42,7 @@ const ExchangeProvider = ({ children }) => {
         if (exchangeId) {
             fetchExchange()
         }
-    }, [exchangeId])
+    }, [exchangeId, setRequestIndex])
 
     if (loading) {
         return <Loader />

@@ -54,12 +54,16 @@ const TitleBar = () => {
                         })}
                     >
                         <span>
-                            {`Analytics tables last generated ${getRelativeTimeDifference(
+                            {i18n.t(
+                                'Analytics tables last generated {{timeDifference}} ago',
                                 {
-                                    startTimestamp: lastAnalyticsTableSuccess,
-                                    endTimestamp: serverDate,
+                                    timeDifference: getRelativeTimeDifference({
+                                        startTimestamp:
+                                            lastAnalyticsTableSuccess,
+                                        endTimestamp: serverDate,
+                                    }),
                                 }
-                            )} ago`}
+                            )}
                         </span>
                     </Tooltip>
                 </div>

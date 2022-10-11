@@ -1,0 +1,133 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2022-10-07T07:18:06.914Z\n"
+"PO-Revision-Date: 2022-10-07T07:18:06.914Z\n"
+
+msgid "Aggregate data exchange information is not accessible"
+msgstr "Information sur les échanges de données aggregées n'est pas accesible"
+
+msgid ""
+"There was a problem retrieving aggregate data exchanges. Refresh the page "
+"to try again."
+msgstr ""
+"Il'y a eu un problème avec le téléchargement des échanges de données aggregées. Actualiser la page "
+"pour essayer de nouveau."
+
+msgid "Submit data"
+msgstr "Envoyer les données"
+
+msgid "Data has already been submitted"
+msgstr "Ces données ont été envoyées"
+
+msgid "There is no data to submit"
+msgstr "Il n'y a pas de données à envoyer"
+
+msgid "Choose a data exchange to get started"
+msgstr "Choisir un échange de données pour commencer"
+
+msgid "Learn more about data exchange"
+msgstr "Apprendre plus sur l'échange de données"
+
+msgid "Data"
+msgstr "Données"
+
+msgid "Open this data in data visualizer"
+msgstr "Ouvrir avec le visualiseur de données"
+
+msgid "1 data report"
+msgstr "Un rapport de données"
+
+msgid "{{requestsCount}} data reports"
+msgstr "{{requestsCount}} rapports de données"
+
+msgid "Analytics tables last generated {{timeDifference}} ago"
+msgstr "Dernière fois les tableaux analytiques ont été mis à jour: il y a {{timeDifference}}"
+
+msgid "Exchange content not accessible"
+msgstr "L'échange n'est pas accessible"
+
+msgid "Submitting..."
+msgstr "Envoyant..."
+
+msgid "No, cancel"
+msgstr "Non, annuler"
+
+msgid "Yes, submit"
+msgstr "Oui, envoyer"
+
+msgid "There was a problem submitting data"
+msgstr "Il y a eu un problème avec l'envoiement des données"
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Try again"
+msgstr "Essayer de nouveau"
+
+msgid "{{orgUnitCount}} organisation unit"
+msgstr "{{orgUnitCount}} unité d'organisation"
+
+msgid "{{orgUnitCount}} organisation units"
+msgstr "{{orgUnitCount}} unités d'organisation"
+
+msgid "{{periodsCount}} period: {{periods}}"
+msgstr "{{periodsCount}} période: {{periods}}"
+
+msgid "{{periodsCount}} periods: {{periods}}"
+msgstr "{{periodsCount}} périodes: {{periods}}"
+
+msgid "3+ periods: {{periods}}, and {{periodsCountLessThree}} more"
+msgstr "3+ périodes: {{periods}}, et {{periodsCountLessThree}} en plus"
+
+msgid "{{reportCount}} report to {{-exchangeName}}"
+msgstr "{{reportCount}} rapport pour {{-exchangeName}}"
+
+msgid "{{reportCount}} reports to {{-exchangeName}}"
+msgstr "{{reportCount}} rapports pour {{-exchangeName}}"
+
+msgid "{{reportCount}} reports to {{-exchangeName}} at {{-exchangeURL}}"
+msgstr "{{reportCount}} rapports pour {{-exchangeName}} à {{-exchangeURL}}"
+
+msgid "{{reportCount}} report to {{-exchangeName}} at {{-exchangeURL}}"
+msgstr "{{reportCount}} rapport pour {{-exchangeName}} à {{-exchangeURL}}"
+
+msgid "Are you sure you want to submit this data?"
+msgstr "Êtes-vous sur de vouloir envoyer ces données?"
+
+msgid "Submitting data"
+msgstr "Envoyer données"
+
+msgid "Imported"
+msgstr "Importés"
+
+msgid "Updated"
+msgstr "Mis-à-jour"
+
+msgid "Ignored"
+msgstr "Ignorés"
+
+msgid "Copy summary to clipboard"
+msgstr "Copier l'information sommaire vers le presse-papier"
+
+msgid "Data submitted successfully"
+msgstr "Les données ont été envoyées avec succès" 
+
+msgid "Summary"
+msgstr "Sommaire"
+
+msgid "Clear selection"
+msgstr "Effacer les selections"
+
+msgid "Unknown error"
+msgstr "Erreur inconnu"
+
+msgid "Data exchange"
+msgstr "Échange de données"
+
+msgid "Choose a data exchange"
+msgstr "Choisir un échange de données"

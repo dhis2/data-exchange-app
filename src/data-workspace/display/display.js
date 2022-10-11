@@ -1,5 +1,6 @@
+import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button } from '@dhis2/ui'
+import { Button, IconLaunch16 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useExchangeContext } from '../../exchange-context/index.js'
@@ -79,7 +80,7 @@ const formatData = (data) => {
     // TBD: locale compare?
     dataElements.sort((a, b) => a.name > b.name)
 
-    // TBD: natural sort
+    // TBD: natural sort? Is this necessary or is it sorted by backend?
     let periods = data.metaData?.dimensions?.pe.map((period) => ({
         id: period,
         name: data.metaData?.items[period]?.name,
@@ -92,11 +93,12 @@ const formatData = (data) => {
     for (const orgUnit of orgUnits) {
         const table = {}
 
-        table.title = !filters
-            ? orgUnit.name
-            : `${orgUnit.name} - ${filters
-                  .map((filter) => data?.metaData?.items?.[filter]?.name)
-                  .join(',')}`
+        table.title =
+            filters?.length > 0
+                ? `${orgUnit.name} - ${filters
+                      .map((filter) => data?.metaData?.items?.[filter]?.name)
+                      .join(',')}`
+                : orgUnit.name
         table.headers = [
             { name: i18n.t('Data') },
             ...periods.map(({ name }) => ({ name })),
@@ -123,20 +125,25 @@ const Display = ({ requestIndex }) => {
     const { exchange, exchangeData } = useExchangeContext()
     const request = exchange.source?.requests?.[requestIndex]
 
-    const formattedData = formatData(exchangeData[requestIndex])
+    const formattedData = formatData(exchangeData?.[requestIndex])
+
+    const { baseUrl } = useConfig()
 
     if (exchangeData) {
         return (
             <div className={styles.display}>
-                {!request?.visualization && (
+                {request?.visualization && (
                     <a
                         target="_blank"
                         rel="noreferrer noopener"
-                        href={'https://www.dhis2.org'}
+                        href={`${baseUrl}/dhis-web-data-visualizer/#/${request?.visualization}`}
                         className={styles.linkNoDecoration}
                     >
-                        <Button className={styles.visualizationButton}>
-                            {i18n.t('Open this data in data visualizer')}
+                        <Button
+                            icon={<IconLaunch16 />}
+                            className={styles.visualizationButton}
+                        >
+                            {i18n.t('Open in data visualizer')}
                         </Button>
                     </a>
                 )}
@@ -156,7 +163,7 @@ const Display = ({ requestIndex }) => {
 }
 
 Display.propTypes = {
-    requestIndex: PropTypes.string,
+    requestIndex: PropTypes.number,
 }
 
 export { Display }

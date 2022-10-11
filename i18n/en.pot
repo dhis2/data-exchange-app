@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-10-04T13:09:51.434Z\n"
-"PO-Revision-Date: 2022-10-04T13:09:51.434Z\n"
+"POT-Creation-Date: 2022-10-11T07:32:29.620Z\n"
+"PO-Revision-Date: 2022-10-11T07:32:29.620Z\n"
 
 msgid "Aggregate data exchange information is not accessible"
 msgstr "Aggregate data exchange information is not accessible"
@@ -21,17 +21,32 @@ msgstr ""
 msgid "Submit data"
 msgstr "Submit data"
 
-msgid "There was a problem retrieving data for this report"
-msgstr "There was a problem retrieving data for this report"
+msgid "Data has already been submitted"
+msgstr "Data has already been submitted"
 
-msgid "Open this data in data visualizer"
-msgstr "Open this data in data visualizer"
+msgid "There is no data to submit"
+msgstr "There is no data to submit"
+
+msgid "Choose a data exchange to get started"
+msgstr "Choose a data exchange to get started"
+
+msgid "Learn more about data exchange"
+msgstr "Learn more about data exchange"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Open in data visualizer"
+msgstr "Open in data visualizer"
 
 msgid "1 data report"
 msgstr "1 data report"
 
 msgid "{{requestsCount}} data reports"
 msgstr "{{requestsCount}} data reports"
+
+msgid "Analytics tables last generated {{timeDifference}} ago"
+msgstr "Analytics tables last generated {{timeDifference}} ago"
 
 msgid "Exchange content not accessible"
 msgstr "Exchange content not accessible"
@@ -54,8 +69,32 @@ msgstr "Close"
 msgid "Try again"
 msgstr "Try again"
 
-msgid "Data submitted successfully"
-msgstr "Data submitted successfully"
+msgid "{{orgUnitCount}} organisation unit"
+msgstr "{{orgUnitCount}} organisation unit"
+
+msgid "{{orgUnitCount}} organisation units"
+msgstr "{{orgUnitCount}} organisation units"
+
+msgid "{{periodsCount}} period: {{periods}}"
+msgstr "{{periodsCount}} period: {{periods}}"
+
+msgid "{{periodsCount}} periods: {{periods}}"
+msgstr "{{periodsCount}} periods: {{periods}}"
+
+msgid "3+ periods: {{periods}}, and {{periodsCountLessThree}} more"
+msgstr "3+ periods: {{periods}}, and {{periodsCountLessThree}} more"
+
+msgid "{{reportCount}} reports to {{-exchangeName}}"
+msgstr "{{reportCount}} reports to {{-exchangeName}}"
+
+msgid "{{reportCount}} report to {{-exchangeName}}"
+msgstr "{{reportCount}} report to {{-exchangeName}}"
+
+msgid "{{reportCount}} reports to {{-exchangeName}} at {{-exchangeURL}}"
+msgstr "{{reportCount}} reports to {{-exchangeName}} at {{-exchangeURL}}"
+
+msgid "{{reportCount}} report to {{-exchangeName}} at {{-exchangeURL}}"
+msgstr "{{reportCount}} report to {{-exchangeName}} at {{-exchangeURL}}"
 
 msgid "Are you sure you want to submit this data?"
 msgstr "Are you sure you want to submit this data?"
@@ -63,11 +102,32 @@ msgstr "Are you sure you want to submit this data?"
 msgid "Submitting data"
 msgstr "Submitting data"
 
-msgid "Clear selection"
-msgstr "Clear selection"
+msgid "Imported"
+msgstr "Imported"
 
-msgid "Exchange"
-msgstr "Exchange"
+msgid "Updated"
+msgstr "Updated"
+
+msgid "Ignored"
+msgstr "Ignored"
+
+msgid "Report"
+msgstr "Report"
+
+msgid "Copy summary to clipboard"
+msgstr "Copy summary to clipboard"
+
+msgid "Data submitted successfully"
+msgstr "Data submitted successfully"
+
+msgid "Summary"
+msgstr "Summary"
+
+msgid "Unknown error"
+msgstr "Unknown error"
+
+msgid "Data exchange"
+msgstr "Data exchange"
 
 msgid "Choose a data exchange"
 msgstr "Choose a data exchange"
