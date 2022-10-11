@@ -3,7 +3,7 @@
 }
 
 .summaryBoxTitle {
-    font-weight: 400;
+    font-weight: 500;
     margin-top: 12px;
 }
 
@@ -18,6 +18,7 @@
 }
 
 .label {
+    color: var(--colors-grey900);
     font-size: 14px;
     margin-bottom: 4px;
     display: flex;
@@ -26,7 +27,7 @@
 
 .summaryBox .count {
     color: var(--colors-grey900);
-    font-size: 21px;
+    font-size: 20px;
     font-weight: 500;
     margin-bottom: 8px;
 }
@@ -34,20 +35,21 @@
 .success {
     composes: summaryBox;
     background-color: var(--colors-green050);
-    border: 2px solid var(--colors-green300);
+    border: 2px solid var(--colors-green400);
     border-radius: 4px;
 }
 
+/* not currently in use */
 .deleted {
     composes: summaryBox;
     background-color: var(--colors-red050);
-    border: 2px solid var(--colors-red600);
+    border: 2px solid var(--colors-red400);
     border-radius: 4px;
 }
 
 .ignored {
     composes: summaryBox;
-    background-color: var(--colors-grey100);
+    background-color: var(--colors-grey050);
     border: 2px solid var(--colors-grey400);
     border-radius: 4px;
 }
