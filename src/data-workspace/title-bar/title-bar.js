@@ -12,9 +12,12 @@ const getRelativeTimeDifference = ({ startTimestamp, endTimestamp }) => {
     }
     const startTime = new Date(startTimestamp)
     const endTime = new Date(endTimestamp)
+    // date-fns implementation has the disadvantage of not translating (translation requires import of locales)
+    // may be better to write own implementation?
     return formatDistance(startTime, endTime)
 }
 
+// this formats to the styling specified by DHIS2 design principles
 const formatTimestamp = ({ timestamp, timezone }) => {
     return `${timestamp.substring(0, 10)} T ${timestamp.substring(
         11,

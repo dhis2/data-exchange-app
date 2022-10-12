@@ -51,6 +51,9 @@ msgstr "Dernière fois les tableaux analytiques ont été mis à jour: il y a {{
 msgid "Exchange content not accessible"
 msgstr "L'échange n'est pas accessible"
 
+msgid "Click to refresh"
+msgstr "Cliquer pour mettre à jour"
+
 msgid "Submitting..."
 msgstr "Envoyant..."
 
@@ -112,10 +115,10 @@ msgid "Ignored"
 msgstr "Ignorés"
 
 msgid "Copy summary to clipboard"
-msgstr "Copier l'information sommaire vers le presse-papier"
+msgstr "Copier l'information sommaire vers lcde presse-papier"
 
-msgid "Data submitted successfully"
-msgstr "Les données ont été envoyées avec succès" 
+msgid "Data submitted successfully."
+msgstr "Les données ont été envoyées avec succès." 
 
 msgid "Summary"
 msgstr "Sommaire"

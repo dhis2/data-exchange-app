@@ -8,7 +8,7 @@ import { AppContext } from './app-context.js'
 const query = {
     aggregateDataExchanges: {
         // This is generic enpoint but will only return
-        // workflows a user is allowed to see
+        // exchanges a user is allowed to see
         resource: 'aggregateDataExchanges',
         params: {
             paging: false,
@@ -34,10 +34,13 @@ const AppProvider = ({ children }) => {
                 title={i18n.t(
                     'Aggregate data exchange information is not accessible'
                 )}
-                message={i18n.t(
-                    'There was a problem retrieving aggregate data exchanges. Refresh the page to try again.'
-                )}
-            />
+            >
+                <span>
+                    {i18n.t(
+                        'There was a problem retrieving aggregate data exchanges. Refresh the page to try again.'
+                    )}
+                </span>
+            </Warning>
         )
     }
 

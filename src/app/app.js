@@ -14,7 +14,7 @@ import { Layout } from './layout.js'
 
 const App = ({ router: Router }) => {
     const [submitModalOpen, setSubmitModalOpen] = useState(false)
-    const [timeOfLastSubmit, setTimeOfLastSubmit] = useState(null)
+    const [dataSubmitted, setDataSubmitted] = useState(null)
 
     const closeSubmitModal = () => {
         setSubmitModalOpen(false)
@@ -41,15 +41,13 @@ const App = ({ router: Router }) => {
                                     <SubmitModal
                                         open={submitModalOpen}
                                         onClose={closeSubmitModal}
-                                        setTimeOfLastSubmit={
-                                            setTimeOfLastSubmit
-                                        }
+                                        setDataSubmitted={setDataSubmitted}
                                     />
                                 </Layout.Content>
                                 <Layout.Bottom>
                                     <BottomBar
                                         openSubmitModal={openSubmitModal}
-                                        timeOfLastSubmit={timeOfLastSubmit}
+                                        dataSubmitted={dataSubmitted}
                                     />
                                 </Layout.Bottom>
                             </ExchangeProvider>
@@ -69,6 +67,7 @@ App.propTypes = {
     router: PropTypes.elementType,
 }
 
+// wrapper so we can use a different router in tests
 const AppWrapper = () => {
     return <App />
 }

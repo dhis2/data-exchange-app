@@ -3,19 +3,19 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styles from './warning.module.css'
 
-const Warning = ({ error, title, message }) => {
+const Warning = ({ error, title, children }) => {
     return (
         <div className={styles.warningBoxWrapper}>
             <NoticeBox error={error} title={title}>
-                {message}
+                {children}
             </NoticeBox>
         </div>
     )
 }
 
 Warning.propTypes = {
+    children: PropTypes.node,
     error: PropTypes.bool,
-    message: PropTypes.string,
     title: PropTypes.string,
 }
 

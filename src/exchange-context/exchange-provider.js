@@ -2,7 +2,7 @@ import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Loader, Warning } from '../shared/index.js'
 import {
     useExchangeId,
@@ -24,7 +24,6 @@ const query = {
         id: ({ id }) => `${id}/sourceData`,
         params: {
             paging: false,
-            fields: ['source, target', 'id', 'displayName'],
         },
     },
 }
@@ -35,14 +34,17 @@ const ExchangeProvider = ({ children }) => {
     })
     const [exchangeId] = useExchangeId()
     const [, setRequestIndex] = useRequestIndex()
-    const fetchExchange = () => refetch({ id: exchangeId })
+    const fetchExchange = useCallback(
+        () => refetch({ id: exchangeId }),
+        [refetch, exchangeId]
+    )
 
     useEffect(() => {
         setRequestIndex(0)
         if (exchangeId) {
             fetchExchange()
         }
-    }, [exchangeId, setRequestIndex])
+    }, [exchangeId, fetchExchange, setRequestIndex])
 
     if (loading) {
         return <Loader />
@@ -50,16 +52,17 @@ const ExchangeProvider = ({ children }) => {
 
     if (error) {
         /**
-         * general error boundary
+         * error boundary
          */
         return (
             <Warning
                 error={true}
                 title={i18n.t('Exchange content not accessible')}
-                message={
-                    <Button onClick={fetchExchange}>Click to refresh</Button>
-                }
-            />
+            >
+                <Button onClick={fetchExchange}>
+                    {i18n.t('Click to refresh')}
+                </Button>
+            </Warning>
         )
     }
 

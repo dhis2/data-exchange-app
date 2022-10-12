@@ -134,7 +134,7 @@ const SuccessContent = ({ data }) => {
         (totalCounts, importSummary) => {
             for (const countType in importSummary?.importCount) {
                 totalCounts[countType] +=
-                    importSummary.importCount[countType] || 0
+                    importSummary.importCount?.[countType] || 0
             }
             return totalCounts
         },

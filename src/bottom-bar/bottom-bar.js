@@ -6,7 +6,7 @@ import { useExchangeContext } from '../exchange-context/index.js'
 import { useExchangeId } from '../use-context-selection/index.js'
 import styles from './bottom-bar.module.css'
 
-const BottomBar = ({ openSubmitModal, timeOfLastSubmit }) => {
+const BottomBar = ({ openSubmitModal, dataSubmitted }) => {
     const [exchangeId] = useExchangeId()
     const { exchangeData } = useExchangeContext()
 
@@ -21,12 +21,12 @@ const BottomBar = ({ openSubmitModal, timeOfLastSubmit }) => {
         return null
     }
 
-    if (dataCount === 0 || timeOfLastSubmit) {
+    if (dataCount === 0 || dataSubmitted) {
         return (
             <div className={styles.bottomBar} data-test="bottom-bar">
                 <Tooltip
                     content={
-                        timeOfLastSubmit
+                        dataSubmitted
                             ? i18n.t('Data has already been submitted')
                             : i18n.t('There is no data to submit')
                     }
@@ -58,7 +58,7 @@ const BottomBar = ({ openSubmitModal, timeOfLastSubmit }) => {
 }
 
 BottomBar.propTypes = {
+    dataSubmitted: PropTypes.bool,
     openSubmitModal: PropTypes.func,
-    timeOfLastSubmit: PropTypes.object,
 }
 export { BottomBar }

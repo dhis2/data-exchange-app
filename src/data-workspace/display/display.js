@@ -4,6 +4,7 @@ import { Button, IconLaunch16 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useExchangeContext } from '../../exchange-context/index.js'
+import { Warning } from '../../shared/index.js'
 import { Table } from '../table/index.js'
 import styles from './display.module.css'
 
@@ -70,15 +71,15 @@ const formatData = (data) => {
         id: orgUnit,
         name: data.metaData?.items[orgUnit]?.name,
     }))
-    // TBD: locale compare?
-    orgUnits.sort((a, b) => a.name > b.name)
+
+    orgUnits.sort((a, b) => a.name.localeCompare(b.name))
 
     const dataElements = data.metaData?.dimensions?.dx.map((dataElement) => ({
         id: dataElement,
         name: data.metaData?.items[dataElement]?.name,
     }))
-    // TBD: locale compare?
-    dataElements.sort((a, b) => a.name > b.name)
+
+    dataElements.sort((a, b) => a.name.localeCompare(b.name))
 
     // TBD: natural sort? Is this necessary or is it sorted by backend?
     let periods = data.metaData?.dimensions?.pe.map((period) => ({
@@ -129,6 +130,16 @@ const Display = ({ requestIndex }) => {
 
     const { baseUrl } = useConfig()
 
+    if (exchangeData?.rows?.length === 0) {
+        return (
+            <div className={styles.display}>
+                <Warning title={i18n.t('No data')}>
+                    <span>{i18n.t('There is no data for this report')}</span>
+                </Warning>
+            </div>
+        )
+    }
+
     if (exchangeData) {
         return (
             <div className={styles.display}>
@@ -136,7 +147,7 @@ const Display = ({ requestIndex }) => {
                     <a
                         target="_blank"
                         rel="noreferrer noopener"
-                        href={`${baseUrl}/dhis-web-data-visualizer/#/${request?.visualization}`}
+                        href={`${baseUrl}/dhis-web-data-visualizer/#/${request.visualization}`}
                         className={styles.linkNoDecoration}
                     >
                         <Button
@@ -159,6 +170,7 @@ const Display = ({ requestIndex }) => {
         )
     }
 
+    // if exchangeData is missing, return null
     return null
 }
 

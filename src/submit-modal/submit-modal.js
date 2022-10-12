@@ -45,8 +45,9 @@ const ErrorModalContent = ({ error, onRetry, onClose }) => (
             <Warning
                 error={true}
                 title={i18n.t('There was a problem submitting data')}
-                message={error.message}
-            />
+            >
+                <span>{error.message}</span>
+            </Warning>
         </ModalContent>
 
         <ModalActions>
@@ -210,10 +211,9 @@ ConfirmModalContent.propTypes = {
     onSubmit: PropTypes.func,
 }
 
-const SubmitModal = ({ open, onClose, setTimeOfLastSubmit }) => {
+const SubmitModal = ({ open, onClose, setDataSubmitted }) => {
     const { exchange, exchangeData } = useExchangeContext()
 
-    // TBD: refactor to use common code from display.js?
     const requests = exchangeData?.map((request, index) => ({
         name: exchange.source?.requests?.[index]?.name,
         orgUnits: request.metaData?.dimensions?.ou,
@@ -224,18 +224,18 @@ const SubmitModal = ({ open, onClose, setTimeOfLastSubmit }) => {
 
     const [
         submitExchange,
-        { called, data, error, loading, submitTimestamp, cleanUp },
+        { called, data, error, loading, dataSubmitted, cleanUp },
     ] = useAggregateDataExchangeMutation({ id: exchange?.id })
 
     // clean up whenever modal is toggled
     useEffect(() => {
         cleanUp()
-    }, [open])
+    }, [open, cleanUp])
 
-    // set time of last submission upon update
+    // update data submission status when there is a change
     useEffect(() => {
-        setTimeOfLastSubmit(submitTimestamp)
-    }, [submitTimestamp, setTimeOfLastSubmit])
+        setDataSubmitted(dataSubmitted)
+    }, [dataSubmitted, setDataSubmitted])
 
     return !exchange ? null : (
         <Modal
@@ -268,7 +268,7 @@ const SubmitModal = ({ open, onClose, setTimeOfLastSubmit }) => {
 
 SubmitModal.propTypes = {
     open: PropTypes.bool,
-    setTimeOfLastSubmit: PropTypes.func,
+    setDataSubmitted: PropTypes.func,
     onClose: PropTypes.func,
 }
 

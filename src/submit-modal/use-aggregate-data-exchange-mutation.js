@@ -1,6 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 const getMutation = ({ id }) => ({
     resource: `aggregateDataExchanges/${id}/exchange`,
@@ -14,15 +14,15 @@ export const useAggregateDataExchangeMutation = ({ id }) => {
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(null)
     const [called, setCalled] = useState(false)
-    const [submitTimestamp, setSubmitTimestamp] = useState(null)
+    const [dataSubmitted, setDataIsSubmitted] = useState(false)
     const [fetch, setFetch] = useState(false)
 
-    const cleanUp = () => {
+    const cleanUp = useCallback(() => {
         setLoading(false)
         setCalled(false)
         setData(null)
         setError(null)
-    }
+    }, [])
 
     useEffect(() => {
         const fetchData = async ({ id }) => {
@@ -30,7 +30,7 @@ export const useAggregateDataExchangeMutation = ({ id }) => {
                 setError(null)
                 setData(null)
                 setLoading(true)
-                setSubmitTimestamp(null)
+                setDataIsSubmitted(false)
                 try {
                     const response = await engine.mutate(getMutation({ id }))
                     if (response?.status === 'ERROR') {
@@ -41,7 +41,7 @@ export const useAggregateDataExchangeMutation = ({ id }) => {
                         throw new Error(errorMessage)
                     }
                     setData(response)
-                    setSubmitTimestamp(new Date())
+                    setDataIsSubmitted(true)
                 } catch (error) {
                     setError(error)
                 } finally {
@@ -58,13 +58,13 @@ export const useAggregateDataExchangeMutation = ({ id }) => {
     useEffect(() => {
         return () => {
             cleanUp()
-            setSubmitTimestamp(null)
+            setDataIsSubmitted(false)
         }
-    }, [id])
+    }, [id, cleanUp])
 
     const refetch = () => {
         setFetch(true)
     }
 
-    return [refetch, { error, data, loading, called, submitTimestamp, cleanUp }]
+    return [refetch, { error, data, loading, called, dataSubmitted, cleanUp }]
 }

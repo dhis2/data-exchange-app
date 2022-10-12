@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-10-11T07:32:29.620Z\n"
-"PO-Revision-Date: 2022-10-11T07:32:29.620Z\n"
+"POT-Creation-Date: 2022-10-12T13:49:25.876Z\n"
+"PO-Revision-Date: 2022-10-12T13:49:25.876Z\n"
 
 msgid "Aggregate data exchange information is not accessible"
 msgstr "Aggregate data exchange information is not accessible"
@@ -27,6 +27,12 @@ msgstr "Data has already been submitted"
 msgid "There is no data to submit"
 msgstr "There is no data to submit"
 
+msgid "Invalid exchange"
+msgstr "Invalid exchange"
+
+msgid "There are no reports associated with this exchange"
+msgstr "There are no reports associated with this exchange"
+
 msgid "Choose a data exchange to get started"
 msgstr "Choose a data exchange to get started"
 
@@ -35,6 +41,12 @@ msgstr "Learn more about data exchange"
 
 msgid "Data"
 msgstr "Data"
+
+msgid "No data"
+msgstr "No data"
+
+msgid "There is no data for this report"
+msgstr "There is no data for this report"
 
 msgid "Open in data visualizer"
 msgstr "Open in data visualizer"
@@ -50,6 +62,9 @@ msgstr "Analytics tables last generated {{timeDifference}} ago"
 
 msgid "Exchange content not accessible"
 msgstr "Exchange content not accessible"
+
+msgid "Click to refresh"
+msgstr "Click to refresh"
 
 msgid "Submitting..."
 msgstr "Submitting..."
@@ -117,8 +132,8 @@ msgstr "Report"
 msgid "Copy summary to clipboard"
 msgstr "Copy summary to clipboard"
 
-msgid "Data submitted successfully"
-msgstr "Data submitted successfully"
+msgid "Data submitted successfully."
+msgstr "Data submitted successfully."
 
 msgid "Summary"
 msgstr "Summary"

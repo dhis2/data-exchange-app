@@ -3,6 +3,7 @@ import { CenteredContent } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { useAppContext } from '../app-context/index.js'
 import { useExchangeContext } from '../exchange-context/index.js'
+import { Warning } from '../shared/index.js'
 import {
     useExchangeId,
     useRequestIndex,
@@ -22,14 +23,15 @@ const DataWorkspace = () => {
 
     const [selectedRequest, setSelectedRequest] = useRequestIndex(undefined)
 
+    // auto select the first report if none is specified
     useEffect(() => {
-        if (!exchangeId) {
+        if (!exchangeId || !requests) {
             setSelectedRequest(undefined)
         }
-        if (exchangeId && !selectedRequest) {
+        if (exchangeId && !selectedRequest && requests) {
             setSelectedRequest(0)
         }
-    }, [exchangeId, selectedRequest, setSelectedRequest])
+    }, [exchangeId, requests, selectedRequest, setSelectedRequest])
 
     if (aggregateDataExchanges.length === 0) {
         return (
@@ -43,6 +45,20 @@ const DataWorkspace = () => {
         return (
             <>
                 <TitleBar />
+                {!requests && (
+                    <div>
+                        <Warning
+                            error={true}
+                            title={i18n.t('Invalid exchange')}
+                        >
+                            <span>
+                                {i18n.t(
+                                    'There are no reports associated with this exchange'
+                                )}
+                            </span>
+                        </Warning>
+                    </div>
+                )}
                 {!isNaN(selectedRequest) && (
                     <>
                         <RequestsNavigation
