@@ -36,7 +36,7 @@ const DataWorkspace = () => {
     if (aggregateDataExchanges.length === 0) {
         return (
             <CenteredContent>
-                <span>There are no exchanges available to you</span>
+                <span>{i18n.t('There are no exchanges available to you')}</span>
             </CenteredContent>
         )
     }
@@ -49,11 +49,11 @@ const DataWorkspace = () => {
                     <div>
                         <Warning
                             error={true}
-                            title={i18n.t('Invalid exchange')}
+                            title={i18n.t('No data in this exchange')}
                         >
                             <span>
                                 {i18n.t(
-                                    'There are no reports associated with this exchange'
+                                    'There is not any data to show in this exchange, or you might not have access to the data.'
                                 )}
                             </span>
                         </Warning>

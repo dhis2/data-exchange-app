@@ -1,3 +1,4 @@
+import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     Button,
@@ -19,14 +20,16 @@ import { useAggregateDataExchangeMutation } from './use-aggregate-data-exchange-
 
 const LoadingStateModalContent = () => (
     <>
-        <ModalContent>
-            <CenteredContent>
-                <div className={styles.loadingWrapper}>
-                    <CircularLoader small />
-                    <span>{i18n.t('Submitting...')}</span>
-                </div>
-            </CenteredContent>
-        </ModalContent>
+        <ModalContentWrapper>
+            <ModalContent>
+                <CenteredContent>
+                    <div className={styles.loadingWrapper}>
+                        <CircularLoader small />
+                        <span>{i18n.t('Submitting...')}</span>
+                    </div>
+                </CenteredContent>
+            </ModalContent>
+        </ModalContentWrapper>
 
         <ModalActions>
             <ButtonStrip end>
@@ -41,14 +44,16 @@ const LoadingStateModalContent = () => (
 
 const ErrorModalContent = ({ error, onRetry, onClose }) => (
     <>
-        <ModalContent>
-            <Warning
-                error={true}
-                title={i18n.t('There was a problem submitting data')}
-            >
-                <span>{error.message}</span>
-            </Warning>
-        </ModalContent>
+        <ModalContentWrapper>
+            <ModalContent>
+                <Warning
+                    error={true}
+                    title={i18n.t('There was a problem submitting data')}
+                >
+                    <span>{error.message}</span>
+                </Warning>
+            </ModalContent>
+        </ModalContentWrapper>
 
         <ModalActions>
             <ButtonStrip end>
@@ -69,9 +74,11 @@ ErrorModalContent.propTypes = {
 
 const SuccessModalContent = ({ onClose, data }) => (
     <>
-        <ModalContent>
-            <SuccessContent data={data} />
-        </ModalContent>
+        <ModalContentWrapper>
+            <ModalContent>
+                <SuccessContent data={data} />
+            </ModalContent>
+        </ModalContentWrapper>
 
         <ModalActions>
             <ButtonStrip end>
@@ -128,45 +135,52 @@ const getReportText = (request) => {
 const ConfirmModalContent = ({ exchange, requests, onClose, onSubmit }) => {
     // this is very wordy, but did not have luck with i18nextscanner picking up from more compact versions...
     let reportTranslationsString
+    const { baseUrl } = useConfig()
     const reportCount = requests.length
     const exchangeName = exchange?.displayName
-    const exchangeURL = exchange?.target?.api?.url
+    const exchangeURL =
+        exchange?.target?.type === 'INTERNAL'
+            ? baseUrl
+            : exchange?.target?.api?.url
+    const exchangeHostName = exchangeURL?.split('//')[1] // remove protocol
 
     if (exchange?.target?.type === 'INTERNAL') {
         if (requests.length > 1) {
             reportTranslationsString = i18n.t(
-                '{{reportCount}} reports to {{-exchangeName}}',
+                '{{reportCount}} reports to {{-exchangeName}} internally at {{-exchangeHostName}}',
                 {
                     reportCount,
                     exchangeName,
+                    exchangeHostName,
                 }
             )
         } else {
             reportTranslationsString = i18n.t(
-                '{{reportCount}} report to {{-exchangeName}}',
+                '{{reportCount}} report to {{-exchangeName}} internally at {{-exchangeHostName}}',
                 {
                     reportCount,
                     exchangeName,
+                    exchangeHostName,
                 }
             )
         }
     } else {
         if (requests.length > 1) {
             reportTranslationsString = i18n.t(
-                '{{reportCount}} reports to {{-exchangeName}} at {{-exchangeURL}}',
+                '{{reportCount}} reports to {{-exchangeName}} at {{-exchangeHostName}}',
                 {
                     reportCount,
                     exchangeName,
-                    exchangeURL,
+                    exchangeHostName,
                 }
             )
         } else {
             reportTranslationsString = i18n.t(
-                '{{reportCount}} report to {{-exchangeName}} at {{-exchangeURL}}',
+                '{{reportCount}} report to {{-exchangeName}} at {{-exchangeHostName}}',
                 {
                     reportCount,
                     exchangeName,
-                    exchangeURL,
+                    exchangeHostName,
                 }
             )
         }
@@ -175,21 +189,23 @@ const ConfirmModalContent = ({ exchange, requests, onClose, onSubmit }) => {
     return (
         <>
             <ModalContent>
-                <div className={styles.submitModalSummaryWrapper}>
-                    {reportTranslationsString}
-                    <ul>
-                        {requests.map((request) => {
-                            return (
-                                <li key={request.name}>
-                                    {getReportText(request)}
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </div>
-                <div>
-                    {i18n.t('Are you sure you want to submit this data?')}
-                </div>
+                <ModalContentWrapper>
+                    <div className={styles.submitModalSummaryWrapper}>
+                        {reportTranslationsString}
+                        <ul>
+                            {requests.map((request) => {
+                                return (
+                                    <li key={request.name}>
+                                        {getReportText(request)}
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                    <div>
+                        {i18n.t('Are you sure you want to submit this data?')}
+                    </div>
+                </ModalContentWrapper>
             </ModalContent>
 
             <ModalActions>
@@ -209,6 +225,14 @@ ConfirmModalContent.propTypes = {
     requests: PropTypes.array,
     onClose: PropTypes.func,
     onSubmit: PropTypes.func,
+}
+
+const ModalContentWrapper = ({ children }) => (
+    <div className={styles.contentStyling}>{children}</div>
+)
+
+ModalContentWrapper.propTypes = {
+    children: PropTypes.node,
 }
 
 const SubmitModal = ({ open, onClose, setDataSubmitted }) => {

@@ -153,6 +153,8 @@ const Display = ({ requestIndex }) => {
                         <Button
                             icon={<IconLaunch16 />}
                             className={styles.visualizationButton}
+                            secondary
+                            small
                         >
                             {i18n.t('Open in data visualizer')}
                         </Button>

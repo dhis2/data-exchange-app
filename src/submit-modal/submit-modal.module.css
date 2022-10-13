@@ -1,5 +1,4 @@
 .submitModalSummaryWrapper {
-    /* confirm grey100 */
     background-color: var(--colors-grey200);
     padding: var(--spacers-dp12);
     margin-bottom: var(--spacers-dp12);
@@ -20,4 +19,8 @@
 
 .loadingWrapper * {
     margin-right: var(--spacers-dp12);
+}
+
+.contentStyling {
+    color: var(--colors-grey900);
 }

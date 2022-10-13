@@ -87,6 +87,20 @@ msgstr "{{periodsCount}} périodes: {{periods}}"
 msgid "3+ periods: {{periods}}, and {{periodsCountLessThree}} more"
 msgstr "3+ périodes: {{periods}}, et {{periodsCountLessThree}} en plus"
 
+msgid ""
+"{{reportCount}} reports to {{-exchangeName}} internally at "
+"{{-exchangeHostName}}"
+msgstr ""
+"{{reportCount}} rapports pour {{-exchangeName}} en interne à "
+"{{-exchangeHostName}}"
+
+msgid ""
+"{{reportCount}} report to {{-exchangeName}} internally at "
+"{{-exchangeHostName}}"
+msgstr ""
+"{{reportCount}} rapport pour {{-exchangeName}} en interne à "
+"{{-exchangeHostName}}"
+
 msgid "{{reportCount}} report to {{-exchangeName}}"
 msgstr "{{reportCount}} rapport pour {{-exchangeName}}"
 
