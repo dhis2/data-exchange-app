@@ -20,16 +20,16 @@ import { useAggregateDataExchangeMutation } from './use-aggregate-data-exchange-
 
 const LoadingStateModalContent = () => (
     <>
-        <ModalContentWrapper>
-            <ModalContent>
+        <ModalContent>
+            <ModalContentWrapper>
                 <CenteredContent>
                     <div className={styles.loadingWrapper}>
                         <CircularLoader small />
                         <span>{i18n.t('Submitting...')}</span>
                     </div>
                 </CenteredContent>
-            </ModalContent>
-        </ModalContentWrapper>
+            </ModalContentWrapper>
+        </ModalContent>
 
         <ModalActions>
             <ButtonStrip end>
@@ -44,16 +44,16 @@ const LoadingStateModalContent = () => (
 
 const ErrorModalContent = ({ error, onRetry, onClose }) => (
     <>
-        <ModalContentWrapper>
-            <ModalContent>
+        <ModalContent>
+            <ModalContentWrapper>
                 <Warning
                     error={true}
                     title={i18n.t('There was a problem submitting data')}
                 >
                     <span>{error.message}</span>
                 </Warning>
-            </ModalContent>
-        </ModalContentWrapper>
+            </ModalContentWrapper>
+        </ModalContent>
 
         <ModalActions>
             <ButtonStrip end>
@@ -74,11 +74,11 @@ ErrorModalContent.propTypes = {
 
 const SuccessModalContent = ({ onClose, data }) => (
     <>
-        <ModalContentWrapper>
-            <ModalContent>
+        <ModalContent>
+            <ModalContentWrapper>
                 <SuccessContent data={data} />
-            </ModalContent>
-        </ModalContentWrapper>
+            </ModalContentWrapper>
+        </ModalContent>
 
         <ModalActions>
             <ButtonStrip end>
