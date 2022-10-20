@@ -8,8 +8,6 @@ import { Warning } from '../../shared/index.js'
 import { Table } from '../table/index.js'
 import styles from './display.module.css'
 
-// TBD re: data conversion for formatting
-
 const convertToObjectFormat = ({
     data,
     dx_index,
@@ -20,29 +18,17 @@ const convertToObjectFormat = ({
     const objectFormat = {}
 
     for (const row of data?.rows) {
-        if (
-            !Object.prototype.hasOwnProperty.call(objectFormat, row[ou_index])
-        ) {
-            objectFormat[row[ou_index]] = {}
-        }
-        if (
-            !Object.prototype.hasOwnProperty.call(
-                objectFormat[row[ou_index]],
-                row[dx_index]
-            )
-        ) {
-            objectFormat[row[ou_index]][row[dx_index]] = {}
-        }
-        if (
-            !Object.prototype.hasOwnProperty.call(
-                objectFormat[row[ou_index]][row[dx_index]],
-                row[pe_index]
-            )
-        ) {
-            objectFormat[row[ou_index]][row[dx_index]][row[pe_index]] = {}
-        }
-        objectFormat[row[ou_index]][row[dx_index]][row[pe_index]] =
-            row[value_index]
+        const ouId = row[ou_index]
+        const deId = row[dx_index]
+        const peId = row[pe_index]
+        const value = row[value_index]
+
+        !(ouId in objectFormat) && (objectFormat[ouId] = {})
+        !(deId in objectFormat[ouId]) && (objectFormat[ouId][deId] = {})
+        !(peId in objectFormat[ouId][deId]) &&
+            (objectFormat[ouId][deId][peId] = {})
+
+        objectFormat[ouId][deId][peId] = value
     }
     return objectFormat
 }
