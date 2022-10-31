@@ -8,7 +8,14 @@ import { Warning } from '../../shared/index.js'
 import { Table } from '../table/index.js'
 import styles from './display.module.css'
 
-const convertToObjectFormat = ({
+export const ensureNestedObjectExists = (obj, propertyNames) => {
+    for (const propertyName of propertyNames) {
+        obj[propertyName] = obj[propertyName] || {}
+        obj = obj[propertyName]
+    }
+}
+
+export const convertToObjectFormat = ({
     data,
     dx_index,
     ou_index,
@@ -23,17 +30,13 @@ const convertToObjectFormat = ({
         const peId = row[pe_index]
         const value = row[value_index]
 
-        !(ouId in objectFormat) && (objectFormat[ouId] = {})
-        !(deId in objectFormat[ouId]) && (objectFormat[ouId][deId] = {})
-        !(peId in objectFormat[ouId][deId]) &&
-            (objectFormat[ouId][deId][peId] = {})
-
+        ensureNestedObjectExists(objectFormat, [ouId, deId, peId])
         objectFormat[ouId][deId][peId] = value
     }
     return objectFormat
 }
 
-const formatData = (data) => {
+export const formatData = (data) => {
     const constantDimensions = ['dx', 'pe', 'ou', 'co']
     const dx_index = data?.headers.findIndex((header) => header.name === 'dx')
     const ou_index = data?.headers.findIndex((header) => header.name === 'ou')
