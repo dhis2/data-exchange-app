@@ -52,15 +52,32 @@ SummaryBox.propTypes = {
 }
 
 const copyTableToClipboard = ({ importSummaries, requests }) => {
-    let clipboardText = `${i18n.t('Report')}\t${i18n.t('Imported')}\t${i18n.t(
-        'Updated'
-    )}\t${i18n.t('Ignored')}\t\n`
-    clipboardText += importSummaries
-        .map(
-            (importSummary, index) =>
-                `${requests?.[index]?.name}\t${importSummary?.importCount?.imported}\t${importSummary?.importCount?.updated}\t${importSummary?.importCount?.ignored}`
-        )
-        .join('\n')
+    const headerRowText = [
+        i18n.t('Report'),
+        i18n.t('Imported'),
+        i18n.t('Updated'),
+        i18n.t('Ignored'),
+    ].join()
+    const clipboardText = importSummaries.reduce(
+        (fullText, importSummary, index) => {
+            let requestName = requests?.[index]?.name ?? ''
+            if (requests?.[index]?.name?.includes(',')) {
+                requestName = `"${requests?.[index]?.name}"`
+            }
+            return (
+                fullText +
+                '\n' +
+                [
+                    requestName,
+                    importSummary?.importCount?.imported,
+                    importSummary?.importCount?.updated,
+                    importSummary?.importCount?.ignored,
+                ].join()
+            )
+        },
+        headerRowText
+    )
+
     navigator.clipboard.writeText(clipboardText)
 }
 
