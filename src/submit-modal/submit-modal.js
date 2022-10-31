@@ -11,7 +11,7 @@ import {
     ModalTitle,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useExchangeContext } from '../exchange-context/index.js'
 import { Warning } from '../shared/index.js'
 import styles from './submit-modal.module.css'
@@ -237,6 +237,7 @@ ModalContentWrapper.propTypes = {
 
 const SubmitModal = ({ open, onClose, setDataSubmitted }) => {
     const { exchange, exchangeData } = useExchangeContext()
+    const [submitsAttempted, setSubmitsAttempted] = useState(false)
 
     const requests = exchangeData?.map((request, index) => ({
         name: exchange.source?.requests?.[index]?.name,
@@ -246,15 +247,15 @@ const SubmitModal = ({ open, onClose, setDataSubmitted }) => {
         ),
     }))
 
-    const [
-        submitExchange,
-        { called, data, error, loading, dataSubmitted, cleanUp },
-    ] = useAggregateDataExchangeMutation({ id: exchange?.id })
+    const [submitExchange, { called, data, error, loading, dataSubmitted }] =
+        useAggregateDataExchangeMutation({ id: exchange?.id })
 
-    // clean up whenever modal is toggled
+    // clean up whenever modal is closed
     useEffect(() => {
-        cleanUp()
-    }, [open, cleanUp])
+        if (!open) {
+            setSubmitsAttempted(false)
+        }
+    }, [open])
 
     // update data submission status when there is a change
     useEffect(() => {
@@ -269,15 +270,18 @@ const SubmitModal = ({ open, onClose, setDataSubmitted }) => {
             onClose={loading ? null : onClose}
         >
             <ModalTitle>{i18n.t('Submitting data')}</ModalTitle>
-            {!called && !loading && (
+            {!called && !loading && !submitsAttempted && (
                 <ConfirmModalContent
                     exchange={exchange}
                     requests={requests}
                     onClose={onClose}
-                    onSubmit={submitExchange}
+                    onSubmit={() => {
+                        setSubmitsAttempted(true)
+                        submitExchange()
+                    }}
                 />
             )}
-            {error && (
+            {error && submitsAttempted && (
                 <ErrorModalContent
                     error={error}
                     onRetry={submitExchange}

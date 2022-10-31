@@ -1,36 +1,57 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 
 const getMutation = ({ id }) => ({
     resource: `aggregateDataExchanges/${id}/exchange`,
     type: 'create',
 })
 
+const uncalledState = {
+    data: null,
+    error: null,
+    loading: false,
+    called: false,
+    dataSubmitted: null,
+}
+
+const submitReducer = (state, action) => {
+    switch (action.type) {
+        case 'loading':
+            return { ...uncalledState, loading: true }
+        case 'success':
+            return {
+                data: action.payload,
+                error: null,
+                loading: false,
+                called: true,
+                dataSubmitted: true,
+            }
+        case 'error':
+            return {
+                data: null,
+                error: action.payload,
+                loading: false,
+                called: false,
+                dataSubmitted: false,
+            }
+        case 'reset':
+            return { ...uncalledState }
+        default:
+            return { ...uncalledState, called: true }
+    }
+}
+
 export const useAggregateDataExchangeMutation = ({ id }) => {
     const engine = useDataEngine()
 
-    const [error, setError] = useState(null)
-    const [data, setData] = useState(null)
-    const [loading, setLoading] = useState(null)
-    const [called, setCalled] = useState(false)
-    const [dataSubmitted, setDataIsSubmitted] = useState(false)
+    const [submissionState, dispatch] = useReducer(submitReducer, uncalledState)
     const [fetch, setFetch] = useState(false)
-
-    const cleanUp = useCallback(() => {
-        setLoading(false)
-        setCalled(false)
-        setData(null)
-        setError(null)
-    }, [])
 
     useEffect(() => {
         const fetchData = async ({ id }) => {
             if (fetch) {
-                setError(null)
-                setData(null)
-                setLoading(true)
-                setDataIsSubmitted(false)
+                dispatch({ type: 'loading' })
                 try {
                     const response = await engine.mutate(getMutation({ id }))
                     if (response?.status === 'ERROR') {
@@ -40,14 +61,11 @@ export const useAggregateDataExchangeMutation = ({ id }) => {
                             )?.description || i18n.t('Unknown error')
                         throw new Error(errorMessage)
                     }
-                    setData(response)
-                    setDataIsSubmitted(true)
-                } catch (error) {
-                    setError(error)
-                } finally {
                     setFetch(false)
-                    setCalled(true)
-                    setLoading(false)
+                    dispatch({ type: 'success', payload: response })
+                } catch (error) {
+                    setFetch(false)
+                    dispatch({ type: 'error', payload: error })
                 }
             }
         }
@@ -57,14 +75,13 @@ export const useAggregateDataExchangeMutation = ({ id }) => {
     // clean up if id changes
     useEffect(() => {
         return () => {
-            cleanUp()
-            setDataIsSubmitted(false)
+            dispatch({ type: 'reset' })
         }
-    }, [id, cleanUp])
+    }, [id])
 
     const refetch = () => {
         setFetch(true)
     }
 
-    return [refetch, { error, data, loading, called, dataSubmitted, cleanUp }]
+    return [refetch, submissionState]
 }
