@@ -8,7 +8,7 @@ import {
     useExchangeId,
     useRequestIndex,
 } from '../use-context-selection/index.js'
-import { Display } from './display/index.js'
+import { RequestsDisplay } from './requests-display/index.js'
 import { RequestsNavigation } from './requests-navigation/index.js'
 import { TitleBar } from './title-bar/title-bar.js'
 
@@ -66,7 +66,7 @@ const DataWorkspace = () => {
                             selected={selectedRequest}
                             onChange={setSelectedRequest}
                         />
-                        <Display requestIndex={selectedRequest} />
+                        <RequestsDisplay requestIndex={selectedRequest} />
                     </>
                 )}
             </>

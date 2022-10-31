@@ -6,7 +6,7 @@ import React from 'react'
 import { useExchangeContext } from '../../exchange-context/index.js'
 import { Warning } from '../../shared/index.js'
 import { Table } from '../table/index.js'
-import styles from './display.module.css'
+import styles from './requests-display.module.css'
 
 export const ensureNestedObjectExists = (obj, propertyNames) => {
     for (const propertyName of propertyNames) {
@@ -111,7 +111,7 @@ export const formatData = (data) => {
     return tableFormat
 }
 
-const Display = ({ requestIndex }) => {
+const RequestsDisplay = ({ requestIndex }) => {
     const { exchange, exchangeData } = useExchangeContext()
     const request = exchange.source?.requests?.[requestIndex]
 
@@ -165,8 +165,8 @@ const Display = ({ requestIndex }) => {
     return null
 }
 
-Display.propTypes = {
+RequestsDisplay.propTypes = {
     requestIndex: PropTypes.number,
 }
 
-export { Display }
+export { RequestsDisplay }
