@@ -3,6 +3,7 @@
     pointer-events: all;
     cursor: not-allowed;
   }
-  .tooltipReference > button:disabled {
-    pointer-events: none;
-  }
+  
+.tooltipReference > button:disabled {
+pointer-events: none;
+}
