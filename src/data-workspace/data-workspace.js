@@ -8,6 +8,7 @@ import {
     useExchangeId,
     useRequestIndex,
 } from '../use-context-selection/index.js'
+import { EntryScreen } from './entry-screen.js'
 import { RequestsDisplay } from './requests-display/index.js'
 import { RequestsNavigation } from './requests-navigation/index.js'
 import { TitleBar } from './title-bar/title-bar.js'
@@ -73,24 +74,7 @@ const DataWorkspace = () => {
         )
     }
 
-    return (
-        <CenteredContent>
-            <span>{i18n.t('Choose a data exchange to get started')}</span>
-            <div>
-                <a
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    href={
-                        'https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-master/data-exchange.html#data-exchange'
-                    }
-                >
-                    <span style={{ fontSize: '12px' }}>
-                        {i18n.t('Learn more about data exchange')}
-                    </span>
-                </a>
-            </div>
-        </CenteredContent>
-    )
+    return <EntryScreen />
 }
 
 export { DataWorkspace }
