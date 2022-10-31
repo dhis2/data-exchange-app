@@ -69,18 +69,8 @@ const ExchangeProvider = ({ children }) => {
     const { exchange, exchangeData } = data || {}
 
     const providerValue = {
-        exchange,
-        exchangeData,
-    }
-
-    if (!called) {
-        return (
-            <ExchangeContext.Provider
-                value={{ exchange: null, exchangeData: null }}
-            >
-                {children}
-            </ExchangeContext.Provider>
-        )
+        exchange: called ? exchange : null,
+        exchangeData: called ? exchangeData : null,
     }
 
     return (
