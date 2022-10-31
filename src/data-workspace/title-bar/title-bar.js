@@ -1,7 +1,7 @@
 import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { IconInfo16, IconDimensionDataSet16, Tooltip } from '@dhis2/ui'
-import { formatDistance } from 'date-fns'
+import moment from 'moment'
 import React from 'react'
 import { useExchangeContext } from '../../exchange-context/index.js'
 import styles from './title-bar.module.css'
@@ -12,9 +12,8 @@ const getRelativeTimeDifference = ({ startTimestamp, endTimestamp }) => {
     }
     const startTime = new Date(startTimestamp)
     const endTime = new Date(endTimestamp)
-    // date-fns implementation has the disadvantage of not translating (translation requires import of locales)
-    // may be better to write own implementation?
-    return formatDistance(startTime, endTime)
+
+    return moment(startTime).fromNow(endTime)
 }
 
 // this formats to the styling specified by DHIS2 design principles
