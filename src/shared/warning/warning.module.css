@@ -1,0 +1,4 @@
+.warningBoxWrapper {
+    margin: var(--spacers-dp8);
+    max-width: 700px;
+}
