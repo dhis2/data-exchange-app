@@ -1,0 +1,12 @@
+{
+    "baseUrl": "http://localhost:3000",
+    "video": false,
+    "projectId": "efhyah",
+    "env": {
+        "dhis2DataTestPrefix": "dhis2-dataexchange",
+        "networkMode": "live",
+        "dhis2ApiVersion": "40"
+    },
+    "experimentalInteractiveRunEvents": true,
+    "testFiles": ["**/*.feature.js", "**/*.feature"]
+}

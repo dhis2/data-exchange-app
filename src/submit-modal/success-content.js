@@ -85,7 +85,7 @@ const SummaryTable = ({ importSummaries }) => {
     const { exchange } = useExchangeContext()
 
     return (
-        <>
+        <div data-test="success-counts-table">
             <DataTable>
                 <DataTableHead>
                     <DataTableRow>
@@ -138,7 +138,7 @@ const SummaryTable = ({ importSummaries }) => {
                     {i18n.t('Copy summary to clipboard')}
                 </Button>
             </div>
-        </>
+        </div>
     )
 }
 

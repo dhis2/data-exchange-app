@@ -16,7 +16,7 @@ const ExchangeSelect = () => {
     }))
 
     return (
-        <div data-test="data-set-selector">
+        <div data-test="data-exchange-selector">
             <SelectorBarItem
                 label={i18n.t('Data exchange')}
                 value={

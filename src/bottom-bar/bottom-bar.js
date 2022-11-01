@@ -17,7 +17,7 @@ const BottomBar = ({ openSubmitModal, dataSubmitted }) => {
 
     const submitButtonText = i18n.t('Submit data')
 
-    if (!exchangeId) {
+    if (!exchangeId || !exchangeData) {
         return null
     }
 
