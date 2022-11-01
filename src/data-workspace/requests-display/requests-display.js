@@ -24,14 +24,16 @@ export const convertToObjectFormat = ({
 }) => {
     const objectFormat = {}
 
-    for (const row of data?.rows) {
-        const ouId = row[ou_index]
-        const deId = row[dx_index]
-        const peId = row[pe_index]
-        const value = row[value_index]
+    if (Array.isArray(data?.rows)) {
+        for (const row of data?.rows) {
+            const ouId = row[ou_index]
+            const deId = row[dx_index]
+            const peId = row[pe_index]
+            const value = row[value_index]
 
-        ensureNestedObjectExists(objectFormat, [ouId, deId, peId])
-        objectFormat[ouId][deId][peId] = value
+            ensureNestedObjectExists(objectFormat, [ouId, deId, peId])
+            objectFormat[ouId][deId][peId] = value
+        }
     }
     return objectFormat
 }
