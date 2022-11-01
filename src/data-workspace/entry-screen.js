@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import styles from './entry-screen.module.css'
 
-// to be replaced with actual icon
 const EmptyStateIcon = () => (
     <svg
         width="64"
