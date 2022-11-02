@@ -1,3 +1,7 @@
+# Data exchange app
+
+[Live demo of the master branch](https://dhis2-data-exchange.netlify.app/#/)
+
 This project was bootstrapped with [DHIS2 Application Platform](https://github.com/dhis2/app-platform).
 
 ## Available Scripts
