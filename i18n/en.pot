@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-10-13T11:45:59.402Z\n"
-"PO-Revision-Date: 2022-10-13T11:45:59.402Z\n"
+"POT-Creation-Date: 2022-11-02T09:25:00.426Z\n"
+"PO-Revision-Date: 2022-11-02T09:25:00.426Z\n"
 
 msgid "Aggregate data exchange information is not accessible"
 msgstr "Aggregate data exchange information is not accessible"
@@ -42,6 +42,12 @@ msgstr ""
 
 msgid "Choose a data exchange to get started"
 msgstr "Choose a data exchange to get started"
+
+msgid "Review your data before submitting it to a data exchange."
+msgstr "Review your data before submitting it to a data exchange."
+
+msgid "Choose a data exchange from the top menu."
+msgstr "Choose a data exchange from the top menu."
 
 msgid "Learn more about data exchange"
 msgstr "Learn more about data exchange"
