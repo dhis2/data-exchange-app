@@ -1,0 +1,169 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2022-11-02T09:25:00.426Z\n"
+"PO-Revision-Date: 2022-11-02T09:25:00.426Z\n"
+
+msgid "Aggregate data exchange information is not accessible"
+msgstr "Aggregate data exchange information is not accessible"
+
+msgid ""
+"There was a problem retrieving aggregate data exchanges. Refresh the page "
+"to try again."
+msgstr ""
+"There was a problem retrieving aggregate data exchanges. Refresh the page "
+"to try again."
+
+msgid "Submit data"
+msgstr "Submit data"
+
+msgid "Data has already been submitted"
+msgstr "Data has already been submitted"
+
+msgid "There is no data to submit"
+msgstr "There is no data to submit"
+
+msgid "There are no exchanges available to you"
+msgstr "There are no exchanges available to you"
+
+msgid "No data in this exchange"
+msgstr "No data in this exchange"
+
+msgid ""
+"There is not any data to show in this exchange, or you might not have "
+"access to the data."
+msgstr ""
+"There is not any data to show in this exchange, or you might not have "
+"access to the data."
+
+msgid "Choose a data exchange to get started"
+msgstr "Choose a data exchange to get started"
+
+msgid "Review your data before submitting it to a data exchange."
+msgstr "Review your data before submitting it to a data exchange."
+
+msgid "Choose a data exchange from the top menu."
+msgstr "Choose a data exchange from the top menu."
+
+msgid "Learn more about data exchange"
+msgstr "Learn more about data exchange"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "No data"
+msgstr "No data"
+
+msgid "There is no data for this report"
+msgstr "There is no data for this report"
+
+msgid "Open in data visualizer"
+msgstr "Open in data visualizer"
+
+msgid "1 data report"
+msgstr "1 data report"
+
+msgid "{{requestsCount}} data reports"
+msgstr "{{requestsCount}} data reports"
+
+msgid "Analytics tables last generated {{timeDifference}} ago"
+msgstr "Analytics tables last generated {{timeDifference}} ago"
+
+msgid "Exchange content not accessible"
+msgstr "Exchange content not accessible"
+
+msgid "Click to refresh"
+msgstr "Click to refresh"
+
+msgid "Submitting..."
+msgstr "Submitting..."
+
+msgid "No, cancel"
+msgstr "No, cancel"
+
+msgid "Yes, submit"
+msgstr "Yes, submit"
+
+msgid "There was a problem submitting data"
+msgstr "There was a problem submitting data"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Try again"
+msgstr "Try again"
+
+msgid "{{orgUnitCount}} organisation unit"
+msgstr "{{orgUnitCount}} organisation unit"
+
+msgid "{{orgUnitCount}} organisation units"
+msgstr "{{orgUnitCount}} organisation units"
+
+msgid "{{periodsCount}} period: {{periods}}"
+msgstr "{{periodsCount}} period: {{periods}}"
+
+msgid "{{periodsCount}} periods: {{periods}}"
+msgstr "{{periodsCount}} periods: {{periods}}"
+
+msgid "3+ periods: {{periods}}, and {{periodsCountLessThree}} more"
+msgstr "3+ periods: {{periods}}, and {{periodsCountLessThree}} more"
+
+msgid ""
+"{{reportCount}} reports to {{-exchangeName}} internally at "
+"{{-exchangeHostName}}"
+msgstr ""
+"{{reportCount}} reports to {{-exchangeName}} internally at "
+"{{-exchangeHostName}}"
+
+msgid ""
+"{{reportCount}} report to {{-exchangeName}} internally at "
+"{{-exchangeHostName}}"
+msgstr ""
+"{{reportCount}} report to {{-exchangeName}} internally at "
+"{{-exchangeHostName}}"
+
+msgid "{{reportCount}} reports to {{-exchangeName}} at {{-exchangeHostName}}"
+msgstr "{{reportCount}} reports to {{-exchangeName}} at {{-exchangeHostName}}"
+
+msgid "{{reportCount}} report to {{-exchangeName}} at {{-exchangeHostName}}"
+msgstr "{{reportCount}} report to {{-exchangeName}} at {{-exchangeHostName}}"
+
+msgid "Are you sure you want to submit this data?"
+msgstr "Are you sure you want to submit this data?"
+
+msgid "Submitting data"
+msgstr "Submitting data"
+
+msgid "Imported"
+msgstr "Imported"
+
+msgid "Updated"
+msgstr "Updated"
+
+msgid "Ignored"
+msgstr "Ignored"
+
+msgid "Report"
+msgstr "Report"
+
+msgid "Copy summary to clipboard"
+msgstr "Copy summary to clipboard"
+
+msgid "Data submitted successfully."
+msgstr "Data submitted successfully."
+
+msgid "Summary"
+msgstr "Summary"
+
+msgid "Unknown error"
+msgstr "Unknown error"
+
+msgid "Data exchange"
+msgstr "Data exchange"
+
+msgid "Choose a data exchange"
+msgstr "Choose a data exchange"

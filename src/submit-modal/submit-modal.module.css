@@ -1,0 +1,26 @@
+.submitModalSummaryWrapper {
+    background-color: var(--colors-grey200);
+    padding: var(--spacers-dp12);
+    margin-bottom: var(--spacers-dp12);
+}
+
+.submitModalSummaryWrapper ul {
+    margin: 0;
+    padding: var(--spacers-dp12) 0 0 var(--spacers-dp32);
+    display: grid;
+    gap: var(--spacers-dp8);
+}
+
+.loadingWrapper {
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+
+.loadingWrapper * {
+    margin-right: var(--spacers-dp12);
+}
+
+.contentStyling {
+    color: var(--colors-grey900);
+}
