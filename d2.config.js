@@ -1,7 +1,7 @@
 const config = {
-    id: '', // Still needs an app-hub id
+    id: '08012f21-0061-4e96-b49b-286e2743a8b4',
     type: 'app',
-    name: 'aggregate-data-exchange',
+    name: 'data-exchange',
     title: 'Data Exchange',
     minDHIS2Version: '2.39',
     coreApp: true,
