@@ -7,13 +7,15 @@ import {
     DataTableColumnHeader,
     DataTableHead,
     DataTableRow,
-    IconCheckmarkCircle24,
+    IconCheckmarkCircle16,
+    IconError16,
     IconCopy16,
     Tag,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState } from 'react'
 import { useExchangeContext } from '../exchange-context/index.js'
+import { ConflictsDetailsTable } from './conflicts-details-table.js'
 import styles from './success-content.module.css'
 
 const importTypeConfig = {
@@ -83,12 +85,22 @@ const copyTableToClipboard = ({ importSummaries, requests }) => {
 
 const SummaryTable = ({ importSummaries }) => {
     const { exchange } = useExchangeContext()
+    const [expandedRow, setExpandedRow] = useState(null)
+
+    const expandToggle = (rowName) => {
+        if (expandedRow === rowName) {
+            setExpandedRow(null)
+        } else {
+            setExpandedRow(rowName)
+        }
+    }
 
     return (
         <div data-test="success-counts-table">
             <DataTable>
                 <DataTableHead>
                     <DataTableRow>
+                        <DataTableColumnHeader />
                         <DataTableColumnHeader>
                             {i18n.t('Report')}
                         </DataTableColumnHeader>
@@ -107,7 +119,26 @@ const SummaryTable = ({ importSummaries }) => {
                     {importSummaries.map((importSummary, index) => (
                         <DataTableRow
                             key={exchange?.source?.requests[index]?.name}
+                            expanded={
+                                exchange?.source?.requests[index]?.name ===
+                                expandedRow
+                            }
+                            onExpandToggle={() =>
+                                expandToggle(
+                                    exchange?.source?.requests[index]?.name
+                                )
+                            }
+                            expandableContent={
+                                importSummary.conflicts?.length > 0 ? (
+                                    <ConflictsDetailsTable
+                                        conflicts={importSummary.conflicts}
+                                    />
+                                ) : null
+                            }
                         >
+                            {!(importSummary.conflicts?.length > 0) && (
+                                <DataTableCell></DataTableCell>
+                            )}
                             <DataTableCell>
                                 {exchange?.source?.requests[index]?.name}
                             </DataTableCell>
@@ -147,21 +178,45 @@ SummaryTable.propTypes = {
 }
 
 const SuccessContent = ({ data }) => {
-    const summaryCounts = data?.importSummaries.reduce(
+    const { importSummaries } = data
+
+    importSummaries[0].conflicts = [
+        {
+            object: 'XpikOziyCXbM',
+            value: 'Data element not found or not accessible: `XpikOziyCXbM`',
+        },
+        {
+            object: 'O05mAByOgAv',
+            value: 'Value must match value type of data element `O05mAByOgAv`: `Data value is not numeric...and then this message continues for a really long and unecessary amount of text`',
+        },
+    ]
+    importSummaries[0].importCount.ignored = 2
+
+    const summaryCounts = importSummaries.reduce(
         (totalCounts, importSummary) => {
             for (const countType in importSummary?.importCount) {
                 totalCounts[countType] +=
                     importSummary.importCount?.[countType] || 0
             }
+            totalCounts.conflicts += importSummary.conflicts?.length || 0
             return totalCounts
         },
-        { imported: 0, updated: 0, ignored: 0, deleted: 0 }
+        { imported: 0, updated: 0, ignored: 0, deleted: 0, conflicts: 0 }
     )
+    console.log(summaryCounts)
     return (
         <>
-            <Tag positive icon={<IconCheckmarkCircle24 />}>
+            <Tag positive icon={<IconCheckmarkCircle16 />}>
                 {i18n.t('Data submitted successfully.')}
             </Tag>
+            {summaryCounts.conflicts > 0 && (
+                <span className={styles.tagWrapper}>
+                    <Tag negative icon={<IconError16 />}>
+                        {i18n.t('Conflicts')}
+                    </Tag>
+                </span>
+            )}
+
             <div className={styles.summaryBoxTitle}>{i18n.t('Summary')}</div>
 
             <div className={styles.summaryBoxWrapper}>
@@ -178,7 +233,7 @@ const SuccessContent = ({ data }) => {
                     importCount={summaryCounts.ignored}
                 />
             </div>
-            <SummaryTable importSummaries={data?.importSummaries} />
+            <SummaryTable importSummaries={importSummaries} />
         </>
     )
 }
