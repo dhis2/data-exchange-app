@@ -83,15 +83,58 @@ const copyTableToClipboard = ({ importSummaries, requests }) => {
     navigator.clipboard.writeText(clipboardText)
 }
 
-const SummaryTable = ({ importSummaries }) => {
+const SummaryRow = ({
+    importSummary,
+    exchangeName,
+    expandedRows,
+    expandToggle,
+    hasConflicts,
+}) => {
+    return importSummary.conflicts?.length > 0 ? (
+        <DataTableRow
+            expanded={expandedRows.includes(exchangeName)}
+            onExpandToggle={() => expandToggle(exchangeName)}
+            expandableContent={
+                <ConflictsDetailsTable conflicts={importSummary.conflicts} />
+            }
+        >
+            <DataTableCell>{exchangeName}</DataTableCell>
+            <DataTableCell>
+                {importSummary?.importCount?.imported}
+            </DataTableCell>
+            <DataTableCell>{importSummary?.importCount?.updated}</DataTableCell>
+            <DataTableCell>{importSummary?.importCount?.ignored}</DataTableCell>
+        </DataTableRow>
+    ) : (
+        <DataTableRow>
+            {hasConflicts && <DataTableCell></DataTableCell>}
+            <DataTableCell>{exchangeName}</DataTableCell>
+            <DataTableCell>
+                {importSummary?.importCount?.imported}
+            </DataTableCell>
+            <DataTableCell>{importSummary?.importCount?.updated}</DataTableCell>
+            <DataTableCell>{importSummary?.importCount?.ignored}</DataTableCell>
+        </DataTableRow>
+    )
+}
+
+SummaryRow.propTypes = {
+    exchangeName: PropTypes.string,
+    expandToggle: PropTypes.func,
+    expandedRows: PropTypes.array,
+    hasConflicts: PropTypes.bool,
+    importSummary: PropTypes.object,
+}
+
+const SummaryTable = ({ importSummaries, hasConflicts }) => {
     const { exchange } = useExchangeContext()
-    const [expandedRow, setExpandedRow] = useState(null)
+    const [expandedRows, setExpandedRows] = useState([])
 
     const expandToggle = (rowName) => {
-        if (expandedRow === rowName) {
-            setExpandedRow(null)
+        if (expandedRows.includes(rowName)) {
+            setExpandedRows(expandedRows.filter((row) => row !== rowName))
         } else {
-            setExpandedRow(rowName)
+            setExpandedRows([...expandedRows, rowName])
         }
     }
 
@@ -100,7 +143,7 @@ const SummaryTable = ({ importSummaries }) => {
             <DataTable>
                 <DataTableHead>
                     <DataTableRow>
-                        <DataTableColumnHeader />
+                        {hasConflicts && <DataTableColumnHeader />}
                         <DataTableColumnHeader>
                             {i18n.t('Report')}
                         </DataTableColumnHeader>
@@ -117,41 +160,16 @@ const SummaryTable = ({ importSummaries }) => {
                 </DataTableHead>
                 <DataTableBody>
                     {importSummaries.map((importSummary, index) => (
-                        <DataTableRow
-                            key={exchange?.source?.requests[index]?.name}
-                            expanded={
-                                exchange?.source?.requests[index]?.name ===
-                                expandedRow
+                        <SummaryRow
+                            key={`${exchange?.source?.requests[index]?.name}-summary`}
+                            importSummary={importSummary}
+                            exchangeName={
+                                exchange?.source?.requests[index]?.name
                             }
-                            onExpandToggle={() =>
-                                expandToggle(
-                                    exchange?.source?.requests[index]?.name
-                                )
-                            }
-                            expandableContent={
-                                importSummary.conflicts?.length > 0 ? (
-                                    <ConflictsDetailsTable
-                                        conflicts={importSummary.conflicts}
-                                    />
-                                ) : null
-                            }
-                        >
-                            {!(importSummary.conflicts?.length > 0) && (
-                                <DataTableCell></DataTableCell>
-                            )}
-                            <DataTableCell>
-                                {exchange?.source?.requests[index]?.name}
-                            </DataTableCell>
-                            <DataTableCell>
-                                {importSummary?.importCount?.imported}
-                            </DataTableCell>
-                            <DataTableCell>
-                                {importSummary?.importCount?.updated}
-                            </DataTableCell>
-                            <DataTableCell>
-                                {importSummary?.importCount?.ignored}
-                            </DataTableCell>
-                        </DataTableRow>
+                            expandedRows={expandedRows}
+                            expandToggle={expandToggle}
+                            hasConflicts={hasConflicts}
+                        />
                     ))}
                 </DataTableBody>
             </DataTable>
@@ -174,23 +192,12 @@ const SummaryTable = ({ importSummaries }) => {
 }
 
 SummaryTable.propTypes = {
+    hasConflicts: PropTypes.bool,
     importSummaries: PropTypes.array,
 }
 
 const SuccessContent = ({ data }) => {
     const { importSummaries } = data
-
-    importSummaries[0].conflicts = [
-        {
-            object: 'XpikOziyCXbM',
-            value: 'Data element not found or not accessible: `XpikOziyCXbM`',
-        },
-        {
-            object: 'O05mAByOgAv',
-            value: 'Value must match value type of data element `O05mAByOgAv`: `Data value is not numeric...and then this message continues for a really long and unecessary amount of text`',
-        },
-    ]
-    importSummaries[0].importCount.ignored = 2
 
     const summaryCounts = importSummaries.reduce(
         (totalCounts, importSummary) => {
@@ -203,7 +210,7 @@ const SuccessContent = ({ data }) => {
         },
         { imported: 0, updated: 0, ignored: 0, deleted: 0, conflicts: 0 }
     )
-    console.log(summaryCounts)
+
     return (
         <>
             <Tag positive icon={<IconCheckmarkCircle16 />}>
@@ -233,7 +240,10 @@ const SuccessContent = ({ data }) => {
                     importCount={summaryCounts.ignored}
                 />
             </div>
-            <SummaryTable importSummaries={importSummaries} />
+            <SummaryTable
+                importSummaries={importSummaries}
+                hasConflicts={summaryCounts.conflicts > 0}
+            />
         </>
     )
 }

@@ -39,7 +39,7 @@ const ConflictsDetailsTable = ({ conflicts }) => {
 }
 
 ConflictsDetailsTable.propTypes = {
-    conflicts: PropTypes.object,
+    conflicts: PropTypes.array,
 }
 
 export { ConflictsDetailsTable }
