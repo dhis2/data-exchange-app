@@ -4,7 +4,7 @@ const config = {
     name: 'data-exchange',
     title: 'Data Exchange',
     minDHIS2Version: '2.39',
-    coreApp: true,
+    coreApp: false,
     entryPoints: {
         app: './src/app/index.js',
     },
