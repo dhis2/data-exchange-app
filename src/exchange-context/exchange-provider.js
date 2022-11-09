@@ -9,6 +9,7 @@ import {
     useRequestIndex,
 } from '../use-context-selection/index.js'
 import { ExchangeContext } from './exchange-context.js'
+import styles from './exchange-provider.module.css'
 
 const query = {
     exchange: {
@@ -59,9 +60,15 @@ const ExchangeProvider = ({ children }) => {
                 error={true}
                 title={i18n.t('Exchange content not accessible')}
             >
-                <Button onClick={fetchExchange}>
-                    {i18n.t('Click to refresh')}
-                </Button>
+                <span className={styles.errorWrapperText}>
+                    {i18n.t(
+                        'Unable to retrieve data for the requested exchange. This may be due to either a connection error or a configuration issue. The message below provides additional detail.'
+                    )}
+                </span>
+                <span className={styles.errorMessage}>
+                    {error?.message || ''}
+                </span>
+                <Button onClick={fetchExchange}>{i18n.t('Try again')}</Button>
             </Warning>
         )
     }
