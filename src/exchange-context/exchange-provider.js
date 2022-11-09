@@ -62,7 +62,7 @@ const ExchangeProvider = ({ children }) => {
             >
                 <span className={styles.errorWrapperText}>
                     {i18n.t(
-                        'Unable to retrieve data for the requested exchange. This may be due to either a connection error or a configuration issue. The message below provides additional detail.'
+                        'It was not possible to retrieve data for the requested exchange. This may be due to either a connection error or a configuration issue. The message below provides additional detail.'
                     )}
                 </span>
                 <span className={styles.errorMessage}>
