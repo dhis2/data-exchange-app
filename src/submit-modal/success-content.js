@@ -71,9 +71,9 @@ const copyTableToClipboard = ({ importSummaries, requests }) => {
                 '\n' +
                 [
                     requestName,
-                    importSummary?.importCount?.imported,
-                    importSummary?.importCount?.updated,
-                    importSummary?.importCount?.ignored,
+                    importSummary.importCount?.imported,
+                    importSummary.importCount?.updated,
+                    importSummary.importCount?.ignored,
                 ].join()
             )
         },
@@ -109,11 +109,9 @@ const SummaryRow = ({
         >
             {showPaddingCell && <DataTableCell></DataTableCell>}
             <DataTableCell>{exchangeName}</DataTableCell>
-            <DataTableCell>
-                {importSummary?.importCount?.imported}
-            </DataTableCell>
-            <DataTableCell>{importSummary?.importCount?.updated}</DataTableCell>
-            <DataTableCell>{importSummary?.importCount?.ignored}</DataTableCell>
+            <DataTableCell>{importSummary.importCount?.imported}</DataTableCell>
+            <DataTableCell>{importSummary.importCount?.updated}</DataTableCell>
+            <DataTableCell>{importSummary.importCount?.ignored}</DataTableCell>
         </DataTableRow>
     )
 }
