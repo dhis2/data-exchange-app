@@ -57,3 +57,7 @@
 .copyButton {
     margin-top: var(--spacers-dp8);
 }
+
+.tagWrapper {
+    margin-left: var(--spacers-dp8);
+}
