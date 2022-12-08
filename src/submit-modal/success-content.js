@@ -90,24 +90,24 @@ const SummaryRow = ({
     expandToggle,
     hasConflicts,
 }) => {
-    return importSummary.conflicts?.length > 0 ? (
+    const rowHasConflicts = importSummary.conflicts?.length > 0
+    const showPaddingCell = hasConflicts && !rowHasConflicts
+
+    return (
         <DataTableRow
             expanded={expandedRows.includes(exchangeName)}
-            onExpandToggle={() => expandToggle(exchangeName)}
+            onExpandToggle={
+                rowHasConflicts ? () => expandToggle(exchangeName) : undefined
+            }
             expandableContent={
-                <ConflictsDetailsTable conflicts={importSummary.conflicts} />
+                rowHasConflicts ? (
+                    <ConflictsDetailsTable
+                        conflicts={importSummary.conflicts}
+                    />
+                ) : undefined
             }
         >
-            <DataTableCell>{exchangeName}</DataTableCell>
-            <DataTableCell>
-                {importSummary?.importCount?.imported}
-            </DataTableCell>
-            <DataTableCell>{importSummary?.importCount?.updated}</DataTableCell>
-            <DataTableCell>{importSummary?.importCount?.ignored}</DataTableCell>
-        </DataTableRow>
-    ) : (
-        <DataTableRow>
-            {hasConflicts && <DataTableCell></DataTableCell>}
+            {showPaddingCell && <DataTableCell></DataTableCell>}
             <DataTableCell>{exchangeName}</DataTableCell>
             <DataTableCell>
                 {importSummary?.importCount?.imported}
