@@ -57,7 +57,7 @@ const TitleBar = () => {
                     >
                         <span>
                             {i18n.t(
-                                'Analytics tables last generated {{timeDifference}} ago',
+                                'Source data was refreshed {{timeDifference}} ago',
                                 {
                                     timeDifference: getRelativeTimeDifference({
                                         startTimestamp:
