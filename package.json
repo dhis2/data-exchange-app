@@ -33,7 +33,7 @@
     },
     "dependencies": {
         "@dhis2/app-runtime": "^3.4.4",
-        "react-router-dom": "^6.4.1",
+        "react-router-dom": "^6.6.1",
         "use-query-params": "^2.1.1"
     }
 }
