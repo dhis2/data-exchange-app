@@ -50,8 +50,8 @@
             "sec-fetch-mode": "cors"
         },
         "statusCode": 200,
-        "responseBody": "{\"aggregateDataExchanges\":[{\"displayName\":\"Internal data exchange\",\"id\":\"ioHMBgeK50L\"},{\"displayName\":\"Multiple org units\",\"id\":\"i80vkc0aaKv\"}]}",
-        "responseSize": 144,
+        "responseBody": "{\"aggregateDataExchanges\":[{\"displayName\":\"CODE internal data exchange\",\"id\":\"o6uIAnFo7ER\"},{\"displayName\":\"Internal data exchange\",\"id\":\"ioHMBgeK50L\"}]}",
+        "responseSize": 153,
         "responseHeaders": {
             "server": "nginx/1.23.0",
             "content-type": "application/json;charset=UTF-8",
