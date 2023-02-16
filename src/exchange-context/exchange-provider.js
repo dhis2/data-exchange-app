@@ -24,6 +24,7 @@ const query = {
         id: ({ id }) => `${id}/sourceData`,
         params: {
             paging: false,
+            outputIdScheme: 'UID',
         },
     },
 }
