@@ -1,3 +1,10 @@
+## [100.0.3](https://github.com/dhis2/data-exchange-app/compare/v100.0.2...v100.0.3) (2023-03-22)
+
+
+### Bug Fixes
+
+* clean up error messages ([#19](https://github.com/dhis2/data-exchange-app/issues/19)) ([47ad829](https://github.com/dhis2/data-exchange-app/commit/47ad8299206a256a174fa680e9adee30b25f6343))
+
 ## [100.0.2](https://github.com/dhis2/data-exchange-app/compare/v100.0.1...v100.0.2) (2023-02-16)
 
 
