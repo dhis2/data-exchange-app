@@ -129,7 +129,7 @@ msgid "Ignored"
 msgstr "Ignorés"
 
 msgid "Copy summary to clipboard"
-msgstr "Copier l'information sommaire vers lcde presse-papier"
+msgstr "Copier l'information sommaire vers le presse-papier"
 
 msgid "Data submitted successfully."
 msgstr "Les données ont été envoyées avec succès." 
@@ -148,3 +148,50 @@ msgstr "Échange de données"
 
 msgid "Choose a data exchange"
 msgstr "Choisir un échange de données"
+
+msgid "Exchange: {{- exchangeName}}"
+msgstr "Echange: {{- exchangeName}}"
+
+msgid "Target URL: {{- exchangeURL}}"
+msgstr "URL destination: {{- exchangeURL}}"
+
+msgid "Run date: {{- runDate}}"
+msgstr "Date d'éxécution: {{- runDate}}"
+
+msgid "SUMMARY"
+msgstr "SOMMAIRE"
+
+msgid ""
+"Imported: {{importedCount}}, Updated: {{updatedCount}}, Ignored: "
+"{{ignoredCount}}"
+msgstr ""
+"Importés: {{importedCount}}, Mis-à-jour: {{updatedCount}}, Ignorés: "
+"{{ignoredCount}}"
+
+msgid "DETAILS"
+msgstr "DETAILS"
+
+msgid "Report: {{- requestName}}"
+msgstr "Rapport: {{- requestName}}"
+
+msgid "Conflicts"
+msgstr "Conflits"
+
+msgid "imported"
+msgstr "importés"
+
+msgid "updated"
+msgstr "mis-à-jour"
+
+msgid "ignored"
+msgstr "ignorés"
+
+msgid "Report"
+msgstr "Rapport"
+
+
+msgid "Object"
+msgstr "Objet"
+
+msgid "Value"
+msgstr "Valeur"
