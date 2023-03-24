@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-11-02T09:25:00.426Z\n"
-"PO-Revision-Date: 2022-11-02T09:25:00.426Z\n"
+"POT-Creation-Date: 2023-03-24T13:11:23.515Z\n"
+"PO-Revision-Date: 2023-03-24T13:11:23.515Z\n"
 
 msgid "Aggregate data exchange information is not accessible"
 msgstr "Aggregate data exchange information is not accessible"
@@ -79,6 +79,15 @@ msgstr "Exchange content not accessible"
 msgid "Click to refresh"
 msgstr "Click to refresh"
 
+msgid "Conflicts"
+msgstr "Conflicts"
+
+msgid "Object"
+msgstr "Object"
+
+msgid "Value"
+msgstr "Value"
+
 msgid "Submitting..."
 msgstr "Submitting..."
 
@@ -138,6 +147,43 @@ msgstr "Are you sure you want to submit this data?"
 msgid "Submitting data"
 msgstr "Submitting data"
 
+msgid "imported"
+msgstr "imported"
+
+msgid "updated"
+msgstr "updated"
+
+msgid "ignored"
+msgstr "ignored"
+
+msgid "Exchange: {{- exchangeName}}"
+msgstr "Exchange: {{- exchangeName}}"
+
+msgid "Target URL: {{- exchangeURL}}"
+msgstr "Target URL: {{- exchangeURL}}"
+
+msgid "Run date: {{- runDate}}"
+msgstr "Run date: {{- runDate}}"
+
+msgid "SUMMARY"
+msgstr "SUMMARY"
+
+msgid ""
+"Imported: {{importedCount}}, Updated: {{updatedCount}}, Ignored: "
+"{{ignoredCount}}"
+msgstr ""
+"Imported: {{importedCount}}, Updated: {{updatedCount}}, Ignored: "
+"{{ignoredCount}}"
+
+msgid "DETAILS"
+msgstr "DETAILS"
+
+msgid "Report: {{- requestName}}"
+msgstr "Report: {{- requestName}}"
+
+msgid "Report"
+msgstr "Report"
+
 msgid "Imported"
 msgstr "Imported"
 
@@ -146,9 +192,6 @@ msgstr "Updated"
 
 msgid "Ignored"
 msgstr "Ignored"
-
-msgid "Report"
-msgstr "Report"
 
 msgid "Copy summary to clipboard"
 msgstr "Copy summary to clipboard"

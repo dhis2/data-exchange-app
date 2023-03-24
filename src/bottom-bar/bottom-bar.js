@@ -43,7 +43,7 @@ const BottomBar = ({ openSubmitModal, dataSubmitted }) => {
 }
 
 BottomBar.propTypes = {
-    dataSubmitted: PropTypes.bool,
+    dataSubmitted: PropTypes.string,
     openSubmitModal: PropTypes.func,
 }
 export { BottomBar }
