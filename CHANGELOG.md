@@ -1,3 +1,10 @@
+## [100.0.4](https://github.com/dhis2/data-exchange-app/compare/v100.0.3...v100.0.4) (2023-03-28)
+
+
+### Bug Fixes
+
+* add conflicts details [DHIS2-13936] ([#18](https://github.com/dhis2/data-exchange-app/issues/18)) ([22dad27](https://github.com/dhis2/data-exchange-app/commit/22dad273f8e9548e373e9861186ab3dea9bd5e91))
+
 ## [100.0.3](https://github.com/dhis2/data-exchange-app/compare/v100.0.2...v100.0.3) (2023-03-22)
 
 
