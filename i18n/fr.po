@@ -1,52 +1,89 @@
+# 
+# Translators:
+# Jason Pickering <jason@dhis2.org>, 2023
+# Manuel Silva <manuel@dhis2.org>, 2023
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2022-11-02T09:25:00.426Z\n"
+"PO-Revision-Date: 2023-08-04 06:21+0000\n"
+"Last-Translator: Manuel Silva <manuel@dhis2.org>, 2023\n"
+"Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-10-07T07:18:06.914Z\n"
-"PO-Revision-Date: 2022-10-07T07:18:06.914Z\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Aggregate data exchange information is not accessible"
-msgstr "Information sur les échanges de données aggregées n'est pas accesible"
+msgstr ""
+"L'information sur les échanges de données aggregées n'est pas accesible"
 
 msgid ""
-"There was a problem retrieving aggregate data exchanges. Refresh the page "
-"to try again."
+"There was a problem retrieving aggregate data exchanges. Refresh the page to"
+" try again."
 msgstr ""
-"Il'y a eu un problème avec le téléchargement des échanges de données aggregées. Actualiser la page "
-"pour essayer de nouveau."
+"Il'y a eu un problème avec le téléchargement des échanges de données "
+"aggregées. Actualiser la page pour essayer de nouveau."
 
 msgid "Submit data"
 msgstr "Envoyer les données"
 
 msgid "Data has already been submitted"
-msgstr "Ces données ont été envoyées"
+msgstr "Les données ont été envoyées"
 
 msgid "There is no data to submit"
 msgstr "Il n'y a pas de données à envoyer"
 
+msgid "There are no exchanges available to you"
+msgstr "Aucun échange n’est disponible pour votre utilisateur"
+
+msgid "No data in this exchange"
+msgstr "Aucune donnée dans cet échange"
+
+msgid ""
+"There is not any data to show in this exchange, or you might not have access"
+" to the data."
+msgstr ""
+"Il n'y a pas de données à afficher dans cet échange, ou vous n'avez peut-"
+"être pas accès aux données."
+
 msgid "Choose a data exchange to get started"
-msgstr "Choisir un échange de données pour commencer"
+msgstr "Veuillez choisir un échange de données pour commencer"
+
+msgid "Review your data before submitting it to a data exchange."
+msgstr ""
+"Veuillez vérifier vos données avant de démarrer un échange de données."
+
+msgid "Choose a data exchange from the top menu."
+msgstr "Veuillez choisir un échange de données dans le menu supérieur."
 
 msgid "Learn more about data exchange"
-msgstr "Apprendre plus sur l'échange de données"
+msgstr "En savoir plus sur l'échange de données"
 
 msgid "Data"
 msgstr "Données"
 
-msgid "Open this data in data visualizer"
-msgstr "Ouvrir avec le visualiseur de données"
+msgid "No data"
+msgstr "Pas de données"
+
+msgid "There is no data for this report"
+msgstr "Il n'y a pas de données pour ce rapport"
+
+msgid "Open in data visualizer"
+msgstr "Ouvrir dans le visualiseur de données"
 
 msgid "1 data report"
-msgstr "Un rapport de données"
+msgstr "1 rapport de données"
 
 msgid "{{requestsCount}} data reports"
 msgstr "{{requestsCount}} rapports de données"
 
 msgid "Analytics tables last generated {{timeDifference}} ago"
-msgstr "Dernière fois les tableaux analytiques ont été mis à jour: il y a {{timeDifference}}"
+msgstr ""
+"Dernière fois les tableaux analytiques ont été mis à jour: il y a "
+"{{timeDifference}}"
 
 msgid "Exchange content not accessible"
 msgstr "L'échange n'est pas accessible"
@@ -55,7 +92,7 @@ msgid "Click to refresh"
 msgstr "Cliquer pour mettre à jour"
 
 msgid "Submitting..."
-msgstr "Envoyant..."
+msgstr "En cours d’envoi..."
 
 msgid "No, cancel"
 msgstr "Non, annuler"
@@ -64,7 +101,7 @@ msgid "Yes, submit"
 msgstr "Oui, envoyer"
 
 msgid "There was a problem submitting data"
-msgstr "Il y a eu un problème avec l'envoiement des données"
+msgstr "Un problème est survenu lors de l'envoi des données"
 
 msgid "Close"
 msgstr "Fermer"
@@ -91,33 +128,29 @@ msgid ""
 "{{reportCount}} reports to {{-exchangeName}} internally at "
 "{{-exchangeHostName}}"
 msgstr ""
-"{{reportCount}} rapports pour {{-exchangeName}} en interne à "
+"{{reportCount}} rapports pour {{-exchangeName}} en interne dans "
 "{{-exchangeHostName}}"
 
 msgid ""
 "{{reportCount}} report to {{-exchangeName}} internally at "
 "{{-exchangeHostName}}"
 msgstr ""
-"{{reportCount}} rapport pour {{-exchangeName}} en interne à "
+"{{reportCount}} rapport pour {{-exchangeName}} en interne dans "
 "{{-exchangeHostName}}"
 
-msgid "{{reportCount}} report to {{-exchangeName}}"
-msgstr "{{reportCount}} rapport pour {{-exchangeName}}"
+msgid "{{reportCount}} reports to {{-exchangeName}} at {{-exchangeHostName}}"
+msgstr ""
+"{{reportCount}} rapports à {{-exchangeName}} dans {{-exchangeHostName}}"
 
-msgid "{{reportCount}} reports to {{-exchangeName}}"
-msgstr "{{reportCount}} rapports pour {{-exchangeName}}"
-
-msgid "{{reportCount}} reports to {{-exchangeName}} at {{-exchangeURL}}"
-msgstr "{{reportCount}} rapports pour {{-exchangeName}} à {{-exchangeURL}}"
-
-msgid "{{reportCount}} report to {{-exchangeName}} at {{-exchangeURL}}"
-msgstr "{{reportCount}} rapport pour {{-exchangeName}} à {{-exchangeURL}}"
+msgid "{{reportCount}} report to {{-exchangeName}} at {{-exchangeHostName}}"
+msgstr ""
+"{{reportCount}} rapport à {{-exchangeName}} dans {{-exchangeHostName}}"
 
 msgid "Are you sure you want to submit this data?"
 msgstr "Êtes-vous sur de vouloir envoyer ces données?"
 
 msgid "Submitting data"
-msgstr "Envoyer données"
+msgstr "Données en cours d'envoi"
 
 msgid "Imported"
 msgstr "Importés"
@@ -128,17 +161,17 @@ msgstr "Mis-à-jour"
 msgid "Ignored"
 msgstr "Ignorés"
 
+msgid "Report"
+msgstr "Rapport"
+
 msgid "Copy summary to clipboard"
-msgstr "Copier l'information sommaire vers lcde presse-papier"
+msgstr "Copier le résumé dans le presse-papiers"
 
 msgid "Data submitted successfully."
-msgstr "Les données ont été envoyées avec succès." 
+msgstr "Les données ont été envoyées avec succès."
 
 msgid "Summary"
-msgstr "Sommaire"
-
-msgid "Clear selection"
-msgstr "Effacer les selections"
+msgstr "Résumé"
 
 msgid "Unknown error"
 msgstr "Erreur inconnu"
@@ -147,4 +180,4 @@ msgid "Data exchange"
 msgstr "Échange de données"
 
 msgid "Choose a data exchange"
-msgstr "Choisir un échange de données"
+msgstr "Veuillez choisir un échange de données"
