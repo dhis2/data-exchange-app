@@ -1,0 +1,179 @@
+# 
+# Translators:
+# Manuel Silva <manuel@dhis2.org>, 2023
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2022-11-02T09:25:00.426Z\n"
+"PO-Revision-Date: 2023-08-04 06:21+0000\n"
+"Last-Translator: Manuel Silva <manuel@dhis2.org>, 2023\n"
+"Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+msgid "Aggregate data exchange information is not accessible"
+msgstr ""
+"La información sobre el intercambio de datos agregados no está disponible"
+
+msgid ""
+"There was a problem retrieving aggregate data exchanges. Refresh the page to"
+" try again."
+msgstr ""
+"Hubo un problema al recuperar los intercambios de datos agregados. Actualice"
+" la página para volver a intentarlo."
+
+msgid "Submit data"
+msgstr "Enviar datos"
+
+msgid "Data has already been submitted"
+msgstr "Los datos ya han sido enviados"
+
+msgid "There is no data to submit"
+msgstr "No hay datos para enviar"
+
+msgid "There are no exchanges available to you"
+msgstr "No hay intercambios de datos disponibles para su usuario"
+
+msgid "No data in this exchange"
+msgstr "No hay datos en este intercambio"
+
+msgid ""
+"There is not any data to show in this exchange, or you might not have access"
+" to the data."
+msgstr ""
+"No hay datos para mostrar en este intercambio, o es posible que no tenga "
+"acceso a los datos."
+
+msgid "Choose a data exchange to get started"
+msgstr "Elija un intercambio de datos para comenzar"
+
+msgid "Review your data before submitting it to a data exchange."
+msgstr "Revise sus datos antes de enviarlos a un intercambio de datos."
+
+msgid "Choose a data exchange from the top menu."
+msgstr "Elija un intercambio de datos en el menú superior."
+
+msgid "Learn more about data exchange"
+msgstr "Más información sobre el intercambio de datos"
+
+msgid "Data"
+msgstr "Datos"
+
+msgid "No data"
+msgstr "Sin datos"
+
+msgid "There is no data for this report"
+msgstr "No hay datos para este informe"
+
+msgid "Open in data visualizer"
+msgstr "Abrir en el visualizador de datos"
+
+msgid "1 data report"
+msgstr "1 informe de datos"
+
+msgid "{{requestsCount}} data reports"
+msgstr "{{requestsCount}} informes de datos"
+
+msgid "Analytics tables last generated {{timeDifference}} ago"
+msgstr ""
+"Las tablas de análisis se generaron por última vez hace {{timeDifference}}"
+
+msgid "Exchange content not accessible"
+msgstr "No se puede acceder al contenido del intercambio"
+
+msgid "Click to refresh"
+msgstr "Haga clic para actualizar"
+
+msgid "Submitting..."
+msgstr "Enviando..."
+
+msgid "No, cancel"
+msgstr "No, anular"
+
+msgid "Yes, submit"
+msgstr "Sí, enviar"
+
+msgid "There was a problem submitting data"
+msgstr "Hubo un problema al enviar los datos."
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "Try again"
+msgstr "Intentar de nuevo"
+
+msgid "{{orgUnitCount}} organisation unit"
+msgstr "{{orgUnitCount}} unidad organizativa"
+
+msgid "{{orgUnitCount}} organisation units"
+msgstr "{{orgUnitCount}} unidades organizativas"
+
+msgid "{{periodsCount}} period: {{periods}}"
+msgstr "{{periodsCount}} periodo: {{periods}}"
+
+msgid "{{periodsCount}} periods: {{periods}}"
+msgstr "{{periodsCount}} periodos: {{periods}}"
+
+msgid "3+ periods: {{periods}}, and {{periodsCountLessThree}} more"
+msgstr "3+ periodos: {{periods}}, y {{periodsCountLessThree}} más"
+
+msgid ""
+"{{reportCount}} reports to {{-exchangeName}} internally at "
+"{{-exchangeHostName}}"
+msgstr ""
+"{{reportCount}} informes de {{-exchangeName}} internamente en "
+"{{-exchangeHostName}}"
+
+msgid ""
+"{{reportCount}} report to {{-exchangeName}} internally at "
+"{{-exchangeHostName}}"
+msgstr ""
+"{{reportCount}} informes de {{-exchangeName}} internamente en "
+"{{-exchangeHostName}}"
+
+msgid "{{reportCount}} reports to {{-exchangeName}} at {{-exchangeHostName}}"
+msgstr ""
+"{{reportCount}} informes de {{-exchangeName}} en {{-exchangeHostName}}"
+
+msgid "{{reportCount}} report to {{-exchangeName}} at {{-exchangeHostName}}"
+msgstr "{{reportCount}} informe de {{-exchangeName}} en {{-exchangeHostName}}"
+
+msgid "Are you sure you want to submit this data?"
+msgstr "¿Está seguro de que desea enviar estos datos?"
+
+msgid "Submitting data"
+msgstr "Enviando datos"
+
+msgid "Imported"
+msgstr "Importado"
+
+msgid "Updated"
+msgstr "Actualizado"
+
+msgid "Ignored"
+msgstr "Ignorado"
+
+msgid "Report"
+msgstr "Informe"
+
+msgid "Copy summary to clipboard"
+msgstr "Copiar resumen al portapapeles"
+
+msgid "Data submitted successfully."
+msgstr "Datos enviados con éxito."
+
+msgid "Summary"
+msgstr "Resumen"
+
+msgid "Unknown error"
+msgstr "Error desconocido"
+
+msgid "Data exchange"
+msgstr "Intercambio de datos"
+
+msgid "Choose a data exchange"
+msgstr "Elija un intercambio de datos"

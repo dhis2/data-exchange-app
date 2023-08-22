@@ -50,7 +50,14 @@ const ErrorModalContent = ({ error, onRetry, onClose }) => (
                     error={true}
                     title={i18n.t('There was a problem submitting data')}
                 >
-                    <span>{error.message}</span>
+                    <span className={styles.errorWrapperText}>
+                        {i18n.t(
+                            'It was not possible to submit your data. The message below provides additional detail.'
+                        )}
+                    </span>
+                    <span className={styles.errorMessage}>
+                        {error?.message || ''}
+                    </span>
                 </Warning>
             </ModalContentWrapper>
         </ModalContent>

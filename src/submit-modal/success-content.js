@@ -7,13 +7,15 @@ import {
     DataTableColumnHeader,
     DataTableHead,
     DataTableRow,
-    IconCheckmarkCircle24,
+    IconCheckmarkCircle16,
+    IconError16,
     IconCopy16,
     Tag,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState } from 'react'
 import { useExchangeContext } from '../exchange-context/index.js'
+import { ConflictsDetailsTable } from './conflicts-details-table.js'
 import styles from './success-content.module.css'
 
 const importTypeConfig = {
@@ -69,9 +71,9 @@ const copyTableToClipboard = ({ importSummaries, requests }) => {
                 '\n' +
                 [
                     requestName,
-                    importSummary?.importCount?.imported,
-                    importSummary?.importCount?.updated,
-                    importSummary?.importCount?.ignored,
+                    importSummary.importCount?.imported,
+                    importSummary.importCount?.updated,
+                    importSummary.importCount?.ignored,
                 ].join()
             )
         },
@@ -81,14 +83,65 @@ const copyTableToClipboard = ({ importSummaries, requests }) => {
     navigator.clipboard.writeText(clipboardText)
 }
 
-const SummaryTable = ({ importSummaries }) => {
+const SummaryRow = ({
+    importSummary,
+    exchangeName,
+    expandedRows,
+    expandToggle,
+    hasConflicts,
+}) => {
+    const rowHasConflicts = importSummary.conflicts?.length > 0
+    const showPaddingCell = hasConflicts && !rowHasConflicts
+
+    return (
+        <DataTableRow
+            expanded={expandedRows.includes(exchangeName)}
+            onExpandToggle={
+                rowHasConflicts ? () => expandToggle(exchangeName) : undefined
+            }
+            expandableContent={
+                rowHasConflicts ? (
+                    <ConflictsDetailsTable
+                        conflicts={importSummary.conflicts}
+                    />
+                ) : undefined
+            }
+        >
+            {showPaddingCell && <DataTableCell></DataTableCell>}
+            <DataTableCell>{exchangeName}</DataTableCell>
+            <DataTableCell>{importSummary.importCount?.imported}</DataTableCell>
+            <DataTableCell>{importSummary.importCount?.updated}</DataTableCell>
+            <DataTableCell>{importSummary.importCount?.ignored}</DataTableCell>
+        </DataTableRow>
+    )
+}
+
+SummaryRow.propTypes = {
+    exchangeName: PropTypes.string,
+    expandToggle: PropTypes.func,
+    expandedRows: PropTypes.array,
+    hasConflicts: PropTypes.bool,
+    importSummary: PropTypes.object,
+}
+
+const SummaryTable = ({ importSummaries, hasConflicts }) => {
     const { exchange } = useExchangeContext()
+    const [expandedRows, setExpandedRows] = useState([])
+
+    const expandToggle = (rowName) => {
+        if (expandedRows.includes(rowName)) {
+            setExpandedRows(expandedRows.filter((row) => row !== rowName))
+        } else {
+            setExpandedRows([...expandedRows, rowName])
+        }
+    }
 
     return (
         <div data-test="success-counts-table">
             <DataTable>
                 <DataTableHead>
                     <DataTableRow>
+                        {hasConflicts && <DataTableColumnHeader />}
                         <DataTableColumnHeader>
                             {i18n.t('Report')}
                         </DataTableColumnHeader>
@@ -105,22 +158,16 @@ const SummaryTable = ({ importSummaries }) => {
                 </DataTableHead>
                 <DataTableBody>
                     {importSummaries.map((importSummary, index) => (
-                        <DataTableRow
-                            key={exchange?.source?.requests[index]?.name}
-                        >
-                            <DataTableCell>
-                                {exchange?.source?.requests[index]?.name}
-                            </DataTableCell>
-                            <DataTableCell>
-                                {importSummary?.importCount?.imported}
-                            </DataTableCell>
-                            <DataTableCell>
-                                {importSummary?.importCount?.updated}
-                            </DataTableCell>
-                            <DataTableCell>
-                                {importSummary?.importCount?.ignored}
-                            </DataTableCell>
-                        </DataTableRow>
+                        <SummaryRow
+                            key={`${exchange?.source?.requests[index]?.name}-summary`}
+                            importSummary={importSummary}
+                            exchangeName={
+                                exchange?.source?.requests[index]?.name
+                            }
+                            expandedRows={expandedRows}
+                            expandToggle={expandToggle}
+                            hasConflicts={hasConflicts}
+                        />
                     ))}
                 </DataTableBody>
             </DataTable>
@@ -143,25 +190,38 @@ const SummaryTable = ({ importSummaries }) => {
 }
 
 SummaryTable.propTypes = {
+    hasConflicts: PropTypes.bool,
     importSummaries: PropTypes.array,
 }
 
 const SuccessContent = ({ data }) => {
-    const summaryCounts = data?.importSummaries.reduce(
+    const { importSummaries } = data
+
+    const summaryCounts = importSummaries.reduce(
         (totalCounts, importSummary) => {
             for (const countType in importSummary?.importCount) {
                 totalCounts[countType] +=
                     importSummary.importCount?.[countType] || 0
             }
+            totalCounts.conflicts += importSummary.conflicts?.length || 0
             return totalCounts
         },
-        { imported: 0, updated: 0, ignored: 0, deleted: 0 }
+        { imported: 0, updated: 0, ignored: 0, deleted: 0, conflicts: 0 }
     )
+
     return (
         <>
-            <Tag positive icon={<IconCheckmarkCircle24 />}>
+            <Tag positive icon={<IconCheckmarkCircle16 />}>
                 {i18n.t('Data submitted successfully.')}
             </Tag>
+            {summaryCounts.conflicts > 0 && (
+                <span className={styles.tagWrapper}>
+                    <Tag negative icon={<IconError16 />}>
+                        {i18n.t('Conflicts')}
+                    </Tag>
+                </span>
+            )}
+
             <div className={styles.summaryBoxTitle}>{i18n.t('Summary')}</div>
 
             <div className={styles.summaryBoxWrapper}>
@@ -178,7 +238,10 @@ const SuccessContent = ({ data }) => {
                     importCount={summaryCounts.ignored}
                 />
             </div>
-            <SummaryTable importSummaries={data?.importSummaries} />
+            <SummaryTable
+                importSummaries={importSummaries}
+                hasConflicts={summaryCounts.conflicts > 0}
+            />
         </>
     )
 }

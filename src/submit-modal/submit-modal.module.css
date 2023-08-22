@@ -24,3 +24,13 @@
 .contentStyling {
     color: var(--colors-grey900);
 }
+
+.errorWrapperText {
+    display: inline-block;
+}
+
+.errorMessage {
+    display: inline-block;
+    margin: var(--spacers-dp8) 0 var(--spacers-dp16) 0;
+    font-style: italic;
+}
