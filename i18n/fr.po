@@ -45,7 +45,7 @@ msgstr "Un rapport de données"
 msgid "{{requestsCount}} data reports"
 msgstr "{{requestsCount}} rapports de données"
 
-msgid "Source data was refreshed {{timeDifference}} ago"
+msgid "Source data was generated {{timeDifference}} ago"
 msgstr "Dernière fois les données du système source ont été mises à jour: il y a {{timeDifference}}"
 
 msgid "Exchange content not accessible"
