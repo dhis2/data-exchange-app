@@ -1,3 +1,17 @@
+## [100.0.6](https://github.com/dhis2/data-exchange-app/compare/v100.0.5...v100.0.6) (2023-08-22)
+
+
+### Bug Fixes
+
+* change analytics update language [DHIS2-14287] ([#29](https://github.com/dhis2/data-exchange-app/issues/29)) ([1fff77f](https://github.com/dhis2/data-exchange-app/commit/1fff77fd9115b45eead8c92113197d5e0cfcb254))
+
+## [100.0.5](https://github.com/dhis2/data-exchange-app/compare/v100.0.4...v100.0.5) (2023-08-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#64](https://github.com/dhis2/data-exchange-app/issues/64)) ([719b155](https://github.com/dhis2/data-exchange-app/commit/719b155d933dd499e0a85903b4e986899d876d8b))
+
 ## [100.0.4](https://github.com/dhis2/data-exchange-app/compare/v100.0.3...v100.0.4) (2023-03-28)
 
 
