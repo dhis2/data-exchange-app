@@ -1,3 +1,10 @@
+# [100.1.0](https://github.com/dhis2/data-exchange-app/compare/v100.0.6...v100.1.0) (2023-08-28)
+
+
+### Features
+
+* improve copy/past text [DHIS2-15012] ([#63](https://github.com/dhis2/data-exchange-app/issues/63)) ([00469ca](https://github.com/dhis2/data-exchange-app/commit/00469ca13fe9fec1090f6711677c67397deca094))
+
 ## [100.0.6](https://github.com/dhis2/data-exchange-app/compare/v100.0.5...v100.0.6) (2023-08-22)
 
 
