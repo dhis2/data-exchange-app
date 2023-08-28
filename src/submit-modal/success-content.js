@@ -21,15 +21,15 @@ import styles from './success-content.module.css'
 const importTypeConfig = {
     imported: {
         style: 'success',
-        text: i18n.t('Imported'),
+        text: i18n.t('imported'),
     },
     updated: {
         style: 'success',
-        text: i18n.t('Updated'),
+        text: i18n.t('updated'),
     },
     ignored: {
         style: 'ignored',
-        text: i18n.t('Ignored'),
+        text: i18n.t('ignored'),
     },
 }
 
@@ -42,7 +42,7 @@ const SummaryBox = ({ importType, importCount }) => {
             <div className={boxStyle}>
                 <div className={styles.count}>{importCount}</div>
                 <div className={styles.label}>
-                    <span>{text.toLowerCase()}</span>
+                    <span>{i18n.t(text)}</span>
                 </div>
             </div>
         </div>
@@ -53,34 +53,94 @@ SummaryBox.propTypes = {
     importType: PropTypes.string,
 }
 
-const copyTableToClipboard = ({ importSummaries, requests }) => {
-    const headerRowText = [
-        i18n.t('Report'),
-        i18n.t('Imported'),
-        i18n.t('Updated'),
-        i18n.t('Ignored'),
-    ].join()
-    const clipboardText = importSummaries.reduce(
+const getConflictLines = (conflicts) => {
+    if (!conflicts) {
+        return ''
+    }
+    return conflicts
+        .map((conflict) => `${conflict.object}: ${conflict.value}`)
+        .join('\n')
+}
+
+const copyTableToClipboard = ({
+    exchangeName,
+    exchangeURL,
+    importSummaries,
+    summaryCounts,
+    requests,
+    dataSubmitted,
+}) => {
+    let text = ''
+    const exchangeNameLine = i18n.t('Exchange: {{- exchangeName}}', {
+        exchangeName,
+        nsSeparator: '-:-',
+    })
+    const targetURLLine = i18n.t('Target URL: {{- exchangeURL}}', {
+        exchangeURL: decodeURI(exchangeURL),
+        nsSeparator: '-:-',
+    })
+    const runDateLine = i18n.t('Run date: {{- runDate}}', {
+        runDate: dataSubmitted,
+        nsSeparator: '-:-',
+    })
+
+    if (exchangeURL) {
+        text += `${exchangeNameLine}\n${targetURLLine}`
+    } else {
+        text += exchangeNameLine
+    }
+    text += '\n' + runDateLine + '\n\n\n' + i18n.t('SUMMARY') + '\n'
+
+    const summaryLine = i18n.t(
+        'Imported: {{importedCount}}, Updated: {{updatedCount}}, Ignored: {{ignoredCount}}',
+        {
+            importedCount: summaryCounts.imported,
+            updatedCount: summaryCounts.updated,
+            ignoredCount: summaryCounts.ignored,
+            nsSeparator: '-:-',
+        }
+    )
+    text += summaryLine + '\n\n\n' + i18n.t('DETAILS')
+
+    const detailsText = importSummaries.reduce(
         (fullText, importSummary, index) => {
             let requestName = requests?.[index]?.name ?? ''
             if (requests?.[index]?.name?.includes(',')) {
                 requestName = `"${requests?.[index]?.name}"`
             }
+            const requestNameLine = i18n.t('Report: {{- requestName}}', {
+                requestName,
+                nsSeparator: '-:-',
+            })
+            const importedCount = importSummary.importCount?.imported
+            const ignoredCount = importSummary.importCount?.ignored
+            const updatedCount = importSummary.importCount?.updated
+            const summaryCountLine = i18n.t(
+                'Imported: {{importedCount}}, Updated: {{updatedCount}}, Ignored: {{ignoredCount}}',
+                {
+                    importedCount,
+                    updatedCount,
+                    ignoredCount,
+                    nsSeparator: '-:-',
+                }
+            )
+            const conflictLines = getConflictLines(importSummary.conflicts)
             return (
                 fullText +
+                '\n\n' +
+                requestNameLine +
                 '\n' +
-                [
-                    requestName,
-                    importSummary.importCount?.imported,
-                    importSummary.importCount?.updated,
-                    importSummary.importCount?.ignored,
-                ].join()
+                summaryCountLine +
+                '\n' +
+                conflictLines
             )
         },
-        headerRowText
+        ''
     )
 
-    navigator.clipboard.writeText(clipboardText)
+    text += detailsText
+
+    navigator.clipboard.writeText(text)
 }
 
 const SummaryRow = ({
@@ -124,7 +184,12 @@ SummaryRow.propTypes = {
     importSummary: PropTypes.object,
 }
 
-const SummaryTable = ({ importSummaries, hasConflicts }) => {
+const SummaryTable = ({
+    importSummaries,
+    summaryCounts,
+    hasConflicts,
+    dataSubmitted,
+}) => {
     const { exchange } = useExchangeContext()
     const [expandedRows, setExpandedRows] = useState([])
 
@@ -177,8 +242,12 @@ const SummaryTable = ({ importSummaries, hasConflicts }) => {
                     icon={<IconCopy16 />}
                     onClick={() => {
                         copyTableToClipboard({
+                            exchangeName: exchange.displayName,
+                            exchangeURL: exchange.target?.api?.url,
                             importSummaries,
+                            summaryCounts,
                             requests: exchange?.source?.requests,
+                            dataSubmitted,
                         })
                     }}
                 >
@@ -190,11 +259,13 @@ const SummaryTable = ({ importSummaries, hasConflicts }) => {
 }
 
 SummaryTable.propTypes = {
+    dataSubmitted: PropTypes.string,
     hasConflicts: PropTypes.bool,
     importSummaries: PropTypes.array,
+    summaryCounts: PropTypes.object,
 }
 
-const SuccessContent = ({ data }) => {
+const SuccessContent = ({ data, dataSubmitted }) => {
     const { importSummaries } = data
 
     const summaryCounts = importSummaries.reduce(
@@ -240,7 +311,9 @@ const SuccessContent = ({ data }) => {
             </div>
             <SummaryTable
                 importSummaries={importSummaries}
+                summaryCounts={summaryCounts}
                 hasConflicts={summaryCounts.conflicts > 0}
+                dataSubmitted={dataSubmitted}
             />
         </>
     )
@@ -248,6 +321,7 @@ const SuccessContent = ({ data }) => {
 
 SuccessContent.propTypes = {
     data: PropTypes.object,
+    dataSubmitted: PropTypes.submitted,
 }
 
 export { SuccessContent }

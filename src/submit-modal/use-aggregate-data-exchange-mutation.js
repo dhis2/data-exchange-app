@@ -1,5 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
+import moment from 'moment'
 import { useEffect, useReducer, useState } from 'react'
 
 const getMutation = ({ id }) => ({
@@ -25,7 +26,7 @@ const submitReducer = (state, action) => {
                 error: null,
                 loading: false,
                 called: true,
-                dataSubmitted: true,
+                dataSubmitted: moment().format(),
             }
         case 'error':
             return {
@@ -33,7 +34,7 @@ const submitReducer = (state, action) => {
                 error: action.payload,
                 loading: false,
                 called: false,
-                dataSubmitted: false,
+                dataSubmitted: null,
             }
         case 'reset':
             return { ...uncalledState }

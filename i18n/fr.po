@@ -179,3 +179,49 @@ msgstr "Échange de données"
 
 msgid "Choose a data exchange"
 msgstr "Veuillez choisir un échange de données"
+
+msgid "Exchange: {{- exchangeName}}"
+msgstr "Echange: {{- exchangeName}}"
+
+msgid "Target URL: {{- exchangeURL}}"
+msgstr "URL destination: {{- exchangeURL}}"
+
+msgid "Run date: {{- runDate}}"
+msgstr "Date d'éxécution: {{- runDate}}"
+
+msgid "SUMMARY"
+msgstr "RESUME"
+
+msgid ""
+"Imported: {{importedCount}}, Updated: {{updatedCount}}, Ignored: "
+"{{ignoredCount}}"
+msgstr ""
+"Importés: {{importedCount}}, Mis-à-jour: {{updatedCount}}, Ignorés: "
+"{{ignoredCount}}"
+
+msgid "DETAILS"
+msgstr "DETAILS"
+
+msgid "Report: {{- requestName}}"
+msgstr "Rapport: {{- requestName}}"
+
+msgid "Conflicts"
+msgstr "Conflits"
+
+msgid "imported"
+msgstr "importés"
+
+msgid "updated"
+msgstr "mis-à-jour"
+
+msgid "ignored"
+msgstr "ignorés"
+
+msgid "Report"
+msgstr "Rapport"
+
+msgid "Object"
+msgstr "Objet"
+
+msgid "Value"
+msgstr "Valeur"

@@ -79,11 +79,11 @@ ErrorModalContent.propTypes = {
     onRetry: PropTypes.func,
 }
 
-const SuccessModalContent = ({ onClose, data }) => (
+const SuccessModalContent = ({ onClose, data, dataSubmitted }) => (
     <>
         <ModalContent>
             <ModalContentWrapper>
-                <SuccessContent data={data} />
+                <SuccessContent data={data} dataSubmitted={dataSubmitted} />
             </ModalContentWrapper>
         </ModalContent>
 
@@ -97,6 +97,7 @@ const SuccessModalContent = ({ onClose, data }) => (
 
 SuccessModalContent.propTypes = {
     data: PropTypes.object,
+    dataSubmitted: PropTypes.string,
     onClose: PropTypes.func,
 }
 
@@ -295,7 +296,13 @@ const SubmitModal = ({ open, onClose, setDataSubmitted }) => {
                     onClose={onClose}
                 />
             )}
-            {data && <SuccessModalContent data={data} onClose={onClose} />}
+            {data && (
+                <SuccessModalContent
+                    data={data}
+                    dataSubmitted={dataSubmitted}
+                    onClose={onClose}
+                />
+            )}
             {loading && <LoadingStateModalContent />}
         </Modal>
     )
