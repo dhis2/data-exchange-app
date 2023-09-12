@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-02T09:25:00.426Z\n"
+"POT-Creation-Date: 2023-08-22T13:27:44.584Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
 "Last-Translator: Manuel Silva <manuel@dhis2.org>, 2023\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -81,13 +81,22 @@ msgid "{{requestsCount}} data reports"
 msgstr "{{requestsCount}} rapports de données"
 
 msgid "Source data was generated {{timeDifference}} ago"
-msgstr "Dernière fois les données du système source ont été mises à jour: il y a {{timeDifference}}"
+msgstr ""
 
 msgid "Exchange content not accessible"
 msgstr "L'échange n'est pas accessible"
 
 msgid "Click to refresh"
 msgstr "Cliquer pour mettre à jour"
+
+msgid "Conflicts"
+msgstr ""
+
+msgid "Object"
+msgstr ""
+
+msgid "Value"
+msgstr ""
 
 msgid "Submitting..."
 msgstr "En cours d’envoi..."
@@ -150,6 +159,41 @@ msgstr "Êtes-vous sur de vouloir envoyer ces données?"
 msgid "Submitting data"
 msgstr "Données en cours d'envoi"
 
+msgid "imported"
+msgstr ""
+
+msgid "updated"
+msgstr ""
+
+msgid "ignored"
+msgstr ""
+
+msgid "Exchange: {{- exchangeName}}"
+msgstr ""
+
+msgid "Target URL: {{- exchangeURL}}"
+msgstr ""
+
+msgid "Run date: {{- runDate}}"
+msgstr ""
+
+msgid "SUMMARY"
+msgstr ""
+
+msgid ""
+"Imported: {{importedCount}}, Updated: {{updatedCount}}, Ignored: "
+"{{ignoredCount}}"
+msgstr ""
+
+msgid "DETAILS"
+msgstr ""
+
+msgid "Report: {{- requestName}}"
+msgstr ""
+
+msgid "Report"
+msgstr "Rapport"
+
 msgid "Imported"
 msgstr "Importés"
 
@@ -158,9 +202,6 @@ msgstr "Mis-à-jour"
 
 msgid "Ignored"
 msgstr "Ignorés"
-
-msgid "Report"
-msgstr "Rapport"
 
 msgid "Copy summary to clipboard"
 msgstr "Copier le résumé dans le presse-papiers"
@@ -179,49 +220,3 @@ msgstr "Échange de données"
 
 msgid "Choose a data exchange"
 msgstr "Veuillez choisir un échange de données"
-
-msgid "Exchange: {{- exchangeName}}"
-msgstr "Echange: {{- exchangeName}}"
-
-msgid "Target URL: {{- exchangeURL}}"
-msgstr "URL destination: {{- exchangeURL}}"
-
-msgid "Run date: {{- runDate}}"
-msgstr "Date d'éxécution: {{- runDate}}"
-
-msgid "SUMMARY"
-msgstr "RESUME"
-
-msgid ""
-"Imported: {{importedCount}}, Updated: {{updatedCount}}, Ignored: "
-"{{ignoredCount}}"
-msgstr ""
-"Importés: {{importedCount}}, Mis-à-jour: {{updatedCount}}, Ignorés: "
-"{{ignoredCount}}"
-
-msgid "DETAILS"
-msgstr "DETAILS"
-
-msgid "Report: {{- requestName}}"
-msgstr "Rapport: {{- requestName}}"
-
-msgid "Conflicts"
-msgstr "Conflits"
-
-msgid "imported"
-msgstr "importés"
-
-msgid "updated"
-msgstr "mis-à-jour"
-
-msgid "ignored"
-msgstr "ignorés"
-
-msgid "Report"
-msgstr "Rapport"
-
-msgid "Object"
-msgstr "Objet"
-
-msgid "Value"
-msgstr "Valeur"
