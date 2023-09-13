@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-11-02T09:25:00.426Z\n"
+"POT-Creation-Date: 2023-08-22T13:27:44.584Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
 "Last-Translator: Sheila André <sandre@saudigitus.org>, 2023\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -77,16 +77,23 @@ msgstr "1 relatório de dados"
 msgid "{{requestsCount}} data reports"
 msgstr "{{requestsCount}} relatórios de dados"
 
-msgid "Analytics tables last generated {{timeDifference}} ago"
+msgid "Source data was generated {{timeDifference}} ago"
 msgstr ""
-"As tabelas analíticas foram geradas pela última vez há {{timeDifference}} "
-"atrás"
 
 msgid "Exchange content not accessible"
 msgstr "Conteúdo da troca não acessível"
 
 msgid "Click to refresh"
 msgstr "Clique para atualizar"
+
+msgid "Conflicts"
+msgstr ""
+
+msgid "Object"
+msgstr ""
+
+msgid "Value"
+msgstr ""
 
 msgid "Submitting..."
 msgstr "Enviando..."
@@ -149,6 +156,41 @@ msgstr "Tem certeza de que deseja enviar esses dados?"
 msgid "Submitting data"
 msgstr "A Enviar dados"
 
+msgid "imported"
+msgstr ""
+
+msgid "updated"
+msgstr ""
+
+msgid "ignored"
+msgstr ""
+
+msgid "Exchange: {{- exchangeName}}"
+msgstr ""
+
+msgid "Target URL: {{- exchangeURL}}"
+msgstr ""
+
+msgid "Run date: {{- runDate}}"
+msgstr ""
+
+msgid "SUMMARY"
+msgstr ""
+
+msgid ""
+"Imported: {{importedCount}}, Updated: {{updatedCount}}, Ignored: "
+"{{ignoredCount}}"
+msgstr ""
+
+msgid "DETAILS"
+msgstr ""
+
+msgid "Report: {{- requestName}}"
+msgstr ""
+
+msgid "Report"
+msgstr "Relatório"
+
 msgid "Imported"
 msgstr "Importado"
 
@@ -157,9 +199,6 @@ msgstr "Actualizado"
 
 msgid "Ignored"
 msgstr "Ignorado"
-
-msgid "Report"
-msgstr "Relatório"
 
 msgid "Copy summary to clipboard"
 msgstr "Copiar sumário para a área de transferência"
