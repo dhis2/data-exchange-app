@@ -1,0 +1,209 @@
+# 
+# Translators:
+# easylin <lin_xd@126.com>, 2023
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2023-08-22T13:27:44.584Z\n"
+"PO-Revision-Date: 2023-08-04 06:21+0000\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2023\n"
+"Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Aggregate data exchange information is not accessible"
+msgstr "聚合数据交换信息不可访问"
+
+msgid ""
+"There was a problem retrieving aggregate data exchanges. Refresh the page to"
+" try again."
+msgstr "检索聚合数据交换时出现问题。刷新页面重试。"
+
+msgid "Submit data"
+msgstr "提交数据"
+
+msgid "Data has already been submitted"
+msgstr "数据已经提交"
+
+msgid "There is no data to submit"
+msgstr "没有数据可提交"
+
+msgid "There are no exchanges available to you"
+msgstr "没有可供您进行的兑换"
+
+msgid "No data in this exchange"
+msgstr "本次交换中没有数据"
+
+msgid ""
+"There is not any data to show in this exchange, or you might not have access"
+" to the data."
+msgstr "此交换中没有任何数据可显示，或者您可能无权访问该数据。"
+
+msgid "Choose a data exchange to get started"
+msgstr "选择数据交换以开始"
+
+msgid "Review your data before submitting it to a data exchange."
+msgstr "在将数据提交到数据交换之前检查您的数据。"
+
+msgid "Choose a data exchange from the top menu."
+msgstr "从顶部菜单中选择数据交换。"
+
+msgid "Learn more about data exchange"
+msgstr "了解有关数据交换的更多信息"
+
+msgid "Data"
+msgstr "数据"
+
+msgid "No data"
+msgstr "没有数据"
+
+msgid "There is no data for this report"
+msgstr "该报告没有数据"
+
+msgid "Open in data visualizer"
+msgstr "在数据可视化工具中打开"
+
+msgid "1 data report"
+msgstr "1份数据报告"
+
+msgid "{{requestsCount}} data reports"
+msgstr "{{requestsCount}} 数据报告"
+
+msgid "Source data was generated {{timeDifference}} ago"
+msgstr "源数据是 {{timeDifference}} 前生成的"
+
+msgid "Exchange content not accessible"
+msgstr "无法访问交换内容"
+
+msgid "Click to refresh"
+msgstr "点击刷新"
+
+msgid "Conflicts"
+msgstr "冲突"
+
+msgid "Object"
+msgstr "目的"
+
+msgid "Value"
+msgstr "价值"
+
+msgid "Submitting..."
+msgstr "正在提交..."
+
+msgid "No, cancel"
+msgstr "不，取消"
+
+msgid "Yes, submit"
+msgstr "是的，提交"
+
+msgid "There was a problem submitting data"
+msgstr "提交数据时出现问题"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Try again"
+msgstr "再试一次"
+
+msgid "{{orgUnitCount}} organisation unit"
+msgstr "{{orgUnitCount}} 组织部门"
+
+msgid "{{orgUnitCount}} organisation units"
+msgstr "{{orgUnitCount}} 组织部门"
+
+msgid "{{periodsCount}} period: {{periods}}"
+msgstr "{{periodsCount}} 期间：{{periods}}"
+
+msgid "{{periodsCount}} periods: {{periods}}"
+msgstr "{{periodsCount}} 时段：{{periods}}"
+
+msgid "3+ periods: {{periods}}, and {{periodsCountLessThree}} more"
+msgstr "3 个以上句点：{{periods}} 和 {{periodsCountLessThree}} 更多"
+
+msgid ""
+"{{reportCount}} reports to {{-exchangeName}} internally at "
+"{{-exchangeHostName}}"
+msgstr "{{reportCount}} 向 {{-exchangeHostName}} 内部的 {{-exchangeName}} 报告"
+
+msgid ""
+"{{reportCount}} report to {{-exchangeName}} internally at "
+"{{-exchangeHostName}}"
+msgstr "{{reportCount}} 向 {{-exchangeName}} 内部的 {{-exchangeHostName}} 报告"
+
+msgid "{{reportCount}} reports to {{-exchangeName}} at {{-exchangeHostName}}"
+msgstr "{{reportCount}} 向位于 {{-exchangeHostName}} 的 {{-exchangeName}} 报告"
+
+msgid "{{reportCount}} report to {{-exchangeName}} at {{-exchangeHostName}}"
+msgstr "{{reportCount}} 向位于 {{-exchangeHostName}} 的 {{-exchangeName}} 报告"
+
+msgid "Are you sure you want to submit this data?"
+msgstr "您确定要提交此数据吗？"
+
+msgid "Submitting data"
+msgstr "提交数据"
+
+msgid "imported"
+msgstr "导入的"
+
+msgid "updated"
+msgstr "更新"
+
+msgid "ignored"
+msgstr "被忽略"
+
+msgid "Exchange: {{- exchangeName}}"
+msgstr "交换：{{- 交易所名称}}"
+
+msgid "Target URL: {{- exchangeURL}}"
+msgstr "目标网址：{{-exchangeURL}}"
+
+msgid "Run date: {{- runDate}}"
+msgstr "运行日期：{{- runDate}}"
+
+msgid "SUMMARY"
+msgstr "概括"
+
+msgid ""
+"Imported: {{importedCount}}, Updated: {{updatedCount}}, Ignored: "
+"{{ignoredCount}}"
+msgstr "导入：{{importedCount}}，更新：{{updatedCount}}，忽略：{{ignoredCount}}"
+
+msgid "DETAILS"
+msgstr "细节"
+
+msgid "Report: {{- requestName}}"
+msgstr "报告：{{- requestName}}"
+
+msgid "Report"
+msgstr "报告"
+
+msgid "Imported"
+msgstr "导入"
+
+msgid "Updated"
+msgstr "更新"
+
+msgid "Ignored"
+msgstr "被忽略"
+
+msgid "Copy summary to clipboard"
+msgstr "将摘要复制到剪贴板"
+
+msgid "Data submitted successfully."
+msgstr "数据提交成功。"
+
+msgid "Summary"
+msgstr "概括"
+
+msgid "Unknown error"
+msgstr "未知错误"
+
+msgid "Data exchange"
+msgstr "数据交换"
+
+msgid "Choose a data exchange"
+msgstr "选择数据交换"
