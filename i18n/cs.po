@@ -16,12 +16,14 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 msgid "Aggregate data exchange information is not accessible"
-msgstr ""
+msgstr "Informace o agregované výměně dat nejsou přístupné"
 
 msgid ""
 "There was a problem retrieving aggregate data exchanges. Refresh the page to"
 " try again."
 msgstr ""
+"Při načítání agregovaných výměn dat došlo k problému. Obnovte stránku a "
+"zkuste to znovu."
 
 msgid "Submit data"
 msgstr "Odeslat data"
@@ -36,24 +38,26 @@ msgid "There are no exchanges available to you"
 msgstr "Nemáte k dispozici žádné výměny."
 
 msgid "No data in this exchange"
-msgstr ""
+msgstr "V této výměně nejsou žádná data"
 
 msgid ""
 "There is not any data to show in this exchange, or you might not have access"
 " to the data."
 msgstr ""
+"V této výměně nejsou žádná data k zobrazení, nebo k datům možná nemáte "
+"přístup."
 
 msgid "Choose a data exchange to get started"
-msgstr ""
+msgstr "Začněte výběrem výměny dat"
 
 msgid "Review your data before submitting it to a data exchange."
-msgstr ""
+msgstr "Zkontrolujte svá data před odesláním k výměně dat."
 
 msgid "Choose a data exchange from the top menu."
-msgstr ""
+msgstr "Vyberte výměnu dat z horní nabídky."
 
 msgid "Learn more about data exchange"
-msgstr ""
+msgstr "Další informace o výměně dat"
 
 msgid "Data"
 msgstr "Data"
@@ -65,145 +69,151 @@ msgid "There is no data for this report"
 msgstr "Pro tento přehled nejsou k dispozici žádná data"
 
 msgid "Open in data visualizer"
-msgstr ""
+msgstr "Otevřít ve vizualizéru dat"
 
 msgid "1 data report"
-msgstr ""
+msgstr "1 datová zpráva"
 
 msgid "{{requestsCount}} data reports"
-msgstr ""
+msgstr "přehledy dat {{requestsCount}}"
 
 msgid "Source data was generated {{timeDifference}} ago"
-msgstr ""
+msgstr "Zdrojová data byla vygenerována před {{timeDifference}}"
 
 msgid "Exchange content not accessible"
-msgstr ""
+msgstr "Obsah Výměny není přístupný"
 
 msgid "Click to refresh"
-msgstr ""
+msgstr "Kliknutím obnovíte"
 
 msgid "Conflicts"
-msgstr ""
+msgstr "Konflikty"
 
 msgid "Object"
-msgstr ""
+msgstr "Objekt"
 
 msgid "Value"
-msgstr ""
+msgstr "Hodnota"
 
 msgid "Submitting..."
-msgstr ""
+msgstr "Odesílání..."
 
 msgid "No, cancel"
-msgstr ""
+msgstr "Ne, zrušit"
 
 msgid "Yes, submit"
-msgstr ""
+msgstr "Ano, odeslat"
 
 msgid "There was a problem submitting data"
-msgstr ""
+msgstr "Při odesílání dat došlo k problému"
 
 msgid "Close"
-msgstr ""
+msgstr "Zavřít"
 
 msgid "Try again"
-msgstr ""
+msgstr "Zkusit znovu"
 
 msgid "{{orgUnitCount}} organisation unit"
-msgstr ""
+msgstr "{{orgUnitCount}} organizační jednotka"
 
 msgid "{{orgUnitCount}} organisation units"
-msgstr ""
+msgstr "{{orgUnitCount}} organizační jednotky"
 
 msgid "{{periodsCount}} period: {{periods}}"
-msgstr ""
+msgstr "{{periodsCount}} období: {{periods}}"
 
 msgid "{{periodsCount}} periods: {{periods}}"
-msgstr ""
+msgstr "{{periodsCount}} období: {{periods}}"
 
 msgid "3+ periods: {{periods}}, and {{periodsCountLessThree}} more"
-msgstr ""
+msgstr "3 a více období: {{periods}} a další {{periodsCountLessThree}} "
 
 msgid ""
 "{{reportCount}} reports to {{-exchangeName}} internally at "
 "{{-exchangeHostName}}"
 msgstr ""
+"{{reportCount}} hlášení na  {{-exchangeName}} interně na adrese "
+"{{-exchangeHostName}}"
 
 msgid ""
 "{{reportCount}} report to {{-exchangeName}} internally at "
 "{{-exchangeHostName}}"
 msgstr ""
+"{{reportCount}} hlášení na  {{-exchangeName}} interně na "
+"{{-exchangeHostName}}"
 
 msgid "{{reportCount}} reports to {{-exchangeName}} at {{-exchangeHostName}}"
-msgstr ""
+msgstr "{{reportCount}} hlášení {{-exchangeName}} na {{-exchangeHostName}}"
 
 msgid "{{reportCount}} report to {{-exchangeName}} at {{-exchangeHostName}}"
-msgstr ""
+msgstr "{{reportCount}} hlášení {{-exchangeName}} na {{-exchangeHostName}}"
 
 msgid "Are you sure you want to submit this data?"
-msgstr ""
+msgstr "Opravdu chcete odeslat tato data?"
 
 msgid "Submitting data"
-msgstr ""
+msgstr "Odeslání dat"
 
 msgid "imported"
-msgstr ""
+msgstr "Importováno"
 
 msgid "updated"
-msgstr ""
+msgstr "aktualizováno"
 
 msgid "ignored"
-msgstr ""
+msgstr "ignorováno"
 
 msgid "Exchange: {{- exchangeName}}"
-msgstr ""
+msgstr "Výměna: {{- exchangeName}}"
 
 msgid "Target URL: {{- exchangeURL}}"
-msgstr ""
+msgstr "Cílová adresa URL: {{- exchangeURL}}"
 
 msgid "Run date: {{- runDate}}"
-msgstr ""
+msgstr "Datum spuštění: {{- runDate}}"
 
 msgid "SUMMARY"
-msgstr ""
+msgstr "SOUHRN"
 
 msgid ""
 "Imported: {{importedCount}}, Updated: {{updatedCount}}, Ignored: "
 "{{ignoredCount}}"
 msgstr ""
+"Importováno: {{importedCount}}, aktualizováno: {{updatedCount}}, ignorováno:"
+" {{ignoredCount}}"
 
 msgid "DETAILS"
-msgstr ""
+msgstr "PODROBNOSTI"
 
 msgid "Report: {{- requestName}}"
-msgstr ""
+msgstr "Zpráva: {{- requestName}}"
 
 msgid "Report"
-msgstr ""
+msgstr "Zpráva"
 
 msgid "Imported"
-msgstr ""
+msgstr "Importováno"
 
 msgid "Updated"
-msgstr ""
+msgstr "Aktualizováno"
 
 msgid "Ignored"
-msgstr ""
+msgstr "Ignorováno"
 
 msgid "Copy summary to clipboard"
-msgstr ""
+msgstr "Zkopírujte souhrn do schránky"
 
 msgid "Data submitted successfully."
-msgstr ""
+msgstr "Data byla úspěšně odeslána."
 
 msgid "Summary"
-msgstr ""
+msgstr "souhrn"
 
 msgid "Unknown error"
-msgstr ""
+msgstr "Neznámá chyba"
 
 msgid "Data exchange"
-msgstr ""
+msgstr "Výměna dat"
 
 msgid "Choose a data exchange"
-msgstr ""
+msgstr "Vyberte výměnu dat"
