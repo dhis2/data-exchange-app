@@ -1,0 +1,222 @@
+# 
+# Translators:
+# Ibatov <ibatovk@who.int>, 2023
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2023-08-22T13:27:44.584Z\n"
+"PO-Revision-Date: 2023-08-04 06:21+0000\n"
+"Last-Translator: Ibatov <ibatovk@who.int>, 2023\n"
+"Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uz@Cyrl\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Aggregate data exchange information is not accessible"
+msgstr "Маълумотлар алмашинуви ҳақидаги йиғма ахборот мавжуд эмас"
+
+msgid ""
+"There was a problem retrieving aggregate data exchanges. Refresh the page to"
+" try again."
+msgstr ""
+"Маълумотлар алмашинувида умумий маълумот олишда хатолик юз берди. Қайта "
+"уриниш учун саҳифани янгиланг."
+
+msgid "Submit data"
+msgstr "Маълумотларни тасдиқлаш"
+
+msgid "Data has already been submitted"
+msgstr "Маълумотлар олдин тасдиқланган"
+
+msgid "There is no data to submit"
+msgstr "Тасдиқлаш учун маълумотлар йўқ"
+
+msgid "There are no exchanges available to you"
+msgstr "Сиз учун қайта танлов имконияти мавжуд эмас"
+
+msgid "No data in this exchange"
+msgstr "Бу танловда маълумотлар йўқ"
+
+msgid ""
+"There is not any data to show in this exchange, or you might not have access"
+" to the data."
+msgstr ""
+"Бу маълумотлар алмашинувда кўрсатиладиган маълумотлар ёўқ ёки сизда "
+"маълумотларга кириш имкони бўлмаслиги мумкин."
+
+msgid "Choose a data exchange to get started"
+msgstr "Бошлаш учун маълумотлар алмашинувини танланг"
+
+msgid "Review your data before submitting it to a data exchange."
+msgstr ""
+"Маълумотларни тасдиқлашга юборишдан олдин маълумотларинигизни кўриб чиқинг."
+
+msgid "Choose a data exchange from the top menu."
+msgstr "Юқори менюдан маълумотларни ўзгартиришни танланг"
+
+msgid "Learn more about data exchange"
+msgstr "Маълумотларни ўзгартириш ҳақида кўпроқ билиб олинг"
+
+msgid "Data"
+msgstr "Маълумот"
+
+msgid "No data"
+msgstr "Маълумот йўқ"
+
+msgid "There is no data for this report"
+msgstr "Ушбу ҳисоботда маълумот мавжуд эмас"
+
+msgid "Open in data visualizer"
+msgstr "Маълумотлар визуализаторида очиш"
+
+msgid "1 data report"
+msgstr "1 маълумот ҳисоботи"
+
+msgid "{{requestsCount}} data reports"
+msgstr "{{requestsCount}} маълумот ҳисоботлари"
+
+msgid "Source data was generated {{timeDifference}} ago"
+msgstr "Изланган маълумот йиғилган{{timeDifference}} олдинги вақтда"
+
+msgid "Exchange content not accessible"
+msgstr "Контентни ўзгартириш имконсиз"
+
+msgid "Click to refresh"
+msgstr "Янгилаш учун босинг"
+
+msgid "Conflicts"
+msgstr "Можаролар"
+
+msgid "Object"
+msgstr "Объект"
+
+msgid "Value"
+msgstr "Қиймат"
+
+msgid "Submitting..."
+msgstr "Топширилмоқда..."
+
+msgid "No, cancel"
+msgstr "Йўқ, рад этиш"
+
+msgid "Yes, submit"
+msgstr "Ҳа, тасдиқлаш"
+
+msgid "There was a problem submitting data"
+msgstr "Маълумотни тасдиқлашда муаммо бўлди"
+
+msgid "Close"
+msgstr "Ёпмоқ"
+
+msgid "Try again"
+msgstr "Қайта уриниб кўринг"
+
+msgid "{{orgUnitCount}} organisation unit"
+msgstr "{{orgUnitCount}} ташкилий бирлик"
+
+msgid "{{orgUnitCount}} organisation units"
+msgstr "{{orgUnitCount}} ташкилий бирликлар"
+
+msgid "{{periodsCount}} period: {{periods}}"
+msgstr "{{periodsCount}} давр: {{periods}}"
+
+msgid "{{periodsCount}} periods: {{periods}}"
+msgstr "{{periodsCount}} даврлар: {{periods}}"
+
+msgid "3+ periods: {{periods}}, and {{periodsCountLessThree}} more"
+msgstr "3+ даврлар: {{periods}}, ва {{periodsCountLessThree}} кўплаб"
+
+msgid ""
+"{{reportCount}} reports to {{-exchangeName}} internally at "
+"{{-exchangeHostName}}"
+msgstr ""
+"{{reportCount}} ҳисобот {{-exchangeName}} ички ахборотдан "
+"{{-exchangeHostName}}"
+
+msgid ""
+"{{reportCount}} report to {{-exchangeName}} internally at "
+"{{-exchangeHostName}}"
+msgstr ""
+"{{reportCount}} ҳисобот {{-exchangeName}} ички ахборотдан "
+"{{-exchangeHostName}}"
+
+msgid "{{reportCount}} reports to {{-exchangeName}} at {{-exchangeHostName}}"
+msgstr ""
+"{{reportCount}} ҳисобот {{-exchangeName}} устида {{-exchangeHostName}}"
+
+msgid "{{reportCount}} report to {{-exchangeName}} at {{-exchangeHostName}}"
+msgstr ""
+"{{reportCount}} ҳисобот {{-exchangeName}} устида {{-exchangeHostName}}"
+
+msgid "Are you sure you want to submit this data?"
+msgstr "Ушбу маълумотларни тасдиқлаш учун ишончингиз комилми?"
+
+msgid "Submitting data"
+msgstr "Маълумотлар тасдиқланмоқда"
+
+msgid "imported"
+msgstr "Импорт қилинди"
+
+msgid "updated"
+msgstr "янгиланди"
+
+msgid "ignored"
+msgstr "истисно қилинди"
+
+msgid "Exchange: {{- exchangeName}}"
+msgstr "Алмаштириш: {{- exchangeName}}"
+
+msgid "Target URL: {{- exchangeURL}}"
+msgstr "Мақсад URL: {{- exchangeURL}}"
+
+msgid "Run date: {{- runDate}}"
+msgstr "Бошланган сана: {{- runDate}}"
+
+msgid "SUMMARY"
+msgstr "ХУЛОСА"
+
+msgid ""
+"Imported: {{importedCount}}, Updated: {{updatedCount}}, Ignored: "
+"{{ignoredCount}}"
+msgstr ""
+"Импорт қилинди: {{importedCount}}, Янгиланди: {{updatedCount}}, Истисно "
+"қилинди: {{ignoredCount}}"
+
+msgid "DETAILS"
+msgstr "ТАФСИЛОТЛАР"
+
+msgid "Report: {{- requestName}}"
+msgstr "Ҳисобот: {{- requestName}}"
+
+msgid "Report"
+msgstr "Ҳисобот"
+
+msgid "Imported"
+msgstr "Импорт қилинди"
+
+msgid "Updated"
+msgstr "Янгиланди"
+
+msgid "Ignored"
+msgstr "Истисно қилинди"
+
+msgid "Copy summary to clipboard"
+msgstr "Хулосани вақтинчалик хотирага нусхалаш"
+
+msgid "Data submitted successfully."
+msgstr "Маълумотлар муваффақиятли тасдиқланди"
+
+msgid "Summary"
+msgstr "Тафсилот"
+
+msgid "Unknown error"
+msgstr "Аниқланмаган хатолик"
+
+msgid "Data exchange"
+msgstr "Маълумотлар алмашинуви"
+
+msgid "Choose a data exchange"
+msgstr "Маълумотлар алмашинувини танланг"
