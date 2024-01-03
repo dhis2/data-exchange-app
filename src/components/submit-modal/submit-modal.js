@@ -12,7 +12,7 @@ import {
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import { useExchangeContext } from '../exchange-context/index.js'
+import { useExchangeContext } from '../../exchange-context/index.js'
 import { Warning } from '../shared/index.js'
 import styles from './submit-modal.module.css'
 import { SuccessContent } from './success-content.js'

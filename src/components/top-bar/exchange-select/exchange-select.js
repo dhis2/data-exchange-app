@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { SelectorBarItem } from '@dhis2/ui'
 import React, { useState } from 'react'
-import { useAppContext } from '../../app-context/index.js'
-import { useExchangeId } from '../../use-context-selection/use-context-selections.js'
+import { useAppContext } from '../../../app-context/index.js'
+import { useExchangeId } from '../../../use-context-selection/use-context-selections.js'
 import { MenuSelect } from '../menu-select/index.js'
 
 const ExchangeSelect = () => {

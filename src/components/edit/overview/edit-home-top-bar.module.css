@@ -1,0 +1,15 @@
+.editTopBarContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--spacers-dp16) 0 var(--spacers-dp16);
+}
+
+.editTitle {
+    font-size: 26px;
+    font-weight: 300;
+}
+
+.exitConfigurationsButton {
+    margin: var(--spacers-dp8);
+}

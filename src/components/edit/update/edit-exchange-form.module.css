@@ -1,0 +1,77 @@
+.subtitle {
+    font-size: 18px;
+    font-weight: 500;
+    margin-block-end: var(--spacers-dp16);
+}
+
+.subsectionContent {
+    padding: var(--spacers-dp4);
+}
+
+.subsectionField {
+    margin-block-end: var(--spacers-dp16);
+}
+
+.subsectionField1000 {
+    margin-block-end: var(--spacers-dp16);
+    max-width: 1000px;
+}
+
+.subsectionField600 {
+    margin-block-end: var(--spacers-dp16);
+    max-width: 600px;
+}
+
+.fieldItem {
+    margin-top: var(--spacers-dp16);
+}
+
+.radiosContainer {
+    margin-block-end: var(--spacers-dp16);
+    display: flex;
+}
+
+.radioItem {
+    margin-left: var(--spacers-dp16);
+}
+
+.radioBox {
+    border: 1.5px solid var(--colors-grey300);
+    border-radius: 8px;
+    height: 80px;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: var(--spacers-dp8);
+    margin-inline-end: var(--spacers-dp8);
+}
+
+.radioBoxSelected {
+    border: 1.5px solid var(--colors-teal500);
+    background-color: var(--colors-teal100);
+}
+
+.radioBoxIcon {
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* .radioBox div {
+    margin-inline-end: 8px;
+} */
+
+.radioDecoratorLabel {
+    display: inline-block;
+    margin-block-end: var(--spacers-dp8);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.radioDecoratorHelper {
+    display: inline-block;
+    color: var(--colors-grey600);
+    font-size: 12px;
+}
