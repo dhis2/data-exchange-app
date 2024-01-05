@@ -17,7 +17,9 @@ export const EditHomeTopBar = () => (
             <h2 className={styles.editTitle}>
                 {i18n.t('Data exchange configurator')}
             </h2>
-            <Button primary>{i18n.t('New exchange configuration')}</Button>
+            <Link to="/add">
+                <Button primary>{i18n.t('New exchange configuration')}</Button>
+            </Link>
         </div>
     </div>
 )

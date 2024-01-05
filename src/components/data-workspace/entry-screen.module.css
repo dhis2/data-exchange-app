@@ -21,7 +21,7 @@
     font-size: 20px;
     line-height: 24px;
     font-weight: 500;
-    color: var(--colors-grey900);  
+    color: var(--colors-grey900);
     margin-top: 32px;
     margin-bottom: 16px;
 }
@@ -37,6 +37,6 @@
     display: inline-block;
     font-size: 14px;
     line-height: 21px;
-    color: var(--colors-grey800);  
+    color: var(--colors-grey800);
     margin-top: 24px;
 }

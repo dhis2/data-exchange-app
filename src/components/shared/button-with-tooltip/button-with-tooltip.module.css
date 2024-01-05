@@ -2,8 +2,8 @@
     display: inline-flex;
     pointer-events: all;
     cursor: not-allowed;
-  }
-  
+}
+
 .tooltipReference > button:disabled {
-pointer-events: none;
+    pointer-events: none;
 }

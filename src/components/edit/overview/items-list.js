@@ -1,4 +1,4 @@
-import { useTimeZoneConversion } from '@dhis2/app-runtime'
+import { useDataMutation, useTimeZoneConversion } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     Button,
@@ -10,7 +10,7 @@ import {
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../../app-context/index.js'
 import { getNaturalCapitalization } from '../../../utils/helpers.js'
 import styles from './items-list.module.css'
@@ -27,7 +27,26 @@ IconTextItem.propTypes = {
     text: PropTypes.string,
 }
 
+const deleteExchangeQuery = {
+    resource: 'aggregateDataExchanges',
+    type: 'delete',
+    id: ({ id }) => id,
+}
+
 const AggregateDataExchangeCard = ({ ade }) => {
+    const navigate = useNavigate()
+    const { refetchExchanges } = useAppContext()
+    const [deleteExchange, { loading: deleting }] = useDataMutation(
+        deleteExchangeQuery,
+        {
+            variables: { id: ade.id },
+            onComplete: async () => {
+                console.log('deleted exchange')
+                await refetchExchanges()
+                navigate('/edit')
+            },
+        }
+    )
     const { fromServerDate } = useTimeZoneConversion()
     const createdClient = fromServerDate(ade?.created)
     return (
@@ -59,8 +78,18 @@ const AggregateDataExchangeCard = ({ ade }) => {
                         <Link to={`/edit/${ade.id}`}>
                             <Button small>{i18n.t('Edit')}</Button>
                         </Link>
-                        <Button destructive secondary small>
-                            {i18n.t('Delete')}
+                        <Button
+                            destructive
+                            secondary
+                            small
+                            onClick={() => {
+                                deleteExchange()
+                            }}
+                            loading={deleting}
+                        >
+                            {deleting
+                                ? i18n.t('Deleting...')
+                                : i18n.t('Delete')}
                         </Button>
                     </ButtonStrip>
                 </div>

@@ -5,7 +5,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom'
 import { QueryParamProvider } from 'use-query-params'
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
 import { AppProvider } from '../app-context/index.js'
-import { DataPage, EditPage, EditItem } from '../pages/index.js'
+import { DataPage, EditPage, EditItem, AddItem } from '../pages/index.js'
 
 const App = ({ router: Router }) => (
     <>
@@ -23,6 +23,7 @@ const App = ({ router: Router }) => (
                             path="/edit/:exchangeID"
                             element={<EditItem />}
                         ></Route>
+                        <Route path="/add" element={<AddItem />}></Route>
                     </Routes>
                 </AppProvider>
             </QueryParamProvider>

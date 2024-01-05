@@ -27,13 +27,17 @@ EditItemFooter.propTypes = {
     handleSubmit: PropTypes.func,
 }
 
-export const EditRequestFooter = ({ exitRequestEditMode }) => (
+export const EditRequestFooter = ({
+    exitRequestEditMode,
+    handleRequestSubmit,
+}) => (
     <>
         <ButtonStrip>
             <Button
                 type="submit"
                 primary
                 onClick={() => {
+                    handleRequestSubmit()
                     exitRequestEditMode()
                 }}
             >
@@ -52,4 +56,5 @@ export const EditRequestFooter = ({ exitRequestEditMode }) => (
 
 EditRequestFooter.propTypes = {
     exitRequestEditMode: PropTypes.func,
+    handleRequestSubmit: PropTypes.func,
 }

@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { EditExchange } from '../components/edit/update/index.js'
+import { EditExchange } from '../components/edit/exchange-update/index.js'
 
 const EXCHANGE_QUERY = {
     exchange: {

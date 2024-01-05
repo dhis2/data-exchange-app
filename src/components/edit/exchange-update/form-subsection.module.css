@@ -1,0 +1,9 @@
+.subtitle {
+    font-size: 18px;
+    font-weight: 500;
+    margin-block-end: var(--spacers-dp16);
+}
+
+.subsectionContent {
+    padding: var(--spacers-dp4);
+}

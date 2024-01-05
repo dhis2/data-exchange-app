@@ -10,13 +10,14 @@ import {
 } from '@dhis2/ui'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useMemo } from 'react'
+import { RequestsOverview } from '../request-update/requests-overview.js'
 import styles from './edit-exchange-form.module.css'
-import { RequestsOverview } from './requests-overview.js'
+import { Subsection } from './form-subsection.js'
 
 const { Field, useField } = ReactFinalForm
 
-const EXCHANGE_TYPES = {
+export const EXCHANGE_TYPES = {
     external: 'EXTERNAL',
     internal: 'INTERNAL',
 }
@@ -51,27 +52,16 @@ const RadioDecorator = ({
 
 RadioDecorator.propTypes = {
     children: PropTypes.node,
-    currentSelected: PropTypes.string,
+    currentSelected: PropTypes.bool,
     helperText: PropTypes.string,
     icon: PropTypes.node,
     label: PropTypes.string,
 }
 
-const Subsection = ({ text, children }) => (
-    <div className={styles.subsection}>
-        <div className={styles.subtitle}>{text}</div>
-        <div className={styles.subsectionContent}>{children}</div>
-    </div>
-)
-
-Subsection.propTypes = {
-    children: PropTypes.node,
-    text: PropTypes.string,
-}
-
 export const EditExchangeFormContents = ({
-    exchangeInfo,
+    requestsState,
     setRequestEditMode,
+    deleteRequest,
 }) => {
     const { input: typeInput } = useField('type', {
         subscription: { value: true },
@@ -213,8 +203,14 @@ export const EditExchangeFormContents = ({
             )}
             <Subsection text={i18n.t('Requests')}>
                 <RequestsOverview
-                    requestsInfo={exchangeInfo.source.requests}
+                    requestsInfo={useMemo(
+                        () =>
+                            requestsState.map((r, index) => ({ ...r, index })),
+                        [requestsState]
+                    )}
+                    // redo this logic ^ (move to RequestsOverview to not need memoization)
                     setRequestEditMode={setRequestEditMode}
+                    deleteRequest={deleteRequest}
                 />
             </Subsection>
         </>
@@ -222,6 +218,7 @@ export const EditExchangeFormContents = ({
 }
 
 EditExchangeFormContents.propTypes = {
-    exchangeInfo: PropTypes.object,
+    deleteRequest: PropTypes.func,
+    requestsState: PropTypes.array,
     setRequestEditMode: PropTypes.func,
 }

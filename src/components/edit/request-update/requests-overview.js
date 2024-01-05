@@ -25,7 +25,11 @@ const ouNames = {
     },
 }
 
-export const RequestsOverview = ({ requestsInfo, setRequestEditMode }) => {
+export const RequestsOverview = ({
+    requestsInfo,
+    setRequestEditMode,
+    deleteRequest,
+}) => {
     const ousToRequest = useMemo(
         () =>
             requestsInfo.reduce((ouSummary, req) => {
@@ -97,7 +101,14 @@ export const RequestsOverview = ({ requestsInfo, setRequestEditMode }) => {
                                 {request.visualization ?? ''}
                             </DataTableCell>
                             <DataTableCell>
-                                <Button small secondary destructive>
+                                <Button
+                                    small
+                                    secondary
+                                    destructive
+                                    onClick={() => {
+                                        deleteRequest(request.index)
+                                    }}
+                                >
                                     Delete
                                 </Button>
                             </DataTableCell>
@@ -105,7 +116,10 @@ export const RequestsOverview = ({ requestsInfo, setRequestEditMode }) => {
                     ))}
                     <TableRow>
                         <DataTableCell>
-                            <Button small>
+                            <Button
+                                small
+                                onClick={() => setRequestEditMode({}, true)}
+                            >
                                 {i18n.t('Add request manually')}
                             </Button>
                             <Button
@@ -123,6 +137,7 @@ export const RequestsOverview = ({ requestsInfo, setRequestEditMode }) => {
 }
 
 RequestsOverview.propTypes = {
-    requestsInfo: PropTypes.object,
+    deleteRequest: PropTypes.func,
+    requestsInfo: PropTypes.array,
     setRequestEditMode: PropTypes.func,
 }

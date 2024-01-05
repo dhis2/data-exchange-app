@@ -24,7 +24,12 @@ const query = {
 }
 
 const AppProvider = ({ children }) => {
-    const { data, loading, error } = useDataQuery(query)
+    const {
+        data,
+        loading,
+        error,
+        refetch: refetchExchanges,
+    } = useDataQuery(query)
 
     if (loading) {
         return <Loader />
@@ -54,6 +59,7 @@ const AppProvider = ({ children }) => {
 
     const providerValue = {
         aggregateDataExchanges,
+        refetchExchanges,
     }
 
     return (
