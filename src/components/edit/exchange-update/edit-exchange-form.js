@@ -22,7 +22,7 @@ export const EXCHANGE_TYPES = {
     internal: 'INTERNAL',
 }
 
-const AUTHENTICATION_TYPES = {
+export const AUTHENTICATION_TYPES = {
     basic: 'BASIC',
     pat: 'PAT',
 }

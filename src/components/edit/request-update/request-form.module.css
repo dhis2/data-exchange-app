@@ -6,3 +6,7 @@
     margin-block-end: var(--spacers-dp16);
     max-width: 1000px;
 }
+
+.subsectionBlockEnd {
+    margin-block-end:  var(--spacers-dp24);
+}

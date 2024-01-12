@@ -1,25 +1,13 @@
-import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { EditExchange } from '../components/edit/exchange-update/index.js'
-
-const EXCHANGE_QUERY = {
-    exchange: {
-        resource: 'aggregateDataExchanges',
-        id: ({ id }) => id,
-        params: {
-            paging: false,
-        },
-    },
-}
+import { useFetchExchange } from '../hooks/useFetchExchange.js'
 
 export const EditItem = () => {
     const { exchangeID } = useParams()
-    const { data, error, loading, refetch } = useDataQuery(EXCHANGE_QUERY, {
-        lazy: true,
-    })
+    const { data, error, loading, refetch } = useFetchExchange()
     useEffect(() => {
         refetch({ id: exchangeID })
     }, [exchangeID, refetch])
@@ -39,7 +27,7 @@ export const EditItem = () => {
     }
 
     if (data) {
-        return <EditExchange exchangeInfo={data.exchange} />
+        return <EditExchange exchangeInfo={data} />
     }
 
     return null

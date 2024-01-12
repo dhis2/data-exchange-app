@@ -1,0 +1,9 @@
+.dimensionFilter {
+    width: 1000px;
+    padding-top: var(--spacers-dp8);
+    overflow-y: auto;
+}
+
+.addFilter {
+    margin-top: var(--spacers-dp16);
+}

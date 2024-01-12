@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-05T17:09:29.688Z\n"
-"PO-Revision-Date: 2024-01-05T17:09:29.688Z\n"
+"POT-Creation-Date: 2024-01-08T14:12:56.973Z\n"
+"PO-Revision-Date: 2024-01-08T14:12:56.973Z\n"
 
 msgid "Aggregate data exchange information is not accessible"
 msgstr "Aggregate data exchange information is not accessible"
@@ -148,6 +148,9 @@ msgstr "Add exchange"
 msgid "Edit exchange"
 msgstr "Edit exchange"
 
+msgid "Could not save"
+msgstr "Could not save"
+
 msgid "Save exchange"
 msgstr "Save exchange"
 
@@ -174,6 +177,9 @@ msgstr "Created {{createdDate}}"
 
 msgid "Edit"
 msgstr "Edit"
+
+msgid "Deleting..."
+msgstr "Deleting..."
 
 msgid "Delete"
 msgstr "Delete"

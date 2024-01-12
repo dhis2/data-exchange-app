@@ -3,7 +3,7 @@ import { createContext } from 'react'
 const AppContext = createContext({
     aggregateDataExchanges: [],
     refetchExchanges: () => {
-        console.log('NOT IMPLEMNTED')
+        console.log('Not implemented')
     },
 })
 

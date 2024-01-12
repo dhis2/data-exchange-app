@@ -1,6 +1,6 @@
 import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Box, ReactFinalForm } from '@dhis2/ui'
+import { Box, NoticeBox, ReactFinalForm } from '@dhis2/ui'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useCallback, useReducer, useState } from 'react'
@@ -8,12 +8,30 @@ import { useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../../app-context/use-app-context.js'
 import { RequestEditForm } from '../request-update/request-form.js'
 import { requestsReducer } from '../request-update/requests-reducer.js'
-import { EditExchangeFormContents } from './edit-exchange-form.js'
+import {
+    AUTHENTICATION_TYPES,
+    EditExchangeFormContents,
+} from './edit-exchange-form.js'
 import styles from './edit-exchange.module.css'
 import { getExchangeValuesFromForm } from './getExchangeValues.js'
 import { EditItemFooter, EditRequestFooter } from './update-footer.js'
 
 const { Form } = ReactFinalForm
+
+const formatError = (error) => {
+    if (error.details?.response?.errorReports?.length > 0) {
+        return error.details.response.errorReports.reduce(
+            (stringified, rep) => {
+                if (rep.message) {
+                    return stringified + `\n${rep.message}`
+                }
+                return stringified
+            },
+            ''
+        )
+    }
+    return error?.message
+}
 
 const RequestEdit = ({
     exitRequestEditMode,
@@ -24,10 +42,17 @@ const RequestEdit = ({
     <>
         <Form
             onSubmit={(requestValues) => {
+                console.log(requestValues)
                 const action = {
                     type: addModeRequest ? 'ADD' : 'UPDATE',
                     value: {
                         name: requestValues.requestName,
+                        pe: requestValues?.peInfo.map(({ id }) => id),
+                        ou: requestValues?.ouInfo.map(({ id }) => id),
+                        filters: requestValues?.filtersInfo.map((filter) => ({
+                            ...filter,
+                            items: filter.items.map(({ id }) => id),
+                        })),
                         ...requestValues,
                     },
                     index: request.index,
@@ -36,9 +61,11 @@ const RequestEdit = ({
             }}
             initialValues={{
                 requestName: request?.name,
-                pe: request?.pe ?? [],
-                ou: request?.ou ?? ['O6uvpzGd5pu'],
+                peInfo: request?.peInfo ?? [],
+                ouInfo: request?.ouInfo ?? [],
                 dx: request?.dx ?? ['fbfJHSPpUQD'],
+                filtersUsed: request?.filtersInfo?.length > 1,
+                filtersInfo: request?.filtersInfo ?? [],
             }}
         >
             {({ handleSubmit: handleRequestSubmit }) => (
@@ -110,13 +137,15 @@ export const EditExchange = ({ exchangeInfo, addMode }) => {
         requestsDispatch({ type: 'DELETE', index })
     }, [])
 
-    const [addExchange, { loading: saving }] = useDataMutation(createExchange, {
-        onComplete: async () => {
-            console.log('saved exchange')
-            await refetchExchanges()
-            navigate('/edit')
-        },
-    })
+    const [addExchange, { loading: saving, error }] = useDataMutation(
+        createExchange,
+        {
+            onComplete: async () => {
+                await refetchExchanges()
+                navigate('/edit')
+            },
+        }
+    )
 
     return (
         <>
@@ -135,7 +164,11 @@ export const EditExchange = ({ exchangeInfo, addMode }) => {
                 initialValues={{
                     name: exchangeInfo.name,
                     type: exchangeInfo.target?.type,
-                    url: exchangeInfo.target?.url,
+                    authentication: exchangeInfo.target?.api?.username
+                        ? AUTHENTICATION_TYPES.basic
+                        : AUTHENTICATION_TYPES.pat,
+                    url: exchangeInfo.target?.api?.url,
+                    username: exchangeInfo.target?.api?.username,
                 }}
             >
                 {({ handleSubmit }) => (
@@ -154,13 +187,23 @@ export const EditExchange = ({ exchangeInfo, addMode }) => {
                                     </h2>
                                     <Box className={styles.editFormArea}>
                                         {saving && <p>saving...</p>}
-                                        <EditExchangeFormContents
-                                            requestsState={requestsState}
-                                            setRequestEditMode={
-                                                setRequestEditMode
-                                            }
-                                            deleteRequest={deleteRequest}
-                                        />
+                                        {error && (
+                                            <NoticeBox
+                                                error
+                                                title={i18n.t('Could not save')}
+                                            >
+                                                {formatError(error)}
+                                            </NoticeBox>
+                                        )}
+                                        {!saving && !error && (
+                                            <EditExchangeFormContents
+                                                requestsState={requestsState}
+                                                setRequestEditMode={
+                                                    setRequestEditMode
+                                                }
+                                                deleteRequest={deleteRequest}
+                                            />
+                                        )}
                                     </Box>
                                 </div>
                             </div>

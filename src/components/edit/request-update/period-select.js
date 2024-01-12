@@ -3,16 +3,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 export const PeriodSelector = ({ input }) => {
-    const selectedPeriods = input.value
-        ? input.value.map((pe) => ({ id: pe, name: pe }))
-        : []
+    const { value: selectedPeriods } = input
 
     return (
         <>
             <PeriodDimension
                 selectedPeriods={selectedPeriods}
                 onSelect={({ items }) => {
-                    input.onChange(items.map(({ id }) => id))
+                    input.onChange(items)
                 }}
             />
         </>

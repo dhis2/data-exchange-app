@@ -41,7 +41,6 @@ const AggregateDataExchangeCard = ({ ade }) => {
         {
             variables: { id: ade.id },
             onComplete: async () => {
-                console.log('deleted exchange')
                 await refetchExchanges()
                 navigate('/edit')
             },
