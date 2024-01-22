@@ -40,3 +40,8 @@
     gap: var(--spacers-dp16);
     padding-inline-start: var(--spacers-dp16);
 }
+
+.searchContainer {
+    padding: 16px;
+    width: 600px;
+}

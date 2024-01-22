@@ -4,7 +4,7 @@ import { Layout } from '../components/data-layout/layout.js'
 import { DataWorkspace } from '../components/data-workspace/index.js'
 import { SubmitModal } from '../components/submit-modal/index.js'
 import { TopBar } from '../components/top-bar/index.js'
-import { ExchangeProvider } from '../exchange-context/index.js'
+import { ExchangeProvider } from '../context/exchange-context/index.js'
 
 export const DataPage = () => {
     const [submitModalOpen, setSubmitModalOpen] = useState(false)

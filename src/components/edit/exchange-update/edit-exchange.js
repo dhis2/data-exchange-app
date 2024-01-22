@@ -1,20 +1,21 @@
-import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Box, NoticeBox, ReactFinalForm } from '@dhis2/ui'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useCallback, useReducer, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppContext } from '../../../app-context/use-app-context.js'
+import { AttributeProvider, useAppContext } from '../../../context/index.js'
+import { Loader } from '../../shared/index.js'
 import { RequestEditForm } from '../request-update/request-form.js'
 import { requestsReducer } from '../request-update/requests-reducer.js'
+import { SCHEME_TYPES } from '../shared/scheme-selector.js'
 import {
     AUTHENTICATION_TYPES,
     EditExchangeFormContents,
 } from './edit-exchange-form.js'
 import styles from './edit-exchange.module.css'
-import { getExchangeValuesFromForm } from './getExchangeValues.js'
 import { EditItemFooter, EditRequestFooter } from './update-footer.js'
+import { useUpdateExchange } from './useUpdateExchange.js'
 
 const { Form } = ReactFinalForm
 
@@ -38,34 +39,80 @@ const RequestEdit = ({
     request,
     requestsDispatch,
     addModeRequest,
+    setRequestsTouched,
 }) => (
     <>
         <Form
             onSubmit={(requestValues) => {
-                console.log(requestValues)
                 const action = {
                     type: addModeRequest ? 'ADD' : 'UPDATE',
                     value: {
+                        ...requestValues,
                         name: requestValues.requestName,
+                        dx: requestValues?.dxInfo.map(({ id }) => id),
                         pe: requestValues?.peInfo.map(({ id }) => id),
                         ou: requestValues?.ouInfo.map(({ id }) => id),
-                        filters: requestValues?.filtersInfo.map((filter) => ({
-                            ...filter,
-                            items: filter.items.map(({ id }) => id),
-                        })),
-                        ...requestValues,
+                        visualization: requestValues.visualizationLinked
+                            ? requestValues?.visualizationInfo?.id
+                            : null,
+                        filters: !requestValues.filtersUsed
+                            ? []
+                            : requestValues?.filtersInfo.map((filter) => ({
+                                  ...filter,
+                                  items: filter.items.map(({ id }) => id),
+                              })),
+                        filtersInfo: !requestValues.filtersUsed
+                            ? null
+                            : requestValues.filtersInfo,
+                        visualizationInfo: !requestValues.visualizationLinked
+                            ? null
+                            : requestValues.visualizationInfo,
+                        outputIdScheme:
+                            requestValues.source_outputIdScheme !==
+                            SCHEME_TYPES.attribute
+                                ? requestValues.source_outputIdScheme
+                                : `ATTRIBUTE:${requestValues.source_outputIdScheme_attribute}`,
+                        outputOrgUnitIdScheme:
+                            requestValues.source_outputOrgUnitIdScheme !==
+                            SCHEME_TYPES.attribute
+                                ? requestValues.source_outputIdScheme
+                                : `ATTRIBUTE:${requestValues.source_outputOrgUnitIdScheme_attribute}`,
+                        outputDataElementIdScheme:
+                            requestValues.source_outputDataElementIdScheme !==
+                            SCHEME_TYPES.attribute
+                                ? requestValues.source_outputIdScheme
+                                : `ATTRIBUTE:${requestValues.source_outputDataElementIdScheme_attribute}`,
                     },
                     index: request.index,
                 }
                 requestsDispatch(action)
+                setRequestsTouched(true)
             }}
             initialValues={{
                 requestName: request?.name,
                 peInfo: request?.peInfo ?? [],
                 ouInfo: request?.ouInfo ?? [],
-                dx: request?.dx ?? ['fbfJHSPpUQD'],
-                filtersUsed: request?.filtersInfo?.length > 1,
-                filtersInfo: request?.filtersInfo ?? [],
+                dxInfo: request?.dxInfo ?? [],
+                filtersUsed: request?.filtersInfo?.length > 0,
+                filtersInfo: request?.filtersInfo ?? [{ dimension: null }],
+                visualizationLinked: Boolean(request.visualization),
+                visualizationInfo: request?.visualizationInfo ?? null,
+                source_outputIdScheme: request?.outputIdScheme
+                    ? request.outputIdScheme.split(':')[0]
+                    : SCHEME_TYPES.uid,
+                source_outputIdScheme_attribute:
+                    request?.outputIdScheme?.split(':')?.[1] ?? null,
+                source_outputDataElementIdScheme:
+                    request?.outputDataElementIdScheme
+                        ? request.outputDataElementIdScheme.split(':')[0]
+                        : SCHEME_TYPES.uid,
+                source_outputDataElementIdScheme_attribute:
+                    request?.outputDataElementIdScheme?.split(':')?.[1] ?? null,
+                source_outputOrgUnitIdScheme: request?.outputOrgUnitIdScheme
+                    ? request?.outputOrgUnitIdScheme.split(':')[0]
+                    : SCHEME_TYPES.uid,
+                source_outputOrgUnitIdScheme_attribute:
+                    request?.outputOrgUnitIdScheme?.split(':')?.[1] ?? null,
             }}
         >
             {({ handleSubmit: handleRequestSubmit }) => (
@@ -103,14 +150,7 @@ RequestEdit.propTypes = {
     exitRequestEditMode: PropTypes.func,
     request: PropTypes.object,
     requestsDispatch: PropTypes.func,
-}
-
-// -------------------------
-
-const createExchange = {
-    resource: 'aggregateDataExchanges',
-    type: 'create',
-    data: (exchange) => exchange,
+    setRequestsTouched: PropTypes.func,
 }
 
 export const EditExchange = ({ exchangeInfo, addMode }) => {
@@ -137,29 +177,28 @@ export const EditExchange = ({ exchangeInfo, addMode }) => {
         requestsDispatch({ type: 'DELETE', index })
     }, [])
 
-    const [addExchange, { loading: saving, error }] = useDataMutation(
-        createExchange,
-        {
-            onComplete: async () => {
-                await refetchExchanges()
-                navigate('/edit')
-            },
-        }
+    const onComplete = useCallback(async () => {
+        await refetchExchanges()
+        navigate('/edit')
+    }, [refetchExchanges, navigate])
+
+    const [saveExchange, { loading: saving, error: error }] = useUpdateExchange(
+        { onComplete }
     )
+    const [requestsTouched, setRequestsTouched] = useState(false)
 
     return (
-        <>
+        <AttributeProvider>
             <Form
                 onSubmit={(values, form) => {
-                    console.log('onSubmit', { values, form })
-                    if (addMode) {
-                        addExchange(
-                            getExchangeValuesFromForm({
-                                values,
-                                requests: requestsState,
-                            })
-                        )
-                    }
+                    saveExchange({
+                        values,
+                        form,
+                        id: exchangeInfo?.id,
+                        requests: requestsState,
+                        requestsTouched,
+                        newExchange: addMode,
+                    })
                 }}
                 initialValues={{
                     name: exchangeInfo.name,
@@ -169,6 +208,41 @@ export const EditExchange = ({ exchangeInfo, addMode }) => {
                         : AUTHENTICATION_TYPES.pat,
                     url: exchangeInfo.target?.api?.url,
                     username: exchangeInfo.target?.api?.username,
+                    target_idScheme: exchangeInfo.target?.request?.idScheme
+                        ? exchangeInfo.target.request.idScheme.split(':')[0]
+                        : SCHEME_TYPES.uid,
+                    target_idScheme_attribute:
+                        exchangeInfo.target?.request?.idScheme.split(':')[1],
+                    target_orgUnitIdScheme: exchangeInfo.target?.request
+                        ?.orgUnitIdScheme
+                        ? exchangeInfo.target.request.orgUnitIdScheme.split(
+                              ':'
+                          )[0]
+                        : SCHEME_TYPES.uid,
+                    target_orgUnitIdScheme_attribute:
+                        exchangeInfo.target?.request?.orgUnitIdScheme?.split(
+                            ':'
+                        )[1],
+                    target_dataElementIdScheme: exchangeInfo.target?.request
+                        ?.dataElementIdScheme
+                        ? exchangeInfo.target.request.dataElementIdScheme.split(
+                              ':'
+                          )[0]
+                        : SCHEME_TYPES.uid,
+                    target_dataElementIdScheme_attribute:
+                        exchangeInfo.target?.request?.dataElementIdScheme?.split(
+                            ':'
+                        )[1],
+                    target_categoryOptionComboIdScheme: exchangeInfo.target
+                        ?.request?.categoryOptionComboIdScheme
+                        ? exchangeInfo.target?.request?.categoryOptionComboIdScheme.split(
+                              ':'
+                          )[0]
+                        : SCHEME_TYPES.uid,
+                    target_categoryOptionComboIdScheme_attribute:
+                        exchangeInfo.target?.request?.categoryOptionComboIdScheme?.split(
+                            ':'
+                        )[1],
                 }}
             >
                 {({ handleSubmit }) => (
@@ -186,16 +260,19 @@ export const EditExchange = ({ exchangeInfo, addMode }) => {
                                             : i18n.t('Edit exchange')}
                                     </h2>
                                     <Box className={styles.editFormArea}>
-                                        {saving && <p>saving...</p>}
+                                        {saving && <Loader />}
                                         {error && (
                                             <NoticeBox
                                                 error
                                                 title={i18n.t('Could not save')}
+                                                className={
+                                                    styles.errorBoxContainer
+                                                }
                                             >
                                                 {formatError(error)}
                                             </NoticeBox>
                                         )}
-                                        {!saving && !error && (
+                                        {!saving && (
                                             <EditExchangeFormContents
                                                 requestsState={requestsState}
                                                 setRequestEditMode={
@@ -208,7 +285,10 @@ export const EditExchange = ({ exchangeInfo, addMode }) => {
                                 </div>
                             </div>
                             <footer className={styles.bottomBar}>
-                                <EditItemFooter handleSubmit={handleSubmit} />
+                                <EditItemFooter
+                                    handleSubmit={handleSubmit}
+                                    requestsTouched={requestsTouched}
+                                />
                             </footer>
                         </div>
                         {!requestEditInfo.editMode ? null : (
@@ -224,13 +304,14 @@ export const EditExchange = ({ exchangeInfo, addMode }) => {
                                     addModeRequest={
                                         requestEditInfo.addModeRequest
                                     }
+                                    setRequestsTouched={setRequestsTouched}
                                 />
                             </div>
                         )}
                     </>
                 )}
             </Form>
-        </>
+        </AttributeProvider>
     )
 }
 

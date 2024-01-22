@@ -1,7 +1,14 @@
+.subtitleContainer {
+    margin-block-end: var(--spacers-dp16);
+    display: flex;
+    align-items: center;
+}
+
 .subtitle {
+    margin-inline-start: var(--spacers-dp4);
     font-size: 18px;
     font-weight: 500;
-    margin-block-end: var(--spacers-dp16);
+    display: inline-block;
 }
 
 .subsectionContent {

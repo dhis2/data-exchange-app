@@ -1,0 +1,11 @@
+.visualizationInfoContainer {
+    margin: var(--spacers-dp8) 0 0 var(--spacers-dp32);
+}
+
+.visualizationLinkTextContainer {
+    margin: var(--spacers-dp8) 0 var(--spacers-dp8) 0;
+}
+
+.visualizationLinkText {
+    font-size: 14px;
+}

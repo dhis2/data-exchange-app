@@ -7,11 +7,12 @@ import {
     IconArrowRight16,
     IconApps16,
     IconClock16,
+    InputField,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAppContext } from '../../../app-context/index.js'
+import { useAppContext, useUserContext } from '../../../context/index.js'
 import { getNaturalCapitalization } from '../../../utils/helpers.js'
 import styles from './items-list.module.css'
 
@@ -46,6 +47,7 @@ const AggregateDataExchangeCard = ({ ade }) => {
             },
         }
     )
+    const { canAddExchange, canDeleteExchange } = useUserContext()
     const { fromServerDate } = useTimeZoneConversion()
     const createdClient = fromServerDate(ade?.created)
     return (
@@ -74,22 +76,26 @@ const AggregateDataExchangeCard = ({ ade }) => {
                 </div>
                 <div>
                     <ButtonStrip>
-                        <Link to={`/edit/${ade.id}`}>
-                            <Button small>{i18n.t('Edit')}</Button>
-                        </Link>
-                        <Button
-                            destructive
-                            secondary
-                            small
-                            onClick={() => {
-                                deleteExchange()
-                            }}
-                            loading={deleting}
-                        >
-                            {deleting
-                                ? i18n.t('Deleting...')
-                                : i18n.t('Delete')}
-                        </Button>
+                        {canAddExchange && (
+                            <Link to={`/edit/${ade.id}`}>
+                                <Button small>{i18n.t('Edit')}</Button>
+                            </Link>
+                        )}
+                        {canDeleteExchange && (
+                            <Button
+                                destructive
+                                secondary
+                                small
+                                onClick={() => {
+                                    deleteExchange()
+                                }}
+                                loading={deleting}
+                            >
+                                {deleting
+                                    ? i18n.t('Deleting...')
+                                    : i18n.t('Delete')}
+                            </Button>
+                        )}
                     </ButtonStrip>
                 </div>
             </Card>
@@ -103,11 +109,32 @@ AggregateDataExchangeCard.propTypes = {
 
 export const EditItemsList = () => {
     const { aggregateDataExchanges } = useAppContext()
+    const [searchTerm, setSearchTerm] = useState('')
+
     return (
-        <div className={styles.listContainer}>
-            {aggregateDataExchanges.map((ade) => (
-                <AggregateDataExchangeCard key={ade.id} ade={ade} />
-            ))}
-        </div>
+        <>
+            <div className={styles.searchContainer}>
+                <InputField
+                    placeholder={i18n.t('Search for a configuration')}
+                    value={searchTerm}
+                    onChange={({ value }) => {
+                        setSearchTerm(value)
+                    }}
+                />
+            </div>
+            <div className={styles.listContainer}>
+                {aggregateDataExchanges
+                    .filter(({ displayName }) =>
+                        searchTerm.length < 1
+                            ? true
+                            : displayName
+                                  .toLowerCase()
+                                  .includes(searchTerm.toLowerCase())
+                    )
+                    .map((ade) => (
+                        <AggregateDataExchangeCard key={ade.id} ade={ade} />
+                    ))}
+            </div>
+        </>
     )
 }

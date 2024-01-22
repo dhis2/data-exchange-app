@@ -2,7 +2,7 @@ import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Loader, Warning } from '../components/shared/index.js'
+import { Loader, Warning } from '../../components/shared/index.js'
 import { AppContext } from './app-context.js'
 
 const query = {
@@ -19,6 +19,7 @@ const query = {
                 'target[type]',
                 'source[requests~size]',
             ],
+            order: 'displayName:iasc',
         },
     },
 }

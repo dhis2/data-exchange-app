@@ -3,11 +3,11 @@ import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useCallback, useEffect } from 'react'
-import { Loader, Warning } from '../components/shared/index.js'
+import { Loader, Warning } from '../../components/shared/index.js'
 import {
     useExchangeId,
     useRequestIndex,
-} from '../use-context-selection/index.js'
+} from '../../use-context-selection/index.js'
 import { ExchangeContext } from './exchange-context.js'
 import styles from './exchange-provider.module.css'
 

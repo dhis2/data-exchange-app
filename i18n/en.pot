@@ -5,18 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-08T14:12:56.973Z\n"
-"PO-Revision-Date: 2024-01-08T14:12:56.973Z\n"
-
-msgid "Aggregate data exchange information is not accessible"
-msgstr "Aggregate data exchange information is not accessible"
-
-msgid ""
-"There was a problem retrieving aggregate data exchanges. Refresh the page "
-"to try again."
-msgstr ""
-"There was a problem retrieving aggregate data exchanges. Refresh the page "
-"to try again."
+"POT-Creation-Date: 2024-01-19T14:17:40.202Z\n"
+"PO-Revision-Date: 2024-01-19T14:17:40.202Z\n"
 
 msgid "Submit data"
 msgstr "Submit data"
@@ -136,6 +126,21 @@ msgstr "The password associated with the username specified above"
 msgid "Requests"
 msgstr "Requests"
 
+msgid "Advanced options"
+msgstr "Advanced options"
+
+msgid "Input general ID Scheme"
+msgstr "Input general ID Scheme"
+
+msgid "Input data element ID Scheme"
+msgstr "Input data element ID Scheme"
+
+msgid "Input organisation unit ID Scheme"
+msgstr "Input organisation unit ID Scheme"
+
+msgid "Input category option combo ID Scheme"
+msgstr "Input category option combo ID Scheme"
+
 msgid "Edit exchange: Add request"
 msgstr "Edit exchange: Add request"
 
@@ -151,6 +156,22 @@ msgstr "Edit exchange"
 msgid "Could not save"
 msgstr "Could not save"
 
+msgid "Discard unsaved changes"
+msgstr "Discard unsaved changes"
+
+msgid ""
+"The {{objectName}} has unsaved changes. Leaving this page will discard "
+"these changes. Are you sure?"
+msgstr ""
+"The {{objectName}} has unsaved changes. Leaving this page will discard "
+"these changes. Are you sure?"
+
+msgid "No, go back"
+msgstr "No, go back"
+
+msgid "Yes, discard changes"
+msgstr "Yes, discard changes"
+
 msgid "Save exchange"
 msgstr "Save exchange"
 
@@ -163,8 +184,8 @@ msgstr "Save request"
 msgid "Exit configuration mode"
 msgstr "Exit configuration mode"
 
-msgid "Data exchange configurator"
-msgstr "Data exchange configurator"
+msgid "Data Exchange Configurations"
+msgstr "Data Exchange Configurations"
 
 msgid "New exchange configuration"
 msgstr "New exchange configuration"
@@ -184,6 +205,173 @@ msgstr "Deleting..."
 msgid "Delete"
 msgstr "Delete"
 
+msgid "Search for a configuration"
+msgstr "Search for a configuration"
+
+msgid "Items"
+msgstr "Items"
+
+msgid "Dimension"
+msgstr "Dimension"
+
+msgid "Add filter"
+msgstr "Add filter"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Created by"
+msgstr "Created by"
+
+msgid "Anyone"
+msgstr "Anyone"
+
+msgid "Only you"
+msgstr "Only you"
+
+msgid "Others"
+msgstr "Others"
+
+msgid "Not supported by this app yet"
+msgstr "Not supported by this app yet"
+
+msgid "Filter by name"
+msgstr "Filter by name"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Last updated"
+msgstr "Last updated"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Clear filters"
+msgstr "Clear filters"
+
+msgid "{{firstItemIndex}}-{{lastItemIndex}} of {{totalNumberOfItems}}"
+msgstr "{{firstItemIndex}}-{{lastItemIndex}} of {{totalNumberOfItems}}"
+
+msgid "Open"
+msgstr "Open"
+
+msgid "Loading"
+msgstr "Loading"
+
+msgid "Couldn't load items"
+msgstr "Couldn't load items"
+
+msgid ""
+"There was a problem loading items. Try again or contact your system "
+"administrator."
+msgstr ""
+"There was a problem loading items. Try again or contact your system "
+"administrator."
+
+msgid "No items found. Create a new to get started."
+msgstr "No items found. Create a new to get started."
+
+msgid ""
+"No items found. Try adjusting your search or filter options to find what "
+"you're looking for."
+msgstr ""
+"No items found. Try adjusting your search or filter options to find what "
+"you're looking for."
+
+msgid "Create new"
+msgstr "Create new"
+
+msgid "Open a visualization"
+msgstr "Open a visualization"
+
+msgid "Loading visualizations"
+msgstr "Loading visualizations"
+
+msgid "Couldn't load visualizations"
+msgstr "Couldn't load visualizations"
+
+msgid ""
+"There was a problem loading visualizations. Try again or contact your "
+"system administrator."
+msgstr ""
+"There was a problem loading visualizations. Try again or contact your "
+"system administrator."
+
+msgid "No visualizations found. Click New visualization to get started."
+msgstr "No visualizations found. Click New visualization to get started."
+
+msgid ""
+"No visualizations found. Try adjusting your search or filter options to "
+"find what you're looking for."
+msgstr ""
+"No visualizations found. Try adjusting your search or filter options to "
+"find what you're looking for."
+
+msgid "New visualization"
+msgstr "New visualization"
+
+msgid "Open a map"
+msgstr "Open a map"
+
+msgid "Loading maps"
+msgstr "Loading maps"
+
+msgid "Couldn't load maps"
+msgstr "Couldn't load maps"
+
+msgid ""
+"There was a problem loading maps. Try again or contact your system "
+"administrator."
+msgstr ""
+"There was a problem loading maps. Try again or contact your system "
+"administrator."
+
+msgid "No maps found. Click New map to get started."
+msgstr "No maps found. Click New map to get started."
+
+msgid ""
+"No maps found. Try adjusting your search or filter options to find what "
+"you're looking for."
+msgstr ""
+"No maps found. Try adjusting your search or filter options to find what "
+"you're looking for."
+
+msgid "New map"
+msgstr "New map"
+
+msgid "Open a line list"
+msgstr "Open a line list"
+
+msgid "Loading line lists"
+msgstr "Loading line lists"
+
+msgid "Couldn't load line lists"
+msgstr "Couldn't load line lists"
+
+msgid ""
+"There was a problem loading line lists. Try again or contact your system "
+"administrator."
+msgstr ""
+"There was a problem loading line lists. Try again or contact your system "
+"administrator."
+
+msgid "No line lists found. Click New line list to get started."
+msgstr "No line lists found. Click New line list to get started."
+
+msgid ""
+"No line lists found. Try adjusting your search or filter options to find "
+"what you're looking for."
+msgstr ""
+"No line lists found. Try adjusting your search or filter options to find "
+"what you're looking for."
+
+msgid "New line list"
+msgstr "New line list"
+
 msgid "Request setup"
 msgstr "Request setup"
 
@@ -193,8 +381,23 @@ msgstr "Request name"
 msgid "Displayed in the Data Exchange app."
 msgstr "Displayed in the Data Exchange app."
 
+msgid "Filter request"
+msgstr "Filter request"
+
+msgid "Filter selections"
+msgstr "Filter selections"
+
+msgid "Link request to a visualization"
+msgstr "Link request to a visualization"
+
+msgid "Request visualizations are shown when submitting exchanges."
+msgstr "Request visualizations are shown when submitting exchanges."
+
 msgid "Data items"
 msgstr "Data items"
+
+msgid "Data item select"
+msgstr "Data item select"
 
 msgid "Periods"
 msgstr "Periods"
@@ -202,8 +405,23 @@ msgstr "Periods"
 msgid "Organisation units"
 msgstr "Organisation units"
 
-msgid "Name"
-msgstr "Name"
+msgid "Output general ID Scheme"
+msgstr "Output general ID Scheme"
+
+msgid "Output data element ID Scheme"
+msgstr "Output data element ID Scheme"
+
+msgid "Output organisation unit ID Scheme"
+msgstr "Output organisation unit ID Scheme"
+
+msgid "{{firstOuName}} and {{ouLength}} others"
+msgstr "{{firstOuName}} and {{ouLength}} others"
+
+msgid "; levels: {{levelCount}}"
+msgstr "; levels: {{levelCount}}"
+
+msgid "; groups: {{groupsCount}}"
+msgstr "; groups: {{groupsCount}}"
 
 msgid "Org. units"
 msgstr "Org. units"
@@ -211,14 +429,20 @@ msgstr "Org. units"
 msgid "Visualization"
 msgstr "Visualization"
 
-msgid "{{firstOuName}} and {{ouLength}} others"
-msgstr "{{firstOuName}} and {{ouLength}} others"
-
 msgid "Add request manually"
 msgstr "Add request manually"
 
-msgid "Add request from visualization"
-msgstr "Add request from visualization"
+msgid "Add request from visualization [TO DO]"
+msgstr "Add request from visualization [TO DO]"
+
+msgid "Linked to: "
+msgstr "Linked to: "
+
+msgid "Choose a different visualization"
+msgstr "Choose a different visualization"
+
+msgid "Choose a visualization"
+msgstr "Choose a visualization"
 
 msgid "Conflicts"
 msgstr "Conflicts"
@@ -362,6 +586,22 @@ msgstr "Choose a data exchange"
 msgid "Configurations"
 msgstr "Configurations"
 
+msgid "Aggregate data exchange information is not accessible"
+msgstr "Aggregate data exchange information is not accessible"
+
+msgid ""
+"There was a problem retrieving aggregate data exchanges. Refresh the page "
+"to try again."
+msgstr ""
+"There was a problem retrieving aggregate data exchanges. Refresh the page "
+"to try again."
+
+msgid "Attribute information is not accessible"
+msgstr "Attribute information is not accessible"
+
+msgid "There was a problem retrieving attributes. Refresh the page to try again."
+msgstr "There was a problem retrieving attributes. Refresh the page to try again."
+
 msgid "Exchange content not accessible"
 msgstr "Exchange content not accessible"
 
@@ -374,5 +614,129 @@ msgstr ""
 "be due to either a connection error or a configuration issue. The message "
 "below provides additional detail."
 
+msgid "User information is not available"
+msgstr "User information is not available"
+
+msgid ""
+"There was a problem retrieving user information. Refresh the page to try "
+"again."
+msgstr ""
+"There was a problem retrieving user information. Refresh the page to try "
+"again."
+
 msgid "The exchange you requested does not exist or you do not have access to it"
 msgstr "The exchange you requested does not exist or you do not have access to it"
+
+msgid "Today"
+msgstr "Today"
+
+msgid "Yesterday"
+msgstr "Yesterday"
+
+msgid "Last 3 days"
+msgstr "Last 3 days"
+
+msgid "Last 7 days"
+msgstr "Last 7 days"
+
+msgid "Last 14 days"
+msgstr "Last 14 days"
+
+msgid "Last 30 days"
+msgstr "Last 30 days"
+
+msgid "Last 60 days"
+msgstr "Last 60 days"
+
+msgid "Last 90 days"
+msgstr "Last 90 days"
+
+msgid "Last 180 days"
+msgstr "Last 180 days"
+
+msgid "This week"
+msgstr "This week"
+
+msgid "Last week"
+msgstr "Last week"
+
+msgid "Last 4 weeks"
+msgstr "Last 4 weeks"
+
+msgid "Last 12 weeks"
+msgstr "Last 12 weeks"
+
+msgid "Last 52 weeks"
+msgstr "Last 52 weeks"
+
+msgid "Weeks this year"
+msgstr "Weeks this year"
+
+msgid "This bi-week"
+msgstr "This bi-week"
+
+msgid "Last bi-week"
+msgstr "Last bi-week"
+
+msgid "Last 4 bi-weeks"
+msgstr "Last 4 bi-weeks"
+
+msgid "This month"
+msgstr "This month"
+
+msgid "Last month"
+msgstr "Last month"
+
+msgid "Last 3 months"
+msgstr "Last 3 months"
+
+msgid "Last 6 months"
+msgstr "Last 6 months"
+
+msgid "Last 12 months"
+msgstr "Last 12 months"
+
+msgid "Months this year"
+msgstr "Months this year"
+
+msgid "This bi-month"
+msgstr "This bi-month"
+
+msgid "Last bi-month"
+msgstr "Last bi-month"
+
+msgid "Last 6 bi-months"
+msgstr "Last 6 bi-months"
+
+msgid "Bi-months this year"
+msgstr "Bi-months this year"
+
+msgid "This quarter"
+msgstr "This quarter"
+
+msgid "Last quarter"
+msgstr "Last quarter"
+
+msgid "Last 4 quarters"
+msgstr "Last 4 quarters"
+
+msgid "Quarters this year"
+msgstr "Quarters this year"
+
+msgid "This six-month"
+msgstr "This six-month"
+
+msgid "Last six-month"
+msgstr "Last six-month"
+
+msgid "Last 2 six-month"
+msgstr "Last 2 six-month"
+
+msgid "This financial year"
+msgstr "This financial year"
+
+msgid "Last financial year"
+msgstr "Last financial year"
+
+msgid "Last 5 financial years"
+msgstr "Last 5 financial years"

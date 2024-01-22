@@ -42,17 +42,6 @@
     background-color: var(--colors-teal100);
 }
 
-.radioBoxIcon {
-    width: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-/* .radioBox div {
-    margin-inline-end: 8px;
-} */
-
 .radioDecoratorLabel {
     display: inline-block;
     margin-block-end: var(--spacers-dp8);
@@ -64,4 +53,12 @@
     display: inline-block;
     color: var(--colors-grey600);
     font-size: 12px;
+}
+
+.radioBoxText {
+    margin-inline-start: var(--spacers-dp8);
+}
+
+.advancedSection {
+    margin: var(--spacers-dp24) 0 var(--spacers-dp24) 0;
 }

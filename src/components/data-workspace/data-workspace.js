@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { CenteredContent } from '@dhis2/ui'
 import React, { useEffect } from 'react'
-import { useAppContext } from '../../app-context/index.js'
-import { useExchangeContext } from '../../exchange-context/index.js'
+import { useAppContext } from '../../context/app-context/index.js'
+import { useExchangeContext } from '../../context/exchange-context/index.js'
 import {
     useExchangeId,
     useRequestIndex,

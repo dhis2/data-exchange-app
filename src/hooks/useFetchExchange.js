@@ -1,6 +1,5 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { useCallback, useState } from 'react'
-import { getPeriodDetails } from '../utils/periods.js'
 
 export const ouGroupPrefix = 'OU_GROUP-'
 export const ouLevelPrefix = 'LEVEL-'
@@ -26,6 +25,37 @@ const ORG_UNITS_QUERY = {
     },
 }
 
+const VISUALIZATIONS_QUERY = {
+    visualizations: {
+        resource: 'visualizations',
+        params: ({ ids }) => ({
+            paging: false,
+            fields: ['id', 'displayName~rename(name)', 'href'],
+            filter: `id:in:[${ids.join()}]`,
+        }),
+    },
+}
+
+const ANALYTICS_QUERY = {
+    metadata: {
+        resource: 'analytics',
+        params: ({ ou, dx, pe }) => ({
+            dimension: `dx:${dx.join(';')},ou:${ou.join(';')},pe:${pe.join(
+                ';'
+            )}`,
+            skipMeta: false,
+            skipData: true,
+            includeMetadataDetails: true,
+        }),
+    },
+}
+
+const getMetadataByRequest = async ({ engine, variables }) => {
+    return await engine.query(ANALYTICS_QUERY, {
+        variables,
+    })
+}
+
 export const useFetchExchange = () => {
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState(null)
@@ -36,12 +66,28 @@ export const useFetchExchange = () => {
     const refetch = useCallback(
         async ({ id }) => {
             // set to loading
+            setLoading(true)
             try {
                 const { exchange } = await engine.query(EXCHANGE_QUERY, {
                     variables: { id },
                 })
 
-                // once we have exchange need to populate orgUnit information
+                // get metadata information for dx, pe
+                const metadataRequests = exchange.source.requests.map(
+                    ({ ou, dx, pe }) => {
+                        return getMetadataByRequest({
+                            engine,
+                            variables: { ou, dx, pe },
+                        })
+                    }
+                )
+
+                const metadataResponses = await Promise.all(metadataRequests)
+                const metadata = metadataResponses.reduce((allItems, md) => {
+                    return { ...allItems, ...md.metadata.metaData.items }
+                }, {})
+
+                // OrgUnit tree requires path, which is missing in analytics response
                 const ousToLookUp = exchange.source.requests.reduce(
                     (ouSet, { ou: ouDimension }) => {
                         for (const orgUnit of ouDimension) {
@@ -71,23 +117,49 @@ export const useFetchExchange = () => {
                     new Map()
                 )
 
+                // get visualizations information
+
+                const visualizationsToLookUp = new Set(
+                    exchange.source.requests.map(
+                        ({ visualization }) => visualization
+                    )
+                )
+                const { visualizations: visualizationsDetails } =
+                    await engine.query(VISUALIZATIONS_QUERY, {
+                        variables: { ids: [...visualizationsToLookUp] },
+                    })
+                const visualizationsMap =
+                    visualizationsDetails.visualizations.reduce(
+                        (visMap, visualization) => {
+                            visMap.set(visualization.id, visualization)
+                            return visMap
+                        },
+                        new Map()
+                    )
+
                 exchange.source.requests = exchange.source.requests.map(
                     (request) => ({
                         ...request,
-                        peInfo: request.pe.map((id) => getPeriodDetails(id)),
-                        ouInfo: request.ou.map((id) => {
-                            if (
-                                id.startsWith(ouLevelPrefix) ||
-                                id.startsWith(ouGroupPrefix)
-                            ) {
-                                return { id }
-                            }
-                            return ouMap.get(id)
-                        }),
+                        dxInfo: request.dx.map((id) => ({
+                            id,
+                            ...metadata[id],
+                        })),
+                        peInfo: request.pe.map((id) => ({
+                            id,
+                            ...metadata[id],
+                        })),
+                        ouInfo: request.ou.map((id) => ({
+                            id,
+                            ...metadata[id],
+                            ...ouMap.get(id),
+                        })),
                         filtersInfo: request.filters.map((filter) => ({
                             ...filter,
                             items: filter.items.map((id) => ({ id })),
                         })),
+                        visualizationInfo: request.visualization
+                            ? visualizationsMap.get(request.visualization)
+                            : null,
                     })
                 )
 

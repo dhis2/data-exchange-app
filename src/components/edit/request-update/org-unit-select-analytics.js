@@ -1,28 +1,19 @@
 import { OrgUnitDimension } from '@dhis2/analytics'
-import { useDataQuery } from '@dhis2/app-runtime'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useMemo } from 'react'
+import { useUserContext } from '../../../context/index.js'
+import { SelectorValidationError } from '../shared/selector-validation-error.js'
 
-// need to get orgUnit info (id, name, path) for initially selected values
-// (need to extract and get info for group/level) [TBD]
-// implement onChange function
-// TBD move to a context?
-const userQuery = {
-    user: {
-        resource: 'me',
-        params: {
-            fields: ['id', 'organisationUnits'],
-        },
-    },
-}
-
-export const OrgUnitSelector = ({ input }) => {
+export const OrgUnitSelector = ({ input, meta }) => {
     const { value: selectedOrgUnits, onChange } = input
-
-    const { data: userInfo } = useDataQuery(userQuery)
-    const rootOrgUnits = userInfo?.user?.organisationUnits
-        ? userInfo?.user?.organisationUnits.map(({ id }) => id)
-        : null
+    const { organisationUnits: userOrganisationUnits } = useUserContext()
+    const rootOrgUnits = useMemo(
+        () =>
+            userOrganisationUnits
+                ? userOrganisationUnits.map(({ id }) => id)
+                : null,
+        [userOrganisationUnits]
+    )
 
     if (!rootOrgUnits) {
         return null
@@ -38,10 +29,12 @@ export const OrgUnitSelector = ({ input }) => {
                 }}
                 hideUserOrgUnits={true}
             />
+            <SelectorValidationError meta={meta} />
         </>
     )
 }
 
 OrgUnitSelector.propTypes = {
     input: PropTypes.object,
+    meta: PropTypes.object,
 }
