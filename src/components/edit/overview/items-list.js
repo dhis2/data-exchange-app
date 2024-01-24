@@ -47,9 +47,21 @@ const AggregateDataExchangeCard = ({ ade }) => {
             },
         }
     )
-    const { canAddExchange, canDeleteExchange } = useUserContext()
+    const { canAddExchange, canDeleteExchange, keyUiLocale } = useUserContext()
+
     const { fromServerDate } = useTimeZoneConversion()
     const createdClient = fromServerDate(ade?.created)
+    const createdClientDate = new Date(createdClient.getClientZonedISOString())
+
+    // keyUiLocale can be invalid, hence wrap in try/catch
+    let createdClientDateString
+    try {
+        createdClientDateString =
+            createdClientDate.toLocaleDateString(keyUiLocale)
+    } catch (e) {
+        createdClientDateString = createdClientDate.toLocaleDateString('en-GB')
+    }
+
     return (
         <div className={styles.cardContainer}>
             <Card key={ade.id} className={styles.cardContainerInner}>
@@ -63,14 +75,13 @@ const AggregateDataExchangeCard = ({ ade }) => {
                         icon={<IconApps16 />}
                         text={i18n.t('{{numberOfRequests}} requests', {
                             numberOfRequests: ade.source.requests,
+                            interpolation: { escapeValue: false },
                         })}
                     />
                     <IconTextItem
                         icon={<IconClock16 />}
-                        text={i18n.t('Created {{createdDate}}', {
-                            createdDate: createdClient
-                                .getClientZonedISOString()
-                                .substring(0, 10),
+                        text={i18n.t('Created {{- createdDate}}', {
+                            createdDate: createdClientDateString,
                         })}
                     />
                 </div>
@@ -115,7 +126,7 @@ export const EditItemsList = () => {
         <>
             <div className={styles.searchContainer}>
                 <InputField
-                    placeholder={i18n.t('Search for a configuration')}
+                    placeholder={i18n.t('Search for an exchange')}
                     value={searchTerm}
                     onChange={({ value }) => {
                         setSearchTerm(value)

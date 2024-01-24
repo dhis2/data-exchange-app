@@ -1,7 +1,7 @@
 import { PeriodDimension } from '@dhis2/analytics'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { SelectorValidationError } from '../shared/selector-validation-error.js'
+import { SelectorValidationError } from '../shared/index.js'
 
 export const PeriodSelector = ({ input, meta }) => {
     const { value: selectedPeriods } = input

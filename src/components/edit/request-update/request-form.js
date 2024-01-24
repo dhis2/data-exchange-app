@@ -9,11 +9,11 @@ import React, { useState } from 'react'
 import {
     Subsection,
     AdvancedSubsection,
-} from '../exchange-update/form-subsection.js'
-import { SchemeSelector } from '../shared/scheme-selector.js'
+    SchemeSelector,
+} from '../shared/index.js'
 import { DataItemSelect } from './data-item-select.js'
 import { FilterSelect } from './filterSelect/filter-select.js'
-import { OrgUnitSelector } from './org-unit-select-analytics.js'
+import { OrgUnitSelector } from './org-unit-select.js'
 import { PeriodSelector } from './period-select.js'
 import styles from './request-form.module.css'
 import { useValidators } from './useValidators.js'
@@ -133,15 +133,15 @@ export const RequestEditForm = () => {
                 {showAdvanced && (
                     <>
                         <SchemeSelector
-                            label={i18n.t('Output general ID Scheme')}
+                            label={i18n.t('Output general ID scheme')}
                             name="source_outputIdScheme"
                         />
                         <SchemeSelector
-                            label={i18n.t('Output data element ID Scheme')}
+                            label={i18n.t('Output data element ID scheme')}
                             name="source_outputDataElementIdScheme"
                         />
                         <SchemeSelector
-                            label={i18n.t('Output organisation unit ID Scheme')}
+                            label={i18n.t('Output organisation unit ID scheme')}
                             name="source_outputOrgUnitIdScheme"
                         />
                     </>

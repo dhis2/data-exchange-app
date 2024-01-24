@@ -5,63 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-19T14:17:40.202Z\n"
-"PO-Revision-Date: 2024-01-19T14:17:40.202Z\n"
-
-msgid "Submit data"
-msgstr "Submit data"
-
-msgid "Data has already been submitted"
-msgstr "Data has already been submitted"
-
-msgid "There is no data to submit"
-msgstr "There is no data to submit"
-
-msgid "There are no exchanges available to you"
-msgstr "There are no exchanges available to you"
-
-msgid "No data in this exchange"
-msgstr "No data in this exchange"
-
-msgid ""
-"There is not any data to show in this exchange, or you might not have "
-"access to the data."
-msgstr ""
-"There is not any data to show in this exchange, or you might not have "
-"access to the data."
-
-msgid "Choose a data exchange to get started"
-msgstr "Choose a data exchange to get started"
-
-msgid "Review your data before submitting it to a data exchange."
-msgstr "Review your data before submitting it to a data exchange."
-
-msgid "Choose a data exchange from the top menu."
-msgstr "Choose a data exchange from the top menu."
-
-msgid "Learn more about data exchange"
-msgstr "Learn more about data exchange"
-
-msgid "Data"
-msgstr "Data"
-
-msgid "No data"
-msgstr "No data"
-
-msgid "There is no data for this report"
-msgstr "There is no data for this report"
-
-msgid "Open in data visualizer"
-msgstr "Open in data visualizer"
-
-msgid "1 data report"
-msgstr "1 data report"
-
-msgid "{{requestsCount}} data reports"
-msgstr "{{requestsCount}} data reports"
-
-msgid "Source data was generated {{timeDifference}} ago"
-msgstr "Source data was generated {{timeDifference}} ago"
+"POT-Creation-Date: 2024-01-23T20:48:43.043Z\n"
+"PO-Revision-Date: 2024-01-23T20:48:43.043Z\n"
 
 msgid "Basic setup"
 msgstr "Basic setup"
@@ -129,23 +74,17 @@ msgstr "Requests"
 msgid "Advanced options"
 msgstr "Advanced options"
 
-msgid "Input general ID Scheme"
-msgstr "Input general ID Scheme"
+msgid "Input general ID scheme"
+msgstr "Input general ID scheme"
 
-msgid "Input data element ID Scheme"
-msgstr "Input data element ID Scheme"
+msgid "Input data element ID scheme"
+msgstr "Input data element ID scheme"
 
-msgid "Input organisation unit ID Scheme"
-msgstr "Input organisation unit ID Scheme"
+msgid "Input organisation unit ID scheme"
+msgstr "Input organisation unit ID scheme"
 
-msgid "Input category option combo ID Scheme"
-msgstr "Input category option combo ID Scheme"
-
-msgid "Edit exchange: Add request"
-msgstr "Edit exchange: Add request"
-
-msgid "Edit exchange: Edit request"
-msgstr "Edit exchange: Edit request"
+msgid "Input category option combo ID scheme"
+msgstr "Input category option combo ID scheme"
 
 msgid "Add exchange"
 msgstr "Add exchange"
@@ -156,30 +95,48 @@ msgstr "Edit exchange"
 msgid "Could not save"
 msgstr "Could not save"
 
-msgid "Discard unsaved changes"
-msgstr "Discard unsaved changes"
+msgid "{{firstOuName}} and {{ouLength}} others"
+msgstr "{{firstOuName}} and {{ouLength}} others"
+
+msgid "; levels: {{levelCount}}"
+msgstr "; levels: {{levelCount}}"
+
+msgid "; groups: {{groupsCount}}"
+msgstr "; groups: {{groupsCount}}"
+
+msgid "No requests"
+msgstr "No requests"
 
 msgid ""
-"The {{objectName}} has unsaved changes. Leaving this page will discard "
-"these changes. Are you sure?"
+"Click on buttons below to add a new request. Exchanges must contain at "
+"least one request."
 msgstr ""
-"The {{objectName}} has unsaved changes. Leaving this page will discard "
-"these changes. Are you sure?"
+"Click on buttons below to add a new request. Exchanges must contain at "
+"least one request."
 
-msgid "No, go back"
-msgstr "No, go back"
+msgid "Delete"
+msgstr "Delete"
 
-msgid "Yes, discard changes"
-msgstr "Yes, discard changes"
+msgid "Name"
+msgstr "Name"
 
-msgid "Save exchange"
-msgstr "Save exchange"
+msgid "Org. units"
+msgstr "Org. units"
 
-msgid "Cancel"
-msgstr "Cancel"
+msgid "Periods"
+msgstr "Periods"
 
-msgid "Save request"
-msgstr "Save request"
+msgid "Data items"
+msgstr "Data items"
+
+msgid "Visualization"
+msgstr "Visualization"
+
+msgid "Add request manually"
+msgstr "Add request manually"
+
+msgid "Add request from visualization [TO DO]"
+msgstr "Add request from visualization [TO DO]"
 
 msgid "Exit configuration mode"
 msgstr "Exit configuration mode"
@@ -193,8 +150,8 @@ msgstr "New exchange configuration"
 msgid "{{numberOfRequests}} requests"
 msgstr "{{numberOfRequests}} requests"
 
-msgid "Created {{createdDate}}"
-msgstr "Created {{createdDate}}"
+msgid "Created {{- createdDate}}"
+msgstr "Created {{- createdDate}}"
 
 msgid "Edit"
 msgstr "Edit"
@@ -202,11 +159,14 @@ msgstr "Edit"
 msgid "Deleting..."
 msgstr "Deleting..."
 
-msgid "Delete"
-msgstr "Delete"
+msgid "Search for an exchange"
+msgstr "Search for an exchange"
 
-msgid "Search for a configuration"
-msgstr "Search for a configuration"
+msgid "Edit exchange: Add request"
+msgstr "Edit exchange: Add request"
+
+msgid "Edit exchange: Edit request"
+msgstr "Edit exchange: Edit request"
 
 msgid "Items"
 msgstr "Items"
@@ -219,6 +179,69 @@ msgstr "Add filter"
 
 msgid "Remove"
 msgstr "Remove"
+
+msgid "Request setup"
+msgstr "Request setup"
+
+msgid "Request name"
+msgstr "Request name"
+
+msgid "Displayed in the Data Exchange app."
+msgstr "Displayed in the Data Exchange app."
+
+msgid "Filter request"
+msgstr "Filter request"
+
+msgid "Filter selections"
+msgstr "Filter selections"
+
+msgid "Link request to a visualization"
+msgstr "Link request to a visualization"
+
+msgid "Request visualizations are shown when submitting exchanges."
+msgstr "Request visualizations are shown when submitting exchanges."
+
+msgid "Data item select"
+msgstr "Data item select"
+
+msgid "Organisation units"
+msgstr "Organisation units"
+
+msgid "Output general ID scheme"
+msgstr "Output general ID scheme"
+
+msgid "Output data element ID scheme"
+msgstr "Output data element ID scheme"
+
+msgid "Output organisation unit ID scheme"
+msgstr "Output organisation unit ID scheme"
+
+msgid "Choose at least one data item"
+msgstr "Choose at least one data item"
+
+msgid "Choose at least one period"
+msgstr "Choose at least one period"
+
+msgid "Choose at least one organisation unit"
+msgstr "Choose at least one organisation unit"
+
+msgid "Linked to: "
+msgstr "Linked to: "
+
+msgid "Choose a different visualization"
+msgstr "Choose a different visualization"
+
+msgid "Choose a visualization"
+msgstr "Choose a visualization"
+
+msgid "Not available"
+msgstr "Not available"
+
+msgid "You do not have the relevant authorities to add a new exchange."
+msgstr "You do not have the relevant authorities to add a new exchange."
+
+msgid "Back to configurations page"
+msgstr "Back to configurations page"
 
 msgid "Created by"
 msgstr "Created by"
@@ -237,9 +260,6 @@ msgstr "Not supported by this app yet"
 
 msgid "Filter by name"
 msgstr "Filter by name"
-
-msgid "Name"
-msgstr "Name"
 
 msgid "Created"
 msgstr "Created"
@@ -372,77 +392,94 @@ msgstr ""
 msgid "New line list"
 msgstr "New line list"
 
-msgid "Request setup"
-msgstr "Request setup"
+msgid "ID"
+msgstr "ID"
 
-msgid "Request name"
-msgstr "Request name"
+msgid "Code"
+msgstr "Code"
 
-msgid "Displayed in the Data Exchange app."
-msgstr "Displayed in the Data Exchange app."
+msgid "Attribute"
+msgstr "Attribute"
 
-msgid "Filter request"
-msgstr "Filter request"
+msgid "Discard unsaved changes"
+msgstr "Discard unsaved changes"
 
-msgid "Filter selections"
-msgstr "Filter selections"
+msgid ""
+"The {{objectName}} has unsaved changes. Leaving this page will discard "
+"these changes. Are you sure?"
+msgstr ""
+"The {{objectName}} has unsaved changes. Leaving this page will discard "
+"these changes. Are you sure?"
 
-msgid "Link request to a visualization"
-msgstr "Link request to a visualization"
+msgid "No, go back"
+msgstr "No, go back"
 
-msgid "Request visualizations are shown when submitting exchanges."
-msgstr "Request visualizations are shown when submitting exchanges."
+msgid "Yes, discard changes"
+msgstr "Yes, discard changes"
 
-msgid "Data items"
-msgstr "Data items"
+msgid "Save exchange"
+msgstr "Save exchange"
 
-msgid "Data item select"
-msgstr "Data item select"
+msgid "Cancel"
+msgstr "Cancel"
 
-msgid "Periods"
-msgstr "Periods"
+msgid "Save request"
+msgstr "Save request"
 
-msgid "Organisation units"
-msgstr "Organisation units"
+msgid "Submit data"
+msgstr "Submit data"
 
-msgid "Output general ID Scheme"
-msgstr "Output general ID Scheme"
+msgid "Data has already been submitted"
+msgstr "Data has already been submitted"
 
-msgid "Output data element ID Scheme"
-msgstr "Output data element ID Scheme"
+msgid "There is no data to submit"
+msgstr "There is no data to submit"
 
-msgid "Output organisation unit ID Scheme"
-msgstr "Output organisation unit ID Scheme"
+msgid "There are no exchanges available to you"
+msgstr "There are no exchanges available to you"
 
-msgid "{{firstOuName}} and {{ouLength}} others"
-msgstr "{{firstOuName}} and {{ouLength}} others"
+msgid "No data in this exchange"
+msgstr "No data in this exchange"
 
-msgid "; levels: {{levelCount}}"
-msgstr "; levels: {{levelCount}}"
+msgid ""
+"There is not any data to show in this exchange, or you might not have "
+"access to the data."
+msgstr ""
+"There is not any data to show in this exchange, or you might not have "
+"access to the data."
 
-msgid "; groups: {{groupsCount}}"
-msgstr "; groups: {{groupsCount}}"
+msgid "Choose a data exchange to get started"
+msgstr "Choose a data exchange to get started"
 
-msgid "Org. units"
-msgstr "Org. units"
+msgid "Review your data before submitting it to a data exchange."
+msgstr "Review your data before submitting it to a data exchange."
 
-msgid "Visualization"
-msgstr "Visualization"
+msgid "Choose a data exchange from the top menu."
+msgstr "Choose a data exchange from the top menu."
 
-msgid "Add request manually"
-msgstr "Add request manually"
+msgid "Learn more about data exchange"
+msgstr "Learn more about data exchange"
 
-msgid "Add request from visualization [TO DO]"
-msgstr "Add request from visualization [TO DO]"
+msgid "Data"
+msgstr "Data"
 
-msgid "Linked to: "
-msgstr "Linked to: "
+msgid "No data"
+msgstr "No data"
 
-msgid "Choose a different visualization"
-msgstr "Choose a different visualization"
+msgid "There is no data for this report"
+msgstr "There is no data for this report"
 
-msgid "Choose a visualization"
-msgstr "Choose a visualization"
+msgid "Open in data visualizer"
+msgstr "Open in data visualizer"
+
+msgid "1 data report"
+msgstr "1 data report"
+
+msgid "{{requestsCount}} data reports"
+msgstr "{{requestsCount}} data reports"
+
+msgid "Source data was generated {{timeDifference}} ago"
+msgstr "Source data was generated {{timeDifference}} ago"
 
 msgid "Conflicts"
 msgstr "Conflicts"
@@ -623,120 +660,3 @@ msgid ""
 msgstr ""
 "There was a problem retrieving user information. Refresh the page to try "
 "again."
-
-msgid "The exchange you requested does not exist or you do not have access to it"
-msgstr "The exchange you requested does not exist or you do not have access to it"
-
-msgid "Today"
-msgstr "Today"
-
-msgid "Yesterday"
-msgstr "Yesterday"
-
-msgid "Last 3 days"
-msgstr "Last 3 days"
-
-msgid "Last 7 days"
-msgstr "Last 7 days"
-
-msgid "Last 14 days"
-msgstr "Last 14 days"
-
-msgid "Last 30 days"
-msgstr "Last 30 days"
-
-msgid "Last 60 days"
-msgstr "Last 60 days"
-
-msgid "Last 90 days"
-msgstr "Last 90 days"
-
-msgid "Last 180 days"
-msgstr "Last 180 days"
-
-msgid "This week"
-msgstr "This week"
-
-msgid "Last week"
-msgstr "Last week"
-
-msgid "Last 4 weeks"
-msgstr "Last 4 weeks"
-
-msgid "Last 12 weeks"
-msgstr "Last 12 weeks"
-
-msgid "Last 52 weeks"
-msgstr "Last 52 weeks"
-
-msgid "Weeks this year"
-msgstr "Weeks this year"
-
-msgid "This bi-week"
-msgstr "This bi-week"
-
-msgid "Last bi-week"
-msgstr "Last bi-week"
-
-msgid "Last 4 bi-weeks"
-msgstr "Last 4 bi-weeks"
-
-msgid "This month"
-msgstr "This month"
-
-msgid "Last month"
-msgstr "Last month"
-
-msgid "Last 3 months"
-msgstr "Last 3 months"
-
-msgid "Last 6 months"
-msgstr "Last 6 months"
-
-msgid "Last 12 months"
-msgstr "Last 12 months"
-
-msgid "Months this year"
-msgstr "Months this year"
-
-msgid "This bi-month"
-msgstr "This bi-month"
-
-msgid "Last bi-month"
-msgstr "Last bi-month"
-
-msgid "Last 6 bi-months"
-msgstr "Last 6 bi-months"
-
-msgid "Bi-months this year"
-msgstr "Bi-months this year"
-
-msgid "This quarter"
-msgstr "This quarter"
-
-msgid "Last quarter"
-msgstr "Last quarter"
-
-msgid "Last 4 quarters"
-msgstr "Last 4 quarters"
-
-msgid "Quarters this year"
-msgstr "Quarters this year"
-
-msgid "This six-month"
-msgstr "This six-month"
-
-msgid "Last six-month"
-msgstr "Last six-month"
-
-msgid "Last 2 six-month"
-msgstr "Last 2 six-month"
-
-msgid "This financial year"
-msgstr "This financial year"
-
-msgid "Last financial year"
-msgstr "Last financial year"
-
-msgid "Last 5 financial years"
-msgstr "Last 5 financial years"

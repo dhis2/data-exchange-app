@@ -19,7 +19,7 @@ const query = {
         resource: 'me',
         params: {
             paging: false,
-            fields: ['id', 'authorities', 'organisationUnits'],
+            fields: ['id', 'authorities', 'organisationUnits', 'settings'],
         },
     },
 }
@@ -49,7 +49,7 @@ const UserProvider = ({ children }) => {
         )
     }
 
-    const { id, authorities, organisationUnits } = data.user
+    const { id, authorities, organisationUnits, settings } = data.user
 
     const canAddExchange = [...ALL_AUTHORITY, ...EXCHANGE_AUTHORITIES_ADD].some(
         (auth) => authorities.includes(auth)
@@ -64,6 +64,7 @@ const UserProvider = ({ children }) => {
         canAddExchange,
         canDeleteExchange,
         organisationUnits,
+        keyUiLocale: settings.keyUiLocale,
     }
 
     return (

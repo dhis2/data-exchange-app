@@ -1,11 +1,10 @@
 import { DataDimension } from '@dhis2/analytics'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { SelectorValidationError } from '../shared/selector-validation-error.js'
+import { SelectorValidationError } from '../shared/index.js'
 
 export const DataItemSelect = ({ input, meta }) => {
     const { value: selectedDimensions, onChange } = input
-    console.log('data item select input', input, meta)
 
     return (
         <>

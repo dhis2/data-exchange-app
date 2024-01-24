@@ -4,7 +4,7 @@ import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useUserContext } from '../../../context/index.js'
-import { OpenFileDialog } from './openVisualization/OpenFileDialog.js'
+import { OpenFileDialog } from '../shared/index.js'
 import styles from './visualization-select.module.css'
 
 export const VisualizationSelect = ({ input }) => {
@@ -54,6 +54,9 @@ export const VisualizationSelect = ({ input }) => {
                 onClose={() => {
                     setOpen(false)
                 }}
+                onNew={() => {
+                    console.log('Not supported')
+                }} // this prop is not relevant, but required
                 onFileSelect={onFileSelect}
                 currentUser={currentUser}
             />

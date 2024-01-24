@@ -1,10 +1,12 @@
-import i18n from '@dhis2/d2-i18n'
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { EditExchange } from '../components/edit/exchange-update/index.js'
-import { Loader, Warning } from '../components/shared/index.js'
+import {
+    EditExchange,
+    useFetchExchange,
+} from '../components/edit/exchange-update/index.js'
+import { AccessWarning } from '../components/edit/shared/index.js'
+import { Loader } from '../components/shared/index.js'
 import { useUserContext } from '../context/index.js'
-import { useFetchExchange } from '../hooks/useFetchExchange.js'
 
 export const EditItem = () => {
     const { exchangeID } = useParams()
@@ -19,15 +21,7 @@ export const EditItem = () => {
     }
 
     if (!canAddExchange || error) {
-        return (
-            <Warning error={true} title={i18n.t('Not available')}>
-                <span>
-                    {i18n.t(
-                        'The exchange you requested does not exist or you cannot edit it.'
-                    )}
-                </span>
-            </Warning>
-        )
+        return <AccessWarning />
     }
 
     if (data) {

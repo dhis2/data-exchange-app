@@ -1,13 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
 import { CenteredContent } from '@dhis2/ui'
 import React, { useEffect } from 'react'
-import { useAppContext } from '../../context/app-context/index.js'
-import { useExchangeContext } from '../../context/exchange-context/index.js'
+import { useAppContext, useExchangeContext } from '../../../context/index.js'
 import {
     useExchangeId,
     useRequestIndex,
-} from '../../use-context-selection/index.js'
-import { Warning } from '../shared/index.js'
+} from '../../../use-context-selection/index.js'
+import { Warning } from '../../shared/index.js'
 import { EntryScreen } from './entry-screen.js'
 import { RequestsDisplay } from './requests-display/index.js'
 import { RequestsNavigation } from './requests-navigation/index.js'

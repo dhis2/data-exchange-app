@@ -1,19 +1,16 @@
+import i18n from '@dhis2/d2-i18n'
 import {
     Field as FieldContainer,
     ReactFinalForm,
     RadioFieldFF,
     SingleSelectFieldFF,
+    hasValue,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useAttributeContext } from '../../../context/index.js'
+import { SCHEME_TYPES } from './constants.js'
 import styles from './scheme-selector.module.css'
-
-export const SCHEME_TYPES = {
-    uid: 'UID',
-    code: 'CODE',
-    attribute: 'ATTRIBUTE',
-}
 
 export const SchemeSelector = ({ name, label }) => {
     const { Field, useField } = ReactFinalForm
@@ -32,7 +29,7 @@ export const SchemeSelector = ({ name, label }) => {
                         name={name}
                         type="radio"
                         component={RadioFieldFF}
-                        label="ID"
+                        label={i18n.t('ID')}
                         value={SCHEME_TYPES.uid}
                     />
                     <Field
@@ -40,7 +37,7 @@ export const SchemeSelector = ({ name, label }) => {
                         className={styles.radioItem}
                         type="radio"
                         component={RadioFieldFF}
-                        label="Code"
+                        label={i18n.t('Code')}
                         value={SCHEME_TYPES.code}
                     />
                     <Field
@@ -48,7 +45,7 @@ export const SchemeSelector = ({ name, label }) => {
                         className={styles.radioItem}
                         type="radio"
                         component={RadioFieldFF}
-                        label="Attribute"
+                        label={i18n.t('Attribute')}
                         value={SCHEME_TYPES.attribute}
                         disabled={attributes.length === 0}
                     />
@@ -59,14 +56,11 @@ export const SchemeSelector = ({ name, label }) => {
                     <Field
                         name={`${name}_attribute`}
                         component={SingleSelectFieldFF}
-                        options={[
-                            ...attributes,
-                            { id: 'ATTRIBUTE', displayName: 'ATTRIBUTE' },
-                            { id: 'undefined', displayeName: 'undefined' },
-                        ].map(({ id, displayName }) => ({
+                        options={attributes.map(({ id, displayName }) => ({
                             value: id,
                             label: displayName,
                         }))}
+                        validate={hasValue}
                     />
                 </div>
             )}

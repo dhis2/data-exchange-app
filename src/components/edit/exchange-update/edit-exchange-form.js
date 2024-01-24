@@ -10,22 +10,17 @@ import {
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useMemo, useState } from 'react'
-import { RequestsOverview } from '../request-update/requests-overview.js'
-import { SchemeSelector } from '../shared/scheme-selector.js'
+import {
+    SchemeSelector,
+    Subsection,
+    AdvancedSubsection,
+    AUTHENTICATION_TYPES,
+    EXCHANGE_TYPES,
+} from '../shared/index.js'
 import styles from './edit-exchange-form.module.css'
-import { Subsection, AdvancedSubsection } from './form-subsection.js'
+import { RequestsOverview } from './requests-overview.js'
 
 const { Field, useField } = ReactFinalForm
-
-export const EXCHANGE_TYPES = {
-    external: 'EXTERNAL',
-    internal: 'INTERNAL',
-}
-
-export const AUTHENTICATION_TYPES = {
-    basic: 'BASIC',
-    pat: 'PAT',
-}
 
 const RadioDecorator = ({ label, helperText, currentSelected, children }) => (
     <Box
@@ -226,20 +221,20 @@ export const EditExchangeFormContents = ({
                 {showAdvanced && (
                     <>
                         <SchemeSelector
-                            label={i18n.t('Input general ID Scheme')}
+                            label={i18n.t('Input general ID scheme')}
                             name="target_idScheme"
                         />
                         <SchemeSelector
-                            label={i18n.t('Input data element ID Scheme')}
+                            label={i18n.t('Input data element ID scheme')}
                             name="target_dataElementIdScheme"
                         />
                         <SchemeSelector
-                            label={i18n.t('Input organisation unit ID Scheme')}
+                            label={i18n.t('Input organisation unit ID scheme')}
                             name="target_orgUnitIdScheme"
                         />
                         <SchemeSelector
                             label={i18n.t(
-                                'Input category option combo ID Scheme'
+                                'Input category option combo ID scheme'
                             )}
                             name="target_categoryOptionComboIdScheme"
                         />

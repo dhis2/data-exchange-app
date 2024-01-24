@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { BottomBar } from '../components/bottom-bar/index.js'
-import { Layout } from '../components/data-layout/layout.js'
-import { DataWorkspace } from '../components/data-workspace/index.js'
-import { SubmitModal } from '../components/submit-modal/index.js'
-import { TopBar } from '../components/top-bar/index.js'
+import { BottomBar } from '../components/view/bottom-bar/index.js'
+import { Layout } from '../components/view/data-layout/layout.js'
+import { DataWorkspace } from '../components/view/data-workspace/index.js'
+import { SubmitModal } from '../components/view/submit-modal/index.js'
+import { TopBar } from '../components/view/top-bar/index.js'
 import { ExchangeProvider } from '../context/exchange-context/index.js'
 
 export const DataPage = () => {

@@ -5,22 +5,23 @@ export const useValidators = () => {
     const dataItemSelectValidator = useCallback(
         (val) =>
             val.length === 0
-                ? i18n.t('Select at least one data item')
+                ? i18n.t('Choose at least one data item')
                 : undefined,
         []
     )
     const periodSelectValidator = useCallback(
         (val) =>
-            val.length === 0 ? i18n.t('Select at least one period') : undefined,
+            val.length === 0 ? i18n.t('Choose at least one period') : undefined,
         []
     )
     const orgUnitSelectValidator = useCallback(
         (val) =>
             val.length === 0
-                ? i18n.t('Select at least one organisation unit')
+                ? i18n.t('Choose at least one organisation unit')
                 : undefined,
         []
     )
+
     return {
         dataItemSelectValidator,
         periodSelectValidator,

@@ -1,5 +1,8 @@
-import { SCHEME_TYPES } from '../shared/scheme-selector.js'
-import { EXCHANGE_TYPES, AUTHENTICATION_TYPES } from './edit-exchange-form.js'
+import {
+    SCHEME_TYPES,
+    EXCHANGE_TYPES,
+    AUTHENTICATION_TYPES,
+} from '../shared/index.js'
 
 export const getExchangeValuesFromForm = ({ values, requests }) => ({
     name: values.name,
@@ -33,7 +36,6 @@ const getTargetDetails = ({ values }) => {
         },
     }
     if (values.type === EXCHANGE_TYPES.internal) {
-        console.log(target)
         return target
     }
     // upate to include api
@@ -59,3 +61,39 @@ const getTargetDetails = ({ values }) => {
         },
     }
 }
+
+export const getInitialValuesFromExchange = ({ exchangeInfo }) => ({
+    name: exchangeInfo.name,
+    type: exchangeInfo.target?.type,
+    authentication: exchangeInfo.target?.api?.username
+        ? AUTHENTICATION_TYPES.basic
+        : AUTHENTICATION_TYPES.pat,
+    url: exchangeInfo.target?.api?.url,
+    username: exchangeInfo.target?.api?.username,
+    target_idScheme: exchangeInfo.target?.request?.idScheme
+        ? exchangeInfo.target.request.idScheme.split(':')[0]
+        : SCHEME_TYPES.uid,
+    target_idScheme_attribute:
+        exchangeInfo.target?.request?.idScheme.split(':')[1],
+    target_orgUnitIdScheme: exchangeInfo.target?.request?.orgUnitIdScheme
+        ? exchangeInfo.target.request.orgUnitIdScheme.split(':')[0]
+        : SCHEME_TYPES.uid,
+    target_orgUnitIdScheme_attribute:
+        exchangeInfo.target?.request?.orgUnitIdScheme?.split(':')[1],
+    target_dataElementIdScheme: exchangeInfo.target?.request
+        ?.dataElementIdScheme
+        ? exchangeInfo.target.request.dataElementIdScheme.split(':')[0]
+        : SCHEME_TYPES.uid,
+    target_dataElementIdScheme_attribute:
+        exchangeInfo.target?.request?.dataElementIdScheme?.split(':')[1],
+    target_categoryOptionComboIdScheme: exchangeInfo.target?.request
+        ?.categoryOptionComboIdScheme
+        ? exchangeInfo.target?.request?.categoryOptionComboIdScheme.split(
+              ':'
+          )[0]
+        : SCHEME_TYPES.uid,
+    target_categoryOptionComboIdScheme_attribute:
+        exchangeInfo.target?.request?.categoryOptionComboIdScheme?.split(
+            ':'
+        )[1],
+})

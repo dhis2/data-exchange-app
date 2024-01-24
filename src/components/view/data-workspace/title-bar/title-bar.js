@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import { IconInfo16, IconDimensionDataSet16, Tooltip } from '@dhis2/ui'
 import moment from 'moment'
 import React from 'react'
-import { useExchangeContext } from '../../../context/exchange-context/index.js'
+import { useExchangeContext } from '../../../../context/index.js'
 import styles from './title-bar.module.css'
 
 const getRelativeTimeDifference = ({ startTimestamp, endTimestamp }) => {

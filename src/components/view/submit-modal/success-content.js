@@ -14,7 +14,7 @@ import {
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { useExchangeContext } from '../../context/exchange-context/index.js'
+import { useExchangeContext } from '../../../context/index.js'
 import { ConflictsDetailsTable } from './conflicts-details-table.js'
 import styles from './success-content.module.css'
 

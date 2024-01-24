@@ -14,12 +14,9 @@ import {
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useUserContext } from '../../../context/index.js'
-import {
-    ouLevelPrefix,
-    ouGroupPrefix,
-} from '../../../hooks/useFetchExchange.js'
-import { OpenFileDialog } from './openVisualization/OpenFileDialog.js'
+import { OpenFileDialog } from '../shared/index.js'
 import styles from './requests-overview.module.css'
+import { ouLevelPrefix, ouGroupPrefix } from './useFetchExchange.js'
 
 const getOuText = ({ ouInfo }) => {
     const orgUnits = ouInfo.filter(
@@ -70,6 +67,60 @@ const EmptyTableInfo = () => (
     </DataTableCell>
 )
 
+const RequestRow = ({
+    request,
+    deleteRequest,
+    baseUrl,
+    setRequestEditMode,
+}) => (
+    <TableRow key={request.name}>
+        <DataTableCell onClick={() => setRequestEditMode(request)}>
+            {request.name}
+        </DataTableCell>
+        <DataTableCell onClick={() => setRequestEditMode(request)}>
+            {getOuText({ ouInfo: request.ouInfo })}
+        </DataTableCell>
+        <DataTableCell onClick={() => setRequestEditMode(request)}>
+            {request.peInfo.map(({ name }) => name).join(', ')}
+        </DataTableCell>
+        <DataTableCell onClick={() => setRequestEditMode(request)}>
+            {request.dx.length}
+        </DataTableCell>
+        <DataTableCell>
+            {request.visualizationInfo?.id ? (
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={`${baseUrl}/dhis-web-data-visualizer/index.html#/${request.visualizationInfo.id}`}
+                >
+                    {request.visualizationInfo?.name ?? ''}
+                </a>
+            ) : (
+                <span>{request.visualizationInfo?.name ?? ''}</span>
+            )}
+        </DataTableCell>
+        <DataTableCell>
+            <Button
+                small
+                secondary
+                destructive
+                onClick={() => {
+                    deleteRequest(request.index)
+                }}
+            >
+                {i18n.t('Delete')}
+            </Button>
+        </DataTableCell>
+    </TableRow>
+)
+
+RequestRow.propTypes = {
+    baseUrl: PropTypes.string,
+    deleteRequest: PropTypes.func,
+    request: PropTypes.object,
+    setRequestEditMode: PropTypes.func,
+}
+
 export const RequestsOverview = ({
     requestsInfo,
     setRequestEditMode,
@@ -97,60 +148,14 @@ export const RequestsOverview = ({
                     {requestsInfo.length === 0 ? (
                         <EmptyTableInfo />
                     ) : (
-                        requestsInfo.map((request) => (
-                            <TableRow key={request.name}>
-                                <DataTableCell
-                                    onClick={() => setRequestEditMode(request)}
-                                >
-                                    {request.name}
-                                </DataTableCell>
-                                <DataTableCell
-                                    onClick={() => setRequestEditMode(request)}
-                                >
-                                    {getOuText({ ouInfo: request.ouInfo })}
-                                </DataTableCell>
-                                <DataTableCell
-                                    onClick={() => setRequestEditMode(request)}
-                                >
-                                    {request.peInfo
-                                        .map(({ name }) => name)
-                                        .join(', ')}
-                                </DataTableCell>
-                                <DataTableCell
-                                    onClick={() => setRequestEditMode(request)}
-                                >
-                                    {request.dx.length}
-                                </DataTableCell>
-                                <DataTableCell>
-                                    {request.visualizationInfo?.id ? (
-                                        <a
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            href={`${baseUrl}/dhis-web-data-visualizer/index.html#/${request.visualizationInfo.id}`}
-                                        >
-                                            {request.visualizationInfo?.name ??
-                                                ''}
-                                        </a>
-                                    ) : (
-                                        <span>
-                                            {request.visualizationInfo?.name ??
-                                                ''}
-                                        </span>
-                                    )}
-                                </DataTableCell>
-                                <DataTableCell>
-                                    <Button
-                                        small
-                                        secondary
-                                        destructive
-                                        onClick={() => {
-                                            deleteRequest(request.index)
-                                        }}
-                                    >
-                                        Delete
-                                    </Button>
-                                </DataTableCell>
-                            </TableRow>
+                        requestsInfo.map((request, index) => (
+                            <RequestRow
+                                key={`${request.name}_${index}`}
+                                request={request}
+                                deleteRequest={deleteRequest}
+                                baseUrl={baseUrl}
+                                setRequestEditMode={setRequestEditMode}
+                            />
                         ))
                     )}
                 </TableBody>
