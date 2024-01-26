@@ -13,7 +13,7 @@ export const getRequestValuesFromForm = ({ requestValues }) => {
     const filtersActuallyUsed =
         requestValues.filtersUsed && validFilters.length > 0
 
-    return {
+    const newValues = {
         ...requestValues,
         name: requestValues.requestName,
         dx: requestValues?.dxInfo.map(({ id }) => id),
@@ -27,6 +27,7 @@ export const getRequestValuesFromForm = ({ requestValues }) => {
         visualizationInfo: !requestValues.visualizationLinked
             ? null
             : requestValues.visualizationInfo,
+        inputIdScheme: SCHEME_TYPES.uid,
         outputIdScheme:
             requestValues.source_outputIdScheme !== SCHEME_TYPES.attribute
                 ? requestValues.source_outputIdScheme
@@ -42,6 +43,8 @@ export const getRequestValuesFromForm = ({ requestValues }) => {
                 ? requestValues.source_outputIdScheme
                 : `ATTRIBUTE:${requestValues.source_outputDataElementIdScheme_attribute}`,
     }
+    console.log(newValues)
+    return newValues
 }
 
 export const getInitialValuesFromRequest = ({ request }) => ({

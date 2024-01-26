@@ -1,8 +1,15 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { useCallback, useState } from 'react'
-
-export const ouGroupPrefix = 'OU_GROUP-'
-export const ouLevelPrefix = 'LEVEL-'
+import {
+    SCHEME_TYPES,
+    OU_GROUP_PREFIX,
+    OU_LEVEL_PREFIX,
+} from '../shared/index.js'
+import {
+    getMetadataWithCode,
+    getFilterCodeMap,
+    getOuLevelMap,
+} from './codeDetailsHelpers.js'
 
 const EXCHANGE_QUERY = {
     exchange: {
@@ -39,13 +46,14 @@ const VISUALIZATIONS_QUERY = {
 const ANALYTICS_QUERY = {
     metadata: {
         resource: 'analytics',
-        params: ({ ou, dx, pe }) => ({
+        params: ({ ou, dx, pe, inputIdScheme }) => ({
             dimension: `dx:${dx.join(';')},ou:${ou.join(';')},pe:${pe.join(
                 ';'
             )}`,
             skipMeta: false,
             skipData: true,
             includeMetadataDetails: true,
+            inputIdScheme,
         }),
     },
 }
@@ -74,28 +82,52 @@ export const useFetchExchange = () => {
 
                 // get metadata information for dx, pe
                 const metadataRequests = exchange.source.requests.map(
-                    ({ ou, dx, pe }) => {
+                    ({ ou, dx, pe, inputIdScheme = 'UID' }) => {
                         return getMetadataByRequest({
                             engine,
-                            variables: { ou, dx, pe },
+                            variables: { ou, dx, pe, inputIdScheme },
                         })
                     }
                 )
 
                 const metadataResponses = await Promise.all(metadataRequests)
-                const metadata = metadataResponses.reduce((allItems, md) => {
-                    return { ...allItems, ...md.metadata.metaData.items }
-                }, {})
+                const metadata = metadataResponses.reduce(
+                    (allItems, md, index) => {
+                        // if the inputIdScheme is 'code', we need to remap the items from id to code
+                        const inputIdScheme =
+                            exchange.source.requests[index]?.inputIdScheme ??
+                            SCHEME_TYPES.uid
+                        let currentItems = {}
+                        if (inputIdScheme === SCHEME_TYPES.code) {
+                            currentItems = getMetadataWithCode({
+                                originalCurrentItems:
+                                    md.metadata.metaData.items,
+                                request: exchange.source.requests[index],
+                                md,
+                            })
+                        } else {
+                            currentItems = md.metadata.metaData.items
+                            // uid for data sets and event data items does not correspond to the format required for dx item, so add these back from key
+                            // this is handled (slightly differently) in getMetadataWithCode
+                            for (const cKey in currentItems) {
+                                currentItems[cKey].id = cKey
+                            }
+                        }
+                        return { ...allItems, ...currentItems }
+                    },
+                    {}
+                )
 
                 // OrgUnit tree requires path, which is missing in analytics response
                 const ousToLookUp = exchange.source.requests.reduce(
                     (ouSet, { ou: ouDimension }) => {
                         for (const orgUnit of ouDimension) {
                             if (
-                                !orgUnit.startsWith(ouLevelPrefix) &&
-                                !orgUnit.startsWith(ouGroupPrefix)
+                                !orgUnit.startsWith(OU_LEVEL_PREFIX) &&
+                                !orgUnit.startsWith(OU_GROUP_PREFIX)
                             ) {
-                                ouSet.add(orgUnit)
+                                // we get uid from metadata in case inputIdScheme:code
+                                ouSet.add(metadata[orgUnit].uid)
                             }
                         }
                         return ouSet
@@ -103,7 +135,6 @@ export const useFetchExchange = () => {
                     new Set()
                 )
 
-                // also add additional information for periods to avoid looking up later
                 const { organisationUnits: orgUnitDetails } =
                     await engine.query(ORG_UNITS_QUERY, {
                         variables: { ids: [...ousToLookUp] },
@@ -118,7 +149,6 @@ export const useFetchExchange = () => {
                 )
 
                 // get visualizations information
-
                 const visualizationsToLookUp = new Set(
                     exchange.source.requests.map(
                         ({ visualization }) => visualization
@@ -137,30 +167,81 @@ export const useFetchExchange = () => {
                         new Map()
                     )
 
+                // if there are any requests with inputIdScheme:code,
+                // lock up filter codes and ou levels
+                const hasCodeIdScheme = exchange.source.requests
+                    .map(({ inputIdScheme }) => inputIdScheme)
+                    .includes('CODE')
+                const filterCodeMap = hasCodeIdScheme
+                    ? await getFilterCodeMap({ engine })
+                    : new Map()
+                const ouLevelMap = hasCodeIdScheme
+                    ? await getOuLevelMap({ engine, exchange })
+                    : new Map()
+
                 exchange.source.requests = exchange.source.requests.map(
-                    (request) => ({
-                        ...request,
-                        dxInfo: request.dx.map((id) => ({
-                            id,
-                            ...metadata[id],
-                        })),
-                        peInfo: request.pe.map((id) => ({
-                            id,
-                            ...metadata[id],
-                        })),
-                        ouInfo: request.ou.map((id) => ({
-                            id,
-                            ...metadata[id],
-                            ...ouMap.get(id),
-                        })),
-                        filtersInfo: request.filters.map((filter) => ({
-                            ...filter,
-                            items: filter.items.map((id) => ({ id })),
-                        })),
-                        visualizationInfo: request.visualization
-                            ? visualizationsMap.get(request.visualization)
-                            : null,
-                    })
+                    (request) => {
+                        const { inputIdScheme = SCHEME_TYPES.uid } = request
+                        return {
+                            ...request,
+                            dxInfo: request.dx.map((identifier) => ({
+                                id: metadata[identifier]?.id ?? identifier,
+                                ...metadata[identifier],
+                            })),
+                            peInfo: request.pe.map((id) => ({
+                                id: metadata[id].uid ?? id,
+                                ...metadata[id],
+                            })),
+                            ouInfo: request.ou.map((identifier) => {
+                                if (inputIdScheme === SCHEME_TYPES.code) {
+                                    if (
+                                        identifier.startsWith(OU_LEVEL_PREFIX)
+                                    ) {
+                                        return {
+                                            id: `${OU_LEVEL_PREFIX}${ouLevelMap.get(
+                                                identifier.split(
+                                                    OU_LEVEL_PREFIX
+                                                )[1]
+                                            )}`,
+                                        }
+                                    }
+                                    if (
+                                        identifier.startsWith(OU_GROUP_PREFIX)
+                                    ) {
+                                        return {
+                                            id: `${OU_GROUP_PREFIX}${
+                                                metadata[
+                                                    identifier.split(
+                                                        OU_GROUP_PREFIX
+                                                    )[1]
+                                                ]?.uid
+                                            }`,
+                                        }
+                                    }
+                                }
+                                return {
+                                    id: metadata[identifier]?.uid ?? identifier,
+                                    ...metadata[identifier],
+                                    ...ouMap.get(metadata[identifier]?.uid),
+                                }
+                            }),
+                            filtersInfo: request.filters.map((filter) => ({
+                                dimension:
+                                    inputIdScheme === SCHEME_TYPES.code
+                                        ? filterCodeMap.get(filter.dimension)
+                                        : filter.dimension,
+                                items: filter.items.map((identifier) => ({
+                                    id:
+                                        inputIdScheme === SCHEME_TYPES.code
+                                            ? filterCodeMap.get(identifier)
+                                            : identifier,
+                                })),
+                            })),
+                            visualizationInfo: request.visualization
+                                ? visualizationsMap.get(request.visualization)
+                                : null,
+                        }
+                    }
                 )
 
                 setData(exchange)

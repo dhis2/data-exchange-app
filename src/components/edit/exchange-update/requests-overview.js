@@ -14,20 +14,23 @@ import {
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useUserContext } from '../../../context/index.js'
-import { OpenFileDialog } from '../shared/index.js'
+import {
+    OpenFileDialog,
+    OU_LEVEL_PREFIX,
+    OU_GROUP_PREFIX,
+} from '../shared/index.js'
 import styles from './requests-overview.module.css'
-import { ouLevelPrefix, ouGroupPrefix } from './useFetchExchange.js'
 
 const getOuText = ({ ouInfo }) => {
     const orgUnits = ouInfo.filter(
         ({ id }) =>
-            !id.startsWith(ouLevelPrefix) && !id.startsWith(ouGroupPrefix)
+            !id.startsWith(OU_LEVEL_PREFIX) && !id.startsWith(OU_GROUP_PREFIX)
     )
     const orgUnitLevels = ouInfo.filter(({ id }) =>
-        id.startsWith(ouLevelPrefix)
+        id.startsWith(OU_LEVEL_PREFIX)
     )
     const orgUnitGroups = ouInfo.filter(({ id }) =>
-        id.startsWith(ouGroupPrefix)
+        id.startsWith(OU_GROUP_PREFIX)
     )
     let orgUnitString = ''
     if (orgUnits.length === 1) {

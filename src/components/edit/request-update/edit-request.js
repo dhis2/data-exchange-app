@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Box, ReactFinalForm } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { Warning } from '../../shared/index.js'
 import { EditRequestFooter } from '../shared/index.js'
 import styles from './edit-request.module.css'
 import {
@@ -46,6 +47,23 @@ export const RequestEdit = ({
                                       })}
                             </h2>
                             <Box className={styles.editFormArea}>
+                                {request.inputIdScheme === 'CODE' && (
+                                    <Warning
+                                        warning
+                                        title={'inputIdScheme:code'}
+                                    >
+                                        <p>
+                                            {i18n.t(
+                                                'This request currently uses inputIdScheme:code. The Data Exchange app does not support saving requests with inputIdScheme:code. If you save this request, it will be converted to inputIdScheme:uid.'
+                                            )}
+                                        </p>
+                                        <p>
+                                            {i18n.t(
+                                                'Changing the inputIdScheme will change the internal representation of the request, but will not change the items in the request.'
+                                            )}
+                                        </p>
+                                    </Warning>
+                                )}
                                 <RequestEditForm />
                             </Box>
                         </div>

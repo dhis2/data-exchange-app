@@ -13,3 +13,6 @@ export const EXCHANGE_TYPES = {
     external: 'EXTERNAL',
     internal: 'INTERNAL',
 }
+
+export const OU_GROUP_PREFIX = 'OU_GROUP-'
+export const OU_LEVEL_PREFIX = 'LEVEL-'
