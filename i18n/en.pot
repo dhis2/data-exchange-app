@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-26T15:43:42.404Z\n"
-"PO-Revision-Date: 2024-01-26T15:43:42.404Z\n"
+"POT-Creation-Date: 2024-01-29T12:40:18.986Z\n"
+"PO-Revision-Date: 2024-01-29T12:40:18.986Z\n"
 
 msgid "Editing the target setup will require you to reenter authentication details."
 msgstr "Editing the target setup will require you to reenter authentication details."
@@ -153,6 +153,22 @@ msgstr "Add request manually"
 
 msgid "Add request from visualization [TO DO]"
 msgstr "Add request from visualization [TO DO]"
+
+msgid "Delete exchange"
+msgstr "Delete exchange"
+
+msgid ""
+"Deleting this exchange will remove it for all users on this instance. This "
+"action cannot be undone. Are you sure?"
+msgstr ""
+"Deleting this exchange will remove it for all users on this instance. This "
+"action cannot be undone. Are you sure?"
+
+msgid "No, cancel"
+msgstr "No, cancel"
+
+msgid "Yes, delete"
+msgstr "Yes, delete"
 
 msgid "Exit configuration mode"
 msgstr "Exit configuration mode"
@@ -531,9 +547,6 @@ msgstr "Value"
 
 msgid "Submitting..."
 msgstr "Submitting..."
-
-msgid "No, cancel"
-msgstr "No, cancel"
 
 msgid "Yes, submit"
 msgstr "Yes, submit"

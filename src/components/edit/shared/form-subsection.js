@@ -29,7 +29,9 @@ AdvancedSubsection.propTypes = {
 
 export const Subsection = ({ text, children, className = '' }) => (
     <div className={className}>
-        <div className={styles.subtitle}>{text}</div>
+        <div className={styles.subtitleContainer}>
+            <div className={styles.subtitle}>{text}</div>
+        </div>
         <div className={styles.subsectionContent}>{children}</div>
     </div>
 )

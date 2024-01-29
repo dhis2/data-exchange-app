@@ -10,10 +10,11 @@ import {
     InputField,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppContext, useUserContext } from '../../../context/index.js'
 import { getNaturalCapitalization } from '../../../utils/helpers.js'
+import { DeleteConfirmation } from './delete-confirmation.js'
 import styles from './items-list.module.css'
 
 const IconTextItem = ({ icon, text }) => (
@@ -62,6 +63,12 @@ const AggregateDataExchangeCard = React.memo(({ ade }) => {
         createdClientDateString = createdClientDate.toLocaleDateString('en-GB')
     }
 
+    const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false)
+    const closeDeleteConfirmation = useCallback(
+        () => setDeleteConfirmationOpen(false),
+        [setDeleteConfirmationOpen]
+    )
+
     return (
         <div className={styles.cardContainer}>
             <Card key={ade.id} className={styles.cardContainerInner}>
@@ -98,7 +105,7 @@ const AggregateDataExchangeCard = React.memo(({ ade }) => {
                                 secondary
                                 small
                                 onClick={() => {
-                                    deleteExchange()
+                                    setDeleteConfirmationOpen(true)
                                 }}
                                 loading={deleting}
                             >
@@ -110,6 +117,11 @@ const AggregateDataExchangeCard = React.memo(({ ade }) => {
                     </ButtonStrip>
                 </div>
             </Card>
+            <DeleteConfirmation
+                open={deleteConfirmationOpen}
+                onClose={closeDeleteConfirmation}
+                onDelete={deleteExchange}
+            />
         </div>
     )
 })
