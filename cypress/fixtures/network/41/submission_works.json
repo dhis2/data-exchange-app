@@ -1,0 +1,125 @@
+[
+    {
+        "path": "/api/41/systemSettings/helpPageLink",
+        "featureName": "Submission works",
+        "static": false,
+        "count": 6,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8080",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"helpPageLink\":\"https://dhis2.github.io/dhis2-docs/master/en/user/html/dhis2_user_manual_en.html\"}",
+        "responseSize": 99,
+        "responseHeaders": {
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "content-type": "application/json",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "server": "Jetty(10.0.19)"
+        }
+    },
+    {
+        "path": "/api/41/aggregateDataExchanges?paging=false&fields=id,displayName,created,target%5Btype%5D,source%5Brequests~size%5D&order=displayName%3Aiasc",
+        "featureName": "Submission works",
+        "static": false,
+        "count": 6,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8080",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"aggregateDataExchanges\":[{\"created\":\"2024-01-19T14:47:31.788\",\"source\":{\"requests\":2},\"target\":{\"type\":\"INTERNAL\"},\"displayName\":\"0 - exchange test (internal request!)\",\"id\":\"QSH0P0KGiKa\"},{\"created\":\"2022-11-01T10:59:16.931\",\"source\":{\"requests\":2},\"target\":{\"type\":\"INTERNAL\"},\"displayName\":\"calculations TEST - update\",\"id\":\"S67MxMHW33n\"},{\"created\":\"2024-01-24T09:44:19.376\",\"source\":{\"requests\":1},\"target\":{\"type\":\"INTERNAL\"},\"displayName\":\"CODE test\",\"id\":\"aL9vAwEddAb\"},{\"created\":\"2024-01-26T12:53:42.250\",\"source\":{\"requests\":1},\"target\":{\"type\":\"EXTERNAL\"},\"displayName\":\"external exchange\",\"id\":\"l3l7IPTt2y5\"},{\"created\":\"2024-01-12T11:39:36.300\",\"source\":{\"requests\":2},\"target\":{\"type\":\"INTERNAL\"},\"displayName\":\"filters exchange\",\"id\":\"i60M9Qs0qeu\"},{\"created\":\"2024-01-24T09:44:19.376\",\"source\":{\"requests\":1},\"target\":{\"type\":\"INTERNAL\"},\"displayName\":\"ID test\",\"id\":\"kObqeVCViH8\"},{\"created\":\"2022-11-01T10:59:16.931\",\"source\":{\"requests\":1},\"target\":{\"type\":\"INTERNAL\"},\"displayName\":\"Internal data exchange\",\"id\":\"ioHMBgeK50L\"}]}",
+        "responseSize": 1051,
+        "responseHeaders": {
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "content-type": "application/json",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "server": "Jetty(10.0.19)"
+        }
+    },
+    {
+        "path": "/api/41/aggregateDataExchanges/ioHMBgeK50L?paging=false&fields=source%2C%20target,id,displayName",
+        "featureName": "Submission works",
+        "static": false,
+        "count": 6,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8080",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"source\":{\"requests\":[{\"name\":\"ANC\",\"dx\":[\"fbfJHSPpUQD\",\"cYeuwXTCPkU\",\"Jtf34kNZhzP\"],\"pe\":[\"LAST_12_MONTHS\",\"202201\"],\"ou\":[\"ImspTQPwCqd\"],\"filters\":[],\"inputIdScheme\":\"UID\",\"outputDataElementIdScheme\":\"UID\",\"outputOrgUnitIdScheme\":\"UID\",\"outputIdScheme\":\"UID\"}]},\"target\":{\"type\":\"INTERNAL\",\"request\":{\"dataElementIdScheme\":\"UID\",\"orgUnitIdScheme\":\"UID\",\"categoryOptionComboIdScheme\":\"UID\",\"idScheme\":\"UID\"}},\"displayName\":\"Internal data exchange\",\"id\":\"ioHMBgeK50L\"}",
+        "responseSize": 469,
+        "responseHeaders": {
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "content-type": "application/json",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "server": "Jetty(10.0.19)"
+        }
+    },
+    {
+        "path": "/api/41/aggregateDataExchanges/ioHMBgeK50L/sourceData?paging=false&outputIdScheme=UID",
+        "featureName": "Submission works",
+        "static": false,
+        "count": 6,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8080",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "[{\"headers\":[{\"name\":\"dx\",\"column\":\"Data\",\"valueType\":\"TEXT\",\"type\":\"java.lang.String\",\"hidden\":false,\"meta\":true},{\"name\":\"pe\",\"column\":\"Period\",\"valueType\":\"TEXT\",\"type\":\"java.lang.String\",\"hidden\":false,\"meta\":true},{\"name\":\"ou\",\"column\":\"Organisation unit\",\"valueType\":\"TEXT\",\"type\":\"java.lang.String\",\"hidden\":false,\"meta\":true},{\"name\":\"value\",\"column\":\"Value\",\"valueType\":\"NUMBER\",\"type\":\"java.lang.Double\",\"hidden\":false,\"meta\":false}],\"metaData\":{\"items\":{\"202201\":{\"name\":\"January 2022\"},\"202301\":{\"name\":\"January 2023\"},\"202302\":{\"name\":\"February 2023\"},\"202303\":{\"name\":\"March 2023\"},\"202304\":{\"name\":\"April 2023\"},\"202305\":{\"name\":\"May 2023\"},\"202306\":{\"name\":\"June 2023\"},\"202307\":{\"name\":\"July 2023\"},\"202308\":{\"name\":\"August 2023\"},\"202309\":{\"name\":\"September 2023\"},\"202310\":{\"name\":\"October 2023\"},\"202311\":{\"name\":\"November 2023\"},\"202312\":{\"name\":\"December 2023\"},\"ou\":{\"name\":\"Organisation unit\"},\"fbfJHSPpUQD\":{\"name\":\"ANC 1st visit\"},\"LAST_12_MONTHS\":{\"name\":\"Last 12 months\"},\"ImspTQPwCqd\":{\"name\":\"Sierra Leone\"},\"dx\":{\"name\":\"Data\"},\"pq2XI5kz2BY\":{\"name\":\"Fixed\"},\"pe\":{\"name\":\"Period\"},\"cYeuwXTCPkU\":{\"name\":\"ANC 2nd visit\"},\"Jtf34kNZhzP\":{\"name\":\"ANC 3rd visit\"},\"PT59n8BQbqM\":{\"name\":\"Outreach\"}},\"dimensions\":{\"dx\":[\"fbfJHSPpUQD\",\"cYeuwXTCPkU\",\"Jtf34kNZhzP\"],\"pe\":[\"202201\",\"202301\",\"202302\",\"202303\",\"202304\",\"202305\",\"202306\",\"202307\",\"202308\",\"202309\",\"202310\",\"202311\",\"202312\"],\"ou\":[\"ImspTQPwCqd\"],\"co\":[\"pq2XI5kz2BY\",\"PT59n8BQbqM\"]}},\"rowContext\":{},\"height\":36,\"width\":4,\"headerWidth\":4,\"rows\":[[\"cYeuwXTCPkU\",\"202304\",\"ImspTQPwCqd\",\"18403\"],[\"cYeuwXTCPkU\",\"202303\",\"ImspTQPwCqd\",\"19574\"],[\"cYeuwXTCPkU\",\"202305\",\"ImspTQPwCqd\",\"23726\"],[\"cYeuwXTCPkU\",\"202306\",\"ImspTQPwCqd\",\"23904\"],[\"cYeuwXTCPkU\",\"202302\",\"ImspTQPwCqd\",\"18488\"],[\"cYeuwXTCPkU\",\"202312\",\"ImspTQPwCqd\",\"15183\"],[\"fbfJHSPpUQD\",\"202308\",\"ImspTQPwCqd\",\"22004\"],[\"cYeuwXTCPkU\",\"202308\",\"ImspTQPwCqd\",\"20413\"],[\"cYeuwXTCPkU\",\"202311\",\"ImspTQPwCqd\",\"19453\"],[\"cYeuwXTCPkU\",\"202310\",\"ImspTQPwCqd\",\"16113\"],[\"fbfJHSPpUQD\",\"202309\",\"ImspTQPwCqd\",\"22308\"],[\"fbfJHSPpUQD\",\"202307\",\"ImspTQPwCqd\",\"22356\"],[\"cYeuwXTCPkU\",\"202307\",\"ImspTQPwCqd\",\"21130\"],[\"cYeuwXTCPkU\",\"202301\",\"ImspTQPwCqd\",\"17269\"],[\"cYeuwXTCPkU\",\"202309\",\"ImspTQPwCqd\",\"20433\"],[\"fbfJHSPpUQD\",\"202304\",\"ImspTQPwCqd\",\"18576\"],[\"Jtf34kNZhzP\",\"202303\",\"ImspTQPwCqd\",\"13934\"],[\"fbfJHSPpUQD\",\"202305\",\"ImspTQPwCqd\",\"29461\"],[\"Jtf34kNZhzP\",\"202302\",\"ImspTQPwCqd\",\"12079\"],[\"fbfJHSPpUQD\",\"202306\",\"ImspTQPwCqd\",\"23813\"],[\"Jtf34kNZhzP\",\"202301\",\"ImspTQPwCqd\",\"11803\"],[\"fbfJHSPpUQD\",\"202303\",\"ImspTQPwCqd\",\"21877\"],[\"fbfJHSPpUQD\",\"202302\",\"ImspTQPwCqd\",\"18786\"],[\"Jtf34kNZhzP\",\"202312\",\"ImspTQPwCqd\",\"10635\"],[\"Jtf34kNZhzP\",\"202311\",\"ImspTQPwCqd\",\"14876\"],[\"Jtf34kNZhzP\",\"202310\",\"ImspTQPwCqd\",\"11825\"],[\"Jtf34kNZhzP\",\"202309\",\"ImspTQPwCqd\",\"15306\"],[\"fbfJHSPpUQD\",\"202311\",\"ImspTQPwCqd\",\"19691\"],[\"fbfJHSPpUQD\",\"202301\",\"ImspTQPwCqd\",\"20026\"],[\"fbfJHSPpUQD\",\"202312\",\"ImspTQPwCqd\",\"16445\"],[\"fbfJHSPpUQD\",\"202310\",\"ImspTQPwCqd\",\"17926\"],[\"Jtf34kNZhzP\",\"202304\",\"ImspTQPwCqd\",\"12467\"],[\"Jtf34kNZhzP\",\"202305\",\"ImspTQPwCqd\",\"15699\"],[\"Jtf34kNZhzP\",\"202307\",\"ImspTQPwCqd\",\"14852\"],[\"Jtf34kNZhzP\",\"202308\",\"ImspTQPwCqd\",\"14662\"],[\"Jtf34kNZhzP\",\"202306\",\"ImspTQPwCqd\",\"15688\"]]}]",
+        "responseSize": 3227,
+        "responseHeaders": {
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "content-type": "application/json",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "server": "Jetty(10.0.19)"
+        }
+    }
+]
