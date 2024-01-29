@@ -12,13 +12,8 @@ import {
     DataTableCell,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
-import { useUserContext } from '../../../context/index.js'
-import {
-    OpenFileDialog,
-    OU_LEVEL_PREFIX,
-    OU_GROUP_PREFIX,
-} from '../shared/index.js'
+import React from 'react'
+import { OU_LEVEL_PREFIX, OU_GROUP_PREFIX } from '../shared/index.js'
 import styles from './requests-overview.module.css'
 
 const getOuText = ({ ouInfo }) => {
@@ -129,10 +124,7 @@ export const RequestsOverview = ({
     setRequestEditMode,
     deleteRequest,
 }) => {
-    const [visualizationDialogOpen, setVisualizationDialogOpen] =
-        useState(false)
     const { baseUrl } = useConfig()
-    const currentUser = useUserContext()
 
     return (
         <>
@@ -165,28 +157,9 @@ export const RequestsOverview = ({
             </Table>
             <ButtonStrip className={styles.buttonContainer}>
                 <Button small onClick={() => setRequestEditMode({}, true)}>
-                    {i18n.t('Add request manually')}
-                </Button>
-                <Button
-                    small
-                    className={styles.requestActionButton}
-                    onClick={() => setVisualizationDialogOpen(true)}
-                >
-                    {i18n.t('Add request from visualization [TO DO]')}
+                    {i18n.t('Add request')}
                 </Button>
             </ButtonStrip>
-            <OpenFileDialog
-                type="visualization"
-                open={visualizationDialogOpen}
-                onClose={() => {
-                    setVisualizationDialogOpen(false)
-                }}
-                onNew={() => {
-                    console.log('Not supported')
-                }} // this prop is not relevant, but required
-                onFileSelect={() => {}}
-                currentUser={currentUser}
-            />
         </>
     )
 }
