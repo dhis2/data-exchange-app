@@ -12,7 +12,7 @@ import { useAttributeContext } from '../../../context/index.js'
 import { SCHEME_TYPES } from './constants.js'
 import styles from './scheme-selector.module.css'
 
-export const SchemeSelector = ({ name, label }) => {
+export const SchemeSelector = ({ name, label, disabled }) => {
     const { Field, useField } = ReactFinalForm
     const { input: schemeInput } = useField(name, {
         subscription: { value: true },
@@ -31,6 +31,7 @@ export const SchemeSelector = ({ name, label }) => {
                         component={RadioFieldFF}
                         label={i18n.t('ID')}
                         value={SCHEME_TYPES.uid}
+                        disabled={disabled}
                     />
                     <Field
                         name={name}
@@ -39,6 +40,7 @@ export const SchemeSelector = ({ name, label }) => {
                         component={RadioFieldFF}
                         label={i18n.t('Code')}
                         value={SCHEME_TYPES.code}
+                        disabled={disabled}
                     />
                     <Field
                         name={name}
@@ -47,7 +49,7 @@ export const SchemeSelector = ({ name, label }) => {
                         component={RadioFieldFF}
                         label={i18n.t('Attribute')}
                         value={SCHEME_TYPES.attribute}
-                        disabled={attributes.length === 0}
+                        disabled={disabled || attributes.length === 0}
                     />
                 </div>
             </FieldContainer>
@@ -69,6 +71,7 @@ export const SchemeSelector = ({ name, label }) => {
 }
 
 SchemeSelector.propTypes = {
+    disabled: PropTypes.bool,
     label: PropTypes.string,
     name: PropTypes.string,
 }

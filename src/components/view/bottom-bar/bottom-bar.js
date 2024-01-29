@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { useExchangeContext } from '../../../context/exchange-context/index.js'
 import { useExchangeId } from '../../../use-context-selection/index.js'
-import { ButtonWithTooltip } from '../../shared/button-with-tooltip/index.js'
+import { ButtonWithTooltip } from '../../common/button-with-tooltip/index.js'
 
 const BottomBar = ({ openSubmitModal, dataSubmitted }) => {
     const [exchangeId] = useExchangeId()

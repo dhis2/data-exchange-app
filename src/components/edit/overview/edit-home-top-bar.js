@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Button, SelectorBar } from '@dhis2/ui'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { EditTitle } from '../shared/index.js'
 import styles from './edit-home-top-bar.module.css'
 
 export const EditHomeTopBar = () => (
@@ -14,9 +15,7 @@ export const EditHomeTopBar = () => (
             </Link>
         </SelectorBar>
         <div className={styles.editTopBarContainer}>
-            <h2 className={styles.editTitle}>
-                {i18n.t('Data Exchange Configurations')}
-            </h2>
+            <EditTitle title={i18n.t('Data Exchange Configurations')} />
             <Link to="/add">
                 <Button primary>{i18n.t('New exchange configuration')}</Button>
             </Link>

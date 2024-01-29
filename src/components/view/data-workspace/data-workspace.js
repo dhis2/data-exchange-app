@@ -6,7 +6,7 @@ import {
     useExchangeId,
     useRequestIndex,
 } from '../../../use-context-selection/index.js'
-import { Warning } from '../../shared/index.js'
+import { Warning } from '../../common/index.js'
 import { EntryScreen } from './entry-screen.js'
 import { RequestsDisplay } from './requests-display/index.js'
 import { RequestsNavigation } from './requests-navigation/index.js'

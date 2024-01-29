@@ -62,3 +62,7 @@
 .advancedSection {
     margin: var(--spacers-dp24) 0 var(--spacers-dp24) 0;
 }
+
+.editWarningButton {
+    margin: var(--spacers-dp8) 0 0 0;
+}

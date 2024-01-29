@@ -5,9 +5,9 @@ import PropTypes from 'prop-types'
 import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AttributeProvider, useAppContext } from '../../../context/index.js'
-import { Loader } from '../../shared/index.js'
+import { Loader } from '../../common/index.js'
 import { RequestEdit } from '../request-update/index.js'
-import { EditItemFooter } from '../shared/index.js'
+import { EditItemFooter, EditTitle } from '../shared/index.js'
 import { EditExchangeFormContents } from './edit-exchange-form.js'
 import styles from './edit-exchange.module.css'
 import { getInitialValuesFromExchange } from './getExchangeValues.js'
@@ -78,11 +78,14 @@ export const EditExchange = ({ exchangeInfo, addMode }) => {
                         >
                             <div className={styles.editArea}>
                                 <div className={styles.editContainer}>
-                                    <h2 className={styles.editUpdateTitle}>
-                                        {addMode
-                                            ? i18n.t('Add exchange')
-                                            : i18n.t('Edit exchange')}
-                                    </h2>
+                                    <EditTitle
+                                        title={
+                                            addMode
+                                                ? i18n.t('Add exchange')
+                                                : i18n.t('Edit exchange')
+                                        }
+                                    />
+
                                     <Box className={styles.editFormArea}>
                                         {saving && <Loader />}
                                         {error && (

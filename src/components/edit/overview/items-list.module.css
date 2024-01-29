@@ -9,6 +9,7 @@
 
 .exchangeTitle {
     font-weight: 500;
+    font-size: 16px;
     margin-block-end: var(--spacers-dp16);
 }
 
@@ -42,6 +43,6 @@
 }
 
 .searchContainer {
-    padding: 16px;
+    margin: 0px var(--spacers-dp16) var(--spacers-dp16) var(--spacers-dp16);
     width: 600px;
 }

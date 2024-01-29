@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useCallback, useEffect } from 'react'
-import { Loader, Warning } from '../../components/shared/index.js'
+import { Loader, Warning } from '../../components/common/index.js'
 import {
     useExchangeId,
     useRequestIndex,

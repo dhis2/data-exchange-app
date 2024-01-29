@@ -5,8 +5,24 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-23T20:48:43.043Z\n"
-"PO-Revision-Date: 2024-01-23T20:48:43.043Z\n"
+"POT-Creation-Date: 2024-01-26T15:43:42.404Z\n"
+"PO-Revision-Date: 2024-01-26T15:43:42.404Z\n"
+
+msgid "Editing the target setup will require you to reenter authentication details."
+msgstr "Editing the target setup will require you to reenter authentication details."
+
+msgid ""
+"Editing the advanced options will require you to reenter authentication "
+"details."
+msgstr ""
+"Editing the advanced options will require you to reenter authentication "
+"details."
+
+msgid "Edit target setup"
+msgstr "Edit target setup"
+
+msgid "Edit advanced options"
+msgstr "Edit advanced options"
 
 msgid "Basic setup"
 msgstr "Basic setup"
@@ -168,6 +184,22 @@ msgstr "Edit exchange: Add request"
 msgid "Edit exchange: Edit request"
 msgstr "Edit exchange: Edit request"
 
+msgid ""
+"This request currently uses inputIdScheme:code. The Data Exchange app does "
+"not support saving requests with inputIdScheme:code. If you save this "
+"request, it will be converted to inputIdScheme:uid."
+msgstr ""
+"This request currently uses inputIdScheme:code. The Data Exchange app does "
+"not support saving requests with inputIdScheme:code. If you save this "
+"request, it will be converted to inputIdScheme:uid."
+
+msgid ""
+"Changing the inputIdScheme will change the internal representation of the "
+"request, but will not change the items in the request."
+msgstr ""
+"Changing the inputIdScheme will change the internal representation of the "
+"request, but will not change the items in the request."
+
 msgid "Items"
 msgstr "Items"
 
@@ -236,6 +268,13 @@ msgstr "Choose a visualization"
 
 msgid "Not available"
 msgstr "Not available"
+
+msgid ""
+"The requested exchange does not exist, or you do not have the relevant "
+"authorities to edit it."
+msgstr ""
+"The requested exchange does not exist, or you do not have the relevant "
+"authorities to edit it."
 
 msgid "You do not have the relevant authorities to add a new exchange."
 msgstr "You do not have the relevant authorities to add a new exchange."

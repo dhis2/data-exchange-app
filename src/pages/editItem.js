@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { Loader } from '../components/common/index.js'
 import {
     EditExchange,
     useFetchExchange,
 } from '../components/edit/exchange-update/index.js'
 import { AccessWarning } from '../components/edit/shared/index.js'
-import { Loader } from '../components/shared/index.js'
 import { useUserContext } from '../context/index.js'
 
 export const EditItem = () => {
@@ -21,7 +21,7 @@ export const EditItem = () => {
     }
 
     if (!canAddExchange || error) {
-        return <AccessWarning />
+        return <AccessWarning editMode={true} />
     }
 
     if (data) {

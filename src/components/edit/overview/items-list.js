@@ -34,7 +34,7 @@ const deleteExchangeQuery = {
     id: ({ id }) => id,
 }
 
-const AggregateDataExchangeCard = ({ ade }) => {
+const AggregateDataExchangeCard = React.memo(({ ade }) => {
     const navigate = useNavigate()
     const { refetchExchanges } = useAppContext()
     const [deleteExchange, { loading: deleting }] = useDataMutation(
@@ -112,7 +112,7 @@ const AggregateDataExchangeCard = ({ ade }) => {
             </Card>
         </div>
     )
-}
+})
 
 AggregateDataExchangeCard.propTypes = {
     ade: PropTypes.object,

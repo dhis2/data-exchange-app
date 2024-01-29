@@ -2,8 +2,8 @@ import i18n from '@dhis2/d2-i18n'
 import { Box, ReactFinalForm } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Warning } from '../../shared/index.js'
-import { EditRequestFooter } from '../shared/index.js'
+import { Warning } from '../../common/index.js'
+import { EditRequestFooter, EditTitle } from '../shared/index.js'
 import styles from './edit-request.module.css'
 import {
     getInitialValuesFromRequest,
@@ -12,6 +12,10 @@ import {
 import { RequestEditForm } from './request-form.js'
 
 const { Form } = ReactFinalForm
+
+const RequestEditInner = React.memo(() => {
+    return <RequestEditForm />
+})
 
 export const RequestEdit = ({
     exitRequestEditMode,
@@ -37,15 +41,21 @@ export const RequestEdit = ({
                 <>
                     <div className={styles.editArea}>
                         <div className={styles.editContainer}>
-                            <h2 className={styles.editUpdateTitle}>
-                                {addModeRequest
-                                    ? i18n.t('Edit exchange: Add request', {
-                                          nsSeparator: '-:-',
-                                      })
-                                    : i18n.t('Edit exchange: Edit request', {
-                                          nsSeparator: '-:-',
-                                      })}
-                            </h2>
+                            <EditTitle
+                                title={
+                                    addModeRequest
+                                        ? i18n.t('Edit exchange: Add request', {
+                                              nsSeparator: '-:-',
+                                          })
+                                        : i18n.t(
+                                              'Edit exchange: Edit request',
+                                              {
+                                                  nsSeparator: '-:-',
+                                              }
+                                          )
+                                }
+                            />
+
                             <Box className={styles.editFormArea}>
                                 {request.inputIdScheme === 'CODE' && (
                                     <Warning
@@ -54,7 +64,8 @@ export const RequestEdit = ({
                                     >
                                         <p>
                                             {i18n.t(
-                                                'This request currently uses inputIdScheme:code. The Data Exchange app does not support saving requests with inputIdScheme:code. If you save this request, it will be converted to inputIdScheme:uid.'
+                                                'This request currently uses inputIdScheme:code. The Data Exchange app does not support saving requests with inputIdScheme:code. If you save this request, it will be converted to inputIdScheme:uid.',
+                                                { nsSeparator: '-:-' }
                                             )}
                                         </p>
                                         <p>
@@ -64,7 +75,7 @@ export const RequestEdit = ({
                                         </p>
                                     </Warning>
                                 )}
-                                <RequestEditForm />
+                                <RequestEditInner />
                             </Box>
                         </div>
                     </div>

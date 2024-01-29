@@ -4,7 +4,7 @@ import { Button, IconLaunch16 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useExchangeContext } from '../../../../context/index.js'
-import { Warning } from '../../../shared/index.js'
+import { Warning } from '../../../common/index.js'
 import { Table } from '../table/index.js'
 import styles from './requests-display.module.css'
 
