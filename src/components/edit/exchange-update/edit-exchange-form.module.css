@@ -32,7 +32,7 @@
     width: 350px;
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     padding: var(--spacers-dp8);
     margin-inline-end: var(--spacers-dp8);
 }
