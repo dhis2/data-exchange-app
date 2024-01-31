@@ -228,7 +228,11 @@ export const EditExchangeFormContents = React.memo(
                                     )}
                                     disabled={editTargetSetupDisabled}
                                     component={InputFieldFF}
-                                    validate={hasValue}
+                                    validate={
+                                        !editTargetSetupDisabled
+                                            ? hasValue
+                                            : null
+                                    }
                                 />
                                 <Field
                                     name="password"
@@ -240,7 +244,11 @@ export const EditExchangeFormContents = React.memo(
                                     )}
                                     disabled={editTargetSetupDisabled}
                                     component={InputFieldFF}
-                                    validate={hasValue}
+                                    validate={
+                                        !editTargetSetupDisabled
+                                            ? hasValue
+                                            : null
+                                    }
                                 />
                             </div>
                         )}
