@@ -12,27 +12,28 @@ export const getExchangeValuesFromForm = ({ values, requests }) => ({
     },
 })
 
+const getFormIdSchemeValues = ({ values }) => {
+    const idSchemeProps = [
+        'idScheme',
+        'dataElementIdScheme',
+        'orgUnitIdScheme',
+        'categoryOptionComboIdScheme',
+    ]
+    return idSchemeProps.reduce((idSchemeValues, prop) => {
+        const attributeProp = `target_${prop}_attribute`
+        idSchemeValues[prop] =
+            values[`target_${prop}`] !== SCHEME_TYPES.attribute
+                ? values[`target_${prop}`]
+                : `ATTRIBUTE:${values[attributeProp]}`
+        return idSchemeValues
+    }, {})
+}
+
 const getTargetDetails = ({ values }) => {
     const target = {
         type: values.type,
         request: {
-            idScheme:
-                values.target_idScheme !== SCHEME_TYPES.attribute
-                    ? values.target_idScheme
-                    : `ATTRIBUTE:${values.target_idScheme_attribute}`,
-            dataElementIdScheme:
-                values.target_dataElementIdScheme !== SCHEME_TYPES.attribute
-                    ? values.target_idScheme
-                    : `ATTRIBUTE:${values.target_dataElementIdScheme_attribute}`,
-            orgUnitIdScheme:
-                values.target_orgUnitIdScheme !== SCHEME_TYPES.attribute
-                    ? values.target_orgUnitIdScheme
-                    : `ATTRIBUTE:${values.target_orgUnitIdScheme_attribute}`,
-            categoryOptionComboIdScheme:
-                values.target_categoryOptionComboIdScheme !==
-                SCHEME_TYPES.attribute
-                    ? values.target_orgUnitIdScheme
-                    : `ATTRIBUTE:${values.target_categoryOptionComboIdScheme_attribute}`,
+            ...getFormIdSchemeValues({ values }),
         },
     }
     if (values.type === EXCHANGE_TYPES.internal) {
@@ -62,6 +63,23 @@ const getTargetDetails = ({ values }) => {
     }
 }
 
+const getIdSchemeValues = ({ exchangeInfo }) => {
+    const idSchemeProps = [
+        'idScheme',
+        'orgUnitIdScheme',
+        'dataElementIdScheme',
+        'categoryOptionComboIdScheme',
+    ]
+    return idSchemeProps.reduce((idSchemeValues, prop) => {
+        idSchemeValues[`target_${prop}`] = exchangeInfo.target?.request?.[prop]
+            ? exchangeInfo.target.request?.[prop]?.split(':')[0]?.toUpperCase()
+            : SCHEME_TYPES.uid
+        idSchemeValues[`target_${prop}_attribute`] =
+            exchangeInfo.target?.request?.[prop]?.split(':')[1]
+        return idSchemeValues
+    }, {})
+}
+
 export const getInitialValuesFromExchange = ({ exchangeInfo }) => ({
     name: exchangeInfo.name,
     type: exchangeInfo.target?.type,
@@ -70,30 +88,5 @@ export const getInitialValuesFromExchange = ({ exchangeInfo }) => ({
         : AUTHENTICATION_TYPES.pat,
     url: exchangeInfo.target?.api?.url,
     username: exchangeInfo.target?.api?.username,
-    target_idScheme: exchangeInfo.target?.request?.idScheme
-        ? exchangeInfo.target.request.idScheme.split(':')[0]
-        : SCHEME_TYPES.uid,
-    target_idScheme_attribute:
-        exchangeInfo.target?.request?.idScheme.split(':')[1],
-    target_orgUnitIdScheme: exchangeInfo.target?.request?.orgUnitIdScheme
-        ? exchangeInfo.target.request.orgUnitIdScheme.split(':')[0]
-        : SCHEME_TYPES.uid,
-    target_orgUnitIdScheme_attribute:
-        exchangeInfo.target?.request?.orgUnitIdScheme?.split(':')[1],
-    target_dataElementIdScheme: exchangeInfo.target?.request
-        ?.dataElementIdScheme
-        ? exchangeInfo.target.request.dataElementIdScheme.split(':')[0]
-        : SCHEME_TYPES.uid,
-    target_dataElementIdScheme_attribute:
-        exchangeInfo.target?.request?.dataElementIdScheme?.split(':')[1],
-    target_categoryOptionComboIdScheme: exchangeInfo.target?.request
-        ?.categoryOptionComboIdScheme
-        ? exchangeInfo.target?.request?.categoryOptionComboIdScheme.split(
-              ':'
-          )[0]
-        : SCHEME_TYPES.uid,
-    target_categoryOptionComboIdScheme_attribute:
-        exchangeInfo.target?.request?.categoryOptionComboIdScheme?.split(
-            ':'
-        )[1],
+    ...getIdSchemeValues({ exchangeInfo }),
 })

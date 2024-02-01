@@ -1,5 +1,21 @@
 import { SCHEME_TYPES } from '../shared/index.js'
 
+const getFormIdSchemeValues = ({ requestValues }) => {
+    const idSchemeProps = [
+        'outputIdScheme',
+        'outputDataElementIdScheme',
+        'outputOrgUnitIdScheme',
+    ]
+    return idSchemeProps.reduce((idSchemeValues, prop) => {
+        const attributeProp = `source_${prop}_attribute`
+        idSchemeValues[prop] =
+            requestValues[`source_${prop}`] !== SCHEME_TYPES.attribute
+                ? requestValues[`source_${prop}`]
+                : `ATTRIBUTE:${requestValues[attributeProp]}`
+        return idSchemeValues
+    }, {})
+}
+
 export const getRequestValuesFromForm = ({ requestValues }) => {
     const validFilters = !requestValues.filtersUsed
         ? []
@@ -13,7 +29,7 @@ export const getRequestValuesFromForm = ({ requestValues }) => {
     const filtersActuallyUsed =
         requestValues.filtersUsed && validFilters.length > 0
 
-    const newValues = {
+    return {
         ...requestValues,
         name: requestValues.requestName,
         dx: requestValues?.dxInfo.map(({ id }) => id),
@@ -28,23 +44,24 @@ export const getRequestValuesFromForm = ({ requestValues }) => {
             ? null
             : requestValues.visualizationInfo,
         inputIdScheme: SCHEME_TYPES.uid,
-        outputIdScheme:
-            requestValues.source_outputIdScheme !== SCHEME_TYPES.attribute
-                ? requestValues.source_outputIdScheme
-                : `ATTRIBUTE:${requestValues.source_outputIdScheme_attribute}`,
-        outputOrgUnitIdScheme:
-            requestValues.source_outputOrgUnitIdScheme !==
-            SCHEME_TYPES.attribute
-                ? requestValues.source_outputIdScheme
-                : `ATTRIBUTE:${requestValues.source_outputOrgUnitIdScheme_attribute}`,
-        outputDataElementIdScheme:
-            requestValues.source_outputDataElementIdScheme !==
-            SCHEME_TYPES.attribute
-                ? requestValues.source_outputIdScheme
-                : `ATTRIBUTE:${requestValues.source_outputDataElementIdScheme_attribute}`,
+        ...getFormIdSchemeValues({ requestValues }),
     }
-    console.log(newValues)
-    return newValues
+}
+
+const getIdSchemeValues = ({ request }) => {
+    const idSchemeProps = [
+        'outputIdScheme',
+        'outputDataElementIdScheme',
+        'outputOrgUnitIdScheme',
+    ]
+    return idSchemeProps.reduce((idSchemeValues, prop) => {
+        idSchemeValues[`source_${prop}`] = request?.[prop]
+            ? request?.[prop]?.split(':')[0]?.toUpperCase()
+            : SCHEME_TYPES.uid
+        idSchemeValues[`source_${prop}_attribute`] =
+            request?.[prop]?.split(':')[1]
+        return idSchemeValues
+    }, {})
 }
 
 export const getInitialValuesFromRequest = ({ request }) => ({
@@ -56,19 +73,5 @@ export const getInitialValuesFromRequest = ({ request }) => ({
     filtersInfo: request?.filtersInfo ?? [{ dimension: null }],
     visualizationLinked: Boolean(request.visualization),
     visualizationInfo: request?.visualizationInfo ?? null,
-    source_outputIdScheme: request?.outputIdScheme
-        ? request.outputIdScheme.split(':')[0]
-        : SCHEME_TYPES.uid,
-    source_outputIdScheme_attribute:
-        request?.outputIdScheme?.split(':')?.[1] ?? null,
-    source_outputDataElementIdScheme: request?.outputDataElementIdScheme
-        ? request.outputDataElementIdScheme.split(':')[0]
-        : SCHEME_TYPES.uid,
-    source_outputDataElementIdScheme_attribute:
-        request?.outputDataElementIdScheme?.split(':')?.[1] ?? null,
-    source_outputOrgUnitIdScheme: request?.outputOrgUnitIdScheme
-        ? request?.outputOrgUnitIdScheme.split(':')[0]
-        : SCHEME_TYPES.uid,
-    source_outputOrgUnitIdScheme_attribute:
-        request?.outputOrgUnitIdScheme?.split(':')?.[1] ?? null,
+    ...getIdSchemeValues({ request }),
 })
