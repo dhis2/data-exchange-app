@@ -21,7 +21,7 @@
         "cypress:run:stub": "start-server-and-test 'yarn cypress:start' http://localhost:3000 'yarn cypress run --env networkMode=stub'"
     },
     "devDependencies": {
-        "@dhis2/cli-app-scripts": "^10.0.0",
+        "@dhis2/cli-app-scripts": "^10.4.1",
         "@dhis2/cli-style": "^10.4.1",
         "@dhis2/cypress-commands": "^9.0.2",
         "@dhis2/cypress-plugins": "^9.0.2",
@@ -32,11 +32,14 @@
         "start-server-and-test": "^1.14.0"
     },
     "dependencies": {
-        "@dhis2/analytics": "^26.2.2",
+        "@dhis2/analytics": "999.9.9-outlier-table.alpha.1",
         "@dhis2/app-runtime": "^3.4.4",
-        "@dhis2/ui": "^8.15.1",
+        "@dhis2/ui": "9.2.0",
         "classnames": "^2.5.1",
         "react-router-dom": "^6.4.1",
         "use-query-params": "^2.1.1"
+    },
+    "resolutions": {
+        "@dhis2/ui": "^9.2.0"
     }
 }
