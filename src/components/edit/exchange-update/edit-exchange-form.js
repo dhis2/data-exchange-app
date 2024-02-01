@@ -202,6 +202,7 @@ export const EditExchangeFormContents = React.memo(
                             <div className={styles.subsectionField600}>
                                 <Field
                                     name="accessToken"
+                                    type="password"
                                     className={styles.fieldItem}
                                     label={i18n.t('Access token')}
                                     helpText={i18n.t(
