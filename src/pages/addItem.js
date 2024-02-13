@@ -1,7 +1,7 @@
 import React from 'react'
 import {
     AccessWarning,
-    EditExchange,
+    ExchangeForm,
     EXCHANGE_TYPES,
 } from '../components/index.js'
 import { useUserContext } from '../context/index.js'
@@ -16,5 +16,5 @@ export const AddItem = () => {
     if (!canAddExchange) {
         ;<AccessWarning />
     }
-    return <EditExchange exchangeInfo={defaultExchange} addMode={true} />
+    return <ExchangeForm exchangeInfo={defaultExchange} addMode={true} />
 }

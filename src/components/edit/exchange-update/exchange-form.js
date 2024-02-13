@@ -6,10 +6,10 @@ import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AttributeProvider, useAppContext } from '../../../context/index.js'
 import { Loader } from '../../common/index.js'
-import { RequestEdit } from '../request-update/index.js'
+import { RequestForm } from '../request-update/index.js'
 import { EditItemFooter, EditTitle } from '../shared/index.js'
-import { EditExchangeFormContents } from './edit-exchange-form.js'
-import styles from './edit-exchange.module.css'
+import { ExchangeFormContents } from './exchange-form-contents.js'
+import styles from './exchange-form.module.css'
 import { getInitialValuesFromExchange } from './getExchangeValues.js'
 import { useRequests } from './useRequests.js'
 import { useUpdateExchange } from './useUpdateExchange.js'
@@ -31,7 +31,7 @@ const formatError = (error) => {
     return error?.message
 }
 
-export const EditExchange = ({ exchangeInfo, addMode }) => {
+export const ExchangeForm = ({ exchangeInfo, addMode }) => {
     const {
         requestEditInfo,
         setRequestEditMode,
@@ -100,7 +100,7 @@ export const EditExchange = ({ exchangeInfo, addMode }) => {
                                             </NoticeBox>
                                         )}
                                         {!saving && (
-                                            <EditExchangeFormContents
+                                            <ExchangeFormContents
                                                 requestsState={requestsState}
                                                 setRequestEditMode={
                                                     setRequestEditMode
@@ -124,7 +124,7 @@ export const EditExchange = ({ exchangeInfo, addMode }) => {
                                     [styles.hidden]: !requestEditInfo.editMode,
                                 })}
                             >
-                                <RequestEdit
+                                <RequestForm
                                     exitRequestEditMode={exitRequestEditMode}
                                     request={requestEditInfo.request}
                                     requestsDispatch={requestsDispatch}
@@ -142,7 +142,7 @@ export const EditExchange = ({ exchangeInfo, addMode }) => {
     )
 }
 
-EditExchange.propTypes = {
+ExchangeForm.propTypes = {
     addMode: PropTypes.bool,
     exchangeInfo: PropTypes.object,
 }

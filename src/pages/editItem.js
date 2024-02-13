@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import {
     AccessWarning,
-    EditExchange,
+    ExchangeForm,
     Loader,
     useFetchExchange,
 } from '../components/index.js'
@@ -25,7 +25,7 @@ export const EditItem = () => {
     }
 
     if (data) {
-        return <EditExchange exchangeInfo={data} />
+        return <ExchangeForm exchangeInfo={data} />
     }
 
     return null

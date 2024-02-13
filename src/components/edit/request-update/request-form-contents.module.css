@@ -1,0 +1,27 @@
+.subsectionField {
+    margin-block-end: var(--spacers-dp16);
+}
+
+.subsectionField1000 {
+    margin-block-end: var(--spacers-dp16);
+    max-width: 1000px;
+}
+
+.subsectionField600 {
+    margin-block-end: var(--spacers-dp16);
+    max-width: 750px;
+}
+
+.subsectionBlockEnd {
+    margin-block-end: var(--spacers-dp24);
+}
+
+.visualizationSubtext {
+    font-size: 12px;
+    color: var(--colors-grey600);
+    margin-inline-start: 26px;
+}
+
+.checkContainer {
+    margin-block-start: var(--spacers-dp16);
+}

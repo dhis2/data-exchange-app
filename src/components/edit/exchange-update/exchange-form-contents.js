@@ -19,7 +19,7 @@ import {
     AUTHENTICATION_TYPES,
     EXCHANGE_TYPES,
 } from '../shared/index.js'
-import styles from './edit-exchange-form.module.css'
+import styles from './exchange-form-contents.module.css'
 import { RequestsOverview } from './requests-overview.js'
 
 const { Field, useField } = ReactFinalForm
@@ -79,7 +79,7 @@ RadioDecorator.propTypes = {
     label: PropTypes.string,
 }
 
-export const EditExchangeFormContents = React.memo(
+export const ExchangeFormContents = React.memo(
     ({ requestsState, setRequestEditMode, deleteRequest }) => {
         const { input: typeInput } = useField('type', {
             subscription: { value: true },
@@ -321,7 +321,7 @@ export const EditExchangeFormContents = React.memo(
     }
 )
 
-EditExchangeFormContents.propTypes = {
+ExchangeFormContents.propTypes = {
     deleteRequest: PropTypes.func,
     requestsState: PropTypes.array,
     setRequestEditMode: PropTypes.func,
