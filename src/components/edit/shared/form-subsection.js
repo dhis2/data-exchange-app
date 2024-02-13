@@ -12,8 +12,10 @@ export const AdvancedSubsection = ({
 }) => (
     <div className={className}>
         <div className={styles.subtitleContainer} onClick={onTextClick}>
-            {open ? <IconChevronUp24 /> : <IconChevronDown24 />}
-            <span className={styles.subtitle}>{text}</span>
+            <span className={styles.subtitleContainerItems}>
+                {open ? <IconChevronUp24 /> : <IconChevronDown24 />}
+                <span className={styles.subtitle}>{text}</span>
+            </span>
         </div>
         <div className={styles.subsectionContent}>{children}</div>
     </div>

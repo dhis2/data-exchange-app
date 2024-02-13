@@ -1,5 +1,10 @@
 .subtitleContainer {
     margin-block-end: var(--spacers-dp16);
+    cursor: pointer;
+    display: inline-block;
+}
+
+.subtitleContainerItems {
     display: flex;
     align-items: center;
 }
