@@ -1,9 +1,9 @@
 import React from 'react'
-import { EditExchange } from '../components/edit/exchange-update/index.js'
 import {
-    EXCHANGE_TYPES,
     AccessWarning,
-} from '../components/edit/shared/index.js'
+    EditExchange,
+    EXCHANGE_TYPES,
+} from '../components/index.js'
 import { useUserContext } from '../context/index.js'
 
 const defaultExchange = {

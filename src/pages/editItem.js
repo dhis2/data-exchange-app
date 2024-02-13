@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { Loader } from '../components/common/index.js'
 import {
+    AccessWarning,
     EditExchange,
+    Loader,
     useFetchExchange,
-} from '../components/edit/exchange-update/index.js'
-import { AccessWarning } from '../components/edit/shared/index.js'
+} from '../components/index.js'
 import { useUserContext } from '../context/index.js'
 
 export const EditItem = () => {
