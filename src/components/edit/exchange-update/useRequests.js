@@ -21,11 +21,13 @@ export const useRequests = ({ exchangeInfo }) => {
         requestsReducer,
         exchangeInfo?.source?.requests ?? []
     )
-    const deleteRequest = useCallback((index) => {
-        requestsDispatch({ type: 'DELETE', index })
-    }, [])
 
     const [requestsTouched, setRequestsTouched] = useState(false)
+
+    const deleteRequest = useCallback((index) => {
+        setRequestsTouched(true)
+        requestsDispatch({ type: 'DELETE', index })
+    }, [])
 
     return {
         requestEditInfo,
