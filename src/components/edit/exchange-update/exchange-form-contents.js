@@ -116,7 +116,7 @@ export const ExchangeFormContents = React.memo(
                                 <RadioDecorator
                                     label={i18n.t('External')}
                                     helperText={i18n.t(
-                                        'Send date to another DHIS2 instance or data warehouse'
+                                        'Send data to another DHIS2 instance or data warehouse'
                                     )}
                                     currentSelected={
                                         typeValue === EXCHANGE_TYPES.external
