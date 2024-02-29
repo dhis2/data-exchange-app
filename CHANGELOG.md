@@ -1,3 +1,10 @@
+# [100.2.0](https://github.com/dhis2/data-exchange-app/compare/v100.1.6...v100.2.0) (2024-02-29)
+
+
+### Features
+
+* add ui to configuration data exchanges [DHIS2-16434] ([#70](https://github.com/dhis2/data-exchange-app/issues/70)) ([96f6063](https://github.com/dhis2/data-exchange-app/commit/96f606382632160f8d03c8cb36d68523b3218a1f))
+
 ## [100.1.6](https://github.com/dhis2/data-exchange-app/compare/v100.1.5...v100.1.6) (2024-02-28)
 
 
