@@ -1,0 +1,21 @@
+.subtitleContainer {
+    margin-block-end: var(--spacers-dp16);
+    cursor: pointer;
+    display: inline-block;
+}
+
+.subtitleContainerItems {
+    display: flex;
+    align-items: center;
+}
+
+.subtitle {
+    margin-inline-start: var(--spacers-dp4);
+    font-size: 20px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.subsectionContent {
+    padding: var(--spacers-dp4);
+}

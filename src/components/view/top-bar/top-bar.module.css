@@ -1,0 +1,6 @@
+.additionalContentContainer {
+    height: 100%;
+    padding-inline-end: var(--spacers-dp8);
+    display: flex;
+    align-items: center;
+}

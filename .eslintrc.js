@@ -6,4 +6,7 @@ module.exports = {
         cy: 'readonly',
         Cypress: 'readonly',
     },
+    rules: {
+        'react/display-name': 'off',
+    },
 }

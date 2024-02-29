@@ -1,0 +1,64 @@
+[
+    {
+        "path": "/api/41/systemSettings/helpPageLink",
+        "featureName": "The app loads",
+        "static": false,
+        "count": 1,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8080",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"helpPageLink\":\"https://dhis2.github.io/dhis2-docs/master/en/user/html/dhis2_user_manual_en.html\"}",
+        "responseSize": 99,
+        "responseHeaders": {
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "content-type": "application/json",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "server": "Jetty(10.0.19)"
+        }
+    },
+    {
+        "path": "/api/41/aggregateDataExchanges?paging=false&fields=id,displayName,created,target%5Btype%5D,source%5Brequests~size%5D&order=displayName%3Aiasc",
+        "featureName": "The app loads",
+        "static": false,
+        "count": 1,
+        "nonDeterministic": false,
+        "method": "GET",
+        "requestBody": "",
+        "requestHeaders": {
+            "host": "localhost:8080",
+            "proxy-connection": "keep-alive",
+            "accept": "application/json",
+            "origin": "http://localhost:3000",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "cors"
+        },
+        "statusCode": 200,
+        "responseBody": "{\"aggregateDataExchanges\":[{\"created\":\"2024-01-19T14:47:31.788\",\"source\":{\"requests\":2},\"target\":{\"type\":\"INTERNAL\"},\"displayName\":\"0 - exchange test (internal request!)\",\"id\":\"QSH0P0KGiKa\"},{\"created\":\"2022-11-01T10:59:16.931\",\"source\":{\"requests\":2},\"target\":{\"type\":\"INTERNAL\"},\"displayName\":\"calculations TEST - update\",\"id\":\"S67MxMHW33n\"},{\"created\":\"2024-01-24T09:44:19.376\",\"source\":{\"requests\":1},\"target\":{\"type\":\"INTERNAL\"},\"displayName\":\"CODE test\",\"id\":\"aL9vAwEddAb\"},{\"created\":\"2024-01-26T12:53:42.250\",\"source\":{\"requests\":1},\"target\":{\"type\":\"EXTERNAL\"},\"displayName\":\"external exchange\",\"id\":\"l3l7IPTt2y5\"},{\"created\":\"2024-01-12T11:39:36.300\",\"source\":{\"requests\":2},\"target\":{\"type\":\"INTERNAL\"},\"displayName\":\"filters exchange\",\"id\":\"i60M9Qs0qeu\"},{\"created\":\"2024-01-24T09:44:19.376\",\"source\":{\"requests\":1},\"target\":{\"type\":\"INTERNAL\"},\"displayName\":\"ID test\",\"id\":\"kObqeVCViH8\"},{\"created\":\"2022-11-01T10:59:16.931\",\"source\":{\"requests\":1},\"target\":{\"type\":\"INTERNAL\"},\"displayName\":\"Internal data exchange\",\"id\":\"ioHMBgeK50L\"}]}",
+        "responseSize": 1051,
+        "responseHeaders": {
+            "access-control-allow-credentials": "true",
+            "access-control-allow-origin": "http://localhost:3000",
+            "vary": "Origin",
+            "access-control-expose-headers": "ETag, Location",
+            "cache-control": "no-cache, private",
+            "content-type": "application/json",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "1; mode=block",
+            "server": "Jetty(10.0.19)"
+        }
+    }
+]

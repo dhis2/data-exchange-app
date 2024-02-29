@@ -1,0 +1,22 @@
+.radiosContainer {
+    margin-block-end: var(--spacers-dp16);
+    display: flex;
+}
+
+.radioItem {
+    margin-left: var(--spacers-dp16);
+}
+
+.radioContainerLabel {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 var(--spacers-dp8) 0;
+}
+
+.attributeSelectionContainer {
+    width: 600px;
+}
+
+.schemeSelectorContainer {
+    margin: 0 0 var(--spacers-dp16) 0;
+}
