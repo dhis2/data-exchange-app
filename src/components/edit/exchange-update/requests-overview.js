@@ -58,7 +58,7 @@ const EmptyTableInfo = () => (
             <p className={styles.emptyTableHeader}>{i18n.t('No requests')}</p>
             <p className={styles.emptyTableText}>
                 {i18n.t(
-                    'Click on the button below to add a new request. Exchanges must contain at least one request.'
+                    "Click the 'Add request' button to add a request to this exchange"
                 )}
             </p>
         </div>
