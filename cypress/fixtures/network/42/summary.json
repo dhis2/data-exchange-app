@@ -1,0 +1,13 @@
+{
+    "count": 126,
+    "totalResponseSize": 23664,
+    "duplicates": 107,
+    "nonDeterministicResponses": 9,
+    "apiVersion": "42",
+    "fixtureFiles": [
+        "static_resources.json",
+        "navigation_using_top_bar_works.json",
+        "the_app_loads.json",
+        "submission_works.json"
+    ]
+}

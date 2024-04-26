@@ -28,27 +28,29 @@ When('user clicks Yes, submit and succeeds', () => {
         'POST',
         /api[/][0-9]*[/]aggregateDataExchanges[/][A-Za-z0-9]*[/]exchange/,
         {
-            responseType: 'ImportSummaries',
-            status: 'SUCCESS',
-            imported: 1,
-            updated: 2,
-            deleted: 3,
-            ignored: 4,
-            importSummaries: [
-                {
-                    responseType: 'ImportSummary',
-                    status: 'SUCCESS',
-                    importCount: {
-                        imported: 1,
-                        updated: 2,
-                        ignored: 3,
-                        deleted: 4,
+            response: {
+                responseType: 'ImportSummaries',
+                status: 'SUCCESS',
+                imported: 1,
+                updated: 2,
+                deleted: 3,
+                ignored: 4,
+                importSummaries: [
+                    {
+                        responseType: 'ImportSummary',
+                        status: 'SUCCESS',
+                        importCount: {
+                            imported: 1,
+                            updated: 2,
+                            ignored: 3,
+                            deleted: 4,
+                        },
+                        conflicts: [],
+                        dataSetComplete: 'false',
                     },
-                    conflicts: [],
-                    dataSetComplete: 'false',
-                },
-            ],
-            total: 10,
+                ],
+                total: 10,
+            },
         }
     )
 
@@ -68,16 +70,18 @@ When('user clicks Yes, submit and fails', () => {
         'POST',
         /api[/][0-9]*[/]aggregateDataExchanges[/][A-Za-z0-9]*[/]exchange/,
         {
-            responseType: 'ImportSummaries',
-            status: 'ERROR',
-            importSummaries: [
-                {
-                    responseType: 'ImportSummary',
-                    status: 'ERROR',
-                    conflicts: [],
-                    dataSetComplete: 'false',
-                },
-            ],
+            response: {
+                responseType: 'ImportSummaries',
+                status: 'ERROR',
+                importSummaries: [
+                    {
+                        responseType: 'ImportSummary',
+                        status: 'ERROR',
+                        conflicts: [],
+                        dataSetComplete: 'false',
+                    },
+                ],
+            },
         }
     )
 
