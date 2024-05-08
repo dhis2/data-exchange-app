@@ -55,9 +55,10 @@ export const useAggregateDataExchangeMutation = ({ id }) => {
                 dispatch({ type: 'loading' })
                 try {
                     const response = await engine.mutate(getMutation({ id }))
-                    if (response?.status === 'ERROR') {
+                    const internalResponse = response?.response ?? response
+                    if (internalResponse?.status === 'ERROR') {
                         const errorMessage =
-                            response?.importSummaries.find(
+                            internalResponse?.importSummaries.find(
                                 ({ status }) => status === 'ERROR'
                             )?.description || i18n.t('Unknown error')
                         throw new Error(errorMessage)

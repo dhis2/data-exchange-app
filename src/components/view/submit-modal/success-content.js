@@ -266,7 +266,8 @@ SummaryTable.propTypes = {
 }
 
 const SuccessContent = ({ data, dataSubmitted }) => {
-    const { importSummaries } = data
+    const importSummaries =
+        data?.importSummaries ?? data?.response?.importSummaries
 
     const summaryCounts = importSummaries.reduce(
         (totalCounts, importSummary) => {
