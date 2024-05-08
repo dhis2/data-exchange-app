@@ -18,6 +18,7 @@ const query = {
                 'created',
                 'target[type]',
                 'source[requests~size]',
+                'access[data]',
             ],
             order: 'displayName:iasc',
         },
