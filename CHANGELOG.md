@@ -1,3 +1,10 @@
+## [100.3.1](https://github.com/dhis2/data-exchange-app/compare/v100.3.0...v100.3.1) (2024-05-08)
+
+
+### Bug Fixes
+
+* update for response format [DHIS2-17286] ([#75](https://github.com/dhis2/data-exchange-app/issues/75)) ([42b3506](https://github.com/dhis2/data-exchange-app/commit/42b350665970d4e466c870200ec146f799f57971))
+
 # [100.3.0](https://github.com/dhis2/data-exchange-app/compare/v100.2.3...v100.3.0) (2024-05-08)
 
 
