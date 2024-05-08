@@ -1,3 +1,10 @@
+# [100.3.0](https://github.com/dhis2/data-exchange-app/compare/v100.2.3...v100.3.0) (2024-05-08)
+
+
+### Features
+
+* conditional disable submit data ([#73](https://github.com/dhis2/data-exchange-app/issues/73)) ([46df124](https://github.com/dhis2/data-exchange-app/commit/46df124875add9940bc933a40c9a7fe37d7e96b7))
+
 ## [100.2.3](https://github.com/dhis2/data-exchange-app/compare/v100.2.2...v100.2.3) (2024-05-08)
 
 
