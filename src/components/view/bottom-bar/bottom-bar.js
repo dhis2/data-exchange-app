@@ -2,13 +2,17 @@ import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useExchangeContext } from '../../../context/exchange-context/index.js'
+import { useAppContext, useExchangeContext } from '../../../context/index.js'
 import { useExchangeId } from '../../../use-context-selection/index.js'
 import { ButtonWithTooltip } from '../../common/button-with-tooltip/index.js'
 
 const BottomBar = ({ openSubmitModal, dataSubmitted }) => {
     const [exchangeId] = useExchangeId()
+    const { aggregateDataExchanges } = useAppContext()
     const { exchangeData } = useExchangeContext()
+    const disableSubmit =
+        aggregateDataExchanges.find((ade) => ade?.id === exchangeId)?.access
+            ?.data?.write === false
 
     const dataCount = exchangeData?.reduce(
         (totalLength, request) => (request?.rows?.length || 0) + totalLength,
@@ -35,7 +39,7 @@ const BottomBar = ({ openSubmitModal, dataSubmitted }) => {
 
     return (
         <div data-test="bottom-bar">
-            <Button primary onClick={openSubmitModal}>
+            <Button primary onClick={openSubmitModal} disabled={disableSubmit}>
                 {submitButtonText}
             </Button>
         </div>
