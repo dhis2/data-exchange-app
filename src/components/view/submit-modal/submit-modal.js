@@ -143,14 +143,14 @@ const getReportText = (request) => {
 const ConfirmModalContent = ({ exchange, requests, onClose, onSubmit }) => {
     // this is very wordy, but did not have luck with i18nextscanner picking up from more compact versions...
     let reportTranslationsString
-    const { baseUrl } = useConfig()
+    const { systemInfo } = useConfig()
     const reportCount = requests.length
     const exchangeName = exchange?.displayName
     const exchangeURL =
         exchange?.target?.type === 'INTERNAL'
-            ? baseUrl
+            ? systemInfo?.contextPath
             : exchange?.target?.api?.url
-    const exchangeHostName = exchangeURL?.split('//')[1] // remove protocol
+    const exchangeHostName = exchangeURL?.split('//')[1] ?? exchangeURL // remove protocol
 
     if (exchange?.target?.type === 'INTERNAL') {
         if (requests.length > 1) {
