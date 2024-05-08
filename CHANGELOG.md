@@ -1,3 +1,10 @@
+## [100.2.3](https://github.com/dhis2/data-exchange-app/compare/v100.2.2...v100.2.3) (2024-05-08)
+
+
+### Bug Fixes
+
+* use contextPath from systemInfo for url [DHIS2-17288] ([#76](https://github.com/dhis2/data-exchange-app/issues/76)) ([b415c3f](https://github.com/dhis2/data-exchange-app/commit/b415c3f70678389295870ac593af937e4c22d6bb))
+
 ## [100.2.2](https://github.com/dhis2/data-exchange-app/compare/v100.2.1...v100.2.2) (2024-04-07)
 
 
