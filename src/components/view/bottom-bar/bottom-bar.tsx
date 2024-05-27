@@ -2,9 +2,9 @@ import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useAppContext, useExchangeContext } from '../../../context/index.js'
-import { useExchangeId } from '../../../use-context-selection/index.js'
-import { ButtonWithTooltip } from '../../common/button-with-tooltip/index.js'
+import { useAppContext, useExchangeContext } from '../../../context/index'
+import { useExchangeId } from '../../../use-context-selection/index'
+import { ButtonWithTooltip } from '../../common/button-with-tooltip/index'
 
 const BottomBar = ({ openSubmitModal, dataSubmitted }) => {
     const [exchangeId] = useExchangeId()

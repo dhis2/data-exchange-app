@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useCallback, useEffect, useState } from 'react'
-import DimensionFilterRow from './dimension-filter-row.js'
+import DimensionFilterRow from './dimension-filter-row'
 import styles from './filter-select.module.css'
 
 export const FilterSelect = ({ input }) => {

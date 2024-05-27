@@ -1,4 +1,4 @@
-import { AppWrapper } from './app.js'
-import './locales/index.js'
+import { AppWrapper } from './app'
+import './locales/index'
 
 export default AppWrapper

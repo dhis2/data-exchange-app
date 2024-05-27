@@ -1,1 +1,1 @@
-export { ButtonWithTooltip } from './button-with-tooltip.js'
+export { ButtonWithTooltip } from './button-with-tooltip'

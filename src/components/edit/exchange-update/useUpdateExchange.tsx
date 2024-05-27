@@ -1,6 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { useCallback, useState } from 'react'
-import { getExchangeValuesFromForm } from './getExchangeValues.js'
+import { getExchangeValuesFromForm } from './getExchangeValues'
 
 const getChange = ({ field, value }) => ({
     op: 'add',

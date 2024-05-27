@@ -3,7 +3,7 @@ import { MenuDivider, Tooltip } from '@dhis2/ui'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
-import styles from './styles/CustomSelectOption.style.js'
+import styles from './styles/CustomSelectOption.style'
 
 const CustomSelectOptionItem = ({
     value,

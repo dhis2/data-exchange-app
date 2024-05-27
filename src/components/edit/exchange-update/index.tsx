@@ -1,2 +1,2 @@
-export { ExchangeForm } from './exchange-form.js'
-export { useFetchExchange } from './useFetchExchange.js'
+export { ExchangeForm } from './exchange-form'
+export { useFetchExchange } from './useFetchExchange'

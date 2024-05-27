@@ -1,4 +1,4 @@
-import { OU_LEVEL_PREFIX } from '../shared/index.js'
+import { OU_LEVEL_PREFIX } from '../shared/index'
 
 const dimensionTypes = [
     'CATEGORY',

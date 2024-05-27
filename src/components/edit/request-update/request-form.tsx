@@ -2,13 +2,13 @@ import i18n from '@dhis2/d2-i18n'
 import { Box, ReactFinalForm } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Warning } from '../../common/index.js'
-import { EditRequestFooter, EditTitle } from '../shared/index.js'
+import { Warning } from '../../common/index'
+import { EditRequestFooter, EditTitle } from '../shared/index'
 import {
     getInitialValuesFromRequest,
     getRequestValuesFromForm,
-} from './getRequestValues.js'
-import { RequestFormContents } from './request-form-contents.js'
+} from './getRequestValues'
+import { RequestFormContents } from './request-form-contents'
 import styles from './request-form.module.css'
 
 const { Form } = ReactFinalForm

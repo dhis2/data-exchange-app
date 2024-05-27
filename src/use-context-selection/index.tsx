@@ -1,1 +1,1 @@
-export * from './use-context-selections.js'
+export * from './use-context-selections'

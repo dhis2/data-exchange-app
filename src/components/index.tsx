@@ -1,3 +1,3 @@
-export * from './common/index.js'
-export * from './edit/index.js'
-export * from './view/index.js'
+export * from './common/index'
+export * from './edit/index'
+export * from './view/index'

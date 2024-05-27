@@ -1,3 +1,3 @@
-export { ExchangeContext } from './exchange-context.js'
-export { ExchangeProvider } from './exchange-provider.js'
-export { useExchangeContext } from './use-exchange-context.js'
+export { ExchangeContext } from './exchange-context'
+export { ExchangeProvider } from './exchange-provider'
+export { useExchangeContext } from './use-exchange-context'

@@ -5,8 +5,8 @@ import {
     ExchangeForm,
     Loader,
     useFetchExchange,
-} from '../components/index.js'
-import { useUserContext } from '../context/index.js'
+} from '../components/index'
+import { useUserContext } from '../context/index'
 
 export const EditItem = () => {
     const { exchangeID } = useParams()

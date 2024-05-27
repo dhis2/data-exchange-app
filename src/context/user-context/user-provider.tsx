@@ -2,8 +2,8 @@ import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Loader, Warning } from '../../components/common/index.js'
-import { UserContext } from './user-context.js'
+import { Loader, Warning } from '../../components/common/index'
+import { UserContext } from './user-context'
 
 const EXCHANGE_AUTHORITIES_ADD = [
     'F_AGGREGATE_DATA_EXCHANGE_PRIVATE_ADD',

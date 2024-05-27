@@ -25,19 +25,19 @@ import React, {
     useState,
 } from 'react'
 /* eslint-disable-next-line import/order */
-import { VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS } from './visTypes.js'
+import { VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS } from './visTypes'
 import {
     CreatedByFilter,
     CREATED_BY_ALL,
     CREATED_BY_ALL_BUT_CURRENT_USER,
     CREATED_BY_CURRENT_USER,
-} from './CreatedByFilter.js'
-import { FileList } from './FileList.js'
-import { NameFilter } from './NameFilter.js'
-import { styles } from './OpenFileDialog.styles.js'
-import { PaginationControls } from './PaginationControls.js'
-import { getTranslatedString, AOTypeMap } from './utils.js'
-import { VisTypeFilter } from './VisTypeFilter.js'
+} from './CreatedByFilter'
+import { FileList } from './FileList'
+import { NameFilter } from './NameFilter'
+import { styles } from './OpenFileDialog.styles'
+import { PaginationControls } from './PaginationControls'
+import { getTranslatedString, AOTypeMap } from './utils'
+import { VisTypeFilter } from './VisTypeFilter'
 
 const getQuery = (type) => ({
     files: {

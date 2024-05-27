@@ -5,8 +5,8 @@ import {
     Layout,
     SubmitModal,
     TopBar,
-} from '../components/index.js'
-import { ExchangeProvider } from '../context/index.js'
+} from '../components/index'
+import { ExchangeProvider } from '../context/index'
 
 export const DataPage = () => {
     const [submitModalOpen, setSubmitModalOpen] = useState(false)

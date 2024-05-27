@@ -8,8 +8,8 @@ import {
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useAttributeContext } from '../../../context/index.js'
-import { SCHEME_TYPES } from './constants.js'
+import { useAttributeContext } from '../../../context/index'
+import { SCHEME_TYPES } from './constants'
 import styles from './scheme-selector.module.css'
 
 export const SchemeSelector = ({ name, label, disabled }) => {

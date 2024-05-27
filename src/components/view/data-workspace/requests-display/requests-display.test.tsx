@@ -2,7 +2,7 @@ import {
     convertToObjectFormat,
     ensureNestedObjectExists,
     formatData,
-} from './requests-display.js'
+} from './requests-display'
 
 describe('convertToObjectFormat', () => {
     it('returns data in expected format', () => {

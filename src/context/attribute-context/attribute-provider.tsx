@@ -2,8 +2,8 @@ import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Loader, Warning } from '../../components/common/index.js'
-import { AttributeContext } from './attribute-context.js'
+import { Loader, Warning } from '../../components/common/index'
+import { AttributeContext } from './attribute-context'
 
 const query = {
     attributes: {

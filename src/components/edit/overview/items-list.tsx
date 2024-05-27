@@ -12,9 +12,9 @@ import {
 import PropTypes from 'prop-types'
 import React, { useCallback, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAppContext, useUserContext } from '../../../context/index.js'
-import { getNaturalCapitalization } from '../../../utils/helpers.js'
-import { DeleteConfirmation } from './delete-confirmation.js'
+import { useAppContext, useUserContext } from '../../../context/index'
+import { getNaturalCapitalization } from '../../../utils/helpers'
+import { DeleteConfirmation } from './delete-confirmation'
 import styles from './items-list.module.css'
 
 const IconTextItem = ({ icon, text }) => (

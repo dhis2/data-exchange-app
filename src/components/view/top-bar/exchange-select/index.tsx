@@ -1,1 +1,1 @@
-export * from './exchange-select.js'
+export * from './exchange-select'

@@ -2,7 +2,7 @@ import {
     SCHEME_TYPES,
     EXCHANGE_TYPES,
     AUTHENTICATION_TYPES,
-} from '../shared/index.js'
+} from '../shared/index'
 
 export const getExchangeValuesFromForm = ({ values, requests }) => ({
     name: values.name,

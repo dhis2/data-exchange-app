@@ -1,8 +1,8 @@
 import { OrgUnitDimension } from '@dhis2/analytics'
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
-import { useUserContext } from '../../../context/index.js'
-import { SelectorValidationError } from '../shared/index.js'
+import { useUserContext } from '../../../context/index'
+import { SelectorValidationError } from '../shared/index'
 
 export const OrgUnitSelector = ({ input, meta }) => {
     const { value: selectedOrgUnits, onChange } = input

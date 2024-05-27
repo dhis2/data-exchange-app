@@ -3,9 +3,9 @@ import i18n from '@dhis2/d2-i18n'
 import { Button, IconLaunch16 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useExchangeContext } from '../../../../context/index.js'
-import { Warning } from '../../../common/index.js'
-import { Table } from '../table/index.js'
+import { useExchangeContext } from '../../../../context/index'
+import { Warning } from '../../../common/index'
+import { Table } from '../table/index'
 import styles from './requests-display.module.css'
 
 export const ensureNestedObjectExists = (obj, propertyNames) => {

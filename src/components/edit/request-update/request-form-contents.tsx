@@ -6,18 +6,14 @@ import {
     hasValue,
 } from '@dhis2/ui'
 import React, { useState } from 'react'
-import {
-    Subsection,
-    AdvancedSubsection,
-    SchemeSelector,
-} from '../shared/index.js'
-import { DataItemSelect } from './data-item-select.js'
-import { FilterSelect } from './filterSelect/filter-select.js'
-import { OrgUnitSelector } from './org-unit-select.js'
-import { PeriodSelector } from './period-select.js'
+import { Subsection, AdvancedSubsection, SchemeSelector } from '../shared/index'
+import { DataItemSelect } from './data-item-select'
+import { FilterSelect } from './filterSelect/filter-select'
+import { OrgUnitSelector } from './org-unit-select'
+import { PeriodSelector } from './period-select'
 import styles from './request-form-contents.module.css'
-import { useValidators } from './useValidators.js'
-import { VisualizationSelect } from './visualization-select.js'
+import { useValidators } from './useValidators'
+import { VisualizationSelect } from './visualization-select'
 
 const { Field, useField } = ReactFinalForm
 

@@ -1,2 +1,2 @@
-export { RequestForm } from './request-form.js'
-export { requestsReducer } from './requests-reducer.js'
+export { RequestForm } from './request-form'
+export { requestsReducer } from './requests-reducer'

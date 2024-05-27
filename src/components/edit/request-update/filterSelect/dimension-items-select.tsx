@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
 import styles from './dimension-items-select.module.css'
-import SelectField from './select-field.js'
+import SelectField from './select-field'
 
 // Load dimension items
 const DIMENSION_ITEMS_QUERY = {

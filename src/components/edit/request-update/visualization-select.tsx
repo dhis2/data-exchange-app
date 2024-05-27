@@ -3,8 +3,8 @@ import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { useUserContext } from '../../../context/index.js'
-import { OpenFileDialog } from '../shared/index.js'
+import { useUserContext } from '../../../context/index'
+import { OpenFileDialog } from '../shared/index'
 import styles from './visualization-select.module.css'
 
 export const VisualizationSelect = ({ input }) => {

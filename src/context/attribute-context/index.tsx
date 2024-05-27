@@ -1,3 +1,3 @@
-export { AttributeContext } from './attribute-context.js'
-export { AttributeProvider } from './attribute-provider.js'
-export { useAttributeContext } from './use-attribute-context.js'
+export { AttributeContext } from './attribute-context'
+export { AttributeProvider } from './attribute-provider'
+export { useAttributeContext } from './use-attribute-context'

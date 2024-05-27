@@ -2,10 +2,10 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelect, colors } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { getDisplayNameByVisType, visTypeIcons } from './visTypes.js'
+import { getDisplayNameByVisType, visTypeIcons } from './visTypes'
 /* eslint-disable-next-line import/order */
-import { CustomSelectOption } from './CustomSelectOption.js'
-import { VisTypeIcon } from './VTI.js'
+import { CustomSelectOption } from './CustomSelectOption'
+import { VisTypeIcon } from './VTI'
 
 export const VisTypeFilter = ({ visTypes, selected, onChange }) => (
     <SingleSelect

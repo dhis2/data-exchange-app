@@ -11,16 +11,16 @@ import {
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useMemo, useState } from 'react'
-import { Warning } from '../../common/index.js'
+import { Warning } from '../../common/index'
 import {
     SchemeSelector,
     Subsection,
     AdvancedSubsection,
     AUTHENTICATION_TYPES,
     EXCHANGE_TYPES,
-} from '../shared/index.js'
+} from '../shared/index'
 import styles from './exchange-form-contents.module.css'
-import { RequestsOverview } from './requests-overview.js'
+import { RequestsOverview } from './requests-overview'
 
 const { Field, useField } = ReactFinalForm
 

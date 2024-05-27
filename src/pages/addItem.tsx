@@ -3,8 +3,8 @@ import {
     AccessWarning,
     ExchangeForm,
     EXCHANGE_TYPES,
-} from '../components/index.js'
-import { useUserContext } from '../context/index.js'
+} from '../components/index'
+import { useUserContext } from '../context/index'
 
 const defaultExchange = {
     source: { requests: [] },

@@ -13,7 +13,7 @@ import {
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { OU_LEVEL_PREFIX, OU_GROUP_PREFIX } from '../shared/index.js'
+import { OU_LEVEL_PREFIX, OU_GROUP_PREFIX } from '../shared/index'
 import styles from './requests-overview.module.css'
 
 const getOuText = ({ ouInfo }) => {

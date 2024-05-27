@@ -12,11 +12,11 @@ import {
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import { useExchangeContext } from '../../../context/index.js'
-import { Warning } from '../../common/index.js'
+import { useExchangeContext } from '../../../context/index'
+import { Warning } from '../../common/index'
 import styles from './submit-modal.module.css'
-import { SuccessContent } from './success-content.js'
-import { useAggregateDataExchangeMutation } from './use-aggregate-data-exchange-mutation.js'
+import { SuccessContent } from './success-content'
+import { useAggregateDataExchangeMutation } from './use-aggregate-data-exchange-mutation'
 
 const LoadingStateModalContent = () => (
     <>

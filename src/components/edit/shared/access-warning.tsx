@@ -3,7 +3,7 @@ import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Warning } from '../../common/index.js'
+import { Warning } from '../../common/index'
 import styles from './access-warning.module.css'
 
 export const AccessWarning = ({ editMode }) => (

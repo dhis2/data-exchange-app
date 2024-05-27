@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Button, SelectorBar } from '@dhis2/ui'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { EditTitle } from '../shared/index.js'
+import { EditTitle } from '../shared/index'
 import styles from './edit-home-top-bar.module.css'
 
 export const EditHomeTopBar = () => (

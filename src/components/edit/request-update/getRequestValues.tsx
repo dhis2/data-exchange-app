@@ -1,4 +1,4 @@
-import { SCHEME_TYPES } from '../shared/index.js'
+import { SCHEME_TYPES } from '../shared/index'
 
 const getFormIdSchemeValues = ({ requestValues }) => {
     const idSchemeProps = [

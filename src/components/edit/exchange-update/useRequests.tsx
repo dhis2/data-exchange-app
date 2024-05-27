@@ -1,5 +1,5 @@
 import { useCallback, useReducer, useState } from 'react'
-import { requestsReducer } from '../request-update/index.js'
+import { requestsReducer } from '../request-update/index'
 
 export const useRequests = ({ exchangeInfo }) => {
     const [requestEditInfo, setRequestEditInfo] = useState({

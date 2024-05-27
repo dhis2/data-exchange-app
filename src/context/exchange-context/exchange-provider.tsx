@@ -3,12 +3,12 @@ import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useCallback, useEffect } from 'react'
-import { Loader, Warning } from '../../components/common/index.js'
+import { Loader, Warning } from '../../components/common/index'
 import {
     useExchangeId,
     useRequestIndex,
-} from '../../use-context-selection/index.js'
-import { ExchangeContext } from './exchange-context.js'
+} from '../../use-context-selection/index'
+import { ExchangeContext } from './exchange-context'
 import styles from './exchange-provider.module.css'
 
 const query = {

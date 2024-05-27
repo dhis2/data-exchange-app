@@ -1,16 +1,16 @@
 import i18n from '@dhis2/d2-i18n'
 import { CenteredContent } from '@dhis2/ui'
 import React, { useEffect } from 'react'
-import { useAppContext, useExchangeContext } from '../../../context/index.js'
+import { useAppContext, useExchangeContext } from '../../../context/index'
 import {
     useExchangeId,
     useRequestIndex,
-} from '../../../use-context-selection/index.js'
-import { Warning } from '../../common/index.js'
-import { EntryScreen } from './entry-screen.js'
-import { RequestsDisplay } from './requests-display/index.js'
-import { RequestsNavigation } from './requests-navigation/index.js'
-import { TitleBar } from './title-bar/title-bar.js'
+} from '../../../use-context-selection/index'
+import { Warning } from '../../common/index'
+import { EntryScreen } from './entry-screen'
+import { RequestsDisplay } from './requests-display/index'
+import { RequestsNavigation } from './requests-navigation/index'
+import { TitleBar } from './title-bar/title-bar'
 
 const DataWorkspace = () => {
     const { aggregateDataExchanges } = useAppContext()

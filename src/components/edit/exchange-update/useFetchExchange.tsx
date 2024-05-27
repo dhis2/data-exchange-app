@@ -1,15 +1,11 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { useCallback, useState } from 'react'
-import {
-    SCHEME_TYPES,
-    OU_GROUP_PREFIX,
-    OU_LEVEL_PREFIX,
-} from '../shared/index.js'
+import { SCHEME_TYPES, OU_GROUP_PREFIX, OU_LEVEL_PREFIX } from '../shared/index'
 import {
     getMetadataWithCode,
     getFilterCodeMap,
     getOuLevelMap,
-} from './codeDetailsHelpers.js'
+} from './codeDetailsHelpers'
 
 const EXCHANGE_QUERY = {
     exchange: {
