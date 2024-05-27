@@ -6,7 +6,7 @@ const config = {
     minDHIS2Version: '2.39',
     coreApp: false,
     entryPoints: {
-        app: './src/index.js',
+        app: './src/index.tsx',
     },
 }
 
