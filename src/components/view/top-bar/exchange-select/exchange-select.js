@@ -1,11 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
-import { SelectorBarItem } from '@dhis2/ui'
+import { Button, SelectorBarItem } from '@dhis2/ui'
 import React, { useState } from 'react'
 import { useAppContext } from '../../../../context/app-context/index.js'
 import { useExchangeId } from '../../../../use-context-selection/use-context-selections.js'
 import { MenuSelect } from '../menu-select/index.js'
 
-const ExchangeSelect = () => {
+const ExchangeSelect = ({ setShowPreview }) => {
     const { aggregateDataExchanges } = useAppContext()
     const [exchangeId, setExchangeId] = useExchangeId()
     const [exchangeSelectorOpen, setExchangeSelectorOpen] = useState(false)
@@ -36,6 +36,7 @@ const ExchangeSelect = () => {
                         onChange={({ selected }) => {
                             setExchangeId(selected)
                             setExchangeSelectorOpen(false)
+                            setShowPreview(false)
                         }}
                     />
                 </div>

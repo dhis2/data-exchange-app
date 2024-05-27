@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-29T08:16:00.606Z\n"
-"PO-Revision-Date: 2024-02-29T08:16:00.606Z\n"
+"POT-Creation-Date: 2024-05-27T12:51:39.407Z\n"
+"PO-Revision-Date: 2024-05-27T12:51:39.407Z\n"
 
 msgid "Editing the target setup will require you to reenter authentication details."
 msgstr "Editing the target setup will require you to reenter authentication details."
@@ -480,9 +480,6 @@ msgstr "Submit data"
 msgid "Data has already been submitted"
 msgstr "Data has already been submitted"
 
-msgid "There is no data to submit"
-msgstr "There is no data to submit"
-
 msgid "There are no exchanges available to you"
 msgstr "There are no exchanges available to you"
 
@@ -664,6 +661,9 @@ msgstr "Data exchange"
 
 msgid "Choose a data exchange"
 msgstr "Choose a data exchange"
+
+msgid "Preview"
+msgstr "Preview"
 
 msgid "Configurations"
 msgstr "Configurations"

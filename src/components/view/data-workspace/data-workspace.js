@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { CenteredContent } from '@dhis2/ui'
+import { CenteredContent, NoticeBox } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { useAppContext, useExchangeContext } from '../../../context/index.js'
 import {
@@ -12,7 +12,7 @@ import { RequestsDisplay } from './requests-display/index.js'
 import { RequestsNavigation } from './requests-navigation/index.js'
 import { TitleBar } from './title-bar/title-bar.js'
 
-const DataWorkspace = () => {
+const DataWorkspace = ({ showPreview }) => {
     const { aggregateDataExchanges } = useAppContext()
     const { exchange } = useExchangeContext()
     const [exchangeId] = useExchangeId()
@@ -41,7 +41,7 @@ const DataWorkspace = () => {
         )
     }
 
-    if (exchange && exchangeId) {
+    if (exchange && exchangeId && showPreview) {
         return (
             <>
                 <TitleBar />
@@ -70,6 +70,18 @@ const DataWorkspace = () => {
                     </>
                 )}
             </>
+        )
+    }
+
+    if (exchange && exchangeId) {
+        return (
+            <NoticeBox>
+                <span>
+                    {i18n.t(
+                        'To preview data click on the preview button. Otherwise you can submit.'
+                    )}
+                </span>
+            </NoticeBox>
         )
     }
 

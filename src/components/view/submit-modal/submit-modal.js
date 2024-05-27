@@ -247,12 +247,10 @@ const SubmitModal = ({ open, onClose, setDataSubmitted }) => {
     const { exchange, exchangeData } = useExchangeContext()
     const [submitsAttempted, setSubmitsAttempted] = useState(false)
 
-    const requests = exchangeData?.map((request, index) => ({
-        name: exchange.source?.requests?.[index]?.name,
-        orgUnits: request.metaData?.dimensions?.ou,
-        periods: request.metaData?.dimensions?.pe.map(
-            (period) => request.metaData?.items[period]?.name
-        ),
+    const requests = exchange?.source?.requests?.map((request, index) => ({
+        name: request?.name,
+        orgUnits: request?.ou,
+        periods: request?.pe,
     }))
 
     const [submitExchange, { called, data, error, loading, dataSubmitted }] =

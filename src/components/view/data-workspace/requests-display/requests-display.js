@@ -115,9 +115,11 @@ export const formatData = (data) => {
 
 const RequestsDisplay = ({ requestIndex }) => {
     const { exchange, exchangeData } = useExchangeContext()
-    const request = exchange.source?.requests?.[requestIndex]
+    const request = exchange?.source?.requests?.[requestIndex]
 
-    const formattedData = formatData(exchangeData?.[requestIndex])
+    const formattedData = exchangeData
+        ? formatData(exchangeData?.[requestIndex])
+        : []
 
     const { baseUrl } = useConfig()
 

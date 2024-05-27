@@ -9,26 +9,15 @@ import { ButtonWithTooltip } from '../../common/button-with-tooltip/index.js'
 const BottomBar = ({ openSubmitModal, dataSubmitted }) => {
     const [exchangeId] = useExchangeId()
     const { aggregateDataExchanges } = useAppContext()
-    const { exchangeData } = useExchangeContext()
-    const disableSubmit =
-        aggregateDataExchanges.find((ade) => ade?.id === exchangeId)?.access
-            ?.data?.write === false
-
-    const dataCount = exchangeData?.reduce(
-        (totalLength, request) => (request?.rows?.length || 0) + totalLength,
-        0
-    )
 
     const submitButtonText = i18n.t('Submit data')
 
-    if (!exchangeId || !exchangeData) {
+    if (!exchangeId) {
         return null
     }
 
-    if (dataCount === 0 || dataSubmitted) {
-        const tooltipContent = dataSubmitted
-            ? i18n.t('Data has already been submitted')
-            : i18n.t('There is no data to submit')
+    if (dataSubmitted) {
+        const tooltipContent = i18n.t('Data has already been submitted')
         return (
             <ButtonWithTooltip
                 buttonText={submitButtonText}
@@ -39,7 +28,7 @@ const BottomBar = ({ openSubmitModal, dataSubmitted }) => {
 
     return (
         <div data-test="bottom-bar">
-            <Button primary onClick={openSubmitModal} disabled={disableSubmit}>
+            <Button primary onClick={openSubmitModal}>
                 {submitButtonText}
             </Button>
         </div>

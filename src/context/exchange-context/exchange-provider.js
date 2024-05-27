@@ -2,7 +2,7 @@ import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Loader, Warning } from '../../components/common/index.js'
 import {
     useExchangeId,
@@ -11,7 +11,7 @@ import {
 import { ExchangeContext } from './exchange-context.js'
 import styles from './exchange-provider.module.css'
 
-const query = {
+const exchangeQuery = {
     exchange: {
         resource: 'aggregateDataExchanges',
         id: ({ id }) => id,
@@ -20,6 +20,9 @@ const query = {
             fields: ['source, target', 'id', 'displayName'],
         },
     },
+}
+
+const exchangeDataQuery = {
     exchangeData: {
         resource: 'aggregateDataExchanges',
         id: ({ id }) => `${id}/sourceData`,
@@ -30,15 +33,36 @@ const query = {
     },
 }
 
-const ExchangeProvider = ({ children }) => {
-    const { loading, error, data, called, refetch } = useDataQuery(query, {
+const ExchangeProvider = ({ children, showPreview }) => {
+    const {
+        loading: exchangeLoading,
+        error: exchangeError,
+        data: exchange,
+        called: exchangeCalled,
+        refetch: exchangeRefetch,
+    } = useDataQuery(exchangeQuery, {
+        lazy: true,
+    })
+    const {
+        loading: exchangeDataLoading,
+        error: exchangeDataError,
+        data: exchangeData,
+        called: exchangeDataCalled,
+        refetch: exchangeDataRefetch,
+    } = useDataQuery(exchangeDataQuery, {
         lazy: true,
     })
     const [exchangeId] = useExchangeId()
     const [, setRequestIndex] = useRequestIndex()
+
     const fetchExchange = useCallback(
-        () => refetch({ id: exchangeId }),
-        [refetch, exchangeId]
+        () => exchangeRefetch({ id: exchangeId }),
+        [exchangeRefetch, exchangeId]
+    )
+
+    const fetchExchangeData = useCallback(
+        () => exchangeDataRefetch({ id: exchangeId }),
+        [exchangeDataRefetch, exchangeId]
     )
 
     useEffect(() => {
@@ -46,13 +70,41 @@ const ExchangeProvider = ({ children }) => {
         if (exchangeId) {
             fetchExchange()
         }
-    }, [exchangeId, fetchExchange, setRequestIndex])
+        if (exchangeId && showPreview) {
+            fetchExchangeData()
+        }
+    }, [
+        exchangeId,
+        showPreview,
+        fetchExchange,
+        fetchExchangeData,
+        setRequestIndex,
+    ])
 
-    if (loading) {
+    if (exchangeLoading || exchangeDataLoading) {
         return <Loader />
     }
 
-    if (error) {
+    if (exchangeError) {
+        /**
+         * error boundary
+         */
+        return (
+            <Warning error={true} title={i18n.t('Exchange not accessible')}>
+                <span className={styles.errorWrapperText}>
+                    {i18n.t(
+                        'It was not possible to retrieve the requested exchange. This may be due to either a connection error or a configuration issue. The message below provides additional detail.'
+                    )}
+                </span>
+                <span className={styles.errorMessage}>
+                    {error?.message || ''}
+                </span>
+                <Button onClick={fetchExchange}>{i18n.t('Try again')}</Button>
+            </Warning>
+        )
+    }
+
+    if (exchangeDataError) {
         /**
          * error boundary
          */
@@ -69,16 +121,19 @@ const ExchangeProvider = ({ children }) => {
                 <span className={styles.errorMessage}>
                     {error?.message || ''}
                 </span>
-                <Button onClick={fetchExchange}>{i18n.t('Try again')}</Button>
+                <Button onClick={fetchExchangeData}>
+                    {i18n.t('Try again')}
+                </Button>
             </Warning>
         )
     }
 
-    const { exchange, exchangeData } = data || {}
-
     const providerValue = {
-        exchange: called ? exchange : null,
-        exchangeData: called ? exchangeData : null,
+        exchange: exchangeCalled ? exchange.exchange : null,
+        exchangeData:
+            exchangeDataCalled && showPreview
+                ? exchangeData.exchangeData
+                : null,
     }
 
     return (

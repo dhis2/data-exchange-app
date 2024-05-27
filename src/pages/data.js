@@ -19,14 +19,16 @@ export const DataPage = () => {
         setSubmitModalOpen(true)
     }
 
+    const [showPreview, setShowPreview] = useState(false)
+
     return (
         <Layout.Container>
             <Layout.Top>
-                <TopBar />
+                <TopBar setShowPreview={setShowPreview} />
             </Layout.Top>
-            <ExchangeProvider>
+            <ExchangeProvider showPreview={showPreview}>
                 <Layout.Content>
-                    <DataWorkspace />
+                    <DataWorkspace showPreview={showPreview} />
                     <SubmitModal
                         open={submitModalOpen}
                         onClose={closeSubmitModal}
