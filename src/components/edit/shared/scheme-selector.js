@@ -19,6 +19,8 @@ export const SchemeSelector = ({
     description,
     disabled,
     enforceEditCheck,
+    defaultOption,
+    setDefaultOption,
 }) => {
     const { Field, useField, useForm } = ReactFinalForm
     const { input: schemeInput } = useField(name, {
@@ -33,9 +35,15 @@ export const SchemeSelector = ({
 
     useEffect(() => {
         if (!isInEditMode) {
-            form.change(name, SCHEME_TYPES.uid)
+            form.change(name, defaultOption ?? SCHEME_TYPES.uid)
         }
-    }, [isInEditMode])
+    }, [isInEditMode, defaultOption, form, name])
+
+    useEffect(() => {
+        if (setDefaultOption) {
+            setDefaultOption(schemeValue)
+        }
+    }, [schemeValue])
 
     return (
         <div className={styles.schemeSelectorContainer}>
@@ -47,7 +55,13 @@ export const SchemeSelector = ({
                         <Checkbox
                             checked={!isInEditMode}
                             className={styles.editCheckboxConfirm}
-                            label={i18n.t('Use default value of ID')}
+                            label={i18n.t(
+                                `Use default value of {{defaultOption}}`,
+                                {
+                                    defaultOption:
+                                        defaultOption ?? SCHEME_TYPES.uid,
+                                }
+                            )}
                             onChange={({ checked }) => {
                                 setIsInEditMode(!checked)
                             }}
@@ -107,9 +121,11 @@ export const SchemeSelector = ({
 }
 
 SchemeSelector.propTypes = {
+    defaultOption: PropTypes.string,
     description: PropTypes.string,
     disabled: PropTypes.bool,
     enforceEditCheck: PropTypes.bool,
     label: PropTypes.string,
     name: PropTypes.string,
+    setDefaultOption: PropTypes.func,
 }
