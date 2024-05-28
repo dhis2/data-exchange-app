@@ -1,12 +1,25 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { config } = require('@dhis2/cli-style')
 
 module.exports = {
-    extends: [config.eslintReact],
+    extends: [
+        config.eslintReact,
+        'plugin:@typescript-eslint/recommended',
+        'plugin:import/typescript',
+    ],
+    settings: {
+        'import/resolver': {
+            node: {
+                extensions: ['.js', '.jsx', '.ts', '.tsx'],
+            },
+        },
+    },
     globals: {
         cy: 'readonly',
         Cypress: 'readonly',
     },
     rules: {
         'react/display-name': 'off',
+        'import/extensions': 'off',
     },
 }
