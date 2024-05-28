@@ -6,6 +6,7 @@ import {
     hasValue,
 } from '@dhis2/ui'
 import React, { useState } from 'react'
+import { useFeatureToggleContext } from '../../../context/index.js'
 import {
     Subsection,
     AdvancedSubsection,
@@ -31,6 +32,7 @@ export const RequestFormContents = () => {
     })
     const { value: visualizationLinkedValue } = visualizationLinked
     const [showAdvanced, setShowAdvanced] = useState(false)
+    const { outputDataItemIdSchemeAvailable } = useFeatureToggleContext()
 
     const {
         dataItemSelectValidator,
@@ -140,6 +142,13 @@ export const RequestFormContents = () => {
                             label={i18n.t('Output data element ID scheme')}
                             name="source_outputDataElementIdScheme"
                         />
+                        {outputDataItemIdSchemeAvailable && (
+                            <SchemeSelector
+                                label={i18n.t('Output data item ID scheme')}
+                                name="source_outputDataItemIdScheme"
+                            />
+                        )}
+
                         <SchemeSelector
                             label={i18n.t('Output organisation unit ID scheme')}
                             name="source_outputOrgUnitIdScheme"

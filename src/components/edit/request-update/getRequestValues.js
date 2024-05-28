@@ -1,11 +1,17 @@
 import { SCHEME_TYPES } from '../shared/index.js'
 
-const getFormIdSchemeValues = ({ requestValues }) => {
-    const idSchemeProps = [
+const getFormIdSchemeValues = ({
+    requestValues,
+    outputDataItemIdSchemeAvailable,
+}) => {
+    const baseIdSchemeProps = [
         'outputIdScheme',
         'outputDataElementIdScheme',
         'outputOrgUnitIdScheme',
     ]
+    const idSchemeProps = outputDataItemIdSchemeAvailable
+        ? [...baseIdSchemeProps, 'outputDataItemIdScheme']
+        : baseIdSchemeProps
     return idSchemeProps.reduce((idSchemeValues, prop) => {
         const attributeProp = `source_${prop}_attribute`
         idSchemeValues[prop] =
@@ -16,7 +22,10 @@ const getFormIdSchemeValues = ({ requestValues }) => {
     }, {})
 }
 
-export const getRequestValuesFromForm = ({ requestValues }) => {
+export const getRequestValuesFromForm = ({
+    requestValues,
+    outputDataItemIdSchemeAvailable,
+}) => {
     const validFilters = !requestValues.filtersUsed
         ? []
         : requestValues?.filtersInfo
@@ -44,16 +53,22 @@ export const getRequestValuesFromForm = ({ requestValues }) => {
             ? null
             : requestValues.visualizationInfo,
         inputIdScheme: SCHEME_TYPES.uid,
-        ...getFormIdSchemeValues({ requestValues }),
+        ...getFormIdSchemeValues({
+            requestValues,
+            outputDataItemIdSchemeAvailable,
+        }),
     }
 }
 
-const getIdSchemeValues = ({ request }) => {
-    const idSchemeProps = [
+const getIdSchemeValues = ({ request, outputDataItemIdSchemeAvailable }) => {
+    const baseIdSchemeProps = [
         'outputIdScheme',
         'outputDataElementIdScheme',
         'outputOrgUnitIdScheme',
     ]
+    const idSchemeProps = outputDataItemIdSchemeAvailable
+        ? [...baseIdSchemeProps, 'outputDataItemIdScheme']
+        : baseIdSchemeProps
     return idSchemeProps.reduce((idSchemeValues, prop) => {
         idSchemeValues[`source_${prop}`] = request?.[prop]
             ? request?.[prop]?.split(':')[0]?.toUpperCase()
@@ -64,7 +79,10 @@ const getIdSchemeValues = ({ request }) => {
     }, {})
 }
 
-export const getInitialValuesFromRequest = ({ request }) => ({
+export const getInitialValuesFromRequest = ({
+    request,
+    outputDataItemIdSchemeAvailable,
+}) => ({
     requestName: request?.name,
     peInfo: request?.peInfo ?? [],
     ouInfo: request?.ouInfo ?? [],
@@ -73,5 +91,5 @@ export const getInitialValuesFromRequest = ({ request }) => ({
     filtersInfo: request?.filtersInfo ?? [{ dimension: null }],
     visualizationLinked: Boolean(request.visualization),
     visualizationInfo: request?.visualizationInfo ?? null,
-    ...getIdSchemeValues({ request }),
+    ...getIdSchemeValues({ request, outputDataItemIdSchemeAvailable }),
 })
