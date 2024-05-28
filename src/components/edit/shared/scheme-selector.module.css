@@ -1,5 +1,5 @@
 .radiosContainer {
-    margin-block-end: var(--spacers-dp16);
+    margin-block-end: var(--spacers-dp24);
     display: flex;
 }
 
@@ -11,6 +11,20 @@
     font-size: 16px;
     font-weight: 500;
     margin: 0 0 var(--spacers-dp8) 0;
+}
+
+.radioContainerSubtext {
+    font-size: 12px;
+    color: var(--colors-grey700);
+    font-weight: 400;
+    margin: 0 0 var(--spacers-dp8) 0;
+}
+
+.radioContainerWrapper {
+}
+
+.editCheckboxConfirm {
+    margin-block-end: var(--spacers-dp8);
 }
 
 .attributeSelectionContainer {

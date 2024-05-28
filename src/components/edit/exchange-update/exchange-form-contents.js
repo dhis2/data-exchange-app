@@ -15,7 +15,6 @@ import { Warning } from '../../common/index.js'
 import {
     SchemeSelector,
     Subsection,
-    AdvancedSubsection,
     AUTHENTICATION_TYPES,
     EXCHANGE_TYPES,
 } from '../shared/index.js'
@@ -37,7 +36,7 @@ const EnableExternalEditWarning = ({
                           'Editing the target setup will require you to reenter authentication details.'
                       )
                     : i18n.t(
-                          'Editing the advanced options will require you to reenter authentication details.'
+                          'Editing the input ID scheme options will require you to reenter authentication details.'
                       )}
             </div>
             <Button
@@ -47,7 +46,7 @@ const EnableExternalEditWarning = ({
             >
                 {targetSetup
                     ? i18n.t('Edit target setup')
-                    : i18n.t('Edit advanced options')}
+                    : i18n.t('Edit input ID scheme options')}
             </Button>
         </Warning>
     )
@@ -90,7 +89,6 @@ export const ExchangeFormContents = React.memo(
             subscription: { value: true },
         })
         const { value: authenticationValue } = authenticationType
-        const [showAdvanced, setShowAdvanced] = useState(false)
 
         const [editTargetSetupDisabled, setEditTargetSetupDisabled] = useState(
             () => typeValue === EXCHANGE_TYPES.external
@@ -270,52 +268,57 @@ export const ExchangeFormContents = React.memo(
                         deleteRequest={deleteRequest}
                     />
                 </Subsection>
-                <AdvancedSubsection
-                    text={i18n.t('Advanced options')}
-                    className={styles.advancedSection}
-                    onTextClick={() => {
-                        setShowAdvanced((prevShown) => !prevShown)
-                    }}
-                    open={showAdvanced}
+                <Subsection
+                    text={i18n.t('Input ID scheme options')}
+                    className={styles.idSchemeSection}
                 >
-                    {showAdvanced && (
-                        <>
-                            <EnableExternalEditWarning
-                                editTargetSetupDisabled={
-                                    editTargetSetupDisabled
-                                }
-                                setEditTargetSetupDisabled={
-                                    setEditTargetSetupDisabled
-                                }
-                                targetSetup={false}
-                            />
-                            <SchemeSelector
-                                label={i18n.t('Input general ID scheme')}
-                                name="target_idScheme"
-                                disabled={editTargetSetupDisabled}
-                            />
-                            <SchemeSelector
-                                label={i18n.t('Input data element ID scheme')}
-                                name="target_dataElementIdScheme"
-                                disabled={editTargetSetupDisabled}
-                            />
-                            <SchemeSelector
-                                label={i18n.t(
-                                    'Input organisation unit ID scheme'
-                                )}
-                                name="target_orgUnitIdScheme"
-                                disabled={editTargetSetupDisabled}
-                            />
-                            <SchemeSelector
-                                label={i18n.t(
-                                    'Input category option combo ID scheme'
-                                )}
-                                name="target_categoryOptionComboIdScheme"
-                                disabled={editTargetSetupDisabled}
-                            />
-                        </>
-                    )}
-                </AdvancedSubsection>
+                    <>
+                        <EnableExternalEditWarning
+                            editTargetSetupDisabled={editTargetSetupDisabled}
+                            setEditTargetSetupDisabled={
+                                setEditTargetSetupDisabled
+                            }
+                            targetSetup={false}
+                        />
+                        <SchemeSelector
+                            label={i18n.t('Input general ID scheme')}
+                            description={i18n.t(
+                                'This is some description for this item'
+                            )}
+                            name="target_idScheme"
+                            disabled={editTargetSetupDisabled}
+                        />
+                        <SchemeSelector
+                            label={i18n.t('Input data element ID scheme')}
+                            description={i18n.t(
+                                'This is a different description for this item'
+                            )}
+                            name="target_dataElementIdScheme"
+                            disabled={editTargetSetupDisabled}
+                            enforceEditCheck={true}
+                        />
+                        <SchemeSelector
+                            label={i18n.t('Input organisation unit ID scheme')}
+                            description={i18n.t(
+                                'Another description for this item'
+                            )}
+                            name="target_orgUnitIdScheme"
+                            disabled={editTargetSetupDisabled}
+                            enforceEditCheck={true}
+                        />
+                        <SchemeSelector
+                            label={i18n.t(
+                                'Input category option combo ID scheme'
+                            )}
+                            description={i18n.t(
+                                'Last description for this item'
+                            )}
+                            name="target_categoryOptionComboIdScheme"
+                            disabled={editTargetSetupDisabled}
+                            enforceEditCheck={true}
+                        />
+                    </>
+                </Subsection>
             </>
         )
     }
