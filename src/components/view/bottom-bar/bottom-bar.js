@@ -2,13 +2,11 @@ import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useAppContext, useExchangeContext } from '../../../context/index.js'
 import { useExchangeId } from '../../../use-context-selection/index.js'
 import { ButtonWithTooltip } from '../../common/button-with-tooltip/index.js'
 
 const BottomBar = ({ openSubmitModal, dataSubmitted }) => {
     const [exchangeId] = useExchangeId()
-    const { aggregateDataExchanges } = useAppContext()
 
     const submitButtonText = i18n.t('Submit data')
 

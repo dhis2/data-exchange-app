@@ -2,7 +2,7 @@ import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Loader, Warning } from '../../components/common/index.js'
 import {
     useExchangeId,
@@ -97,7 +97,7 @@ const ExchangeProvider = ({ children, showPreview }) => {
                     )}
                 </span>
                 <span className={styles.errorMessage}>
-                    {error?.message || ''}
+                    {exchangeError?.message || ''}
                 </span>
                 <Button onClick={fetchExchange}>{i18n.t('Try again')}</Button>
             </Warning>
@@ -119,7 +119,7 @@ const ExchangeProvider = ({ children, showPreview }) => {
                     )}
                 </span>
                 <span className={styles.errorMessage}>
-                    {error?.message || ''}
+                    {exchangeDataError?.message || ''}
                 </span>
                 <Button onClick={fetchExchangeData}>
                     {i18n.t('Try again')}
@@ -145,6 +145,7 @@ const ExchangeProvider = ({ children, showPreview }) => {
 
 ExchangeProvider.propTypes = {
     children: PropTypes.node.isRequired,
+    showPreview: PropTypes.bool.isRequired,
 }
 
 export { ExchangeProvider }

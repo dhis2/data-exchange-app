@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, SelectorBarItem } from '@dhis2/ui'
+import { SelectorBarItem } from '@dhis2/ui'
+import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useAppContext } from '../../../../context/app-context/index.js'
 import { useExchangeId } from '../../../../use-context-selection/use-context-selections.js'
@@ -43,6 +44,10 @@ const ExchangeSelect = ({ setShowPreview }) => {
             </SelectorBarItem>
         </div>
     )
+}
+
+ExchangeSelect.propTypes = {
+    setShowPreview: PropTypes.func.isRequired,
 }
 
 export { ExchangeSelect }

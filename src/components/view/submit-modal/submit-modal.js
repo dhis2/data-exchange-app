@@ -244,10 +244,10 @@ ModalContentWrapper.propTypes = {
 }
 
 const SubmitModal = ({ open, onClose, setDataSubmitted }) => {
-    const { exchange, exchangeData } = useExchangeContext()
+    const { exchange } = useExchangeContext()
     const [submitsAttempted, setSubmitsAttempted] = useState(false)
 
-    const requests = exchange?.source?.requests?.map((request, index) => ({
+    const requests = exchange?.source?.requests?.map((request) => ({
         name: request?.name,
         orgUnits: request?.ou,
         periods: request?.pe,

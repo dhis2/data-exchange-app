@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip, SelectorBar } from '@dhis2/ui'
+import PropTypes from 'prop-types'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useUserContext } from '../../../context/index.js'
@@ -37,6 +38,10 @@ const LinKToEditMode = ({ setShowPreview }) => {
     )
 }
 
+LinKToEditMode.propTypes = {
+    setShowPreview: PropTypes.func.isRequired,
+}
+
 const TopBar = ({ setShowPreview }) => {
     const clearExchangeId = useClearEntireSelection()
 
@@ -55,6 +60,10 @@ const TopBar = ({ setShowPreview }) => {
             <ExchangeSelect setShowPreview={setShowPreview} />
         </SelectorBar>
     )
+}
+
+TopBar.propTypes = {
+    setShowPreview: PropTypes.func.isRequired,
 }
 
 export { TopBar }
