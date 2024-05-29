@@ -8,7 +8,7 @@ import {
     Checkbox,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useAttributeContext } from '../../../context/index.js'
 import { SCHEME_TYPES } from './constants.js'
 import styles from './scheme-selector.module.css'
@@ -19,8 +19,7 @@ export const SchemeSelector = ({
     description,
     disabled,
     enforceEditCheck,
-    defaultOption,
-    setDefaultOption,
+    defaultIDSchemeName,
 }) => {
     const { Field, useField, useForm } = ReactFinalForm
     const { input: schemeInput } = useField(name, {
@@ -29,21 +28,10 @@ export const SchemeSelector = ({
     const { value: schemeValue } = schemeInput
     const form = useForm()
     const { attributes } = useAttributeContext()
+
     const [isInEditMode, setIsInEditMode] = useState(
-        enforceEditCheck ? false : true
+        enforceEditCheck ? schemeValue !== SCHEME_TYPES.none : true
     )
-
-    useEffect(() => {
-        if (!isInEditMode) {
-            form.change(name, defaultOption ?? SCHEME_TYPES.uid)
-        }
-    }, [isInEditMode, defaultOption, form, name])
-
-    useEffect(() => {
-        if (setDefaultOption) {
-            setDefaultOption(schemeValue)
-        }
-    }, [schemeValue])
 
     return (
         <div className={styles.schemeSelectorContainer}>
@@ -56,23 +44,36 @@ export const SchemeSelector = ({
                             checked={!isInEditMode}
                             className={styles.editCheckboxConfirm}
                             label={i18n.t(
-                                `Use default value of {{defaultOption}}`,
-                                {
-                                    defaultOption:
-                                        defaultOption ?? SCHEME_TYPES.uid,
-                                }
+                                'Follow scheme set by the {{defaultIDSchemeName}}',
+                                { defaultIDSchemeName }
                             )}
                             onChange={({ checked }) => {
+                                if (checked) {
+                                    form.change(name, SCHEME_TYPES.none)
+                                }
                                 setIsInEditMode(!checked)
                             }}
                         />
                     )}
 
                     <div className={styles.radiosContainer}>
+                        {enforceEditCheck && (
+                            <Field
+                                name={name}
+                                type="radio"
+                                checked={true}
+                                component={RadioFieldFF}
+                                label={i18n.t('None')}
+                                value={SCHEME_TYPES.none}
+                                disabled={disabled || !isInEditMode}
+                            />
+                        )}
                         <Field
                             name={name}
+                            className={
+                                enforceEditCheck ? styles.radioItem : null
+                            }
                             type="radio"
-                            checked={true}
                             component={RadioFieldFF}
                             label={i18n.t('ID')}
                             value={SCHEME_TYPES.uid}
@@ -121,11 +122,10 @@ export const SchemeSelector = ({
 }
 
 SchemeSelector.propTypes = {
-    defaultOption: PropTypes.string,
+    defaultIDSchemeName: PropTypes.string,
     description: PropTypes.string,
     disabled: PropTypes.bool,
     enforceEditCheck: PropTypes.bool,
     label: PropTypes.string,
     name: PropTypes.string,
-    setDefaultOption: PropTypes.func,
 }

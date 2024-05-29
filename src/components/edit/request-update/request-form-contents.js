@@ -121,15 +121,28 @@ export const RequestFormContents = () => {
                 <>
                     <SchemeSelector
                         label={i18n.t('Output general ID scheme')}
+                        description={i18n.t(
+                            'Description for output general ID scheme'
+                        )}
                         name="source_outputIdScheme"
                     />
                     <SchemeSelector
                         label={i18n.t('Output data element ID scheme')}
+                        description={i18n.t(
+                            'Description for data element ID scheme'
+                        )}
                         name="source_outputDataElementIdScheme"
+                        enforceEditCheck={true}
+                        defaultIDSchemeName={i18n.t('Output general ID scheme')}
                     />
                     <SchemeSelector
                         label={i18n.t('Output organisation unit ID scheme')}
+                        description={i18n.t(
+                            'Description for organisation unit ID scheme'
+                        )}
                         name="source_outputOrgUnitIdScheme"
+                        enforceEditCheck={true}
+                        defaultIDSchemeName={i18n.t('Output general ID scheme')}
                     />
                 </>
             </Subsection>

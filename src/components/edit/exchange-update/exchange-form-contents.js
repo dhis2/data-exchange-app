@@ -17,7 +17,6 @@ import {
     Subsection,
     AUTHENTICATION_TYPES,
     EXCHANGE_TYPES,
-    SCHEME_TYPES,
 } from '../shared/index.js'
 import styles from './exchange-form-contents.module.css'
 import { RequestsOverview } from './requests-overview.js'
@@ -94,8 +93,6 @@ export const ExchangeFormContents = React.memo(
         const [editTargetSetupDisabled, setEditTargetSetupDisabled] = useState(
             () => typeValue === EXCHANGE_TYPES.external
         )
-
-        const [defaultOption, setDefaultOption] = useState(SCHEME_TYPES.uid)
 
         return (
             <>
@@ -290,7 +287,6 @@ export const ExchangeFormContents = React.memo(
                             )}
                             name="target_idScheme"
                             disabled={editTargetSetupDisabled}
-                            setDefaultOption={setDefaultOption}
                         />
                         <SchemeSelector
                             label={i18n.t('Input data element ID scheme')}
@@ -300,7 +296,9 @@ export const ExchangeFormContents = React.memo(
                             name="target_dataElementIdScheme"
                             disabled={editTargetSetupDisabled}
                             enforceEditCheck={true}
-                            defaultOption={defaultOption}
+                            defaultIDSchemeName={i18n.t(
+                                'Input general ID scheme'
+                            )}
                         />
                         <SchemeSelector
                             label={i18n.t('Input organisation unit ID scheme')}
@@ -310,7 +308,9 @@ export const ExchangeFormContents = React.memo(
                             name="target_orgUnitIdScheme"
                             disabled={editTargetSetupDisabled}
                             enforceEditCheck={true}
-                            defaultOption={defaultOption}
+                            defaultIDSchemeName={i18n.t(
+                                'Input general ID scheme'
+                            )}
                         />
                         <SchemeSelector
                             label={i18n.t(
@@ -322,7 +322,9 @@ export const ExchangeFormContents = React.memo(
                             name="target_categoryOptionComboIdScheme"
                             disabled={editTargetSetupDisabled}
                             enforceEditCheck={true}
-                            defaultOption={defaultOption}
+                            defaultIDSchemeName={i18n.t(
+                                'Input general ID scheme'
+                            )}
                         />
                     </>
                 </Subsection>

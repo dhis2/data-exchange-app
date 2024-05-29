@@ -4,13 +4,23 @@ import {
     AUTHENTICATION_TYPES,
 } from '../shared/index.js'
 
-export const getExchangeValuesFromForm = ({ values, requests }) => ({
-    name: values.name,
-    target: getTargetDetails({ values }),
-    source: {
-        requests,
-    },
-})
+const removeRequestIDSchemeValuesOfNONE = ({ requests }) => {
+    const idSchemeProps = [
+        'idScheme',
+        'dataElementIdScheme',
+        'orgUnitIdScheme',
+        'categoryOptionComboIdScheme',
+    ]
+    return requests.map((request) => {
+        const requestCopy = { ...request }
+        for (const prop of idSchemeProps) {
+            if (requestCopy[prop] === SCHEME_TYPES.none) {
+                delete requestCopy[prop]
+            }
+        }
+        return requestCopy
+    })
+}
 
 const getFormIdSchemeValues = ({ values }) => {
     const idSchemeProps = [
@@ -21,10 +31,12 @@ const getFormIdSchemeValues = ({ values }) => {
     ]
     return idSchemeProps.reduce((idSchemeValues, prop) => {
         const attributeProp = `target_${prop}_attribute`
-        idSchemeValues[prop] =
-            values[`target_${prop}`] !== SCHEME_TYPES.attribute
-                ? values[`target_${prop}`]
-                : `ATTRIBUTE:${values[attributeProp]}`
+        if (values[`target_${prop}`] !== SCHEME_TYPES.none) {
+            idSchemeValues[prop] =
+                values[`target_${prop}`] !== SCHEME_TYPES.attribute
+                    ? values[`target_${prop}`]
+                    : `ATTRIBUTE:${values[attributeProp]}`
+        }
         return idSchemeValues
     }, {})
 }
@@ -63,9 +75,16 @@ const getTargetDetails = ({ values }) => {
     }
 }
 
+export const getExchangeValuesFromForm = ({ values, requests }) => ({
+    name: values.name,
+    target: getTargetDetails({ values }),
+    source: { requests: removeRequestIDSchemeValuesOfNONE({ requests }) },
+})
+
 const getIdSchemeValues = ({ exchangeInfo }) => {
+    const defaultSchemeProp = 'idScheme'
     const idSchemeProps = [
-        'idScheme',
+        defaultSchemeProp,
         'orgUnitIdScheme',
         'dataElementIdScheme',
         'categoryOptionComboIdScheme',
@@ -73,7 +92,9 @@ const getIdSchemeValues = ({ exchangeInfo }) => {
     return idSchemeProps.reduce((idSchemeValues, prop) => {
         idSchemeValues[`target_${prop}`] = exchangeInfo.target?.request?.[prop]
             ? exchangeInfo.target.request?.[prop]?.split(':')[0]?.toUpperCase()
-            : SCHEME_TYPES.uid
+            : prop === defaultSchemeProp
+            ? SCHEME_TYPES.uid
+            : SCHEME_TYPES.none
         idSchemeValues[`target_${prop}_attribute`] =
             exchangeInfo.target?.request?.[prop]?.split(':')[1]
         return idSchemeValues

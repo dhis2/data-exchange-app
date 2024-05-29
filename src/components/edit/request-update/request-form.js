@@ -32,6 +32,7 @@ export const RequestForm = ({
                     value: getRequestValuesFromForm({ requestValues }),
                     index: request.index,
                 }
+                console.log(action)
                 requestsDispatch(action)
                 setRequestsTouched(true)
             }}
