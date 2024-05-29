@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-05-27T12:51:39.407Z\n"
-"PO-Revision-Date: 2024-05-27T12:51:39.407Z\n"
+"POT-Creation-Date: 2024-05-28T07:28:28.916Z\n"
+"PO-Revision-Date: 2024-05-28T07:28:28.916Z\n"
 
 msgid "Editing the target setup will require you to reenter authentication details."
 msgstr "Editing the target setup will require you to reenter authentication details."
@@ -493,6 +493,9 @@ msgstr ""
 "There is not any data to show in this exchange, or you might not have "
 "access to the data."
 
+msgid "To preview data click on the preview button. Otherwise you can submit."
+msgstr "To preview data click on the preview button. Otherwise you can submit."
+
 msgid "Choose a data exchange to get started"
 msgstr "Choose a data exchange to get started"
 
@@ -683,6 +686,18 @@ msgstr "Attribute information is not accessible"
 
 msgid "There was a problem retrieving attributes. Refresh the page to try again."
 msgstr "There was a problem retrieving attributes. Refresh the page to try again."
+
+msgid "Exchange not accessible"
+msgstr "Exchange not accessible"
+
+msgid ""
+"It was not possible to retrieve the requested exchange. This may be due to "
+"either a connection error or a configuration issue. The message below "
+"provides additional detail."
+msgstr ""
+"It was not possible to retrieve the requested exchange. This may be due to "
+"either a connection error or a configuration issue. The message below "
+"provides additional detail."
 
 msgid "Exchange content not accessible"
 msgstr "Exchange content not accessible"
