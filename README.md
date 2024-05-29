@@ -47,3 +47,53 @@ You can learn more about the platform in the [DHIS2 Application Platform Documen
 You can learn more about the runtime in the [DHIS2 Application Runtime Documentation](https://runtime.dhis2.nu/).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+## Migrating to TS
+
+- the simplest `tsconfig.json`
+
+```json
+{
+    "compilerOptions": {
+      "allowJs": true,
+      "target": "es5"
+    },
+    "include": ["./src/**/*"]
+}
+```
+from: https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html#writing-a-configuration-file
+
+- install `typescript`
+
+```bash
+yarn add --dev typescript
+```
+
+(optionally) add an alias to make testing easier in `package.json`, to run `yarn tsc --noEmit` for example.
+
+:::note[TypeScript is a typed "superset" of JavaScript]
+
+TypeScript is a language that is a superset of JavaScript: JS syntax is therefore legal TS. 
+:::
+
+- Rename all files from `.js` to `.ts` (or `.jsx` to `.tsx`). You could use a script:
+
+```bash
+find ./src -depth -name "*.js" -exec sh -c 'mv "$1" "${1%.js}.tsx"' _ {} \;
+```
+
+- Remove all references to modules `.js` - get rid of extensions (if you want to keep extensions, you'd need to set `allowImportingTsExtensions` - not worth the hassle)
+
+(this will cause eslint errors)
+
+- Fix eslint config
+
+install `yarn add @typescript-eslint/eslint-plugin @typescript-eslint/parser`
+
+extend eslint config
+
+- inferred types
+- settings cast
+- generics (DRY)
+- 
