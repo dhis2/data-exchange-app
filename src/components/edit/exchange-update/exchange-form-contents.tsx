@@ -79,7 +79,13 @@ RadioDecorator.propTypes = {
     label: PropTypes.string,
 }
 
-export const ExchangeFormContents = React.memo(
+type ExchangeFormContentsType = {
+    requestsState: Array<any>
+    setRequestEditMode: (request: any, addModeRequest?: any) => void
+    deleteRequest: (request: any, addModeRequest?: any) => void
+}
+
+export const ExchangeFormContents = React.memo<ExchangeFormContentsType>(
     ({ requestsState, setRequestEditMode, deleteRequest }) => {
         const { input: typeInput } = useField('type', {
             subscription: { value: true },
@@ -321,8 +327,8 @@ export const ExchangeFormContents = React.memo(
     }
 )
 
-ExchangeFormContents.propTypes = {
-    deleteRequest: PropTypes.func,
-    requestsState: PropTypes.array,
-    setRequestEditMode: PropTypes.func,
-}
+// ExchangeFormContents.propTypes = {
+//     deleteRequest: PropTypes.func,
+//     requestsState: PropTypes.array,
+//     setRequestEditMode: PropTypes.func,
+// }

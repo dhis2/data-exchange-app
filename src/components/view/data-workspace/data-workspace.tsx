@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { CenteredContent } from '@dhis2/ui'
+import { Center } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { useAppContext, useExchangeContext } from '../../../context/index'
 import {
@@ -35,9 +35,9 @@ const DataWorkspace = () => {
 
     if (aggregateDataExchanges.length === 0) {
         return (
-            <CenteredContent>
+            <Center>
                 <span>{i18n.t('There are no exchanges available to you')}</span>
-            </CenteredContent>
+            </Center>
         )
     }
 

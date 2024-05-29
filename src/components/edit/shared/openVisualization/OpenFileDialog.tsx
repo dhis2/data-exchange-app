@@ -24,6 +24,7 @@ import React, {
     useReducer,
     useState,
 } from 'react'
+import { PagedResponse } from '../../../../types/generated'
 /* eslint-disable-next-line import/order */
 import { VIS_TYPE_GROUP_ALL, VIS_TYPE_GROUP_CHARTS } from './visTypes'
 import {
@@ -48,7 +49,7 @@ const getQuery = (type) => ({
             page = 1,
             filters,
         }) => {
-            const queryParams = {
+            const queryParams: Record<string, any> = {
                 filter: filters,
                 fields: `id,type,displayName,title,displayDescription,created,lastUpdated,user,access,href`,
                 paging: true,
@@ -140,7 +141,9 @@ export const OpenFileDialog = ({
         return sortDirection
     }, [sortField, sortDirection])
 
-    const { loading, error, data, refetch } = useDataQuery(filesQuery, {
+    const { loading, error, data, refetch } = useDataQuery<{
+        files: PagedResponse<{ [key in string]: Array<any> }, 'files'>
+    }>(filesQuery, {
         lazy: true,
         onComplete: (response) => {
             if (page !== response.files.pager.page) {
@@ -352,6 +355,7 @@ export const OpenFileDialog = ({
                                                 </DataTableCell>
                                             </DataTableRow>
                                         )}
+
                                         {!loading &&
                                             !data?.files[
                                                 AOTypeMap[type].apiEndpoint

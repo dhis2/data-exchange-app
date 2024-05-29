@@ -1,6 +1,12 @@
 import { createContext } from 'react'
+import { CurrentUser } from '../../types/generated'
 
-const UserContext = createContext({
+type UserContextType = Partial<CurrentUser> & {
+    canAddExchange: boolean
+    canDeleteExchange: boolean
+    keyUiLocale: string
+}
+const UserContext = createContext<UserContextType>({
     id: '',
     canAddExchange: false,
     canDeleteExchange: false,

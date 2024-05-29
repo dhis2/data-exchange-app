@@ -1,10 +1,10 @@
-import { CenteredContent, CircularLoader } from '@dhis2/ui'
+import { Center, CircularLoader } from '@dhis2/ui'
 import React from 'react'
 
 const Loader = () => (
-    <CenteredContent>
+    <Center>
         <CircularLoader />
-    </CenteredContent>
+    </Center>
 )
 
 export { Loader }

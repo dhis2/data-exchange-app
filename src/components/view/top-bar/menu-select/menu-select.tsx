@@ -10,7 +10,7 @@ const MenuSelect = ({ values, selected, dataTest, onChange }) => {
                 {values.map(({ value, label }) => (
                     <MenuItem
                         key={value || label}
-                        dataValue={value}
+                        value={value}
                         label={<span data-value={value}>{label}</span>}
                         active={selected === value}
                         onClick={() => onChange({ selected: value })}

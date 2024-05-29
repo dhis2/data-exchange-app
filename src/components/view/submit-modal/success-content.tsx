@@ -322,7 +322,7 @@ const SuccessContent = ({ data, dataSubmitted }) => {
 
 SuccessContent.propTypes = {
     data: PropTypes.object,
-    dataSubmitted: PropTypes.submitted,
+    dataSubmitted: PropTypes.bool,
 }
 
 export { SuccessContent }

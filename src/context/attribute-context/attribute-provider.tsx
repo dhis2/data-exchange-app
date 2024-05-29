@@ -3,6 +3,8 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Loader, Warning } from '../../components/common/index'
+import { Attribute, ModelCollectionResponse } from '../../types/generated'
+import { WrapQueryResponse } from '../../types/query'
 import { AttributeContext } from './attribute-context'
 
 const query = {
@@ -18,8 +20,12 @@ const query = {
     },
 }
 
+type AttributeResponse = {
+    attributes: ModelCollectionResponse<Attribute, 'attributes'>
+}
+
 const AttributeProvider = ({ children }) => {
-    const { data, loading, error } = useDataQuery(query)
+    const { data, loading, error } = useDataQuery<AttributeResponse>(query)
 
     if (loading) {
         return <Loader />

@@ -4,6 +4,8 @@ import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useCallback, useEffect } from 'react'
 import { Loader, Warning } from '../../components/common/index'
+import { ExchangeData } from '../../types'
+import { AggregateDataExchange } from '../../types/generated'
 import {
     useExchangeId,
     useRequestIndex,
@@ -30,10 +32,16 @@ const query = {
     },
 }
 
+type ExchangeResponse = {
+    exchangeData: ExchangeData
+    exchange: AggregateDataExchange
+}
+
 const ExchangeProvider = ({ children }) => {
-    const { loading, error, data, called, refetch } = useDataQuery(query, {
-        lazy: true,
-    })
+    const { loading, error, data, called, refetch } =
+        useDataQuery<ExchangeResponse>(query, {
+            lazy: true,
+        })
     const [exchangeId] = useExchangeId()
     const [, setRequestIndex] = useRequestIndex()
     const fetchExchange = useCallback(

@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Loader, Warning } from '../../components/common/index'
+import { CurrentUser } from '../../types/generated'
 import { UserContext } from './user-context'
 
 const EXCHANGE_AUTHORITIES_ADD = [
@@ -24,8 +25,10 @@ const query = {
     },
 }
 
+type UserResponse = { user: CurrentUser }
+
 const UserProvider = ({ children }) => {
-    const { data, loading, error } = useDataQuery(query)
+    const { data, loading, error } = useDataQuery<UserResponse>(query)
 
     if (loading) {
         return <Loader />
@@ -64,7 +67,7 @@ const UserProvider = ({ children }) => {
         canAddExchange,
         canDeleteExchange,
         organisationUnits,
-        keyUiLocale: settings.keyUiLocale,
+        keyUiLocale: settings.keyUiLocale as string,
     }
 
     return (

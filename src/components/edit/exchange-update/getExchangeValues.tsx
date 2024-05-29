@@ -29,8 +29,23 @@ const getFormIdSchemeValues = ({ values }) => {
     }, {})
 }
 
+type SchemesType =
+    | 'idScheme'
+    | 'dataElementIdScheme'
+    | 'orgUnitIdScheme'
+    | 'categoryOptionComboIdScheme'
+type TargetDetailType = {
+    type: string
+    request: Partial<{
+        [key in SchemesType]: any
+    }>
+    api?: {
+        url: string
+    }
+}
+
 const getTargetDetails = ({ values }) => {
-    const target = {
+    const target: TargetDetailType = {
         type: values.type,
         request: {
             ...getFormIdSchemeValues({ values }),

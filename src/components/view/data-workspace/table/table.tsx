@@ -35,8 +35,8 @@ const Table = ({ title, columns, rows }) => (
                 <DataTableRow>
                     <DataTableColumnHeader
                         fixed
-                        left="0"
-                        top="0"
+                        left={true}
+                        top={true}
                         className={styles.cell}
                     >
                         <span className={styles.labelCellContent}>
@@ -64,7 +64,7 @@ const Table = ({ title, columns, rows }) => (
                         <DataTableRow key={index}>
                             <DataTableCell
                                 fixed
-                                left="0"
+                                left={true}
                                 className={styles.cell}
                             >
                                 <span className={styles.labelCellContent}>

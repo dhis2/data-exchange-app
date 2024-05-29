@@ -3,6 +3,10 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Loader, Warning } from '../../components/common/index'
+import {
+    AggregateDataExchange,
+    ModelCollectionResponse,
+} from '../../types/generated'
 import { AppContext } from './app-context'
 
 const query = {
@@ -25,13 +29,20 @@ const query = {
     },
 }
 
+type AggregateDataExchangeResponse = {
+    aggregateDataExchanges: ModelCollectionResponse<
+        AggregateDataExchange,
+        'aggregateDataExchanges'
+    >
+}
+
 const AppProvider = ({ children }) => {
     const {
         data,
         loading,
         error,
         refetch: refetchExchanges,
-    } = useDataQuery(query)
+    } = useDataQuery<AggregateDataExchangeResponse>(query)
 
     if (loading) {
         return <Loader />

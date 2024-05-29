@@ -4,6 +4,10 @@ import i18n from '@dhis2/d2-i18n'
 import { Popover, IconChevronDown24, Help } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
+import {
+    DimensionalItemObject,
+    ModelCollectionResponse,
+} from '../../../../types/generated'
 import styles from './dimension-select.module.css'
 
 // Include the following dimension types
@@ -29,7 +33,9 @@ const DIMENSIONS_QUERY = {
 const DimensionSelect = ({ dimension, onChange }) => {
     const [isOpen, setIsOpen] = useState(false)
     const nameProperty = 'displayName'
-    const { error, data } = useDataQuery(DIMENSIONS_QUERY, {
+    const { error, data } = useDataQuery<{
+        dimensions: ModelCollectionResponse<DimensionalItemObject, 'dimensions'>
+    }>(DIMENSIONS_QUERY, {
         variables: { nameProperty },
     })
     const dropdownRef = useRef()

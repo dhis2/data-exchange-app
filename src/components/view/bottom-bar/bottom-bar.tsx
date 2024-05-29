@@ -10,6 +10,7 @@ const BottomBar = ({ openSubmitModal, dataSubmitted }) => {
     const [exchangeId] = useExchangeId()
     const { aggregateDataExchanges } = useAppContext()
     const { exchangeData } = useExchangeContext()
+    console.log('>>>>>>>>', exchangeData)
     const disableSubmit =
         aggregateDataExchanges.find((ade) => ade?.id === exchangeId)?.access
             ?.data?.write === false

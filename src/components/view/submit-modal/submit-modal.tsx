@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import {
     Button,
     ButtonStrip,
-    CenteredContent,
+    Center,
     CircularLoader,
     Modal,
     ModalActions,
@@ -22,12 +22,12 @@ const LoadingStateModalContent = () => (
     <>
         <ModalContent>
             <ModalContentWrapper>
-                <CenteredContent>
+                <Center>
                     <div className={styles.loadingWrapper}>
                         <CircularLoader small />
                         <span>{i18n.t('Submitting...')}</span>
                     </div>
-                </CenteredContent>
+                </Center>
             </ModalContentWrapper>
         </ModalContent>
 

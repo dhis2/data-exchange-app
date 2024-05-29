@@ -18,14 +18,14 @@ const DIMENSION_ITEMS_QUERY = {
     },
 }
 
+type DimensionItemsSelectType = any
+
 const DimensionItemsSelect = ({ dimension, value, onChange }) => {
     const nameProperty = 'displayName'
-    const { loading, error, data, refetch } = useDataQuery(
-        DIMENSION_ITEMS_QUERY,
-        {
+    const { loading, error, data, refetch } =
+        useDataQuery<DimensionItemsSelectType>(DIMENSION_ITEMS_QUERY, {
             lazy: true,
-        }
-    )
+        })
 
     useEffect(() => {
         if (dimension) {

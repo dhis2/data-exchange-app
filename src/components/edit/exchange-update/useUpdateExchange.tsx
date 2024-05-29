@@ -1,5 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { useCallback, useState } from 'react'
+import { Error } from '../../../types/generated'
 import { getExchangeValuesFromForm } from './getExchangeValues'
 
 const getChange = ({ field, value }) => ({
@@ -48,13 +49,33 @@ const getJsonPatch = ({ formattedValues, form, requestsTouched }) => {
     return changes
 }
 
-export const useUpdateExchange = ({ onComplete }) => {
+type RefetchExchangeFunc = ({
+    id,
+    form,
+    values,
+    requests,
+    requestsTouched,
+    newExchange,
+}: any) => Promise<void>
+
+type UseUpdateExchangeReturnType = {
+    loading: boolean
+    error: Error
+}
+
+type UseUpdateExchangeType = ({
+    onComplete,
+}: {
+    onComplete: VoidFunction
+}) => [RefetchExchangeFunc, UseUpdateExchangeReturnType]
+
+export const useUpdateExchange: UseUpdateExchangeType = ({ onComplete }) => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
     const engine = useDataEngine()
 
-    const refetch = useCallback(
+    const refetch: RefetchExchangeFunc = useCallback(
         async ({
             id,
             form,
@@ -84,6 +105,7 @@ export const useUpdateExchange = ({ onComplete }) => {
                     })
                     if (changes?.length > 0) {
                         await engine.mutate({
+                            id, // @todo: is the type wrong?
                             resource: `aggregateDataExchanges/${id}`,
                             type: 'json-patch',
                             data: changes,

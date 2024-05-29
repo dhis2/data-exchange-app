@@ -19,7 +19,9 @@ module.exports = {
         Cypress: 'readonly',
     },
     rules: {
+        'react/prop-types': 'off',
         'react/display-name': 'off',
         'import/extensions': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
     },
 }

@@ -82,8 +82,13 @@ export const formatData = (data) => {
     )
 
     const tableFormat = []
+    type TableType = Partial<{
+        title: string
+        headers: Array<{ name: string }>
+        rows: Array<string>
+    }>
     for (const orgUnit of orgUnits) {
-        const table = {}
+        const table: TableType = {}
 
         table.title =
             filters?.length > 0

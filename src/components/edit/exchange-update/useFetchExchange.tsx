@@ -1,5 +1,11 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { useCallback, useState } from 'react'
+import {
+    AggregateDataExchange,
+    ModelCollectionResponse,
+    OrganisationUnit,
+    Visualization,
+} from '../../../types/generated'
 import { SCHEME_TYPES, OU_GROUP_PREFIX, OU_LEVEL_PREFIX } from '../shared/index'
 import {
     getMetadataWithCode,
@@ -72,9 +78,9 @@ export const useFetchExchange = () => {
             // set to loading
             setLoading(true)
             try {
-                const { exchange } = await engine.query(EXCHANGE_QUERY, {
+                const { exchange } = (await engine.query(EXCHANGE_QUERY, {
                     variables: { id },
-                })
+                })) as { exchange: AggregateDataExchange }
 
                 // get metadata information for dx, pe
                 const metadataRequests = exchange.source.requests.map(
@@ -132,9 +138,14 @@ export const useFetchExchange = () => {
                 )
 
                 const { organisationUnits: orgUnitDetails } =
-                    await engine.query(ORG_UNITS_QUERY, {
+                    (await engine.query(ORG_UNITS_QUERY, {
                         variables: { ids: [...ousToLookUp] },
-                    })
+                    })) as {
+                        organisationUnits: ModelCollectionResponse<
+                            OrganisationUnit,
+                            'organisationUnits'
+                        >
+                    }
 
                 const ouMap = orgUnitDetails.organisationUnits.reduce(
                     (orgUnitsMap, orgUnit) => {
@@ -151,9 +162,14 @@ export const useFetchExchange = () => {
                     )
                 )
                 const { visualizations: visualizationsDetails } =
-                    await engine.query(VISUALIZATIONS_QUERY, {
+                    (await engine.query(VISUALIZATIONS_QUERY, {
                         variables: { ids: [...visualizationsToLookUp] },
-                    })
+                    })) as {
+                        visualizations: ModelCollectionResponse<
+                            Visualization,
+                            'visualizations'
+                        >
+                    }
                 const visualizationsMap =
                     visualizationsDetails.visualizations.reduce(
                         (visMap, visualization) => {

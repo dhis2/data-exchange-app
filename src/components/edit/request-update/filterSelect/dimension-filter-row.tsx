@@ -5,7 +5,19 @@ import DimensionItemsSelect from './dimension-items-select'
 import DimensionSelect from './dimension-select'
 import RemoveFilter from './remove-filter'
 
-const DimensionFilterRow = ({
+type DimensionFilterRowProps = {
+    dimension: string
+    items: Array<any>
+    index: number
+    onChange: (
+        id: number,
+        { dimension, items }: { dimension: string; items: Array<any> }
+    ) => void
+    onRemove: (index: number) => void
+}
+type DimensionFilterRowType = React.FC<DimensionFilterRowProps>
+
+const DimensionFilterRow: DimensionFilterRowType = ({
     dimension,
     items,
     index,
