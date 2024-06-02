@@ -460,9 +460,6 @@ msgstr "Enviar dados"
 msgid "Data has already been submitted"
 msgstr "Os dados já foram enviados"
 
-msgid "There is no data to submit"
-msgstr "Não há dados para enviar"
-
 msgid "There are no exchanges available to you"
 msgstr "Não há trocas disponíveis para esse utilizador"
 
