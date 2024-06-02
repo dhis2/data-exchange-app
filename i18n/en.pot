@@ -5,24 +5,24 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-29T08:16:00.606Z\n"
-"PO-Revision-Date: 2024-02-29T08:16:00.606Z\n"
+"POT-Creation-Date: 2024-05-29T14:03:57.468Z\n"
+"PO-Revision-Date: 2024-05-29T14:03:57.468Z\n"
 
 msgid "Editing the target setup will require you to reenter authentication details."
 msgstr "Editing the target setup will require you to reenter authentication details."
 
 msgid ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
+"Editing the input ID scheme options will require you to reenter "
+"authentication details."
 msgstr ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
+"Editing the input ID scheme options will require you to reenter "
+"authentication details."
 
 msgid "Edit target setup"
 msgstr "Edit target setup"
 
-msgid "Edit advanced options"
-msgstr "Edit advanced options"
+msgid "Edit input ID scheme options"
+msgstr "Edit input ID scheme options"
 
 msgid "Basic setup"
 msgstr "Basic setup"
@@ -87,20 +87,32 @@ msgstr "The password associated with the username specified above"
 msgid "Requests"
 msgstr "Requests"
 
-msgid "Advanced options"
-msgstr "Advanced options"
+msgid "Input ID scheme options"
+msgstr "Input ID scheme options"
 
 msgid "Input general ID scheme"
 msgstr "Input general ID scheme"
 
+msgid "This is some description for this item"
+msgstr "This is some description for this item"
+
 msgid "Input data element ID scheme"
 msgstr "Input data element ID scheme"
+
+msgid "This is a different description for this item"
+msgstr "This is a different description for this item"
 
 msgid "Input organisation unit ID scheme"
 msgstr "Input organisation unit ID scheme"
 
+msgid "Another description for this item"
+msgstr "Another description for this item"
+
 msgid "Input category option combo ID scheme"
 msgstr "Input category option combo ID scheme"
+
+msgid "Last description for this item"
+msgstr "Last description for this item"
 
 msgid "Add exchange"
 msgstr "Add exchange"
@@ -225,6 +237,9 @@ msgstr "Data item select"
 
 msgid "Organisation units"
 msgstr "Organisation units"
+
+msgid "Output ID scheme options"
+msgstr "Output ID scheme options"
 
 msgid "Output general ID scheme"
 msgstr "Output general ID scheme"
@@ -439,6 +454,12 @@ msgstr ""
 
 msgid "New line list"
 msgstr "New line list"
+
+msgid "Use default value"
+msgstr "Use default value"
+
+msgid "None"
+msgstr "None"
 
 msgid "ID"
 msgstr "ID"

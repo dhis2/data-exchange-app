@@ -1,6 +1,6 @@
 .subtitleContainer {
     margin-block-end: var(--spacers-dp16);
-    cursor: pointer;
+    cursor: default;
     display: inline-block;
 }
 
