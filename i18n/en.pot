@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-06-03T13:55:59.666Z\n"
-"PO-Revision-Date: 2024-06-03T13:55:59.666Z\n"
+"POT-Creation-Date: 2024-06-03T14:01:27.882Z\n"
+"PO-Revision-Date: 2024-06-03T14:01:27.882Z\n"
 
 msgid "Editing the target setup will require you to reenter authentication details."
 msgstr "Editing the target setup will require you to reenter authentication details."
@@ -183,6 +183,9 @@ msgstr "Edit"
 
 msgid "Deleting..."
 msgstr "Deleting..."
+
+msgid "Sharing"
+msgstr "Sharing"
 
 msgid "Search for an exchange"
 msgstr "Search for an exchange"

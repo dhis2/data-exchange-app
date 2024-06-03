@@ -114,6 +114,9 @@ const AggregateDataExchangeCard = React.memo(({ ade }) => {
                                     : i18n.t('Delete')}
                             </Button>
                         )}
+                        <Button secondary small onClick={() => {}}>
+                            {i18n.t('Sharing')}
+                        </Button>
                     </ButtonStrip>
                 </div>
             </Card>
