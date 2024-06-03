@@ -1,3 +1,10 @@
+# [100.5.0](https://github.com/dhis2/data-exchange-app/compare/v100.4.1...v100.5.0) (2024-06-03)
+
+
+### Features
+
+* add outputDataItemIdScheme [DHIS2-17213] ([#77](https://github.com/dhis2/data-exchange-app/issues/77)) ([d04a457](https://github.com/dhis2/data-exchange-app/commit/d04a457e9d0f506914e544794a300f2db0f79a94))
+
 ## [100.4.1](https://github.com/dhis2/data-exchange-app/compare/v100.4.0...v100.4.1) (2024-06-02)
 
 
