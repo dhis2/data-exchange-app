@@ -480,9 +480,6 @@ msgstr "Submit data"
 msgid "Data has already been submitted"
 msgstr "Data has already been submitted"
 
-msgid "There is no data to submit"
-msgstr "There is no data to submit"
-
 msgid "There are no exchanges available to you"
 msgstr "There are no exchanges available to you"
 

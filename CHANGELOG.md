@@ -1,3 +1,18 @@
+## [100.4.1](https://github.com/dhis2/data-exchange-app/compare/v100.4.0...v100.4.1) (2024-06-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([55ef763](https://github.com/dhis2/data-exchange-app/commit/55ef763a7585dbc39ea8eeb37d65b04790700993))
+
+# [100.4.0](https://github.com/dhis2/data-exchange-app/compare/v100.3.1...v100.4.0) (2024-05-30)
+
+
+### Features
+
+* upgrade cypress to version ([6764701](https://github.com/dhis2/data-exchange-app/commit/67647016ff6af033321d9248b69bfe38c179e6a1))
+* upgrade cypress version ([00a5b51](https://github.com/dhis2/data-exchange-app/commit/00a5b51adfe71398520fa43712823853b364ac8c))
+
 ## [100.3.1](https://github.com/dhis2/data-exchange-app/compare/v100.3.0...v100.3.1) (2024-05-08)
 
 

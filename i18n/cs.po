@@ -469,9 +469,6 @@ msgstr "Odeslat data"
 msgid "Data has already been submitted"
 msgstr "Data již byla odeslána"
 
-msgid "There is no data to submit"
-msgstr "Chybí data k odeslání"
-
 msgid "There are no exchanges available to you"
 msgstr "Nemáte k dispozici žádné výměny."
 
