@@ -8,6 +8,7 @@ import {
     IconApps16,
     IconClock16,
     InputField,
+    SharingDialog,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useCallback, useState } from 'react'
@@ -64,6 +65,7 @@ const AggregateDataExchangeCard = React.memo(({ ade }) => {
     }
 
     const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false)
+    const [sharingSettingsOpen, setSharingSettingsOpen] = useState(false)
     const closeDeleteConfirmation = useCallback(
         () => setDeleteConfirmationOpen(false),
         [setDeleteConfirmationOpen]
@@ -114,7 +116,13 @@ const AggregateDataExchangeCard = React.memo(({ ade }) => {
                                     : i18n.t('Delete')}
                             </Button>
                         )}
-                        <Button secondary small onClick={() => {}}>
+                        <Button
+                            secondary
+                            small
+                            onClick={() => {
+                                setSharingSettingsOpen(true)
+                            }}
+                        >
                             {i18n.t('Sharing')}
                         </Button>
                     </ButtonStrip>
@@ -125,6 +133,15 @@ const AggregateDataExchangeCard = React.memo(({ ade }) => {
                 onClose={closeDeleteConfirmation}
                 onDelete={deleteExchange}
             />
+            {sharingSettingsOpen && (
+                <SharingDialog
+                    id={ade.id}
+                    onClose={() => {
+                        setSharingSettingsOpen(false)
+                    }}
+                    type={'aggregateDataExchange'}
+                />
+            )}
         </div>
     )
 })
