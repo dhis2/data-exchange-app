@@ -37,7 +37,7 @@
         "@dhis2/app-runtime": "^3.4.4",
         "@dhis2/ui": "9.2.0",
         "classnames": "^2.5.1",
-        "react-router-dom": "^6.4.1",
+        "react-router-dom": "^6.23.1",
         "use-query-params": "^2.1.1"
     },
     "resolutions": {
