@@ -117,8 +117,13 @@ describe('<EditPage/>', () => {
         })
     })
 
-    it('should display the sharing button', () => {
-        const { screen } = setUp(<EditPage />)
+    it('should display the sharing button when user has the right permission', () => {
+        const { screen } = setUp(<EditPage />, {
+            aggregateDataExchanges: [
+                testDataExchange({ writeMetadataAccess: true }),
+            ],
+            userContext: testUserContext({ canAddExchange: true }),
+        })
         const exchangeCards = screen.queryAllByTestId('data-exchange-card')
         exchangeCards.map((exchangeCard) => {
             expect(
@@ -127,9 +132,44 @@ describe('<EditPage/>', () => {
         })
     })
 
-    it('should open and close a sharing dialog when the sharing button is clicked', async () => {
+    it('should not display the sharing button when user does not have metadata write access', () => {
         const { screen } = setUp(<EditPage />, {
-            aggregateDataExchanges: [testDataExchange()],
+            aggregateDataExchanges: [
+                testDataExchange({ writeMetadataAccess: false }),
+            ],
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+        const exchangeCards = screen.queryAllByTestId('data-exchange-card')
+        exchangeCards.map((exchangeCard) => {
+            expect(
+                within(exchangeCard).queryByRole('button', { name: 'Sharing' })
+            ).not.toBeInTheDocument()
+        })
+    })
+
+    it('should not display the sharing button when user does not have add exchange permissions', () => {
+        const { screen } = setUp(<EditPage />, {
+            aggregateDataExchanges: [
+                testDataExchange({ writeMetadataAccess: true }),
+            ],
+            userContext: testUserContext({ canAddExchange: false }),
+        })
+        const exchangeCards = screen.queryAllByTestId('data-exchange-card')
+        exchangeCards.map((exchangeCard) => {
+            expect(
+                within(exchangeCard).queryByRole('button', { name: 'Sharing' })
+            ).not.toBeInTheDocument()
+        })
+    })
+
+    it('should open a sharing dialog when the sharing button is clicked', async () => {
+        const { screen } = setUp(<EditPage />, {
+            aggregateDataExchanges: [
+                testDataExchange({
+                    writeMetadataAccess: true,
+                }),
+            ],
+            userContext: testUserContext({ canAddExchange: true }),
         })
         const exchangeCard = screen.queryByTestId('data-exchange-card')
         within(exchangeCard).getByRole('button', { name: 'Sharing' }).click()

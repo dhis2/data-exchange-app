@@ -71,6 +71,8 @@ const AggregateDataExchangeCard = React.memo(({ ade }) => {
         [setDeleteConfirmationOpen]
     )
 
+    const canShareExchange = ade.access.write && canAddExchange
+
     return (
         <div className={styles.cardContainer} data-test="data-exchange-card">
             <Card key={ade.id} className={styles.cardContainerInner}>
@@ -116,15 +118,17 @@ const AggregateDataExchangeCard = React.memo(({ ade }) => {
                                     : i18n.t('Delete')}
                             </Button>
                         )}
-                        <Button
-                            secondary
-                            small
-                            onClick={() => {
-                                setSharingSettingsOpen(true)
-                            }}
-                        >
-                            {i18n.t('Sharing')}
-                        </Button>
+                        {canShareExchange && (
+                            <Button
+                                secondary
+                                small
+                                onClick={() => {
+                                    setSharingSettingsOpen(true)
+                                }}
+                            >
+                                {i18n.t('Sharing')}
+                            </Button>
+                        )}
                     </ButtonStrip>
                 </div>
             </Card>

@@ -8,6 +8,8 @@ export const testDataExchange = ({
     displayName = faker.company.name(),
     requests = faker.number.int({ min: 1, max: 5 }),
     targetType = randomValueIn(['INTERNAL', 'EXTERNAL']),
+    writeMetadataAccess = faker.datatype.boolean(),
+    readMetadataAccess = faker.datatype.boolean(),
     writeDataAccess = faker.datatype.boolean(),
     readDataAccess = faker.datatype.boolean(),
     created = faker.date.recent(),
@@ -16,7 +18,11 @@ export const testDataExchange = ({
     displayName,
     source: { requests },
     target: { type: targetType },
-    access: { data: { write: writeDataAccess, read: readDataAccess } },
+    access: {
+        write: writeMetadataAccess,
+        read: readMetadataAccess,
+        data: { write: writeDataAccess, read: readDataAccess },
+    },
     created,
 })
 
