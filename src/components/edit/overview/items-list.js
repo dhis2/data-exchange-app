@@ -72,7 +72,7 @@ const AggregateDataExchangeCard = React.memo(({ ade }) => {
     )
 
     return (
-        <div className={styles.cardContainer}>
+        <div className={styles.cardContainer} data-test="data-exchange-card">
             <Card key={ade.id} className={styles.cardContainerInner}>
                 <div className={styles.exchangeTitle}>{ade.displayName}</div>
                 <div className={styles.detailsContainer}>

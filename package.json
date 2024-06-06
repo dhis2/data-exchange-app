@@ -25,6 +25,8 @@
         "@dhis2/cli-style": "^10.4.1",
         "@dhis2/cypress-commands": "^10.0.6",
         "@dhis2/cypress-plugins": "^10.0.1",
+        "@faker-js/faker": "^8.4.1",
+        "@testing-library/jest-dom": "^6.4.5",
         "cypress": "^13.10.0",
         "@badeball/cypress-cucumber-preprocessor": "^16.0.0",
         "@cypress/webpack-preprocessor": "^5.17.0",
@@ -36,6 +38,7 @@
         "@dhis2/analytics": "999.9.9-outlier-table.alpha.1",
         "@dhis2/app-runtime": "^3.4.4",
         "@dhis2/ui": "9.2.0",
+        "@testing-library/react": "12.1.5",
         "classnames": "^2.5.1",
         "react-router-dom": "^6.4.1",
         "use-query-params": "^2.1.1"
