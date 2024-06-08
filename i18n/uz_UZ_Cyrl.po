@@ -459,9 +459,6 @@ msgstr "Маълумотларни тасдиқлаш"
 msgid "Data has already been submitted"
 msgstr "Маълумотлар олдин тасдиқланган"
 
-msgid "There is no data to submit"
-msgstr "Тасдиқлаш учун маълумотлар йўқ"
-
 msgid "There are no exchanges available to you"
 msgstr "Сиз учун қайта танлов имконияти мавжуд эмас"
 
