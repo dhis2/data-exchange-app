@@ -460,9 +460,6 @@ msgstr "提交数据"
 msgid "Data has already been submitted"
 msgstr "数据已经提交"
 
-msgid "There is no data to submit"
-msgstr "没有数据可提交"
-
 msgid "There are no exchanges available to you"
 msgstr "没有可供您进行的兑换"
 
