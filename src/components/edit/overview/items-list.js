@@ -71,7 +71,7 @@ const AggregateDataExchangeCard = React.memo(({ ade }) => {
         [setDeleteConfirmationOpen]
     )
 
-    const canShareExchange = ade.access.write && canAddExchange
+    const canShareExchange = ade.access?.write && canAddExchange
 
     return (
         <div className={styles.cardContainer} data-test="data-exchange-card">

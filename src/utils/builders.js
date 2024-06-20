@@ -3,8 +3,11 @@ import { faker } from '@faker-js/faker'
 const randomValueIn = (list) =>
     list[faker.number.int({ min: 0, max: list.length - 1 })]
 
+const randomDhis2Id = () =>
+    faker.helpers.fromRegExp(/[a-zA-Z]{1}[a-zA-Z0-9]{10}/)
+
 export const testDataExchange = ({
-    id = faker.string.uuid(),
+    id = randomDhis2Id(),
     displayName = faker.company.name(),
     requests = faker.number.int({ min: 1, max: 5 }),
     targetType = randomValueIn(['INTERNAL', 'EXTERNAL']),
@@ -27,7 +30,7 @@ export const testDataExchange = ({
 })
 
 export const testUserContext = ({
-    id = faker.string.uuid(),
+    id = randomDhis2Id(),
     canAddExchange = faker.datatype.boolean(),
     canDeleteExchange = faker.datatype.boolean(),
     organisationUnits = [],
