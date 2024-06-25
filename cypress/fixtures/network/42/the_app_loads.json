@@ -33,7 +33,7 @@
         }
     },
     {
-        "path": "/api/42/aggregateDataExchanges?paging=false&fields=id,displayName,created,target%5Btype%5D,source%5Brequests~size%5D,access%5Bdata%5D&order=displayName%3Aiasc",
+        "path": "/api/42/aggregateDataExchanges?paging=false&fields=id,displayName,created,target%5Btype%5D,source%5Brequests~size%5D,access&order=displayName%3Aiasc",
         "featureName": "The app loads",
         "static": false,
         "count": 1,
@@ -49,8 +49,8 @@
             "sec-fetch-mode": "cors"
         },
         "statusCode": 200,
-        "responseBody": "{\"aggregateDataExchanges\":[{\"created\":\"2022-11-01T10:59:16.931\",\"source\":{\"requests\":1},\"target\":{\"type\":\"INTERNAL\"},\"displayName\":\"Internal data exchange\",\"id\":\"ioHMBgeK50L\"}]}",
-        "responseSize": 177,
+        "responseBody": "{\"aggregateDataExchanges\":[{\"created\":\"2022-11-01T10:59:16.931\",\"source\":{\"requests\":1},\"target\":{\"type\":\"INTERNAL\"},\"access\":{\"manage\":true,\"externalize\":true,\"write\":true,\"read\":true,\"update\":true,\"delete\":true,\"data\":{\"write\":true,\"read\":true}},\"displayName\":\"Internal data exchange\",\"id\":\"ioHMBgeK50L\"},{\"created\":\"2024-06-10T11:56:12.352\",\"source\":{\"requests\":1},\"target\":{\"type\":\"EXTERNAL\"},\"access\":{\"manage\":true,\"externalize\":true,\"write\":true,\"read\":true,\"update\":true,\"delete\":true,\"data\":{\"write\":true,\"read\":true}},\"displayName\":\"test external\",\"id\":\"eRttbFrLp9p\"}]}",
+        "responseSize": 579,
         "responseHeaders": {
             "server": "nginx/1.23.0",
             "content-type": "application/json;charset=UTF-8",
