@@ -1,3 +1,24 @@
+# [100.6.0](https://github.com/dhis2/data-exchange-app/compare/v100.5.1...v100.6.0) (2024-06-25)
+
+
+### Bug Fixes
+
+* add missing transations ([1f9161a](https://github.com/dhis2/data-exchange-app/commit/1f9161a864e2247a12b236a45694b85330c734f5))
+* minor fixes ([e64ac31](https://github.com/dhis2/data-exchange-app/commit/e64ac314da4c1e43866007caaa20bf94b9dc2bac))
+* move testing libraty to dev dependencies ([fcb16c9](https://github.com/dhis2/data-exchange-app/commit/fcb16c9578ad3bf1ff26d154e4313ae4185dde08))
+* update fixtures for cypress tests ([064041e](https://github.com/dhis2/data-exchange-app/commit/064041ea6f2f3e22425563efe07947f07e43def3))
+
+
+### Features
+
+* add sharing button to data exchange configurations ([69d91b7](https://github.com/dhis2/data-exchange-app/commit/69d91b7cb5ed50d85e8e94da631bfe03d9347b71))
+* add sharing button which opens a sharing dialog in configurations ([e5bd1d7](https://github.com/dhis2/data-exchange-app/commit/e5bd1d7f6cf2f5c0dfd6b0c80b5df3ddc5cb73d7))
+* add tests for edit overview page ([e133b39](https://github.com/dhis2/data-exchange-app/commit/e133b39ed15fe34273025ff1ad625a49171b8f94))
+* show sharing button only if the user can share the exchange ([adff79f](https://github.com/dhis2/data-exchange-app/commit/adff79fcd7a5bca5b343c41faf8749b1d66184a6))
+* update version of dhis2 app runtime ([430e79c](https://github.com/dhis2/data-exchange-app/commit/430e79c4b76c773b9a4ba3cd0b6555326afdf07c))
+* upgrade app platform and ui library ([d2d761c](https://github.com/dhis2/data-exchange-app/commit/d2d761cb042e571ab4f2c108b511f85a3738a30e))
+* upgrade node version for ci ([58eb9cb](https://github.com/dhis2/data-exchange-app/commit/58eb9cba061a62313fba706ac057327bb7d020d3))
+
 ## [100.5.1](https://github.com/dhis2/data-exchange-app/compare/v100.5.0...v100.5.1) (2024-06-16)
 
 
