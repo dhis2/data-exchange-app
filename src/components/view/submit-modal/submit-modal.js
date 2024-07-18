@@ -249,8 +249,8 @@ const SubmitModal = ({ open, onClose, setDataSubmitted }) => {
 
     const requests = exchangeData?.map((request, index) => ({
         name: exchange.source?.requests?.[index]?.name,
-        orgUnits: request.metaData?.dimensions?.ou,
-        periods: request.metaData?.dimensions?.pe.map(
+        orgUnits: request?.metaData?.dimensions?.ou,
+        periods: request?.metaData?.dimensions?.pe.map(
             (period) => request.metaData?.items[period]?.name
         ),
     }))

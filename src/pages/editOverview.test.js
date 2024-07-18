@@ -52,7 +52,10 @@ beforeEach(() => {
 
 describe('<EditPage/>', () => {
     it('should display every data exchange', () => {
-        const { screen, aggregateDataExchanges } = setUp(<EditPage />)
+        const { screen, aggregateDataExchanges } = setUp(<EditPage />,
+            {
+                aggregateDataExchanges:  [testDataExchange(), testDataExchange()],
+            })
         const exchangeCards = screen.queryAllByTestId('data-exchange-card')
         expect(exchangeCards).toHaveLength(2)
 
