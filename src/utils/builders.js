@@ -6,8 +6,10 @@ const randomValueIn = (list) =>
 export const randomDhis2Id = () =>
     faker.helpers.fromRegExp(/[a-zA-Z]{1}[a-zA-Z0-9]{10}/)
 
-export const testRequest = ({name = faker.word.noun()} = {}) => ({
-    name
+export const testRequest = ({
+                                name = faker.word.noun(),
+                            } = {}) => ({
+    name,
 })
 
 export const testDataExchange = ({
@@ -20,11 +22,12 @@ export const testDataExchange = ({
     writeDataAccess = faker.datatype.boolean(),
     readDataAccess = faker.datatype.boolean(),
     created = faker.date.recent(),
+    externalURL = undefined,
 } = {}) => ({
     id,
     displayName,
     source: { requests },
-    target: { type: targetType },
+    target: { type: targetType, api: {url: externalURL}},
     access: {
         write: writeMetadataAccess,
         read: readMetadataAccess,

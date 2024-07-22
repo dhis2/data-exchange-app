@@ -101,7 +101,7 @@ SuccessModalContent.propTypes = {
     onClose: PropTypes.func,
 }
 
-const getReportText = (request) => {
+export const getReportText = (request) => {
     const { name, orgUnits, periods } = request
     const orgUnitText =
         orgUnits.length === 1
@@ -200,10 +200,10 @@ const ConfirmModalContent = ({ exchange, requests, onClose, onSubmit }) => {
                 <ModalContentWrapper>
                     <div className={styles.submitModalSummaryWrapper}>
                         {reportTranslationsString}
-                        <ul>
-                            {requests.map((request) => {
+                        <ul >
+                            {requests.map((request, i) => {
                                 return (
-                                    <li key={request.name}>
+                                    <li key={`${request.name}-${i}`}>
                                         {getReportText(request)}
                                     </li>
                                 )
@@ -218,8 +218,8 @@ const ConfirmModalContent = ({ exchange, requests, onClose, onSubmit }) => {
 
             <ModalActions>
                 <ButtonStrip end>
-                    <Button onClick={onClose}>{i18n.t('No, cancel')}</Button>
-                    <Button primary onClick={onSubmit}>
+                    <Button onClick={onClose} data-test='cancel-submission-button'>{i18n.t('No, cancel')}</Button>
+                    <Button primary onClick={onSubmit} data-test='confirm-submission-button'>
                         {i18n.t('Yes, submit')}
                     </Button>
                 </ButtonStrip>

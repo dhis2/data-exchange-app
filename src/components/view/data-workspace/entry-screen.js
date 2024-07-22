@@ -74,7 +74,7 @@ const documentationLink =
 
 export const EntryScreen = () => (
     <div className={styles.wrapperDiv}>
-        <div className={styles.innerDiv}>
+        <div className={styles.innerDiv} data-test="entry-screen-message">
             <div className={styles.svgWrapper}>
                 <EmptyStateIcon />
             </div>
