@@ -295,7 +295,7 @@ export const ExchangeFormContents = React.memo(
                             )}
                             name="target_dataElementIdScheme"
                             disabled={editTargetSetupDisabled}
-                            enforceEditCheck={true}
+                            canBeNone={true}
                             defaultIDSchemeName={i18n.t(
                                 'Input general ID scheme'
                             )}
@@ -307,7 +307,7 @@ export const ExchangeFormContents = React.memo(
                             )}
                             name="target_orgUnitIdScheme"
                             disabled={editTargetSetupDisabled}
-                            enforceEditCheck={true}
+                            canBeNone={true}
                             defaultIDSchemeName={i18n.t(
                                 'Input general ID scheme'
                             )}
@@ -321,7 +321,7 @@ export const ExchangeFormContents = React.memo(
                             )}
                             name="target_categoryOptionComboIdScheme"
                             disabled={editTargetSetupDisabled}
-                            enforceEditCheck={true}
+                            canBeNone={true}
                             defaultIDSchemeName={i18n.t(
                                 'Input general ID scheme'
                             )}

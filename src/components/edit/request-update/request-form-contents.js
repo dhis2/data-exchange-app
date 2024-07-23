@@ -122,17 +122,17 @@ export const RequestFormContents = () => {
                     <SchemeSelector
                         label={i18n.t('Output general ID scheme')}
                         description={i18n.t(
-                            'Description for output general ID scheme'
+                            'The default ID scheme that will be applied for the data that is exported from the source system. In the case, that the selected scheme is not present, ID will be used as a fallback.'
                         )}
                         name="source_outputIdScheme"
                     />
                     <SchemeSelector
                         label={i18n.t('Output data element ID scheme')}
                         description={i18n.t(
-                            'Description for data element ID scheme'
+                            'This scheme is applied to all data elements. It will override the outputDataItemIdScheme'
                         )}
                         name="source_outputDataElementIdScheme"
-                        enforceEditCheck={true}
+                        canBeNone={true}
                         defaultIDSchemeName={i18n.t('Output general ID scheme')}
                     />
                     <SchemeSelector
@@ -141,7 +141,7 @@ export const RequestFormContents = () => {
                             'Description for organisation unit ID scheme'
                         )}
                         name="source_outputOrgUnitIdScheme"
-                        enforceEditCheck={true}
+                        canBeNone={true}
                         defaultIDSchemeName={i18n.t('Output general ID scheme')}
                     />
                 </>

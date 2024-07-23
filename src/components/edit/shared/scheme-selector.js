@@ -5,10 +5,9 @@ import {
     RadioFieldFF,
     SingleSelectFieldFF,
     hasValue,
-    Checkbox,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React from 'react'
 import { useAttributeContext } from '../../../context/index.js'
 import { SCHEME_TYPES } from './constants.js'
 import styles from './scheme-selector.module.css'
@@ -18,20 +17,15 @@ export const SchemeSelector = ({
     label,
     description,
     disabled,
-    enforceEditCheck,
+    canBeNone,
     defaultIDSchemeName,
 }) => {
-    const { Field, useField, useForm } = ReactFinalForm
+    const { Field, useField } = ReactFinalForm
     const { input: schemeInput } = useField(name, {
         subscription: { value: true },
     })
     const { value: schemeValue } = schemeInput
-    const form = useForm()
     const { attributes } = useAttributeContext()
-
-    const [isInEditMode, setIsInEditMode] = useState(
-        enforceEditCheck ? schemeValue !== SCHEME_TYPES.none : true
-    )
 
     return (
         <div className={styles.schemeSelectorContainer}>
@@ -39,45 +33,29 @@ export const SchemeSelector = ({
             <div className={styles.radioContainerSubtext}>{description}</div>
             <div className={styles.radioContainerWrapper}>
                 <FieldContainer>
-                    {enforceEditCheck && (
-                        <Checkbox
-                            checked={!isInEditMode}
-                            className={styles.editCheckboxConfirm}
-                            label={i18n.t(
-                                'Follow scheme set by the {{defaultIDSchemeName}}',
-                                { defaultIDSchemeName }
-                            )}
-                            onChange={({ checked }) => {
-                                if (checked) {
-                                    form.change(name, SCHEME_TYPES.none)
-                                }
-                                setIsInEditMode(!checked)
-                            }}
-                        />
-                    )}
-
                     <div className={styles.radiosContainer}>
-                        {enforceEditCheck && (
+                        {canBeNone && (
                             <Field
                                 name={name}
                                 type="radio"
                                 checked={true}
                                 component={RadioFieldFF}
-                                label={i18n.t('None')}
+                                label={i18n.t(
+                                    'None (follows {{defaultIDSchemeName}})',
+                                    { defaultIDSchemeName }
+                                )}
                                 value={SCHEME_TYPES.none}
-                                disabled={disabled || !isInEditMode}
+                                disabled={disabled}
                             />
                         )}
                         <Field
                             name={name}
-                            className={
-                                enforceEditCheck ? styles.radioItem : null
-                            }
+                            className={canBeNone ? styles.radioItem : null}
                             type="radio"
                             component={RadioFieldFF}
                             label={i18n.t('ID')}
                             value={SCHEME_TYPES.uid}
-                            disabled={disabled || !isInEditMode}
+                            disabled={disabled}
                         />
                         <Field
                             name={name}
@@ -86,7 +64,7 @@ export const SchemeSelector = ({
                             component={RadioFieldFF}
                             label={i18n.t('Code')}
                             value={SCHEME_TYPES.code}
-                            disabled={disabled || !isInEditMode}
+                            disabled={disabled}
                         />
                         <Field
                             name={name}
@@ -95,11 +73,7 @@ export const SchemeSelector = ({
                             component={RadioFieldFF}
                             label={i18n.t('Attribute')}
                             value={SCHEME_TYPES.attribute}
-                            disabled={
-                                disabled ||
-                                attributes.length === 0 ||
-                                !isInEditMode
-                            }
+                            disabled={disabled || attributes.length === 0}
                         />
                     </div>
                 </FieldContainer>
@@ -122,10 +96,10 @@ export const SchemeSelector = ({
 }
 
 SchemeSelector.propTypes = {
+    canBeNone: PropTypes.bool,
     defaultIDSchemeName: PropTypes.string,
     description: PropTypes.string,
     disabled: PropTypes.bool,
-    enforceEditCheck: PropTypes.bool,
     label: PropTypes.string,
     name: PropTypes.string,
 }
