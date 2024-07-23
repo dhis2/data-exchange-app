@@ -5,10 +5,10 @@ import React from 'react'
 import { MemoryRouter, Route } from 'react-router-dom'
 import { QueryParamProvider } from 'use-query-params'
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
-import { formatData } from '../components/view/data-workspace/requests-display'
-import { getRelativeTimeDifference } from '../components/view/data-workspace/title-bar'
-import { getReportText } from '../components/view/submit-modal/submit-modal'
-import { AppContext, UserContext } from '../context'
+import { formatData } from '../components/view/data-workspace/requests-display/index.js'
+import { getRelativeTimeDifference } from '../components/view/data-workspace/title-bar/index.js'
+import { getReportText } from '../components/view/submit-modal/submit-modal.js'
+import { AppContext, UserContext } from '../context/index.js'
 import {
     testDataExchange,
     testDataExchangeSourceData,
@@ -16,7 +16,7 @@ import {
     testRequest,
     testUserContext,
 } from '../utils/builders.js'
-import { DataPage } from './data'
+import { DataPage } from './data.js'
 
 const lastAnalyticsTableSuccess = '2024-07-07T21:47:58.383'
 const serverDate = '2024-07-18T17:36:38.164'
@@ -106,7 +106,7 @@ beforeEach(() => {
 describe('<DataPage/>', () => {
     it('should display a drop down to select an exchange', async () => {
         const exchanges = [testDataExchange(), testDataExchange()]
-        const { screen, aggregateDataExchanges } = setUp(<DataPage />, {
+        const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
         })
 
@@ -119,7 +119,7 @@ describe('<DataPage/>', () => {
     })
 
     it('should display a genera message when no exchange is selected ', async () => {
-        const { screen, aggregateDataExchanges } = setUp(<DataPage />)
+        const { screen } = setUp(<DataPage />)
 
         expect(screen.getByTestId('entry-screen-message')).toBeInTheDocument()
     })
@@ -127,7 +127,7 @@ describe('<DataPage/>', () => {
     it('should select and clear the selected exchange', async () => {
         const anExchange = testDataExchange()
         const exchanges = [anExchange, testDataExchange()]
-        const { screen, router } = setUp(<DataPage />, {
+        const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
         })
 
@@ -151,7 +151,7 @@ describe('<DataPage/>', () => {
     it('should display the correct exchange specified in url if the param is present', async () => {
         const anExchange = testDataExchange()
         const exchanges = [anExchange, testDataExchange()]
-        const { screen, router } = setUp(<DataPage />, {
+        const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
             exchangeId: anExchange.id,
         })
@@ -166,7 +166,7 @@ describe('<DataPage/>', () => {
 
         const exchanges = [anExchange]
         const exchangeData = testDataExchangeSourceData()
-        const { screen, router } = setUp(<DataPage />, {
+        const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
             exchangeId: anExchange.id,
             exchangeData,
@@ -226,7 +226,7 @@ describe('<DataPage/>', () => {
 
         const exchanges = [anExchange]
         const exchangeData = testDataExchangeSourceData()
-        const { screen, router } = setUp(<DataPage />, {
+        const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
             exchangeId: anExchange.id,
             exchangeData,
@@ -260,7 +260,7 @@ describe('<DataPage/>', () => {
         })
         const exchanges = [anExchange]
         const exchangeData = testDataExchangeSourceData()
-        const { screen, router } = setUp(<DataPage />, {
+        const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
             exchangeId: anExchange.id,
             exchangeData,
@@ -291,7 +291,7 @@ describe('<DataPage/>', () => {
         })
 
         const exchanges = [anExchange]
-        const { screen, router } = setUp(<DataPage />, {
+        const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
             exchangeId: anExchange.id,
             importSummaryResponse: { importSummaries },
@@ -373,7 +373,7 @@ describe('<DataPage/>', () => {
         })
 
         const exchanges = [anExchange]
-        const { screen, router } = setUp(<DataPage />, {
+        const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
             exchangeId: anExchange.id,
             importSummaryResponse: {
@@ -402,7 +402,7 @@ describe('<DataPage/>', () => {
         const anExchange = testDataExchange()
         const exchanges = [anExchange]
 
-        const { screen, router } = setUp(<DataPage />, {
+        const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
             exchangeId: anExchange.id,
             loadExchangeDataForever: true,
@@ -415,7 +415,7 @@ describe('<DataPage/>', () => {
     it('should display a warning if there are no requests', async () => {
         const anExchange = testDataExchange({ requests: null })
         const exchanges = [anExchange, testDataExchange()]
-        const { screen, router } = setUp(<DataPage />, {
+        const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
             exchangeId: anExchange.id,
         })

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { getReportText } from './submit-modal'
+import { getReportText } from './submit-modal.js'
 
 describe('getReportText', () => {
     it('returns the report name', () => {
