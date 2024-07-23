@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-02-29T08:16:00.606Z\n"
+"POT-Creation-Date: 2024-06-03T14:01:27.882Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
 "Last-Translator: Jiří Podhorecký, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -192,6 +192,9 @@ msgstr "Upravit"
 msgid "Deleting..."
 msgstr "Mazání..."
 
+msgid "Sharing"
+msgstr "Sdílení"
+
 msgid "Search for an exchange"
 msgstr ""
 
@@ -238,6 +241,9 @@ msgid "Output general ID scheme"
 msgstr ""
 
 msgid "Output data element ID scheme"
+msgstr ""
+
+msgid "Output data item ID scheme"
 msgstr ""
 
 msgid "Output organisation unit ID scheme"
@@ -305,7 +311,7 @@ msgid "Others"
 msgstr "Ostatní"
 
 msgid "Not supported by this app yet"
-msgstr ""
+msgstr "Tato aplikace zatím nepodporuje"
 
 msgid "Filter by name"
 msgstr "Filtrovat podle názvu"
@@ -326,7 +332,7 @@ msgid "{{firstItemIndex}}-{{lastItemIndex}} of {{totalNumberOfItems}}"
 msgstr "{{firstItemIndex}}-{{lastItemIndex}} z {{totalNumberOfItems}}"
 
 msgid "Open"
-msgstr ""
+msgstr "Otevřít"
 
 msgid "Loading"
 msgstr "načítání"
@@ -355,7 +361,7 @@ msgid "Create new"
 msgstr "Vytvořit nový"
 
 msgid "Open a visualization"
-msgstr ""
+msgstr "Otevřít vizualizaci"
 
 msgid "Loading visualizations"
 msgstr "Načítání vizualizací"
@@ -372,11 +378,14 @@ msgstr ""
 
 msgid "No visualizations found. Click New visualization to get started."
 msgstr ""
+"Nebyly nalezeny žádné vizualizace. Začněte kliknutím na Nová vizualizace."
 
 msgid ""
 "No visualizations found. Try adjusting your search or filter options to find"
 " what you're looking for."
 msgstr ""
+"Nenalezeny žádné vizualizace. Zkuste upravit možnosti vyhledávání nebo "
+"filtrování, abyste našli to, co hledáte."
 
 msgid "New visualization"
 msgstr "Nová vizualizace"
@@ -394,51 +403,61 @@ msgid ""
 "There was a problem loading maps. Try again or contact your system "
 "administrator."
 msgstr ""
+"Při načítání map došlo k problému. Zkuste to znovu nebo se obraťte na "
+"správce systému."
 
 msgid "No maps found. Click New map to get started."
-msgstr ""
+msgstr "Nenalezeny žádné mapy. Začněte kliknutím na Nová mapa."
 
 msgid ""
 "No maps found. Try adjusting your search or filter options to find what "
 "you're looking for."
 msgstr ""
+"Nenalezeny žádné mapy. Zkuste upravit možnosti vyhledávání nebo filtrování, "
+"abyste našli to, co hledáte."
 
 msgid "New map"
-msgstr ""
+msgstr "Nová mapa"
 
 msgid "Open a line list"
-msgstr ""
+msgstr "Otevřít řádkový seznam"
 
 msgid "Loading line lists"
-msgstr ""
+msgstr "Načítání řádkových seznamů"
 
 msgid "Couldn't load line lists"
-msgstr ""
+msgstr "Řádkové seznamy se nepodařilo načíst"
 
 msgid ""
 "There was a problem loading line lists. Try again or contact your system "
 "administrator."
 msgstr ""
+"Při načítání řádkových seznamů došlo k problému. Zkuste to znovu nebo se "
+"obraťte na správce systému."
 
 msgid "No line lists found. Click New line list to get started."
 msgstr ""
+"Nebyly nalezeny žádné řádkové seznamy. Začněte kliknutím na Nový řádkový "
+"seznam."
 
 msgid ""
 "No line lists found. Try adjusting your search or filter options to find "
 "what you're looking for."
 msgstr ""
+"Nebyly nalezeny žádné řádkové seznamy. Zkuste upravit možnosti vyhledávání "
+"nebo filtru, abyste našli to, co hledáte."
 
 msgid "New line list"
-msgstr ""
+msgstr "Nový řádkový seznam"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Code"
-msgstr ""
+msgstr "Kód"
 
 msgid "Attribute"
-msgstr ""
+msgstr "Atribut"
 
 msgid "Discard unsaved changes"
 msgstr ""
@@ -452,13 +471,13 @@ msgid "No, go back"
 msgstr ""
 
 msgid "Yes, discard changes"
-msgstr ""
+msgstr "Ano, zahodit změny"
 
 msgid "Save exchange"
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 msgid "Save request"
 msgstr ""
@@ -468,6 +487,9 @@ msgstr "Odeslat data"
 
 msgid "Data has already been submitted"
 msgstr "Data již byla odeslána"
+
+msgid "There is no data to submit"
+msgstr "Chybí data k odeslání"
 
 msgid "There are no exchanges available to you"
 msgstr "Nemáte k dispozici žádné výměny."
