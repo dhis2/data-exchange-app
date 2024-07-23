@@ -6,6 +6,7 @@ import {
     hasValue,
 } from '@dhis2/ui'
 import React from 'react'
+import { useFeatureToggleContext } from '../../../context/index.js'
 import { Subsection, SchemeSelector } from '../shared/index.js'
 import { DataItemSelect } from './data-item-select.js'
 import { FilterSelect } from './filterSelect/filter-select.js'
@@ -26,6 +27,7 @@ export const RequestFormContents = () => {
         subscription: { value: true },
     })
     const { value: visualizationLinkedValue } = visualizationLinked
+    const { outputDataItemIdSchemeAvailable } = useFeatureToggleContext()
 
     const {
         dataItemSelectValidator,
@@ -135,6 +137,13 @@ export const RequestFormContents = () => {
                         canBeNone={true}
                         defaultIDSchemeName={i18n.t('Output general ID scheme')}
                     />
+                        {outputDataItemIdSchemeAvailable && (
+                            <SchemeSelector
+                                label={i18n.t('Output data item ID scheme')}
+                                name="source_outputDataItemIdScheme"
+                            />
+                        )}
+
                     <SchemeSelector
                         label={i18n.t('Output organisation unit ID scheme')}
                         description={i18n.t(

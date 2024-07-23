@@ -1,6 +1,6 @@
 {
     "name": "data-exchange-app",
-    "version": "100.3.1",
+    "version": "100.6.0",
     "description": "",
     "license": "BSD-3-Clause",
     "private": true,
@@ -21,25 +21,29 @@
         "cypress:run:stub": "start-server-and-test 'yarn cypress:start' http://localhost:3000 'yarn cypress run --env networkMode=stub'"
     },
     "devDependencies": {
-        "@dhis2/cli-app-scripts": "^10.4.1",
-        "@dhis2/cli-style": "^10.4.1",
-        "@dhis2/cypress-commands": "^9.0.2",
-        "@dhis2/cypress-plugins": "^9.0.2",
-        "cypress": "^9.7.0",
-        "cypress-cucumber-preprocessor": "^4.3.1",
+        "@badeball/cypress-cucumber-preprocessor": "^16.0.0",
+        "@cypress/webpack-preprocessor": "^5.17.0",
+        "@dhis2/cli-app-scripts": "^11.5.0",
+        "@dhis2/cli-style": "^10.4.3",
+        "@dhis2/cypress-commands": "^10.0.6",
+        "@dhis2/cypress-plugins": "^10.0.1",
+        "@faker-js/faker": "^8.4.1",
+        "@testing-library/jest-dom": "^6.4.5",
+        "@testing-library/react": "12.1.5",
+        "cypress": "^13.10.0",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.6",
         "start-server-and-test": "^1.14.0"
     },
     "dependencies": {
         "@dhis2/analytics": "999.9.9-outlier-table.alpha.1",
-        "@dhis2/app-runtime": "^3.4.4",
-        "@dhis2/ui": "9.2.0",
+        "@dhis2/app-runtime": "^3.10.4",
+        "@dhis2/ui": "9.8.9",
         "classnames": "^2.5.1",
         "react-router-dom": "^6.4.1",
         "use-query-params": "^2.1.1"
     },
     "resolutions": {
-        "@dhis2/ui": "^9.2.0"
+        "@dhis2/ui": "^9.8.9"
     }
 }

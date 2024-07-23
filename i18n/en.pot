@@ -196,6 +196,9 @@ msgstr "Edit"
 msgid "Deleting..."
 msgstr "Deleting..."
 
+msgid "Sharing"
+msgstr "Sharing"
+
 msgid "Search for an exchange"
 msgstr "Search for an exchange"
 
@@ -262,6 +265,9 @@ msgid ""
 msgstr ""
 "This scheme is applied to all data elements. It will override the "
 "outputDataItemIdScheme"
+
+msgid "Output data item ID scheme"
+msgstr "Output data item ID scheme"
 
 msgid "Output organisation unit ID scheme"
 msgstr "Output organisation unit ID scheme"
