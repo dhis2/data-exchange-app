@@ -6,9 +6,7 @@ const randomValueIn = (list) =>
 export const randomDhis2Id = () =>
     faker.helpers.fromRegExp(/[a-zA-Z]{1}[a-zA-Z0-9]{10}/)
 
-export const testRequest = ({
-                                name = faker.word.noun(),
-                            } = {}) => ({
+export const testRequest = ({ name = faker.word.noun() } = {}) => ({
     name,
 })
 
@@ -27,7 +25,7 @@ export const testDataExchange = ({
     id,
     displayName,
     source: { requests },
-    target: { type: targetType, api: {url: externalURL}},
+    target: { type: targetType, api: { url: externalURL } },
     access: {
         write: writeMetadataAccess,
         read: readMetadataAccess,
@@ -50,80 +48,116 @@ export const testUserContext = ({
     keyUiLocale,
 })
 
-const testHeaders = [{
-    name: "dx",
-    column: "Data",
-    valueType: "TEXT",
-    type: "java.lang.String",
-    hidden: false,
-    meta: true
-}, {
-    name: "pe",
-    column: "Period",
-    valueType: "TEXT",
-    type: "java.lang.String",
-    hidden: false,
-    meta: true
-}, {
-    name: "ou",
-    column: "Organisation unit",
-    valueType: "TEXT",
-    type: "java.lang.String",
-    hidden: false,
-    meta: true
-}, {
-    name: "value",
-    column: "Value",
-    valueType: "NUMBER",
-    type: "java.lang.Double",
-    hidden: false,
-    meta: false
-}]
+const testHeaders = [
+    {
+        name: 'dx',
+        column: 'Data',
+        valueType: 'TEXT',
+        type: 'java.lang.String',
+        hidden: false,
+        meta: true,
+    },
+    {
+        name: 'pe',
+        column: 'Period',
+        valueType: 'TEXT',
+        type: 'java.lang.String',
+        hidden: false,
+        meta: true,
+    },
+    {
+        name: 'ou',
+        column: 'Organisation unit',
+        valueType: 'TEXT',
+        type: 'java.lang.String',
+        hidden: false,
+        meta: true,
+    },
+    {
+        name: 'value',
+        column: 'Value',
+        valueType: 'NUMBER',
+        type: 'java.lang.Double',
+        hidden: false,
+        meta: false,
+    },
+]
 
 const testItems = {
-    202307: {name: "July 2023"},
-    202308: {name: "August 2023"},
-    202309: {name: "September 2023"},
-    MAs88nJc9nL: {name: "Private Clinic"},
-    LAST_12_MONTHS: {name: "Last 12 months"},
-    ImspTQPwCqd: {name: "Sierra Leone"},
-    dx: {name: "Data"},
-    pq2XI5kz2BY: {name: "Fixed"},
-    PT59n8BQbqM: {name: "Outreach"},
-    ou: {name: "Organisation unit"},
-    fbfJHSPpUQD: {name: "ANC 1st visit"},
-    pe: {name: "Period"},
-    cYeuwXTCPkU: {name: "ANC 2nd visit"},
-    oRVt7g429ZO: {name: "Public facilities"},
-    Bpx0589u8y0: {name: "Facility Ownership"}
+    202307: { name: 'July 2023' },
+    202308: { name: 'August 2023' },
+    202309: { name: 'September 2023' },
+    MAs88nJc9nL: { name: 'Private Clinic' },
+    LAST_12_MONTHS: { name: 'Last 12 months' },
+    ImspTQPwCqd: { name: 'Sierra Leone' },
+    dx: { name: 'Data' },
+    pq2XI5kz2BY: { name: 'Fixed' },
+    PT59n8BQbqM: { name: 'Outreach' },
+    ou: { name: 'Organisation unit' },
+    fbfJHSPpUQD: { name: 'ANC 1st visit' },
+    pe: { name: 'Period' },
+    cYeuwXTCPkU: { name: 'ANC 2nd visit' },
+    oRVt7g429ZO: { name: 'Public facilities' },
+    Bpx0589u8y0: { name: 'Facility Ownership' },
 }
 
 const testDimensions = {
-    dx: ["fbfJHSPpUQD", "cYeuwXTCPkU"],
-    pe: ["202307", "202308", "202309"],
-    ou: ["ImspTQPwCqd"],
-    co: ["pq2XI5kz2BY", "PT59n8BQbqM"],
-    Bpx0589u8y0: ["oRVt7g429ZO", "MAs88nJc9nL"]
+    dx: ['fbfJHSPpUQD', 'cYeuwXTCPkU'],
+    pe: ['202307', '202308', '202309'],
+    ou: ['ImspTQPwCqd'],
+    co: ['pq2XI5kz2BY', 'PT59n8BQbqM'],
+    Bpx0589u8y0: ['oRVt7g429ZO', 'MAs88nJc9nL'],
 }
 
-const testRows =  [ ["fbfJHSPpUQD", "202308", "ImspTQPwCqd", "21050"],["cYeuwXTCPkU", "202308", "ImspTQPwCqd", "19638"],
-    ["fbfJHSPpUQD", "202307", "ImspTQPwCqd", "21438"], ["cYeuwXTCPkU", "202307", "ImspTQPwCqd", "21438"],
-    ["fbfJHSPpUQD", "202309", "ImspTQPwCqd", "21476"], ["cYeuwXTCPkU", "202309", "ImspTQPwCqd", "21476"] ]
+const testRows = [
+    ['fbfJHSPpUQD', '202308', 'ImspTQPwCqd', '21050'],
+    ['cYeuwXTCPkU', '202308', 'ImspTQPwCqd', '19638'],
+    ['fbfJHSPpUQD', '202307', 'ImspTQPwCqd', '21438'],
+    ['cYeuwXTCPkU', '202307', 'ImspTQPwCqd', '21438'],
+    ['fbfJHSPpUQD', '202309', 'ImspTQPwCqd', '21476'],
+    ['cYeuwXTCPkU', '202309', 'ImspTQPwCqd', '21476'],
+]
 
 export const testDataExchangeSourceData = ({
-                                               headers = testHeaders,
-                                               items = testItems,
-                                               dimensions = testDimensions,
-                                               rows = testRows
-                                           } = {}) => ({
+    headers = testHeaders,
+    items = testItems,
+    dimensions = testDimensions,
+    rows = testRows,
+} = {}) => ({
     headers,
     metaData: {
         items,
-        dimensions
+        dimensions,
     },
     rowContext: {},
     width: 4,
     rows,
     height: 36,
-    headerWidth: 4
+    headerWidth: 4,
+})
+
+export const testAttribute = ({
+    id = randomDhis2Id(),
+    displayName = faker.word.adjective(),
+} = {}) => ({
+    displayName,
+    id,
+})
+
+export const testImportSummary = ({
+    imported = faker.number.int(),
+    updated = faker.number.int(),
+    ignored = faker.number.int(),
+    deleted = faker.number.int(),
+    status = 'SUCCESS',
+    conflicts = [],
+} = {}) => ({
+    importCount: {
+        imported,
+        updated,
+        ignored,
+        deleted,
+    },
+    conflicts,
+    status,
 })

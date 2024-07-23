@@ -38,7 +38,7 @@ const SummaryBox = ({ importType, importCount }) => {
     const boxStyle = styles[styleName]
 
     return (
-        <div className={styles.summaryBox}>
+        <div className={styles.summaryBox} data-test="summary-box">
             <div className={boxStyle}>
                 <div className={styles.count}>{importCount}</div>
                 <div className={styles.label}>
@@ -236,7 +236,10 @@ const SummaryTable = ({
                     ))}
                 </DataTableBody>
             </DataTable>
-            <div className={styles.copyButton}>
+            <div
+                className={styles.copyButton}
+                data-test="copy-to-clipboard-button"
+            >
                 <Button
                     small
                     icon={<IconCopy16 />}
@@ -322,7 +325,7 @@ const SuccessContent = ({ data, dataSubmitted }) => {
 
 SuccessContent.propTypes = {
     data: PropTypes.object,
-    dataSubmitted: PropTypes.submitted,
+    dataSubmitted: PropTypes.string,
 }
 
 export { SuccessContent }

@@ -99,7 +99,10 @@ export const ExchangeFormContents = React.memo(
         return (
             <>
                 <Subsection text={i18n.t('Basic setup')}>
-                    <div className={styles.subsectionField1000}>
+                    <div
+                        className={styles.subsectionField1000}
+                        data-test="exchange-name-input"
+                    >
                         <Field
                             name="name"
                             label={i18n.t('Exchange name')}
@@ -110,7 +113,10 @@ export const ExchangeFormContents = React.memo(
                             validate={hasValue}
                         />
                     </div>
-                    <div className={styles.subsectionField}>
+                    <div
+                        className={styles.subsectionField}
+                        data-test="exchange-type-input"
+                    >
                         <FieldContainer label={i18n.t('Exchange target type')}>
                             <div className={styles.radiosContainer}>
                                 <RadioDecorator
@@ -159,7 +165,10 @@ export const ExchangeFormContents = React.memo(
                             }
                             targetSetup={true}
                         />
-                        <div className={styles.subsectionField600}>
+                        <div
+                            className={styles.subsectionField600}
+                            data-test="exchange-url"
+                        >
                             <Field
                                 name="url"
                                 label={i18n.t('Target URL')}
@@ -176,7 +185,10 @@ export const ExchangeFormContents = React.memo(
                             <FieldContainer
                                 label={i18n.t('Authentication method')}
                             >
-                                <div className={styles.radiosContainer}>
+                                <div
+                                    className={styles.radiosContainer}
+                                    data-test="exchange-auth-method"
+                                >
                                     <Field
                                         name="authentication"
                                         type="radio"
@@ -199,7 +211,10 @@ export const ExchangeFormContents = React.memo(
                         </div>
 
                         {authenticationValue === AUTHENTICATION_TYPES.pat && (
-                            <div className={styles.subsectionField600}>
+                            <div
+                                className={styles.subsectionField600}
+                                data-test="exchange-auth-pat"
+                            >
                                 <Field
                                     name="accessToken"
                                     type="password"
@@ -219,7 +234,10 @@ export const ExchangeFormContents = React.memo(
                             </div>
                         )}
                         {authenticationValue === AUTHENTICATION_TYPES.basic && (
-                            <div className={styles.subsectionField600}>
+                            <div
+                                className={styles.subsectionField600}
+                                data-test="exchange-auth-basic"
+                            >
                                 <Field
                                     name="username"
                                     className={styles.fieldItem}

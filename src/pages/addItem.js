@@ -14,7 +14,7 @@ const defaultExchange = {
 export const AddItem = () => {
     const { canAddExchange } = useUserContext()
     if (!canAddExchange) {
-        ;<AccessWarning />
+        return <AccessWarning />
     }
     return <ExchangeForm exchangeInfo={defaultExchange} addMode={true} />
 }
