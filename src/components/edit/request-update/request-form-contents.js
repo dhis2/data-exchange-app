@@ -137,12 +137,12 @@ export const RequestFormContents = () => {
                         canBeNone={true}
                         defaultIDSchemeName={i18n.t('Output general ID scheme')}
                     />
-                        {outputDataItemIdSchemeAvailable && (
-                            <SchemeSelector
-                                label={i18n.t('Output data item ID scheme')}
-                                name="source_outputDataItemIdScheme"
-                            />
-                        )}
+                    {outputDataItemIdSchemeAvailable && (
+                        <SchemeSelector
+                            label={i18n.t('Output data item ID scheme')}
+                            name="source_outputDataItemIdScheme"
+                        />
+                    )}
 
                     <SchemeSelector
                         label={i18n.t('Output organisation unit ID scheme')}
