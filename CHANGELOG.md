@@ -1,3 +1,10 @@
+## [100.6.1](https://github.com/dhis2/data-exchange-app/compare/v100.6.0...v100.6.1) (2024-07-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c4bd1b1](https://github.com/dhis2/data-exchange-app/commit/c4bd1b12c9ea1a335e8b8874d4a8284bdce9c499))
+
 # [100.6.0](https://github.com/dhis2/data-exchange-app/compare/v100.5.1...v100.6.0) (2024-06-25)
 
 
