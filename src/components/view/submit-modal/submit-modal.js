@@ -89,7 +89,9 @@ const SuccessModalContent = ({ onClose, data, dataSubmitted }) => (
 
         <ModalActions>
             <ButtonStrip end>
-                <Button onClick={onClose}>{i18n.t('Close')}</Button>
+                <Button onClick={onClose} data-test="close-submission-button">
+                    {i18n.t('Close')}
+                </Button>
             </ButtonStrip>
         </ModalActions>
     </>
@@ -286,33 +288,35 @@ const SubmitModal = ({ open, onClose, setDataSubmitted }) => {
             position="middle"
             onClose={loading ? null : onClose}
         >
-            <ModalTitle>{i18n.t('Submitting data')}</ModalTitle>
-            {!called && !loading && !submitsAttempted && (
-                <ConfirmModalContent
-                    exchange={exchange}
-                    requests={requests}
-                    onClose={onClose}
-                    onSubmit={() => {
-                        setSubmitsAttempted(true)
-                        submitExchange()
-                    }}
-                />
-            )}
-            {error && submitsAttempted && (
-                <ErrorModalContent
-                    error={error}
-                    onRetry={submitExchange}
-                    onClose={onClose}
-                />
-            )}
-            {data && (
-                <SuccessModalContent
-                    data={data}
-                    dataSubmitted={dataSubmitted}
-                    onClose={onClose}
-                />
-            )}
-            {loading && <LoadingStateModalContent />}
+            <span data-test="submit-modal-content">
+                <ModalTitle>{i18n.t('Submitting data')}</ModalTitle>
+                {!called && !loading && !submitsAttempted && (
+                    <ConfirmModalContent
+                        exchange={exchange}
+                        requests={requests}
+                        onClose={onClose}
+                        onSubmit={() => {
+                            setSubmitsAttempted(true)
+                            submitExchange()
+                        }}
+                    />
+                )}
+                {error && submitsAttempted && (
+                    <ErrorModalContent
+                        error={error}
+                        onRetry={submitExchange}
+                        onClose={onClose}
+                    />
+                )}
+                {data && (
+                    <SuccessModalContent
+                        data={data}
+                        dataSubmitted={dataSubmitted}
+                        onClose={onClose}
+                    />
+                )}
+                {loading && <LoadingStateModalContent />}
+            </span>
         </Modal>
     )
 }

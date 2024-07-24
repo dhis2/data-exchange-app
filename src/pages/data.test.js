@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { CustomDataProvider } from '@dhis2/app-runtime'
-import { configure, render, waitFor, within } from '@testing-library/react'
+import { act, configure, render, waitFor, within } from '@testing-library/react'
 import React from 'react'
 import { MemoryRouter, Route } from 'react-router-dom'
 import { QueryParamProvider } from 'use-query-params'
@@ -10,6 +10,9 @@ import { getRelativeTimeDifference } from '../components/view/data-workspace/tit
 import { getReportText } from '../components/view/submit-modal/submit-modal.js'
 import { AppContext, UserContext } from '../context/index.js'
 import {
+    addOnlyPermissionsUserContext,
+    allPermissionsUserContext,
+    noPermissionsUserContext,
     testDataExchange,
     testDataExchangeSourceData,
     testImportSummary,
@@ -18,10 +21,9 @@ import {
 } from '../utils/builders.js'
 import { DataPage } from './data.js'
 
-const lastAnalyticsTableSuccess = '2024-07-07T21:47:58.383'
-const serverDate = '2024-07-18T17:36:38.164'
-const contextPath = 'debug.dhis2.org/dev'
-let mockImportSummariesResponse = {}
+const mockLastAnalyticsTableSuccess = '2024-07-07T21:47:58.383'
+const mockServerDate = '2024-07-18T17:36:38.164'
+const mockContextPath = 'debug.dhis2.org/dev'
 
 jest.mock('@dhis2/app-runtime', () => ({
     ...jest.requireActual('@dhis2/app-runtime'),
@@ -29,15 +31,10 @@ jest.mock('@dhis2/app-runtime', () => ({
         baseUrl: 'https://debug.dhis2.org/dev',
         apiVersion: '41',
         systemInfo: {
-            lastAnalyticsTableSuccess,
-            serverDate,
+            lastAnalyticsTableSuccess: mockLastAnalyticsTableSuccess,
+            serverDate: mockServerDate,
             serverTimeZoneId: 'Etc/UTC',
-            contextPath: `https://${contextPath}`,
-        },
-    }),
-    useDataEngine: jest.fn().mockReturnValue({
-        mutate: () => {
-            return mockImportSummariesResponse
+            contextPath: `https://${mockContextPath}`,
         },
     }),
 }))
@@ -47,33 +44,30 @@ const setUp = (
     {
         aggregateDataExchanges = [testDataExchange(), testDataExchange()],
         exchangeId = null,
-        exchangeData = testDataExchangeSourceData(),
-        loadExchangeDataForever = false,
+        exchangeData = [testDataExchangeSourceData()],
         importSummaryResponse = { importSummaries: [testImportSummary()] },
+        userContext = testUserContext(),
     } = {}
 ) => {
-    mockImportSummariesResponse = importSummaryResponse
     const routerParams = exchangeId ? `?exchangeId=${exchangeId}` : ''
-    const aggregateDataExchangesData =
-        exchangeId &&
-        aggregateDataExchanges.find((exchange) => exchange.id === exchangeId)
 
-    const customerProviderData = aggregateDataExchangesData
-        ? {
-              aggregateDataExchanges: (_, params) => {
-                  return params.id === exchangeId
-                      ? Promise.resolve(aggregateDataExchangesData)
-                      : Promise.resolve([exchangeData])
-              },
-          }
-        : {}
+    const customerProviderData = {
+        aggregateDataExchanges: (type, params) => {
+            const sourceDataRegExpr = /^[\w\d]+\/sourceData$/
+            return sourceDataRegExpr.test(params.id)
+                ? Promise.resolve(exchangeData)
+                : Promise.resolve(
+                      aggregateDataExchanges.find(
+                          (exchange) => exchange.id === params.id
+                      )
+                  )
+        },
+        [`aggregateDataExchanges/${exchangeId}/exchange`]: (type) =>
+            type === 'create' ? importSummaryResponse : undefined,
+    }
 
     const screen = render(
-        <CustomDataProvider
-            data={customerProviderData}
-            queryClientOptions={{}}
-            options={{ loadForever: loadExchangeDataForever }}
-        >
+        <CustomDataProvider data={customerProviderData} queryClientOptions={{}}>
             <MemoryRouter initialEntries={[routerParams]}>
                 <QueryParamProvider
                     ReactRouterRoute={Route}
@@ -85,7 +79,7 @@ const setUp = (
                             refetchExchanges: () => {},
                         }}
                     >
-                        <UserContext.Provider value={testUserContext()}>
+                        <UserContext.Provider value={userContext}>
                             {ui}
                         </UserContext.Provider>
                     </AppContext.Provider>
@@ -118,10 +112,36 @@ describe('<DataPage/>', () => {
         })
     })
 
-    it('should display a genera message when no exchange is selected ', async () => {
+    it('should display a general message when no exchange is selected ', async () => {
         const { screen } = setUp(<DataPage />)
 
         expect(screen.getByTestId('entry-screen-message')).toBeInTheDocument()
+    })
+
+    it('should show an edit configurations button when the user all permissions', async () => {
+        const { screen } = setUp(<DataPage />, {
+            userContext: allPermissionsUserContext(),
+        })
+
+        expect(screen.getByTestId('configurations-button')).toBeInTheDocument()
+    })
+
+    it('should show an edit configurations button when the user has add only permissions', async () => {
+        const { screen } = setUp(<DataPage />, {
+            userContext: addOnlyPermissionsUserContext(),
+        })
+
+        expect(screen.getByTestId('configurations-button')).toBeInTheDocument()
+    })
+
+    it('should not show an edit configurations button when the user has no permissions', async () => {
+        const { screen } = setUp(<DataPage />, {
+            userContext: noPermissionsUserContext(),
+        })
+
+        expect(
+            screen.queryByTestId('configurations-button')
+        ).not.toBeInTheDocument()
     })
 
     it('should select and clear the selected exchange', async () => {
@@ -139,6 +159,9 @@ describe('<DataPage/>', () => {
             anExchange.displayName
         )
 
+        const loader = screen.getByTestId('dhis2-uicore-circularloader')
+        expect(loader).toBeInTheDocument()
+
         const headerBar = screen.getByTestId('dhis2-ui-selectorbar')
         within(headerBar)
             .queryByRole('button', { name: 'Clear selections' })
@@ -146,6 +169,32 @@ describe('<DataPage/>', () => {
         expect(screen.getByTestId('data-exchange-selector')).toHaveTextContent(
             'Choose a data exchange'
         )
+    })
+
+    it('should show a progress bar when loading content', async () => {
+        const anExchange = testDataExchange()
+        const exchanges = [anExchange]
+
+        const { screen } = setUp(<DataPage />, {
+            aggregateDataExchanges: exchanges,
+            exchangeId: anExchange.id,
+        })
+
+        const loader = await screen.getByTestId('dhis2-uicore-circularloader')
+        expect(loader).toBeInTheDocument()
+    })
+
+    it('should display a warning if there are no requests', async () => {
+        const anExchange = testDataExchange({ requests: null })
+        const exchanges = [anExchange, testDataExchange()]
+        const { screen } = setUp(<DataPage />, {
+            aggregateDataExchanges: exchanges,
+            exchangeId: anExchange.id,
+        })
+
+        expect(
+            await screen.findByTestId('no-exchange-data-warning')
+        ).toBeInTheDocument()
     })
 
     it('should display the correct exchange specified in url if the param is present', async () => {
@@ -159,9 +208,12 @@ describe('<DataPage/>', () => {
         expect(screen.getByTestId('data-exchange-selector')).toHaveTextContent(
             anExchange.displayName
         )
+
+        const loader = screen.getByTestId('dhis2-uicore-circularloader')
+        expect(loader).toBeInTheDocument()
     })
 
-    it('should display a preview table once an exchange id selected', async () => {
+    it('should display a preview table once an exchange is selected', async () => {
         const anExchange = testDataExchange()
 
         const exchanges = [anExchange]
@@ -169,7 +221,7 @@ describe('<DataPage/>', () => {
         const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
             exchangeId: anExchange.id,
-            exchangeData,
+            exchangeData: [exchangeData],
         })
 
         const titleBar = await screen.findByTestId('title-bar')
@@ -178,8 +230,8 @@ describe('<DataPage/>', () => {
             `${anExchange.source.requests.length} data report`
         )
         const timeDifference = getRelativeTimeDifference({
-            startTimestamp: lastAnalyticsTableSuccess,
-            endTimestamp: serverDate,
+            startTimestamp: mockLastAnalyticsTableSuccess,
+            endTimestamp: mockServerDate,
         })
         expect(titleBar).toHaveTextContent(
             `Source data was generated ${timeDifference} ago`
@@ -199,6 +251,42 @@ describe('<DataPage/>', () => {
         expect(
             within(dataTable).getByTestId('dhis2-uicore-tablehead')
         ).toHaveTextContent(formattedData.title)
+        const tableRows = within(dataTable).getAllByTestId(
+            'dhis2-uicore-datatablerow'
+        )
+        expect(tableRows).toHaveLength(3)
+
+        expect(tableRows[0]).toHaveTextContent(
+            formattedData.headers.map((h) => h.name).join('')
+        )
+        expect(tableRows[1]).toHaveTextContent(formattedData.rows[0].join(''))
+        expect(tableRows[2]).toHaveTextContent(formattedData.rows[1].join(''))
+    })
+
+    it('can show the correct data once another tab is clicked on', async () => {
+        const anExchange = testDataExchange({
+            requests: [testRequest(), testRequest()],
+        })
+
+        const exchanges = [anExchange]
+        const exchangesData = [
+            testDataExchangeSourceData(),
+            testDataExchangeSourceData(),
+        ]
+        const { screen } = setUp(<DataPage />, {
+            aggregateDataExchanges: exchanges,
+            exchangeId: anExchange.id,
+            exchangeData: exchangesData,
+        })
+
+        const tabBar = await screen.findByTestId('dhis2-uicore-tabbar')
+        const tabs = within(tabBar).getAllByTestId('dhis2-uicore-tab')
+        expect(tabs).toHaveLength(anExchange.source.requests.length)
+        tabs[1].click()
+
+        const dataTable = await screen.findByTestId('dhis2-uicore-datatable')
+        const formattedData = formatData(exchangesData[1])[0]
+        expect(dataTable).toBeInTheDocument()
         expect(
             within(dataTable).getByTestId('dhis2-uicore-tablehead')
         ).toHaveTextContent(formattedData.title)
@@ -206,15 +294,12 @@ describe('<DataPage/>', () => {
             'dhis2-uicore-datatablerow'
         )
         expect(tableRows).toHaveLength(3)
-        formattedData.headers.map((tableHeader) =>
-            expect(tableRows[0]).toHaveTextContent(tableHeader.name)
+
+        expect(tableRows[0]).toHaveTextContent(
+            formattedData.headers.map((h) => h.name).join('')
         )
-        formattedData.rows[0].map((firstRowCell) =>
-            expect(tableRows[1]).toHaveTextContent(firstRowCell)
-        )
-        formattedData.rows[1].map((secondRowCell) =>
-            expect(tableRows[2]).toHaveTextContent(secondRowCell)
-        )
+        expect(tableRows[1]).toHaveTextContent(formattedData.rows[0].join(''))
+        expect(tableRows[2]).toHaveTextContent(formattedData.rows[1].join(''))
     })
 
     it('should show a submit modal for internal exchange when the user clicks on the submit data button', async () => {
@@ -229,15 +314,15 @@ describe('<DataPage/>', () => {
         const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
             exchangeId: anExchange.id,
-            exchangeData,
+            exchangeData: [exchangeData],
         })
 
         const bottomBar = await screen.findByTestId('bottom-bar')
         within(bottomBar).getByRole('button', { name: 'Submit data' }).click()
-        const submitModal = await screen.findByTestId('dhis2-uicore-card')
+        const submitModal = await screen.findByTestId('submit-modal-content')
         expect(submitModal).toBeInTheDocument()
         expect(submitModal).toHaveTextContent(
-            `1 report to ${anExchange.displayName} internally at ${contextPath}`
+            `1 report to ${anExchange.displayName} internally at ${mockContextPath}`
         )
         expect(submitModal).toHaveTextContent(
             getReportText({
@@ -263,12 +348,12 @@ describe('<DataPage/>', () => {
         const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
             exchangeId: anExchange.id,
-            exchangeData,
+            exchangeData: [exchangeData],
         })
 
         const bottomBar = await screen.findByTestId('bottom-bar')
         within(bottomBar).getByRole('button', { name: 'Submit data' }).click()
-        const submitModal = await screen.findByTestId('dhis2-uicore-card')
+        const submitModal = await screen.findByTestId('submit-modal-content')
         expect(submitModal).toBeInTheDocument()
         expect(submitModal).toHaveTextContent(
             `1 report to ${anExchange.displayName} at ${externalURL}`
@@ -304,12 +389,16 @@ describe('<DataPage/>', () => {
         })
         submitButton.click()
 
-        const submitModal = await screen.findByTestId('dhis2-uicore-card')
+        const submitModal = await screen.findByTestId('submit-modal-content')
         within(submitModal).getByTestId('confirm-submission-button').click()
 
-        waitFor(() => expect(submitButton).toBeDisabled())
         const successTag = await screen.findByTestId('dhis2-uicore-tag')
         expect(successTag).toBeInTheDocument()
+
+        await act(async () => {})
+        waitFor(() => {
+            expect(submitButton).toBeDisabled()
+        })
 
         const summaryBoxes = screen.getAllByTestId('summary-box')
         expect(summaryBoxes).toHaveLength(3)
@@ -389,39 +478,49 @@ describe('<DataPage/>', () => {
         })
         submitButton.click()
 
-        const submitModal = await screen.findByTestId('dhis2-uicore-card')
+        const submitModal = await screen.findByTestId('submit-modal-content')
         within(submitModal).getByTestId('confirm-submission-button').click()
 
-        waitFor(() => expect(submitButton).toBeDisabled())
         const warning = await screen.findByTestId('warning')
         expect(warning).toBeInTheDocument()
         expect(warning).toHaveTextContent('There was a problem submitting data')
     })
 
-    it('should show a progress bar when loading content', async () => {
-        const anExchange = testDataExchange()
+    it('show an error when a exchange data when submitting data fails', async () => {
+        jest.mock('@dhis2/app-runtime', () => ({
+            ...jest.requireActual('@dhis2/app-runtime'),
+            useDataEngine: jest.fn().mockRejectedValue('OH NO'),
+        }))
+        const importSummariesWithError = [
+            testImportSummary(),
+            testImportSummary({ status: 'ERROR' }),
+        ]
+        const anExchange = testDataExchange({
+            requests: [testRequest(), testRequest()],
+        })
+
         const exchanges = [anExchange]
-
         const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
             exchangeId: anExchange.id,
-            loadExchangeDataForever: true,
+            importSummaryResponse: {
+                importSummaries: importSummariesWithError,
+                status: 'ERROR',
+            },
         })
 
-        const loader = await screen.findByTestId('dhis2-uicore-circularloader')
-        expect(loader).toBeInTheDocument()
-    })
+        const bottomBar = await screen.findByTestId('bottom-bar')
 
-    it('should display a warning if there are no requests', async () => {
-        const anExchange = testDataExchange({ requests: null })
-        const exchanges = [anExchange, testDataExchange()]
-        const { screen } = setUp(<DataPage />, {
-            aggregateDataExchanges: exchanges,
-            exchangeId: anExchange.id,
+        const submitButton = within(bottomBar).getByRole('button', {
+            name: 'Submit data',
         })
+        submitButton.click()
 
-        expect(
-            await screen.findByTestId('no-exchange-data-warning')
-        ).toBeInTheDocument()
+        const submitModal = await screen.findByTestId('submit-modal-content')
+        within(submitModal).getByTestId('confirm-submission-button').click()
+
+        const warning = await screen.findByTestId('warning')
+        expect(warning).toBeInTheDocument()
+        expect(warning).toHaveTextContent('There was a problem submitting data')
     })
 })

@@ -48,6 +48,24 @@ export const testUserContext = ({
     keyUiLocale,
 })
 
+export const addOnlyPermissionsUserContext = () =>
+    testUserContext({
+        canAddExchange: true,
+        canDeleteExchange: false,
+    })
+
+export const noPermissionsUserContext = () =>
+    testUserContext({
+        canAddExchange: false,
+        canDeleteExchange: false,
+    })
+
+export const allPermissionsUserContext = () =>
+    testUserContext({
+        canAddExchange: true,
+        canDeleteExchange: true,
+    })
+
 const testHeaders = [
     {
         name: 'dx',

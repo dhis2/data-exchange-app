@@ -4,7 +4,7 @@ import React from 'react'
 
 const RequestsNavigation = ({ requests, selected, onChange }) =>
     requests && requests?.length > 0 ? (
-        <TabBar>
+        <TabBar scrollable>
             {requests.map((request, index) => (
                 <Tab
                     key={request.name}
