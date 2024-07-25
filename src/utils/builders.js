@@ -179,3 +179,23 @@ export const testImportSummary = ({
     conflicts,
     status,
 })
+
+export const testOrganizationalUnitLevel = ({
+    name = faker.word.noun(),
+    id = randomDhis2Id(),
+    level = 0,
+} = {}) => ({ name, level, id, displayName: name })
+
+export const testOrganisationUnitLevels = ({ numberOfLevels = 2 } = {}) =>
+    [...Array(numberOfLevels + 1).keys()].map((level) =>
+        testOrganizationalUnitLevel({ level })
+    )
+
+export const testOrganisationUnitGroup = ({
+    name = faker.word.noun(),
+    id = randomDhis2Id(),
+} = {}) => ({
+    name,
+    id,
+    displayName: name,
+})
