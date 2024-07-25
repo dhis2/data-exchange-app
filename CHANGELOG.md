@@ -1,3 +1,10 @@
+# [100.7.0](https://github.com/dhis2/data-exchange-app/compare/v100.6.1...v100.7.0) (2024-07-25)
+
+
+### Features
+
+* upgrade ui and analytics library ([c4c020d](https://github.com/dhis2/data-exchange-app/commit/c4c020d8eee9752e465f2cbdf8a77d55e3d804db))
+
 ## [100.6.1](https://github.com/dhis2/data-exchange-app/compare/v100.6.0...v100.6.1) (2024-07-24)
 
 
