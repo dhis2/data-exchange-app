@@ -25,6 +25,12 @@ const mockLastAnalyticsTableSuccess = '2024-07-07T21:47:58.383'
 const mockServerDate = '2024-07-18T17:36:38.164'
 const mockContextPath = 'debug.dhis2.org/dev'
 
+global.ResizeObserver = jest.fn().mockImplementation(() => ({
+    observe: jest.fn(),
+    unobserve: jest.fn(),
+    disconnect: jest.fn(),
+}))
+
 jest.mock('@dhis2/app-runtime', () => ({
     ...jest.requireActual('@dhis2/app-runtime'),
     useConfig: () => ({
