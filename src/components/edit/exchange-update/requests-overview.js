@@ -53,16 +53,20 @@ const getOuText = ({ ouInfo }) => {
 }
 
 const EmptyTableInfo = () => (
-    <DataTableCell colspan="6">
-        <div className={styles.emptyTableWrapper}>
-            <p className={styles.emptyTableHeader}>{i18n.t('No requests')}</p>
-            <p className={styles.emptyTableText}>
-                {i18n.t(
-                    "Click the 'Add request' button to add a request to this exchange"
-                )}
-            </p>
-        </div>
-    </DataTableCell>
+    <TableRow>
+        <DataTableCell colSpan="6">
+            <div className={styles.emptyTableWrapper}>
+                <p className={styles.emptyTableHeader}>
+                    {i18n.t('No requests')}
+                </p>
+                <p className={styles.emptyTableText}>
+                    {i18n.t(
+                        "Click the 'Add request' button to add a request to this exchange"
+                    )}
+                </p>
+            </div>
+        </DataTableCell>
+    </TableRow>
 )
 
 const RequestRow = ({

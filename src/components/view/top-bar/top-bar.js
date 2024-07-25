@@ -13,7 +13,10 @@ const LinKToEditMode = () => {
         return null
     }
     return (
-        <div className={styles.additionalContentContainer}>
+        <div
+            className={styles.additionalContentContainer}
+            data-test={'configurations-button'}
+        >
             <Link to="/edit">
                 <Button small>{i18n.t('Configurations')}</Button>
             </Link>

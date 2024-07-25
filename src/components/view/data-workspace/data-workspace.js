@@ -17,7 +17,7 @@ const DataWorkspace = () => {
     const { exchange } = useExchangeContext()
     const [exchangeId] = useExchangeId()
     // memoize for stable reference?
-    const requests = exchange?.source?.requests.map((request) => ({
+    const requests = exchange?.source?.requests?.map((request) => ({
         name: request.name,
     }))
 
@@ -46,7 +46,7 @@ const DataWorkspace = () => {
             <>
                 <TitleBar />
                 {!requests && (
-                    <div>
+                    <div data-test="no-exchange-data-warning">
                         <Warning
                             error={true}
                             title={i18n.t('No data in this exchange')}
