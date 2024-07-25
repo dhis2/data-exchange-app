@@ -1,3 +1,19 @@
+# [100.8.0](https://github.com/dhis2/data-exchange-app/compare/v100.7.0...v100.8.0) (2024-07-25)
+
+
+### Bug Fixes
+
+* add mock for resize observer ([fe45b4b](https://github.com/dhis2/data-exchange-app/commit/fe45b4b0fed5ca1c070504f4b264de8600b5f547))
+* fix format ([a899bdf](https://github.com/dhis2/data-exchange-app/commit/a899bdfb4fcc30b9b25625730ee82291fd327c35))
+
+
+### Features
+
+* add additional tests for main exchange page ([ad71e7a](https://github.com/dhis2/data-exchange-app/commit/ad71e7a47920f013d5cb939f877c1f2f30d65eea))
+* add initial tests for main data display page ([f65f04c](https://github.com/dhis2/data-exchange-app/commit/f65f04cc47215c3734dbb791dd5855d892b48fa9))
+* add more tests to general data page and refactor existing ones ([d9426ea](https://github.com/dhis2/data-exchange-app/commit/d9426ea448411a4e9a53787b0b7633f8e122bdfe))
+* more tests for data page and setup for other pages ([01b06b2](https://github.com/dhis2/data-exchange-app/commit/01b06b23a053fd3586aafe1491818d0cdf7f1ac4))
+
 # [100.7.0](https://github.com/dhis2/data-exchange-app/compare/v100.6.1...v100.7.0) (2024-07-25)
 
 
