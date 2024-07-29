@@ -54,7 +54,10 @@ export const SchemeSelector = ({ name, label, disabled, dataTest }) => {
                 </div>
             </FieldContainer>
             {schemeValue === SCHEME_TYPES.attribute && (
-                <div className={styles.attributeSelectionContainer} data-test={`${dataTest}-attributes`} >
+                <div
+                    className={styles.attributeSelectionContainer}
+                    data-test={`${dataTest}-attributes`}
+                >
                     <Field
                         name={`${name}_attribute`}
                         component={SingleSelectFieldFF}
@@ -71,8 +74,8 @@ export const SchemeSelector = ({ name, label, disabled, dataTest }) => {
 }
 
 SchemeSelector.propTypes = {
+    dataTest: PropTypes.string,
     disabled: PropTypes.bool,
     label: PropTypes.string,
     name: PropTypes.string,
-    dataTest: PropTypes.string
 }

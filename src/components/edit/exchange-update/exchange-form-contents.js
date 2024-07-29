@@ -118,7 +118,10 @@ export const ExchangeFormContents = React.memo(
                         data-test="exchange-type-input"
                     >
                         <FieldContainer label={i18n.t('Exchange target type')}>
-                            <div className={styles.radiosContainer}>
+                            <div
+                                className={styles.radiosContainer}
+                                data-test="exchange-types"
+                            >
                                 <RadioDecorator
                                     label={i18n.t('External')}
                                     helperText={i18n.t(

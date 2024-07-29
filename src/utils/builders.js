@@ -8,11 +8,15 @@ export const randomDhis2Id = () =>
 
 export const testRequest = ({ name = faker.word.noun() } = {}) => ({
     name,
+    dx: [],
+    pe: [],
+    ou: [],
+    filters: [],
 })
 
 export const testDataExchange = ({
     id = randomDhis2Id(),
-    displayName = faker.company.name(),
+    name = faker.company.name(),
     requests = [testRequest()],
     targetType = randomValueIn(['INTERNAL', 'EXTERNAL']),
     writeMetadataAccess = faker.datatype.boolean(),
@@ -23,7 +27,8 @@ export const testDataExchange = ({
     externalURL = undefined,
 } = {}) => ({
     id,
-    displayName,
+    displayName: name,
+    name,
     source: { requests },
     target: { type: targetType, api: { url: externalURL } },
     access: {

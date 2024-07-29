@@ -26,6 +26,7 @@ const mockLastAnalyticsTableSuccess = '2024-07-07T21:47:58.383'
 const mockServerDate = '2024-07-18T17:36:38.164'
 const mockContextPath = 'debug.dhis2.org/dev'
 
+/* eslint-disable react/prop-types */
 jest.mock('@dhis2/analytics', () => ({
     ...jest.requireActual('@dhis2/analytics'),
     DataDimension: ({ onSelect }) => (
@@ -70,24 +71,25 @@ const setUp = (
     {
         userContext = testUserContext(),
         attributes = [testAttribute(), testAttribute()],
-        aggregateDataExchanges = [testDataExchange(), testDataExchange()],
-        organisationUnitLevels = testOrganisationUnitLevels(),
-        organisationUnitGroups = [
-            testOrganisationUnitGroup(),
-            testOrganisationUnitGroup(),
-        ],
     } = {}
 ) => {
     const customerProviderData = {
-        attributes : {attributes},
+        attributes: { attributes },
         aggregateDataExchanges: (type) => {
             if (type === 'create') {
                 return {}
             }
             return undefined
         },
-        organisationUnitLevels: { organisationUnitLevels },
-        organisationUnitGroups: { organisationUnitGroups },
+        organisationUnitLevels: {
+            organisationUnitLevels: testOrganisationUnitLevels(),
+        },
+        organisationUnitGroups: {
+            organisationUnitGroups: [
+                testOrganisationUnitGroup(),
+                testOrganisationUnitGroup(),
+            ],
+        },
     }
 
     const screen = render(
@@ -99,7 +101,10 @@ const setUp = (
                 >
                     <AppContext.Provider
                         value={{
-                            aggregateDataExchanges,
+                            aggregateDataExchanges: [
+                                testDataExchange(),
+                                testDataExchange(),
+                            ],
                             refetchExchanges: () => {},
                         }}
                     >
@@ -172,7 +177,7 @@ describe('<AddItem/>', () => {
         fireEvent.input(exchangeNameInput, { target: { value: exchangeName } })
 
         const typeRadio = within(
-            screen.getByTestId('dhis2-uicore-field-content')
+            screen.getByTestId('exchange-types')
         ).getAllByRole('radio')
         expect(typeRadio[1].getAttribute('value')).toEqual('INTERNAL')
         typeRadio[1].click()
@@ -216,7 +221,7 @@ describe('<AddItem/>', () => {
         fireEvent.input(nameInput, { target: { value: exchangeName } })
 
         const typeRadio = within(
-            screen.getByTestId('dhis2-uicore-field-content')
+            screen.getByTestId('exchange-types')
         ).getAllByRole('radio')
         expect(typeRadio[0].getAttribute('value')).toEqual('EXTERNAL')
         typeRadio[0].click()
@@ -243,10 +248,6 @@ describe('<AddItem/>', () => {
         const requestRow = await screen.findByTestId('dhis2-uicore-tablerow')
         expect(requestRow).toHaveTextContent(requestName)
         expect(requestRow).toHaveTextContent(orgUnit)
-
-        within(screen.getByTestId('edit-item-footer'))
-            .getByText('Save exchange')
-            .click()
 
         within(screen.getByTestId('edit-item-footer'))
             .getByText('Save exchange')
@@ -281,7 +282,7 @@ describe('<AddItem/>', () => {
         fireEvent.input(nameInput, { target: { value: exchangeName } })
 
         const typeRadio = within(
-            screen.getByTestId('dhis2-uicore-field-content')
+            screen.getByTestId('exchange-types')
         ).getAllByRole('radio')
         expect(typeRadio[0].getAttribute('value')).toEqual('EXTERNAL')
         typeRadio[0].click()
@@ -316,10 +317,6 @@ describe('<AddItem/>', () => {
             .getByText('Save exchange')
             .click()
 
-        within(screen.getByTestId('edit-item-footer'))
-            .getByText('Save exchange')
-            .click()
-
         waitFor(() =>
             expect(
                 screen.getByTestId('saving-exchange-loader')
@@ -346,7 +343,7 @@ describe('<AddItem/>', () => {
         fireEvent.input(exchangeNameInput, { target: { value: exchangeName } })
 
         const typeRadio = within(
-            screen.getByTestId('dhis2-uicore-field-content')
+            screen.getByTestId('exchange-types')
         ).getAllByRole('radio')
         typeRadio[1].click()
 
@@ -395,10 +392,14 @@ describe('<AddItem/>', () => {
         const requestName = 'a request name'
         const orgUnit = 'an org unit'
 
-        const attributes = [testAttribute({displayName: 'brenda'}), testAttribute(), testAttribute()]
+        const attributes = [
+            testAttribute({ displayName: 'brenda' }),
+            testAttribute(),
+            testAttribute(),
+        ]
         const { screen } = setUp(<AddItem />, {
             userContext: testUserContext({ canAddExchange: true }),
-            attributes
+            attributes,
         })
 
         expect(
@@ -411,7 +412,7 @@ describe('<AddItem/>', () => {
         fireEvent.input(exchangeNameInput, { target: { value: exchangeName } })
 
         const typeRadio = within(
-            screen.getByTestId('dhis2-uicore-field-content')
+            screen.getByTestId('exchange-types')
         ).getAllByRole('radio')
         typeRadio[1].click()
 
@@ -420,66 +421,80 @@ describe('<AddItem/>', () => {
 
         screen.getByTestId('advanced-options').click()
 
-        const generalIdPicker = screen.getByTestId('general-id-scheme-selector');
-        const generalIdSchemeRadio = within(
-            generalIdPicker
-        ).getAllByRole('radio')
+        const generalIdPicker = screen.getByTestId('general-id-scheme-selector')
+        const generalIdSchemeRadio =
+            within(generalIdPicker).getAllByRole('radio')
         expect(generalIdSchemeRadio).toHaveLength(3)
         generalIdSchemeRadio[2].click()
         within(generalIdPicker).getByTestId('dhis2-uicore-select-input').click()
-        const generalAttributeOptions = within(await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper'))
-            .getAllByTestId('dhis2-uicore-singleselectoption')
+        const generalAttributeOptions = within(
+            await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper')
+        ).getAllByTestId('dhis2-uicore-singleselectoption')
         expect(generalAttributeOptions).toHaveLength(3)
         attributes.map((attribute, i) =>
-        expect(generalAttributeOptions[i]).toHaveTextContent(attribute.displayName))
+            expect(generalAttributeOptions[i]).toHaveTextContent(
+                attribute.displayName
+            )
+        )
         generalAttributeOptions[0].click()
 
-
-
-        const elementIdPicker = screen.getByTestId('element-id-scheme-selector');
-        const elementIdSchemeRadio = within(
-            elementIdPicker
-        ).getAllByRole('radio')
+        const elementIdPicker = screen.getByTestId('element-id-scheme-selector')
+        const elementIdSchemeRadio =
+            within(elementIdPicker).getAllByRole('radio')
         expect(elementIdSchemeRadio).toHaveLength(3)
         elementIdSchemeRadio[2].click()
         within(elementIdPicker).getByTestId('dhis2-uicore-select-input').click()
-        const elementAttributeOptions = within(await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper'))
-            .getAllByTestId('dhis2-uicore-singleselectoption')
+        const elementAttributeOptions = within(
+            await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper')
+        ).getAllByTestId('dhis2-uicore-singleselectoption')
         expect(elementAttributeOptions).toHaveLength(3)
         attributes.map((attribute, i) =>
-            expect(elementAttributeOptions[i]).toHaveTextContent(attribute.displayName))
+            expect(elementAttributeOptions[i]).toHaveTextContent(
+                attribute.displayName
+            )
+        )
         elementAttributeOptions[0].click()
 
-
-        const orgUnitIdPicker = screen.getByTestId('org-unit-id-scheme-selector');
-        const orgUnitIdSchemeRadio = within(
-            orgUnitIdPicker
-        ).getAllByRole('radio')
+        const orgUnitIdPicker = screen.getByTestId(
+            'org-unit-id-scheme-selector'
+        )
+        const orgUnitIdSchemeRadio =
+            within(orgUnitIdPicker).getAllByRole('radio')
         expect(orgUnitIdSchemeRadio).toHaveLength(3)
         orgUnitIdSchemeRadio[2].click()
         within(orgUnitIdPicker).getByTestId('dhis2-uicore-select-input').click()
-        const orgUnitAttributeOptions = within(await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper'))
-            .getAllByTestId('dhis2-uicore-singleselectoption')
+        const orgUnitAttributeOptions = within(
+            await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper')
+        ).getAllByTestId('dhis2-uicore-singleselectoption')
         expect(orgUnitAttributeOptions).toHaveLength(3)
         attributes.map((attribute, i) =>
-            expect(orgUnitAttributeOptions[i]).toHaveTextContent(attribute.displayName))
+            expect(orgUnitAttributeOptions[i]).toHaveTextContent(
+                attribute.displayName
+            )
+        )
         orgUnitAttributeOptions[0].click()
 
-
-        const categoryOptionComboIdPicker = screen.getByTestId('category-option-combo-scheme-selector');
+        const categoryOptionComboIdPicker = screen.getByTestId(
+            'category-option-combo-scheme-selector'
+        )
         const categoryOptionComboSchemeRadio = within(
             categoryOptionComboIdPicker
         ).getAllByRole('radio')
         expect(categoryOptionComboSchemeRadio).toHaveLength(3)
         categoryOptionComboSchemeRadio[2].click()
-        within(categoryOptionComboIdPicker).getByTestId('dhis2-uicore-select-input').click()
-        const categoryOptionComboAttributeOptions = within(await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper'))
-            .getAllByTestId('dhis2-uicore-singleselectoption')
+        within(categoryOptionComboIdPicker)
+            .getByTestId('dhis2-uicore-select-input')
+            .click()
+        const categoryOptionComboAttributeOptions = within(
+            await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper')
+        ).getAllByTestId('dhis2-uicore-singleselectoption')
         expect(categoryOptionComboAttributeOptions).toHaveLength(3)
         attributes.map((attribute, i) =>
-            expect(categoryOptionComboAttributeOptions[i]).toHaveTextContent(attribute.displayName))
+            expect(categoryOptionComboAttributeOptions[i]).toHaveTextContent(
+                attribute.displayName
+            )
+        )
         categoryOptionComboAttributeOptions[0].click()
-
 
         within(screen.getByTestId('edit-item-footer'))
             .getByText('Save exchange')
