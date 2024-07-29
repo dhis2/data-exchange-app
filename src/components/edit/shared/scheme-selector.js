@@ -12,7 +12,7 @@ import { useAttributeContext } from '../../../context/index.js'
 import { SCHEME_TYPES } from './constants.js'
 import styles from './scheme-selector.module.css'
 
-export const SchemeSelector = ({ name, label, disabled }) => {
+export const SchemeSelector = ({ name, label, disabled, dataTest }) => {
     const { Field, useField } = ReactFinalForm
     const { input: schemeInput } = useField(name, {
         subscription: { value: true },
@@ -21,7 +21,7 @@ export const SchemeSelector = ({ name, label, disabled }) => {
     const { attributes } = useAttributeContext()
 
     return (
-        <div className={styles.schemeSelectorContainer}>
+        <div className={styles.schemeSelectorContainer} data-test={dataTest}>
             <FieldContainer>
                 <div className={styles.radioContainerLabel}>{label}</div>
                 <div className={styles.radiosContainer}>
@@ -54,7 +54,7 @@ export const SchemeSelector = ({ name, label, disabled }) => {
                 </div>
             </FieldContainer>
             {schemeValue === SCHEME_TYPES.attribute && (
-                <div className={styles.attributeSelectionContainer}>
+                <div className={styles.attributeSelectionContainer} data-test={`${dataTest}-attributes`} >
                     <Field
                         name={`${name}_attribute`}
                         component={SingleSelectFieldFF}
@@ -74,4 +74,5 @@ SchemeSelector.propTypes = {
     disabled: PropTypes.bool,
     label: PropTypes.string,
     name: PropTypes.string,
+    dataTest: PropTypes.string
 }

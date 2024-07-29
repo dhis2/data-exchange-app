@@ -79,7 +79,7 @@ const setUp = (
     } = {}
 ) => {
     const customerProviderData = {
-        attributes,
+        attributes : {attributes},
         aggregateDataExchanges: (type) => {
             if (type === 'create') {
                 return {}
@@ -315,6 +315,171 @@ describe('<AddItem/>', () => {
         within(screen.getByTestId('edit-item-footer'))
             .getByText('Save exchange')
             .click()
+
+        within(screen.getByTestId('edit-item-footer'))
+            .getByText('Save exchange')
+            .click()
+
+        waitFor(() =>
+            expect(
+                screen.getByTestId('saving-exchange-loader')
+            ).toBeInTheDocument()
+        )
+    })
+
+    it('creates an internal exchange with codes as ID schemes', async () => {
+        const exchangeName = 'an exchange name'
+        const requestName = 'a request name'
+        const orgUnit = 'an org unit'
+
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        const exchangeNameInput = within(
+            screen.getByTestId('exchange-name-input')
+        ).getByLabelText('Exchange name')
+        fireEvent.input(exchangeNameInput, { target: { value: exchangeName } })
+
+        const typeRadio = within(
+            screen.getByTestId('dhis2-uicore-field-content')
+        ).getAllByRole('radio')
+        typeRadio[1].click()
+
+        screen.getByText('Add request').click()
+        await createRequest(screen, { requestName, orgUnit })
+
+        screen.getByTestId('advanced-options').click()
+
+        const generalIdSchemeRadio = within(
+            screen.getByTestId('general-id-scheme-selector')
+        ).getAllByRole('radio')
+        expect(generalIdSchemeRadio).toHaveLength(3)
+        generalIdSchemeRadio[1].click()
+
+        const elementIdSchemeRadio = within(
+            screen.getByTestId('element-id-scheme-selector')
+        ).getAllByRole('radio')
+        expect(elementIdSchemeRadio).toHaveLength(3)
+        elementIdSchemeRadio[1].click()
+
+        const orgUnitIdSchemeRadio = within(
+            screen.getByTestId('org-unit-id-scheme-selector')
+        ).getAllByRole('radio')
+        expect(orgUnitIdSchemeRadio).toHaveLength(3)
+        orgUnitIdSchemeRadio[1].click()
+
+        const categoryOptionComboSchemeRadio = within(
+            screen.getByTestId('category-option-combo-scheme-selector')
+        ).getAllByRole('radio')
+        expect(categoryOptionComboSchemeRadio).toHaveLength(3)
+        categoryOptionComboSchemeRadio[1].click()
+
+        within(screen.getByTestId('edit-item-footer'))
+            .getByText('Save exchange')
+            .click()
+
+        waitFor(() =>
+            expect(
+                screen.getByTestId('saving-exchange-loader')
+            ).toBeInTheDocument()
+        )
+    })
+
+    it('creates an internal exchange with attribute as ID schemes', async () => {
+        const exchangeName = 'an exchange name'
+        const requestName = 'a request name'
+        const orgUnit = 'an org unit'
+
+        const attributes = [testAttribute({displayName: 'brenda'}), testAttribute(), testAttribute()]
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+            attributes
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        const exchangeNameInput = within(
+            screen.getByTestId('exchange-name-input')
+        ).getByLabelText('Exchange name')
+        fireEvent.input(exchangeNameInput, { target: { value: exchangeName } })
+
+        const typeRadio = within(
+            screen.getByTestId('dhis2-uicore-field-content')
+        ).getAllByRole('radio')
+        typeRadio[1].click()
+
+        screen.getByText('Add request').click()
+        await createRequest(screen, { requestName, orgUnit })
+
+        screen.getByTestId('advanced-options').click()
+
+        const generalIdPicker = screen.getByTestId('general-id-scheme-selector');
+        const generalIdSchemeRadio = within(
+            generalIdPicker
+        ).getAllByRole('radio')
+        expect(generalIdSchemeRadio).toHaveLength(3)
+        generalIdSchemeRadio[2].click()
+        within(generalIdPicker).getByTestId('dhis2-uicore-select-input').click()
+        const generalAttributeOptions = within(await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper'))
+            .getAllByTestId('dhis2-uicore-singleselectoption')
+        expect(generalAttributeOptions).toHaveLength(3)
+        attributes.map((attribute, i) =>
+        expect(generalAttributeOptions[i]).toHaveTextContent(attribute.displayName))
+        generalAttributeOptions[0].click()
+
+
+
+        const elementIdPicker = screen.getByTestId('element-id-scheme-selector');
+        const elementIdSchemeRadio = within(
+            elementIdPicker
+        ).getAllByRole('radio')
+        expect(elementIdSchemeRadio).toHaveLength(3)
+        elementIdSchemeRadio[2].click()
+        within(elementIdPicker).getByTestId('dhis2-uicore-select-input').click()
+        const elementAttributeOptions = within(await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper'))
+            .getAllByTestId('dhis2-uicore-singleselectoption')
+        expect(elementAttributeOptions).toHaveLength(3)
+        attributes.map((attribute, i) =>
+            expect(elementAttributeOptions[i]).toHaveTextContent(attribute.displayName))
+        elementAttributeOptions[0].click()
+
+
+        const orgUnitIdPicker = screen.getByTestId('org-unit-id-scheme-selector');
+        const orgUnitIdSchemeRadio = within(
+            orgUnitIdPicker
+        ).getAllByRole('radio')
+        expect(orgUnitIdSchemeRadio).toHaveLength(3)
+        orgUnitIdSchemeRadio[2].click()
+        within(orgUnitIdPicker).getByTestId('dhis2-uicore-select-input').click()
+        const orgUnitAttributeOptions = within(await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper'))
+            .getAllByTestId('dhis2-uicore-singleselectoption')
+        expect(orgUnitAttributeOptions).toHaveLength(3)
+        attributes.map((attribute, i) =>
+            expect(orgUnitAttributeOptions[i]).toHaveTextContent(attribute.displayName))
+        orgUnitAttributeOptions[0].click()
+
+
+        const categoryOptionComboIdPicker = screen.getByTestId('category-option-combo-scheme-selector');
+        const categoryOptionComboSchemeRadio = within(
+            categoryOptionComboIdPicker
+        ).getAllByRole('radio')
+        expect(categoryOptionComboSchemeRadio).toHaveLength(3)
+        categoryOptionComboSchemeRadio[2].click()
+        within(categoryOptionComboIdPicker).getByTestId('dhis2-uicore-select-input').click()
+        const categoryOptionComboAttributeOptions = within(await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper'))
+            .getAllByTestId('dhis2-uicore-singleselectoption')
+        expect(categoryOptionComboAttributeOptions).toHaveLength(3)
+        attributes.map((attribute, i) =>
+            expect(categoryOptionComboAttributeOptions[i]).toHaveTextContent(attribute.displayName))
+        categoryOptionComboAttributeOptions[0].click()
+
 
         within(screen.getByTestId('edit-item-footer'))
             .getByText('Save exchange')
