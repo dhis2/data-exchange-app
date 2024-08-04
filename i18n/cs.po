@@ -41,7 +41,7 @@ msgid "Exchange name"
 msgstr ""
 
 msgid "A unique name helps people find the right data exchange."
-msgstr ""
+msgstr "Jedinečný název pomáhá lidem najít správnou výměnu dat."
 
 msgid "Exchange target type"
 msgstr ""
@@ -211,28 +211,28 @@ msgid "Remove"
 msgstr "Odstranit"
 
 msgid "Request setup"
-msgstr ""
+msgstr "Nastavení požadavku"
 
 msgid "Request name"
-msgstr ""
+msgstr "Název požadavku"
 
 msgid "Displayed in the Data Exchange app."
 msgstr ""
 
 msgid "Filter request"
-msgstr ""
+msgstr "Požadavek na filtr"
 
 msgid "Filter selections"
-msgstr ""
+msgstr "Výběr filtrů"
 
 msgid "Link request to a visualization"
-msgstr ""
+msgstr "Požadavek na propojení s vizualizací"
 
 msgid "Request visualizations are shown when submitting exchanges."
 msgstr ""
 
 msgid "Data item select"
-msgstr ""
+msgstr "Výběr datové položky"
 
 msgid "Organisation units"
 msgstr "Organizační jednotky"
@@ -265,6 +265,8 @@ msgid ""
 "Changing the inputIdScheme will change the internal representation of the "
 "request, but will not change the items in the request."
 msgstr ""
+"Změna inputIdScheme změní vnitřní reprezentaci požadavku, ale nezmění "
+"položky v požadavku."
 
 msgid "Choose at least one data item"
 msgstr "Vyberte alespoň jednu datovou položku"
@@ -276,16 +278,16 @@ msgid "Choose at least one organisation unit"
 msgstr "Vyberte alespoň jednu organizační jednotku"
 
 msgid "Linked to: "
-msgstr ""
+msgstr "Odkazován na:"
 
 msgid "Choose a different visualization"
-msgstr ""
+msgstr "Výběr jiné vizualizace"
 
 msgid "Choose a visualization"
-msgstr ""
+msgstr "Výběr vizualizace"
 
 msgid "Not available"
-msgstr ""
+msgstr "Není k dispozici"
 
 msgid ""
 "The requested exchange does not exist, or you do not have the relevant "
@@ -460,15 +462,17 @@ msgid "Attribute"
 msgstr "Atribut"
 
 msgid "Discard unsaved changes"
-msgstr ""
+msgstr "Odstranit neuložené změny"
 
 msgid ""
 "The {{objectName}} has unsaved changes. Leaving this page will discard these"
 " changes. Are you sure?"
 msgstr ""
+"Na {{objectName}} jsou neuložené změny. Opuštěním této stránky se tyto změny"
+" zruší. Jste si jisti?"
 
 msgid "No, go back"
-msgstr ""
+msgstr "Ne, jít zpět"
 
 msgid "Yes, discard changes"
 msgstr "Ano, zahodit změny"
@@ -480,7 +484,7 @@ msgid "Cancel"
 msgstr "Zrušit"
 
 msgid "Save request"
-msgstr ""
+msgstr "Uložit požadavek"
 
 msgid "Submit data"
 msgstr "Odeslat data"
@@ -559,6 +563,8 @@ msgid ""
 "It was not possible to submit your data. The message below provides "
 "additional detail."
 msgstr ""
+"Vaše údaje nebylo možné odeslat. Níže uvedená zpráva obsahuje další "
+"podrobnosti."
 
 msgid "Close"
 msgstr "Zavřít"
@@ -672,7 +678,7 @@ msgid "Choose a data exchange"
 msgstr "Vyberte výměnu dat"
 
 msgid "Configurations"
-msgstr ""
+msgstr "Konfigurace"
 
 msgid "Aggregate data exchange information is not accessible"
 msgstr "Informace o agregované výměně dat nejsou přístupné"
@@ -685,11 +691,12 @@ msgstr ""
 "zkuste to znovu."
 
 msgid "Attribute information is not accessible"
-msgstr ""
+msgstr "Informace o atributech nejsou přístupné"
 
 msgid ""
 "There was a problem retrieving attributes. Refresh the page to try again."
 msgstr ""
+"Při načítání atributů došlo k problému. Obnovte stránku a zkuste to znovu."
 
 msgid "Exchange content not accessible"
 msgstr "Obsah Výměny není přístupný"
@@ -699,11 +706,16 @@ msgid ""
 " due to either a connection error or a configuration issue. The message "
 "below provides additional detail."
 msgstr ""
+"Údaje pro požadovanou výměnu nebylo možné získat. To může být způsobeno buď "
+"chybou připojení, nebo problémem s konfigurací. Níže uvedená zpráva "
+"poskytuje další podrobnosti."
 
 msgid "User information is not available"
-msgstr ""
+msgstr "Informace o uživateli nejsou k dispozici"
 
 msgid ""
 "There was a problem retrieving user information. Refresh the page to try "
 "again."
 msgstr ""
+"Došlo k problému při načítání informací o uživateli. Obnovte stránku a "
+"zkuste to znovu."
