@@ -16,6 +16,14 @@
     display: inline-block;
 }
 
+.description {
+    margin-inline-start: var(--spacers-dp4);
+    margin-block-start: var(--spacers-dp8);
+    font-size: 14px;
+    color: var(--colors-grey700);
+    display: block;
+}
+
 .subsectionContent {
     padding: var(--spacers-dp4);
 }

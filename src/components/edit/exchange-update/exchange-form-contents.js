@@ -270,6 +270,9 @@ export const ExchangeFormContents = React.memo(
                 </Subsection>
                 <Subsection
                     text={i18n.t('Input ID scheme options')}
+                    description={i18n.t(
+                        'Defines the scheme (ID, code, attribute value) on the target system that will be used, upon input, to match data sent from the source system.'
+                    )}
                     className={styles.idSchemeSection}
                 >
                     <>
@@ -283,16 +286,14 @@ export const ExchangeFormContents = React.memo(
                         <SchemeSelector
                             label={i18n.t('Input general ID scheme')}
                             description={i18n.t(
-                                'This is some description for this item'
+                                'Applies to all elements as the default ID scheme. If the chosen scheme is not present for a given element, ID will be used as the fallback.'
                             )}
                             name="target_idScheme"
                             disabled={editTargetSetupDisabled}
                         />
                         <SchemeSelector
                             label={i18n.t('Input data element ID scheme')}
-                            description={i18n.t(
-                                'This is a different description for this item'
-                            )}
+                            description={i18n.t('Applies to data elements.')}
                             name="target_dataElementIdScheme"
                             disabled={editTargetSetupDisabled}
                             canBeNone={true}
@@ -303,7 +304,7 @@ export const ExchangeFormContents = React.memo(
                         <SchemeSelector
                             label={i18n.t('Input organisation unit ID scheme')}
                             description={i18n.t(
-                                'Another description for this item'
+                                'Applies to organisation units.'
                             )}
                             name="target_orgUnitIdScheme"
                             disabled={editTargetSetupDisabled}
@@ -317,7 +318,7 @@ export const ExchangeFormContents = React.memo(
                                 'Input category option combo ID scheme'
                             )}
                             description={i18n.t(
-                                'Last description for this item'
+                                'Applies to category option combos.'
                             )}
                             name="target_categoryOptionComboIdScheme"
                             disabled={editTargetSetupDisabled}

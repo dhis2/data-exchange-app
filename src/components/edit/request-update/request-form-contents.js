@@ -119,36 +119,45 @@ export const RequestFormContents = () => {
                     />
                 </div>
             </Subsection>
-            <Subsection text={i18n.t('Output ID scheme options')}>
+            <Subsection
+                text={i18n.t('Output ID scheme options')}
+                description={i18n.t(
+                    'Defines how data from the source system will be output before it is sent to the target instance.'
+                )}
+            >
                 <>
                     <SchemeSelector
                         label={i18n.t('Output general ID scheme')}
                         description={i18n.t(
-                            'The default ID scheme that will be applied for the data that is exported from the source system. In the case, that the selected scheme is not present, ID will be used as a fallback.'
+                            'Applies to all elements as the default ID scheme. If the chosen scheme is not present for a given element, ID will be used as the fallback.'
                         )}
                         name="source_outputIdScheme"
                     />
+                    {outputDataItemIdSchemeAvailable && (
+                        <SchemeSelector
+                            label={i18n.t('Output data item ID scheme')}
+                            description={i18n.t(
+                                'Applies to data elements, indicators, and program indicators.'
+                            )}
+                            name="source_outputDataItemIdScheme"
+                            canBeNone={true}
+                            defaultIDSchemeName={i18n.t(
+                                'Output general ID scheme'
+                            )}
+                        />
+                    )}
                     <SchemeSelector
                         label={i18n.t('Output data element ID scheme')}
                         description={i18n.t(
-                            'This scheme is applied to all data elements. It will override the outputDataItemIdScheme'
+                            'Applies to data elements. For data elements, it will override the scheme specified by Output data item ID scheme.'
                         )}
                         name="source_outputDataElementIdScheme"
                         canBeNone={true}
                         defaultIDSchemeName={i18n.t('Output general ID scheme')}
                     />
-                    {outputDataItemIdSchemeAvailable && (
-                        <SchemeSelector
-                            label={i18n.t('Output data item ID scheme')}
-                            name="source_outputDataItemIdScheme"
-                        />
-                    )}
-
                     <SchemeSelector
                         label={i18n.t('Output organisation unit ID scheme')}
-                        description={i18n.t(
-                            'Description for organisation unit ID scheme'
-                        )}
+                        description={i18n.t('Applies to organisation units.')}
                         name="source_outputOrgUnitIdScheme"
                         canBeNone={true}
                         defaultIDSchemeName={i18n.t('Output general ID scheme')}
