@@ -5,13 +5,9 @@ import {
     CheckboxFieldFF,
     hasValue,
 } from '@dhis2/ui'
-import React, { useState } from 'react'
+import React from 'react'
 import { useFeatureToggleContext } from '../../../context/index.js'
-import {
-    Subsection,
-    AdvancedSubsection,
-    SchemeSelector,
-} from '../shared/index.js'
+import { Subsection, SchemeSelector } from '../shared/index.js'
 import { DataItemSelect } from './data-item-select.js'
 import { FilterSelect } from './filterSelect/filter-select.js'
 import { OrgUnitSelector } from './org-unit-select.js'
@@ -31,7 +27,6 @@ export const RequestFormContents = () => {
         subscription: { value: true },
     })
     const { value: visualizationLinkedValue } = visualizationLinked
-    const [showAdvanced, setShowAdvanced] = useState(false)
     const { outputDataItemIdSchemeAvailable } = useFeatureToggleContext()
 
     const {
@@ -124,38 +119,51 @@ export const RequestFormContents = () => {
                     />
                 </div>
             </Subsection>
-            <AdvancedSubsection
-                text={i18n.t('Advanced options')}
-                className={styles.advancedSection}
-                onTextClick={() => {
-                    setShowAdvanced((prevShown) => !prevShown)
-                }}
-                open={showAdvanced}
-            >
-                {showAdvanced && (
-                    <>
-                        <SchemeSelector
-                            label={i18n.t('Output general ID scheme')}
-                            name="source_outputIdScheme"
-                        />
-                        <SchemeSelector
-                            label={i18n.t('Output data element ID scheme')}
-                            name="source_outputDataElementIdScheme"
-                        />
-                        {outputDataItemIdSchemeAvailable && (
-                            <SchemeSelector
-                                label={i18n.t('Output data item ID scheme')}
-                                name="source_outputDataItemIdScheme"
-                            />
-                        )}
-
-                        <SchemeSelector
-                            label={i18n.t('Output organisation unit ID scheme')}
-                            name="source_outputOrgUnitIdScheme"
-                        />
-                    </>
+            <Subsection
+                text={i18n.t('Output ID scheme options')}
+                description={i18n.t(
+                    'Defines how data from the source system will be output before it is sent to the target instance.'
                 )}
-            </AdvancedSubsection>
+            >
+                <>
+                    <SchemeSelector
+                        label={i18n.t('Output general ID scheme')}
+                        description={i18n.t(
+                            'Applies to all elements as the default ID scheme. If the chosen scheme is not present for a given element, ID will be used as the fallback.'
+                        )}
+                        name="source_outputIdScheme"
+                    />
+                    {outputDataItemIdSchemeAvailable && (
+                        <SchemeSelector
+                            label={i18n.t('Output data item ID scheme')}
+                            description={i18n.t(
+                                'Applies to data elements, indicators, and program indicators.'
+                            )}
+                            name="source_outputDataItemIdScheme"
+                            canBeNone={true}
+                            defaultIDSchemeName={i18n.t(
+                                'Output general ID scheme'
+                            )}
+                        />
+                    )}
+                    <SchemeSelector
+                        label={i18n.t('Output data element ID scheme')}
+                        description={i18n.t(
+                            'Applies to data elements. For data elements, it will override the scheme specified by Output data item ID scheme.'
+                        )}
+                        name="source_outputDataElementIdScheme"
+                        canBeNone={true}
+                        defaultIDSchemeName={i18n.t('Output general ID scheme')}
+                    />
+                    <SchemeSelector
+                        label={i18n.t('Output organisation unit ID scheme')}
+                        description={i18n.t('Applies to organisation units.')}
+                        name="source_outputOrgUnitIdScheme"
+                        canBeNone={true}
+                        defaultIDSchemeName={i18n.t('Output general ID scheme')}
+                    />
+                </>
+            </Subsection>
         </>
     )
 }

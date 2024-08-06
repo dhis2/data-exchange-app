@@ -25,3 +25,10 @@
 .checkContainer {
     margin-block-start: var(--spacers-dp16);
 }
+
+.schemeExplanationText {
+    font-size: 12px;
+    color: var(--colors-grey700);
+    font-weight: 400;
+    margin: 0 0 var(--spacers-dp8) 0;
+}

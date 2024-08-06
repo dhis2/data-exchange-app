@@ -1,4 +1,11 @@
 export const SCHEME_TYPES = {
+    none: 'NONE',
+    uid: 'UID',
+    code: 'CODE',
+    attribute: 'ATTRIBUTE',
+}
+
+export const SCHEME_TYPES_WITH_NONE = {
     uid: 'UID',
     code: 'CODE',
     attribute: 'ATTRIBUTE',

@@ -14,10 +14,12 @@ const getFormIdSchemeValues = ({
         : baseIdSchemeProps
     return idSchemeProps.reduce((idSchemeValues, prop) => {
         const attributeProp = `source_${prop}_attribute`
+
         idSchemeValues[prop] =
             requestValues[`source_${prop}`] !== SCHEME_TYPES.attribute
                 ? requestValues[`source_${prop}`]
                 : `ATTRIBUTE:${requestValues[attributeProp]}`
+
         return idSchemeValues
     }, {})
 }
@@ -61,8 +63,9 @@ export const getRequestValuesFromForm = ({
 }
 
 const getIdSchemeValues = ({ request, outputDataItemIdSchemeAvailable }) => {
+    const defaultSchemeProp = 'outputIdScheme'
     const baseIdSchemeProps = [
-        'outputIdScheme',
+        defaultSchemeProp,
         'outputDataElementIdScheme',
         'outputOrgUnitIdScheme',
     ]
@@ -72,7 +75,9 @@ const getIdSchemeValues = ({ request, outputDataItemIdSchemeAvailable }) => {
     return idSchemeProps.reduce((idSchemeValues, prop) => {
         idSchemeValues[`source_${prop}`] = request?.[prop]
             ? request?.[prop]?.split(':')[0]?.toUpperCase()
-            : SCHEME_TYPES.uid
+            : prop === defaultSchemeProp
+            ? SCHEME_TYPES.uid
+            : SCHEME_TYPES.none
         idSchemeValues[`source_${prop}_attribute`] =
             request?.[prop]?.split(':')[1]
         return idSchemeValues
