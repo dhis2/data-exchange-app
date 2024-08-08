@@ -118,7 +118,10 @@ export const ExchangeFormContents = React.memo(
                         data-test="exchange-type-input"
                     >
                         <FieldContainer label={i18n.t('Exchange target type')}>
-                            <div className={styles.radiosContainer}>
+                            <div
+                                className={styles.radiosContainer}
+                                data-test="exchange-types"
+                            >
                                 <RadioDecorator
                                     label={i18n.t('External')}
                                     helperText={i18n.t(
@@ -311,11 +314,13 @@ export const ExchangeFormContents = React.memo(
                                 label={i18n.t('Input general ID scheme')}
                                 name="target_idScheme"
                                 disabled={editTargetSetupDisabled}
+                                dataTest="general-id-scheme-selector"
                             />
                             <SchemeSelector
                                 label={i18n.t('Input data element ID scheme')}
                                 name="target_dataElementIdScheme"
                                 disabled={editTargetSetupDisabled}
+                                dataTest="element-id-scheme-selector"
                             />
                             <SchemeSelector
                                 label={i18n.t(
@@ -323,6 +328,7 @@ export const ExchangeFormContents = React.memo(
                                 )}
                                 name="target_orgUnitIdScheme"
                                 disabled={editTargetSetupDisabled}
+                                dataTest="org-unit-id-scheme-selector"
                             />
                             <SchemeSelector
                                 label={i18n.t(
@@ -330,6 +336,7 @@ export const ExchangeFormContents = React.memo(
                                 )}
                                 name="target_categoryOptionComboIdScheme"
                                 disabled={editTargetSetupDisabled}
+                                dataTest="category-option-combo-scheme-selector"
                             />
                         </>
                     )}

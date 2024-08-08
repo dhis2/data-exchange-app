@@ -90,7 +90,11 @@ export const ExchangeForm = ({ exchangeInfo, addMode }) => {
                                     />
 
                                     <Box className={styles.editFormArea}>
-                                        {saving && <Loader />}
+                                        {saving && (
+                                            <span data-test="saving-exchange-loader">
+                                                <Loader />
+                                            </span>
+                                        )}
                                         {error && (
                                             <NoticeBox
                                                 error
