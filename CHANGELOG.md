@@ -1,3 +1,13 @@
+# [100.9.0](https://github.com/dhis2/data-exchange-app/compare/v100.8.1...v100.9.0) (2024-08-13)
+
+
+### Features
+
+* add more tests and improve some of the existing ones ([c0bc7a7](https://github.com/dhis2/data-exchange-app/commit/c0bc7a78dc6381a11ee6b85d460c054bf115643a))
+* add more tests to cover add exchange usecase ([4d3389a](https://github.com/dhis2/data-exchange-app/commit/4d3389ac8c480d5ac362ec24ca52b83244cd2554))
+* add tests to cover add exchnage usecase ([09abd23](https://github.com/dhis2/data-exchange-app/commit/09abd2379a9d3d785af05dbf335674ec91e49331))
+* add tests to cover edit exchange usecase and format ([2414879](https://github.com/dhis2/data-exchange-app/commit/2414879da3d82f3f410358e17215d7c5357c9338))
+
 ## [100.8.1](https://github.com/dhis2/data-exchange-app/compare/v100.8.0...v100.8.1) (2024-08-04)
 
 
