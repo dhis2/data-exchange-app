@@ -33,8 +33,8 @@ AdvancedSubsection.propTypes = {
     onTextClick: PropTypes.func,
 }
 
-export const Subsection = ({ text, children, className = '' }) => (
-    <div className={className}>
+export const Subsection = ({ text, children, className = '', dataTest }) => (
+    <div className={className} data-test={dataTest || 'subsection'}>
         <div className={styles.subtitleContainer}>
             <div className={styles.subtitle}>{text}</div>
         </div>
@@ -45,5 +45,6 @@ export const Subsection = ({ text, children, className = '' }) => (
 Subsection.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    dataTest: PropTypes.string,
     text: PropTypes.string,
 }

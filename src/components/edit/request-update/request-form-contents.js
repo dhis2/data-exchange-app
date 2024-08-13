@@ -46,7 +46,10 @@ export const RequestFormContents = () => {
                 text={i18n.t('Request setup')}
                 className={styles.subsectionBlockEnd}
             >
-                <div className={styles.subsectionField1000}>
+                <div
+                    className={styles.subsectionField1000}
+                    data-test="request-name"
+                >
                     <Field
                         name="requestName"
                         label={i18n.t('Request name')}

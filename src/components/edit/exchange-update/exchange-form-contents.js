@@ -160,7 +160,10 @@ export const ExchangeFormContents = React.memo(
                     </div>
                 </Subsection>
                 {typeValue === EXCHANGE_TYPES.external && (
-                    <Subsection text={i18n.t('Target setup')}>
+                    <Subsection
+                        text={i18n.t('Target setup')}
+                        dataTest="target-setup"
+                    >
                         <EnableExternalEditWarning
                             editTargetSetupDisabled={editTargetSetupDisabled}
                             setEditTargetSetupDisabled={

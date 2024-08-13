@@ -158,6 +158,21 @@ describe('<AddItem/>', () => {
         ).toBeInTheDocument()
     })
 
+    it('should display a warning if the user does not have permissions to view an exchange', async () => {
+        const { screen } = setUp(<AddItem />, {
+            userContext: noPermissionsUserContext(),
+        })
+        const warning = await screen.findByTestId('dhis2-uicore-noticebox')
+        expect(warning).toBeInTheDocument()
+        const backButton = screen.getByTestId('link-to-configuration-page')
+        expect(backButton).toBeInTheDocument()
+        expect(
+            within(backButton).getByRole('link', {
+                name: 'Back to configurations page',
+            })
+        ).toBeInTheDocument()
+    })
+
     it('creates an internal exchange', async () => {
         const exchangeName = 'an exchange name'
         const requestName = 'a request name'
@@ -193,10 +208,52 @@ describe('<AddItem/>', () => {
             .getByText('Save exchange')
             .click()
 
-        waitFor(() =>
+        await waitFor(() =>
             expect(
                 screen.getByTestId('saving-exchange-loader')
             ).toBeInTheDocument()
+        )
+    })
+
+    it('does not create an internal exchange if the name is missing', async () => {
+        const requestName = 'a request name'
+        const orgUnit = 'an org unit'
+
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        const typeRadio = within(
+            screen.getByTestId('exchange-types')
+        ).getAllByRole('radio')
+        expect(typeRadio[1].getAttribute('value')).toEqual('INTERNAL')
+        typeRadio[1].click()
+
+        screen.getByText('Add request').click()
+        await createRequest(screen, { requestName, orgUnit })
+
+        const requestRow = await screen.findByTestId('dhis2-uicore-tablerow')
+        expect(requestRow).toHaveTextContent(requestName)
+
+        within(screen.getByTestId('edit-item-footer'))
+            .getByText('Save exchange')
+            .click()
+
+        const exchangeNameInputWarning = within(
+            screen.getByTestId('exchange-name-input')
+        ).getByTestId('dhis2-uiwidgets-inputfield-validation')
+        expect(exchangeNameInputWarning).toBeInTheDocument()
+        expect(exchangeNameInputWarning).toHaveTextContent(
+            'Please provide a value'
+        )
+        await waitFor(() =>
+            expect(
+                screen.queryByTestId('saving-exchange-loader')
+            ).not.toBeInTheDocument()
         )
     })
 
@@ -253,7 +310,7 @@ describe('<AddItem/>', () => {
             .getByText('Save exchange')
             .click()
 
-        waitFor(() =>
+        await waitFor(() =>
             expect(
                 screen.getByTestId('saving-exchange-loader')
             ).toBeInTheDocument()
@@ -317,10 +374,189 @@ describe('<AddItem/>', () => {
             .getByText('Save exchange')
             .click()
 
-        waitFor(() =>
+        await waitFor(() =>
             expect(
                 screen.getByTestId('saving-exchange-loader')
             ).toBeInTheDocument()
+        )
+    })
+
+    it('does not create an external exchange if name is missing', async () => {
+        const exchangeURL = 'a/url'
+        const exchangePAT = 'anAuthToken'
+        const requestName = 'a request name'
+        const orgUnit = 'an org unit'
+
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        const typeRadio = within(
+            screen.getByTestId('exchange-types')
+        ).getAllByRole('radio')
+        expect(typeRadio[0].getAttribute('value')).toEqual('EXTERNAL')
+        typeRadio[0].click()
+
+        const exchangeURLInput = within(
+            await screen.findByTestId('exchange-url')
+        ).getByLabelText('Target URL')
+        fireEvent.input(exchangeURLInput, { target: { value: exchangeURL } })
+
+        const authRadio = within(
+            screen.getByTestId('exchange-auth-method')
+        ).getAllByRole('radio')
+        expect(authRadio[1].getAttribute('value')).toEqual('PAT')
+        authRadio[1].click()
+
+        const tokenInput = within(
+            screen.getByTestId('exchange-auth-pat')
+        ).getByLabelText('Access token')
+        fireEvent.input(tokenInput, { target: { value: exchangePAT } })
+
+        screen.getByText('Add request').click()
+        await createRequest(screen, { requestName, orgUnit })
+
+        const requestRow = await screen.findByTestId('dhis2-uicore-tablerow')
+        expect(requestRow).toHaveTextContent(requestName)
+        expect(requestRow).toHaveTextContent(orgUnit)
+
+        within(screen.getByTestId('edit-item-footer'))
+            .getByText('Save exchange')
+            .click()
+
+        const exchangeNameInputWarning = within(
+            screen.getByTestId('exchange-name-input')
+        ).getByTestId('dhis2-uiwidgets-inputfield-validation')
+        expect(exchangeNameInputWarning).toBeInTheDocument()
+        expect(exchangeNameInputWarning).toHaveTextContent(
+            'Please provide a value'
+        )
+        await waitFor(() =>
+            expect(
+                screen.queryByTestId('saving-exchange-loader')
+            ).not.toBeInTheDocument()
+        )
+    })
+
+    it('does not create an external exchange if auth token info are missing', async () => {
+        const exchangeName = 'an exchange name'
+        const exchangeURL = 'a/url'
+        const requestName = 'a request name'
+        const orgUnit = 'an org unit'
+
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        const nameInput = within(
+            screen.getByTestId('exchange-name-input')
+        ).getByLabelText('Exchange name')
+        fireEvent.input(nameInput, { target: { value: exchangeName } })
+
+        const typeRadio = within(
+            screen.getByTestId('exchange-types')
+        ).getAllByRole('radio')
+        expect(typeRadio[0].getAttribute('value')).toEqual('EXTERNAL')
+        typeRadio[0].click()
+
+        const exchangeURLInput = within(
+            await screen.findByTestId('exchange-url')
+        ).getByLabelText('Target URL')
+        fireEvent.input(exchangeURLInput, { target: { value: exchangeURL } })
+
+        const authRadio = within(
+            screen.getByTestId('exchange-auth-method')
+        ).getAllByRole('radio')
+        expect(authRadio[1].getAttribute('value')).toEqual('PAT')
+        authRadio[1].click()
+
+        screen.getByText('Add request').click()
+        await createRequest(screen, { requestName, orgUnit })
+
+        const requestRow = await screen.findByTestId('dhis2-uicore-tablerow')
+        expect(requestRow).toHaveTextContent(requestName)
+        expect(requestRow).toHaveTextContent(orgUnit)
+
+        within(screen.getByTestId('edit-item-footer'))
+            .getByText('Save exchange')
+            .click()
+
+        const exchangeAutheInputWarning = within(
+            screen.getByTestId('exchange-auth-pat')
+        ).getByTestId('dhis2-uiwidgets-inputfield-validation')
+        expect(exchangeAutheInputWarning).toBeInTheDocument()
+        expect(exchangeAutheInputWarning).toHaveTextContent(
+            'Please provide a value'
+        )
+        await waitFor(() =>
+            expect(
+                screen.queryByTestId('saving-exchange-loader')
+            ).not.toBeInTheDocument()
+        )
+    })
+
+    it('does not create an external exchange if basic auth info are missing', async () => {
+        const exchangeName = 'an exchange name'
+        const exchangeURL = 'a/url'
+        const requestName = 'a request name'
+        const orgUnit = 'an org unit'
+
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        const nameInput = within(
+            screen.getByTestId('exchange-name-input')
+        ).getByLabelText('Exchange name')
+        fireEvent.input(nameInput, { target: { value: exchangeName } })
+
+        const typeRadio = within(
+            screen.getByTestId('exchange-types')
+        ).getAllByRole('radio')
+        expect(typeRadio[0].getAttribute('value')).toEqual('EXTERNAL')
+        typeRadio[0].click()
+
+        const exchangeURLInput = within(
+            await screen.findByTestId('exchange-url')
+        ).getByLabelText('Target URL')
+        fireEvent.input(exchangeURLInput, { target: { value: exchangeURL } })
+
+        const authRadio = within(
+            screen.getByTestId('exchange-auth-method')
+        ).getAllByRole('radio')
+        expect(authRadio[0].getAttribute('value')).toEqual('BASIC')
+        authRadio[0].click()
+
+        screen.getByText('Add request').click()
+        await createRequest(screen, { requestName, orgUnit })
+
+        const requestRow = await screen.findByTestId('dhis2-uicore-tablerow')
+        expect(requestRow).toHaveTextContent(requestName)
+
+        within(screen.getByTestId('edit-item-footer'))
+            .getByText('Save exchange')
+            .click()
+
+        const exchangeAuthInputWarnings = within(
+            screen.getByTestId('exchange-auth-basic')
+        ).getAllByTestId('dhis2-uiwidgets-inputfield-validation')
+        expect(exchangeAuthInputWarnings).toHaveLength(2)
+        await waitFor(() =>
+            expect(
+                screen.queryByTestId('saving-exchange-loader')
+            ).not.toBeInTheDocument()
         )
     })
 
@@ -380,7 +616,7 @@ describe('<AddItem/>', () => {
             .getByText('Save exchange')
             .click()
 
-        waitFor(() =>
+        await waitFor(() =>
             expect(
                 screen.getByTestId('saving-exchange-loader')
             ).toBeInTheDocument()
@@ -500,10 +736,127 @@ describe('<AddItem/>', () => {
             .getByText('Save exchange')
             .click()
 
-        waitFor(() =>
+        await waitFor(() =>
             expect(
                 screen.getByTestId('saving-exchange-loader')
             ).toBeInTheDocument()
         )
+    })
+
+    it('warns about unsaved changes if user clicks cancel after making changes in the form', async () => {
+        const exchangeName = 'an exchange name'
+
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        const exchangeNameInput = within(
+            screen.getByTestId('exchange-name-input')
+        ).getByLabelText('Exchange name')
+        fireEvent.input(exchangeNameInput, { target: { value: exchangeName } })
+
+        within(screen.getByTestId('edit-item-footer'))
+            .getByText('Cancel')
+            .click()
+
+        const warningModal = await screen.findByTestId('exchange-discard-modal')
+        expect(warningModal).toBeVisible()
+        expect(warningModal).toHaveTextContent('Discard unsaved changes')
+    })
+
+    it('does not warn about unsaved changes if user clicks cancel after making no changes in the form ', async () => {
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        within(screen.getByTestId('edit-item-footer'))
+            .getByText('Cancel')
+            .click()
+
+        const warningModal = await screen.findByTestId('exchange-discard-modal')
+        expect(warningModal).not.toBeVisible()
+    })
+
+    it('does not create a request if the request name is missing', async () => {
+        const orgUnit = 'an org unit'
+
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        screen.getByText('Add request').click()
+
+        fireEvent.input(screen.getByTestId('fake-data-selector'), {
+            target: { value: 'a data element' },
+        })
+        fireEvent.input(screen.getByTestId('fake-period-selector'), {
+            target: { value: 'a period' },
+        })
+        fireEvent.input(screen.getByTestId('fake-orgunit-selector'), {
+            target: { value: orgUnit },
+        })
+        const footer = screen.getByTestId('edit-request-footer')
+        within(footer).getByText('Save request').click()
+
+        const requestNameInputWarning = within(
+            screen.getByTestId('request-name')
+        ).getByTestId('dhis2-uiwidgets-inputfield-validation')
+        expect(requestNameInputWarning).toBeInTheDocument()
+        expect(requestNameInputWarning).toHaveTextContent(
+            'Please provide a value'
+        )
+    })
+
+    it('warns about unsaved changes if user clicks cancel after making changes in the request form', async () => {
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        screen.getByText('Add request').click()
+        const requestNameInput = await screen.findByLabelText('Request name')
+        fireEvent.input(requestNameInput, { target: { value: 'a request' } })
+
+        const footer = screen.getByTestId('edit-request-footer')
+        within(footer).getByText('Cancel').click()
+
+        const warningModal = await screen.findByTestId('request-discard-modal')
+        expect(warningModal).toBeVisible()
+        expect(warningModal).toHaveTextContent('Discard unsaved changes')
+    })
+
+    it('does not warn about unsaved changes if user clicks cancel after making no changes in the request form', async () => {
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        screen.getByText('Add request').click()
+
+        const footer = screen.getByTestId('edit-request-footer')
+        within(footer).getByText('Cancel').click()
+
+        await waitFor(() => {
+            const warningModal = screen.queryByTestId('request-discard-modal')
+            expect(warningModal).not.toBeInTheDocument()
+        })
     })
 })
