@@ -91,7 +91,10 @@ export const RequestForm = ({
                                 </Box>
                             </div>
                         </div>
-                        <footer className={styles.bottomBar}>
+                        <footer
+                            data-test="edit-request-footer"
+                            className={styles.bottomBar}
+                        >
                             <EditRequestFooter
                                 handleRequestSubmit={handleRequestSubmit}
                                 exitRequestEditMode={exitRequestEditMode}

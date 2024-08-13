@@ -8,11 +8,15 @@ export const randomDhis2Id = () =>
 
 export const testRequest = ({ name = faker.word.noun() } = {}) => ({
     name,
+    dx: [],
+    pe: [],
+    ou: [],
+    filters: [],
 })
 
 export const testDataExchange = ({
     id = randomDhis2Id(),
-    displayName = faker.company.name(),
+    name = faker.company.name(),
     requests = [testRequest()],
     targetType = randomValueIn(['INTERNAL', 'EXTERNAL']),
     writeMetadataAccess = faker.datatype.boolean(),
@@ -23,7 +27,8 @@ export const testDataExchange = ({
     externalURL = undefined,
 } = {}) => ({
     id,
-    displayName,
+    displayName: name,
+    name,
     source: { requests },
     target: { type: targetType, api: { url: externalURL } },
     access: {
@@ -178,4 +183,24 @@ export const testImportSummary = ({
     },
     conflicts,
     status,
+})
+
+export const testOrganizationalUnitLevel = ({
+    name = faker.word.noun(),
+    id = randomDhis2Id(),
+    level = 0,
+} = {}) => ({ name, level, id, displayName: name })
+
+export const testOrganisationUnitLevels = ({ numberOfLevels = 2 } = {}) =>
+    [...Array(numberOfLevels + 1).keys()].map((level) =>
+        testOrganizationalUnitLevel({ level })
+    )
+
+export const testOrganisationUnitGroup = ({
+    name = faker.word.noun(),
+    id = randomDhis2Id(),
+} = {}) => ({
+    name,
+    id,
+    displayName: name,
 })
