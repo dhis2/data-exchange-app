@@ -122,14 +122,14 @@ export const RequestFormContents = () => {
             <Subsection
                 text={i18n.t('Output ID scheme options')}
                 description={i18n.t(
-                    'Defines how data from the source system will be output before it is sent to the target instance.'
+                    'Configure the formatting of source data before sending to the target system.'
                 )}
             >
                 <>
                     <SchemeSelector
                         label={i18n.t('Output general ID scheme')}
                         description={i18n.t(
-                            'Applies to all elements as the default ID scheme. If the chosen scheme is not present for a given element, ID will be used as the fallback.'
+                            'Used as the default ID scheme for all items. If the chosen scheme is not available for an item, it will fallback to using ID.'
                         )}
                         name="source_outputIdScheme"
                     />

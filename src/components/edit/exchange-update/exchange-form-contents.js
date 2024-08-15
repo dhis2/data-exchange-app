@@ -271,7 +271,7 @@ export const ExchangeFormContents = React.memo(
                 <Subsection
                     text={i18n.t('Input ID scheme options')}
                     description={i18n.t(
-                        'Defines the scheme (ID, code, attribute value) on the target system that will be used, upon input, to match data sent from the source system.'
+                        'Configure the scheme (ID, code, attribute value) used on the target system to match data coming from the source system.'
                     )}
                     className={styles.idSchemeSection}
                 >
@@ -286,7 +286,7 @@ export const ExchangeFormContents = React.memo(
                         <SchemeSelector
                             label={i18n.t('Input general ID scheme')}
                             description={i18n.t(
-                                'Applies to all elements as the default ID scheme. If the chosen scheme is not present for a given element, ID will be used as the fallback.'
+                                'Used as the default ID scheme for all items. If the chosen scheme is not available for an item, it will fall back to using ID.'
                             )}
                             name="target_idScheme"
                             disabled={editTargetSetupDisabled}
