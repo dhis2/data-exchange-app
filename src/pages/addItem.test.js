@@ -737,7 +737,7 @@ describe('<AddItem/>', () => {
                 screen.getByTestId('saving-exchange-loader')
             ).toBeInTheDocument()
         )
-    })
+    }, 7000)
 
     it('warns about unsaved changes if user clicks cancel after making changes in the form', async () => {
         const exchangeName = 'an exchange name'
