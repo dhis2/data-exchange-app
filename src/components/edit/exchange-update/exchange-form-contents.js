@@ -295,7 +295,7 @@ export const ExchangeFormContents = React.memo(
                 <Subsection
                     text={i18n.t('Input ID scheme options')}
                     description={i18n.t(
-                        'Configure the scheme (ID, code, attribute value) used on the target system to match data coming from the source system.'
+                        'Specify the scheme (ID, code, attribute value) used on the target system to match data coming from the source system.'
                     )}
                     className={styles.idSchemeSection}
                 >
