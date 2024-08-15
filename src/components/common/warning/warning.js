@@ -5,7 +5,7 @@ import styles from './warning.module.css'
 
 const Warning = ({ error, warning, title, children }) => {
     return (
-        <div className={styles.warningBoxWrapper}>
+        <div className={styles.warningBoxWrapper} data-test="warning">
             <NoticeBox error={error} warning={warning} title={title}>
                 {children}
             </NoticeBox>

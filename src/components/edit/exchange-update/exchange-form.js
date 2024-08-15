@@ -77,7 +77,10 @@ export const ExchangeForm = ({ exchangeInfo, addMode }) => {
                             })}
                         >
                             <div className={styles.editArea}>
-                                <div className={styles.editContainer}>
+                                <div
+                                    className={styles.editContainer}
+                                    data-test="add-exchange-title"
+                                >
                                     <EditTitle
                                         title={
                                             addMode
@@ -87,7 +90,11 @@ export const ExchangeForm = ({ exchangeInfo, addMode }) => {
                                     />
 
                                     <Box className={styles.editFormArea}>
-                                        {saving && <Loader />}
+                                        {saving && (
+                                            <span data-test="saving-exchange-loader">
+                                                <Loader />
+                                            </span>
+                                        )}
                                         {error && (
                                             <NoticeBox
                                                 error
@@ -111,7 +118,10 @@ export const ExchangeForm = ({ exchangeInfo, addMode }) => {
                                     </Box>
                                 </div>
                             </div>
-                            <footer className={styles.bottomBar}>
+                            <footer
+                                className={styles.bottomBar}
+                                data-test="edit-item-footer"
+                            >
                                 <EditItemFooter
                                     handleSubmit={handleSubmit}
                                     requestsTouched={requestsTouched}

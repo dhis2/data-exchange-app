@@ -2,8 +2,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styles from './form-subsection.module.css'
 
-export const Subsection = ({ text, description, children, className = '' }) => (
-    <div className={className}>
+export const Subsection = ({
+    text,
+    description,
+    children,
+    className = '',
+    dataTest,
+}) => (
+    <div className={className} data-test={dataTest || 'subsection'}>
         <div className={styles.subtitleContainer}>
             <div className={styles.subtitle}>{text}</div>
             {description && (
@@ -17,6 +23,7 @@ export const Subsection = ({ text, description, children, className = '' }) => (
 Subsection.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    dataTest: PropTypes.string,
     description: PropTypes.string,
     text: PropTypes.string,
 }

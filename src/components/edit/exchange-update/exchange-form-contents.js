@@ -97,7 +97,10 @@ export const ExchangeFormContents = React.memo(
         return (
             <>
                 <Subsection text={i18n.t('Basic setup')}>
-                    <div className={styles.subsectionField1000}>
+                    <div
+                        className={styles.subsectionField1000}
+                        data-test="exchange-name-input"
+                    >
                         <Field
                             name="name"
                             label={i18n.t('Exchange name')}
@@ -108,9 +111,15 @@ export const ExchangeFormContents = React.memo(
                             validate={hasValue}
                         />
                     </div>
-                    <div className={styles.subsectionField}>
+                    <div
+                        className={styles.subsectionField}
+                        data-test="exchange-type-input"
+                    >
                         <FieldContainer label={i18n.t('Exchange target type')}>
-                            <div className={styles.radiosContainer}>
+                            <div
+                                className={styles.radiosContainer}
+                                data-test="exchange-types"
+                            >
                                 <RadioDecorator
                                     label={i18n.t('External')}
                                     helperText={i18n.t(
@@ -149,7 +158,10 @@ export const ExchangeFormContents = React.memo(
                     </div>
                 </Subsection>
                 {typeValue === EXCHANGE_TYPES.external && (
-                    <Subsection text={i18n.t('Target setup')}>
+                    <Subsection
+                        text={i18n.t('Target setup')}
+                        dataTest="target-setup"
+                    >
                         <EnableExternalEditWarning
                             editTargetSetupDisabled={editTargetSetupDisabled}
                             setEditTargetSetupDisabled={
@@ -157,7 +169,10 @@ export const ExchangeFormContents = React.memo(
                             }
                             targetSetup={true}
                         />
-                        <div className={styles.subsectionField600}>
+                        <div
+                            className={styles.subsectionField600}
+                            data-test="exchange-url"
+                        >
                             <Field
                                 name="url"
                                 label={i18n.t('Target URL')}
@@ -174,7 +189,10 @@ export const ExchangeFormContents = React.memo(
                             <FieldContainer
                                 label={i18n.t('Authentication method')}
                             >
-                                <div className={styles.radiosContainer}>
+                                <div
+                                    className={styles.radiosContainer}
+                                    data-test="exchange-auth-method"
+                                >
                                     <Field
                                         name="authentication"
                                         type="radio"
@@ -197,7 +215,10 @@ export const ExchangeFormContents = React.memo(
                         </div>
 
                         {authenticationValue === AUTHENTICATION_TYPES.pat && (
-                            <div className={styles.subsectionField600}>
+                            <div
+                                className={styles.subsectionField600}
+                                data-test="exchange-auth-pat"
+                            >
                                 <Field
                                     name="accessToken"
                                     type="password"
@@ -217,7 +238,10 @@ export const ExchangeFormContents = React.memo(
                             </div>
                         )}
                         {authenticationValue === AUTHENTICATION_TYPES.basic && (
-                            <div className={styles.subsectionField600}>
+                            <div
+                                className={styles.subsectionField600}
+                                data-test="exchange-auth-basic"
+                            >
                                 <Field
                                     name="username"
                                     className={styles.fieldItem}
@@ -290,6 +314,7 @@ export const ExchangeFormContents = React.memo(
                             )}
                             name="target_idScheme"
                             disabled={editTargetSetupDisabled}
+                            dataTest="general-id-scheme-selector"
                         />
                         <SchemeSelector
                             label={i18n.t('Input data element ID scheme')}
@@ -300,6 +325,7 @@ export const ExchangeFormContents = React.memo(
                             defaultIDSchemeName={i18n.t(
                                 'Input general ID scheme'
                             )}
+                            dataTest="element-id-scheme-selector"
                         />
                         <SchemeSelector
                             label={i18n.t('Input organisation unit ID scheme')}
@@ -312,6 +338,7 @@ export const ExchangeFormContents = React.memo(
                             defaultIDSchemeName={i18n.t(
                                 'Input general ID scheme'
                             )}
+                            dataTest="org-unit-id-scheme-selector"
                         />
                         <SchemeSelector
                             label={i18n.t(
@@ -326,6 +353,7 @@ export const ExchangeFormContents = React.memo(
                             defaultIDSchemeName={i18n.t(
                                 'Input general ID scheme'
                             )}
+                            dataTest="category-option-combo-scheme-selector"
                         />
                     </>
                 </Subsection>

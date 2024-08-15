@@ -1,6 +1,6 @@
 {
     "name": "data-exchange-app",
-    "version": "100.6.0",
+    "version": "100.9.0",
     "description": "",
     "license": "BSD-3-Clause",
     "private": true,
@@ -36,14 +36,14 @@
         "start-server-and-test": "^1.14.0"
     },
     "dependencies": {
-        "@dhis2/analytics": "999.9.9-outlier-table.alpha.1",
+        "@dhis2/analytics": "^26.7.9",
         "@dhis2/app-runtime": "^3.10.4",
-        "@dhis2/ui": "9.8.9",
+        "@dhis2/ui": "^9.10.3",
         "classnames": "^2.5.1",
         "react-router-dom": "^6.4.1",
         "use-query-params": "^2.1.1"
     },
     "resolutions": {
-        "@dhis2/ui": "^9.8.9"
+        "@dhis2/ui": "^9.10.3"
     }
 }

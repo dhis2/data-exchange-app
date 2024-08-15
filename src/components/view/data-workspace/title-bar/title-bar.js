@@ -6,7 +6,7 @@ import React from 'react'
 import { useExchangeContext } from '../../../../context/index.js'
 import styles from './title-bar.module.css'
 
-const getRelativeTimeDifference = ({ startTimestamp, endTimestamp }) => {
+export const getRelativeTimeDifference = ({ startTimestamp, endTimestamp }) => {
     if (!startTimestamp || !endTimestamp) {
         return undefined
     }
@@ -32,7 +32,7 @@ const TitleBar = () => {
     const requestsCount = exchange.source?.requests?.length
 
     return (
-        <div className={styles.titleBar}>
+        <div className={styles.titleBar} data-test="title-bar">
             <span className={styles.workflowName}>{exchange?.displayName}</span>
             <span className={styles.workflowDataSetsCount}>
                 <IconDimensionDataSet16 />

@@ -20,7 +20,10 @@ export const AccessWarning = ({ editMode }) => (
             </span>
         </Warning>
 
-        <div className={styles.accessWarningButton}>
+        <div
+            className={styles.accessWarningButton}
+            data-test="link-to-configuration-page"
+        >
             <Link to="/edit/">
                 <Button>{i18n.t('Back to configurations page')}</Button>
             </Link>

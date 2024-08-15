@@ -15,6 +15,7 @@ import styles from './scheme-selector.module.css'
 export const SchemeSelector = ({
     name,
     label,
+    dataTest,
     description,
     disabled,
     canBeNone,
@@ -28,7 +29,7 @@ export const SchemeSelector = ({
     const { attributes } = useAttributeContext()
 
     return (
-        <div className={styles.schemeSelectorContainer}>
+        <div className={styles.schemeSelectorContainer} data-test={dataTest}>
             <div className={styles.radioContainerLabel}>{label}</div>
             <div className={styles.radioContainerSubtext}>{description}</div>
             <div className={styles.radioContainerWrapper}>
@@ -78,7 +79,10 @@ export const SchemeSelector = ({
                     </div>
                 </FieldContainer>
                 {schemeValue === SCHEME_TYPES.attribute && (
-                    <div className={styles.attributeSelectionContainer}>
+                    <div
+                        className={styles.attributeSelectionContainer}
+                        data-test={`${dataTest}-attributes`}
+                    >
                         <Field
                             name={`${name}_attribute`}
                             component={SingleSelectFieldFF}
@@ -97,6 +101,7 @@ export const SchemeSelector = ({
 
 SchemeSelector.propTypes = {
     canBeNone: PropTypes.bool,
+    dataTest: PropTypes.string,
     defaultIDSchemeName: PropTypes.string,
     description: PropTypes.string,
     disabled: PropTypes.bool,

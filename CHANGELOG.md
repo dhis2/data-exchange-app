@@ -1,3 +1,50 @@
+# [100.9.0](https://github.com/dhis2/data-exchange-app/compare/v100.8.1...v100.9.0) (2024-08-13)
+
+
+### Features
+
+* add more tests and improve some of the existing ones ([c0bc7a7](https://github.com/dhis2/data-exchange-app/commit/c0bc7a78dc6381a11ee6b85d460c054bf115643a))
+* add more tests to cover add exchange usecase ([4d3389a](https://github.com/dhis2/data-exchange-app/commit/4d3389ac8c480d5ac362ec24ca52b83244cd2554))
+* add tests to cover add exchnage usecase ([09abd23](https://github.com/dhis2/data-exchange-app/commit/09abd2379a9d3d785af05dbf335674ec91e49331))
+* add tests to cover edit exchange usecase and format ([2414879](https://github.com/dhis2/data-exchange-app/commit/2414879da3d82f3f410358e17215d7c5357c9338))
+
+## [100.8.1](https://github.com/dhis2/data-exchange-app/compare/v100.8.0...v100.8.1) (2024-08-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([a5b7eac](https://github.com/dhis2/data-exchange-app/commit/a5b7eac5889337e2999ae0c4531a29d611c96ba8))
+
+# [100.8.0](https://github.com/dhis2/data-exchange-app/compare/v100.7.0...v100.8.0) (2024-07-25)
+
+
+### Bug Fixes
+
+* add mock for resize observer ([fe45b4b](https://github.com/dhis2/data-exchange-app/commit/fe45b4b0fed5ca1c070504f4b264de8600b5f547))
+* fix format ([a899bdf](https://github.com/dhis2/data-exchange-app/commit/a899bdfb4fcc30b9b25625730ee82291fd327c35))
+
+
+### Features
+
+* add additional tests for main exchange page ([ad71e7a](https://github.com/dhis2/data-exchange-app/commit/ad71e7a47920f013d5cb939f877c1f2f30d65eea))
+* add initial tests for main data display page ([f65f04c](https://github.com/dhis2/data-exchange-app/commit/f65f04cc47215c3734dbb791dd5855d892b48fa9))
+* add more tests to general data page and refactor existing ones ([d9426ea](https://github.com/dhis2/data-exchange-app/commit/d9426ea448411a4e9a53787b0b7633f8e122bdfe))
+* more tests for data page and setup for other pages ([01b06b2](https://github.com/dhis2/data-exchange-app/commit/01b06b23a053fd3586aafe1491818d0cdf7f1ac4))
+
+# [100.7.0](https://github.com/dhis2/data-exchange-app/compare/v100.6.1...v100.7.0) (2024-07-25)
+
+
+### Features
+
+* upgrade ui and analytics library ([c4c020d](https://github.com/dhis2/data-exchange-app/commit/c4c020d8eee9752e465f2cbdf8a77d55e3d804db))
+
+## [100.6.1](https://github.com/dhis2/data-exchange-app/compare/v100.6.0...v100.6.1) (2024-07-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c4bd1b1](https://github.com/dhis2/data-exchange-app/commit/c4bd1b12c9ea1a335e8b8874d4a8284bdce9c499))
+
 # [100.6.0](https://github.com/dhis2/data-exchange-app/compare/v100.5.1...v100.6.0) (2024-06-25)
 
 

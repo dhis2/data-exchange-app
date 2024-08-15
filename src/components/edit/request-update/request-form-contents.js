@@ -41,7 +41,10 @@ export const RequestFormContents = () => {
                 text={i18n.t('Request setup')}
                 className={styles.subsectionBlockEnd}
             >
-                <div className={styles.subsectionField1000}>
+                <div
+                    className={styles.subsectionField1000}
+                    data-test="request-name"
+                >
                     <Field
                         name="requestName"
                         label={i18n.t('Request name')}
@@ -129,7 +132,7 @@ export const RequestFormContents = () => {
                     <SchemeSelector
                         label={i18n.t('Output general ID scheme')}
                         description={i18n.t(
-                            'Used as the default ID scheme for all items. If the chosen scheme is not available for an item, it will fallback to using ID.'
+                            'Used as the default ID scheme for all items. If the chosen scheme is not available for an item, it will fall back to using ID.'
                         )}
                         name="source_outputIdScheme"
                     />

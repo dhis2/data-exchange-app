@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-15T10:55:57.053Z\n"
-"PO-Revision-Date: 2024-08-15T10:55:57.053Z\n"
+"POT-Creation-Date: 2024-08-15T11:45:11.349Z\n"
+"PO-Revision-Date: 2024-08-15T11:45:11.349Z\n"
 
 msgid "Editing the target setup will require you to reenter authentication details."
 msgstr "Editing the target setup will require you to reenter authentication details."
@@ -260,13 +260,6 @@ msgstr "Configure the formatting of source data before sending to the target sys
 
 msgid "Output general ID scheme"
 msgstr "Output general ID scheme"
-
-msgid ""
-"Used as the default ID scheme for all items. If the chosen scheme is not "
-"available for an item, it will fallback to using ID."
-msgstr ""
-"Used as the default ID scheme for all items. If the chosen scheme is not "
-"available for an item, it will fallback to using ID."
 
 msgid "Output data item ID scheme"
 msgstr "Output data item ID scheme"

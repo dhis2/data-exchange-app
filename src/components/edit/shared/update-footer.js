@@ -14,7 +14,13 @@ import { useNavigate } from 'react-router-dom'
 
 const DiscardModal = ({ open, onClose, onCancelConfirm, objectName }) => {
     return (
-        <Modal hide={!open} large position="middle" onClose={onClose}>
+        <Modal
+            hide={!open}
+            large
+            position="middle"
+            onClose={onClose}
+            dataTest={`${objectName}-discard-modal`}
+        >
             <ModalTitle>{i18n.t('Discard unsaved changes')}</ModalTitle>
             <ModalContent>
                 <span>
