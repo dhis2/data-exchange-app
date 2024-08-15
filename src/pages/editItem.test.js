@@ -7,6 +7,7 @@ import {
     waitFor,
     within,
 } from '@testing-library/react'
+import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import { MemoryRouter, Route } from 'react-router-dom'
 import { QueryParamProvider } from 'use-query-params'
@@ -67,6 +68,8 @@ jest.mock('@dhis2/app-runtime', () => ({
     }),
 }))
 
+const patchExchange = jest.fn()
+
 const setUp = (
     ui,
     {
@@ -90,7 +93,13 @@ const setUp = (
             }
             return undefined
         },
-        [`aggregateDataExchanges/${exchangeIdOrDataExchangeId}`]: () => {
+        [`aggregateDataExchanges/${exchangeIdOrDataExchangeId}`]: (
+            type,
+            query
+        ) => {
+            if (type === 'json-patch') {
+                patchExchange(query?.data)
+            }
             return {}
         },
         analytics: { headers: [], metaData: { items: {}, dimensions: {} } },
@@ -144,6 +153,10 @@ beforeEach(() => {
 })
 
 describe('<EditItem/>', () => {
+    afterEach(() => {
+        jest.clearAllMocks()
+    })
+
     const createRequest = async (screen, { requestName, orgUnit }) => {
         const requestNameInput = await screen.findByLabelText('Request name')
         fireEvent.input(requestNameInput, { target: { value: requestName } })
@@ -549,4 +562,216 @@ describe('<EditItem/>', () => {
             ).toBeInTheDocument()
         )
     })
+
+    it('loads None (follows Input general ID scheme) option if no ID scheme is specified', async () => {
+        const request = testRequest()
+        const dataExchange = testDataExchange({
+            requests: [request],
+            targetType: 'INTERNAL',
+            inputIdSchemes: { idScheme: 'UID' },
+        })
+
+        const { screen } = setUp(<EditItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+            dataExchange,
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Edit exchange')
+
+        const defaultElementIdSchemeRadio = within(
+            screen.getByTestId('element-id-scheme-selector')
+        ).getByRole('radio', { name: 'None (follows Input general ID scheme)' })
+
+        expect(defaultElementIdSchemeRadio).toBeChecked()
+
+        const defaultOrgUnitIdSchemeRadio = within(
+            screen.getByTestId('org-unit-id-scheme-selector')
+        ).getByRole('radio', { name: 'None (follows Input general ID scheme)' })
+
+        expect(defaultOrgUnitIdSchemeRadio).toBeChecked()
+
+        const defaultCategoryOptionComboSchemeRadio = within(
+            screen.getByTestId('category-option-combo-scheme-selector')
+        ).getByRole('radio', { name: 'None (follows Input general ID scheme)' })
+
+        expect(defaultCategoryOptionComboSchemeRadio).toBeChecked()
+    })
+
+    it('displays appropriate ID scheme selections based on exchange values', async () => {
+        const request = testRequest()
+        const dataExchange = testDataExchange({
+            requests: [request],
+            targetType: 'INTERNAL',
+            inputIdSchemes: {
+                idScheme: 'UID',
+                dataElementIdScheme: 'CODE',
+                orgUnitIdScheme: 'ATTRIBUTE:attribute001',
+                categoryOptionComboIdScheme: 'UID',
+            },
+        })
+        const attributes = [
+            testAttribute({ displayName: 'Taco Friday', id: 'attribute001' }),
+            testAttribute(),
+            testAttribute(),
+        ]
+
+        const { screen } = setUp(<EditItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+            dataExchange,
+            attributes,
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Edit exchange')
+
+        const codeElementIdSchemeRadio = within(
+            screen.getByTestId('element-id-scheme-selector')
+        ).getByRole('radio', { name: 'Code' })
+
+        expect(codeElementIdSchemeRadio).toBeChecked()
+
+        const attributeOrgUnitIdSchemeRadio = within(
+            screen.getByTestId('org-unit-id-scheme-selector')
+        ).getByRole('radio', { name: 'Attribute' })
+
+        expect(attributeOrgUnitIdSchemeRadio).toBeChecked()
+        expect(
+            within(screen.getByTestId('org-unit-id-scheme-selector')).getByText(
+                'Taco Friday'
+            )
+        ).toBeInTheDocument()
+
+        const idCategoryOptionComboSchemeRadio = within(
+            screen.getByTestId('category-option-combo-scheme-selector')
+        ).getByRole('radio', { name: 'ID' })
+
+        expect(idCategoryOptionComboSchemeRadio).toBeChecked()
+    })
+
+    it('does not post anything for ID schemes when None option is selected', async () => {
+        const request = testRequest()
+        const dataExchange = testDataExchange({
+            requests: [request],
+            targetType: 'INTERNAL',
+            inputIdSchemes: {
+                idScheme: 'UID',
+                dataElementIdScheme: 'CODE',
+                orgUnitIdScheme: 'UID',
+                categoryOptionComboIdScheme: 'CODE',
+            },
+        })
+
+        const { screen } = setUp(<EditItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+            dataExchange,
+        })
+
+        const user = userEvent.setup()
+
+        await screen.findByTestId('add-exchange-title')
+
+        const defaultElementIdSchemeRadio = within(
+            screen.getByTestId('element-id-scheme-selector')
+        ).getByRole('radio', { name: 'None (follows Input general ID scheme)' })
+        await user.click(defaultElementIdSchemeRadio)
+
+        const defaultOrgUnitIdSchemeRadio = within(
+            screen.getByTestId('org-unit-id-scheme-selector')
+        ).getByRole('radio', { name: 'None (follows Input general ID scheme)' })
+        await user.click(defaultOrgUnitIdSchemeRadio)
+
+        const defaultCategoryOptionComboSchemeRadio = within(
+            screen.getByTestId('category-option-combo-scheme-selector')
+        ).getByRole('radio', { name: 'None (follows Input general ID scheme)' })
+        await user.click(defaultCategoryOptionComboSchemeRadio)
+
+        const saveExchange = within(
+            screen.getByTestId('edit-item-footer')
+        ).getByText('Save exchange')
+        await user.click(saveExchange)
+
+        const expectedPayload = [
+            {
+                op: 'add',
+                path: '/target',
+                value: {
+                    type: 'INTERNAL',
+                    request: {
+                        idScheme: 'UID',
+                    },
+                },
+            },
+        ]
+
+        expect(patchExchange).toHaveBeenCalled()
+        expect(patchExchange).toHaveBeenCalledWith(expectedPayload)
+    }, 7000),
+        it('posts expected id schemes based on selections', async () => {
+            const request = testRequest()
+            const dataExchange = testDataExchange({
+                requests: [request],
+                targetType: 'INTERNAL',
+                inputIdSchemes: {
+                    idScheme: 'UID',
+                    categoryOptionComboIdScheme: 'ATTRIBUTE:snorkmaiden',
+                },
+            })
+            const attributes = [
+                testAttribute({
+                    name: 'Snorkmaiden',
+                    displayName: 'Snorkmaiden',
+                    id: 'snorkmaiden',
+                }),
+                testAttribute(),
+                testAttribute(),
+            ]
+
+            const { screen } = setUp(<EditItem />, {
+                userContext: testUserContext({ canAddExchange: true }),
+                dataExchange,
+                attributes,
+            })
+
+            const user = userEvent.setup()
+
+            await screen.findByTestId('add-exchange-title')
+
+            const idElementIdSchemeRadio = within(
+                screen.getByTestId('element-id-scheme-selector')
+            ).getByRole('radio', { name: 'ID' })
+            await user.click(idElementIdSchemeRadio)
+
+            const codeOrgUnitIdSchemeRadio = within(
+                screen.getByTestId('org-unit-id-scheme-selector')
+            ).getByRole('radio', { name: 'Code' })
+            await user.click(codeOrgUnitIdSchemeRadio)
+
+            const saveExchange = within(
+                screen.getByTestId('edit-item-footer')
+            ).getByText('Save exchange')
+            await user.click(saveExchange)
+
+            const expectedPayload = [
+                {
+                    op: 'add',
+                    path: '/target',
+                    value: {
+                        type: 'INTERNAL',
+                        request: {
+                            categoryOptionComboIdScheme:
+                                'ATTRIBUTE:snorkmaiden',
+                            dataElementIdScheme: 'UID',
+                            idScheme: 'UID',
+                            orgUnitIdScheme: 'CODE',
+                        },
+                    },
+                },
+            ]
+
+            expect(patchExchange).toHaveBeenCalled()
+            expect(patchExchange).toHaveBeenCalledWith(expectedPayload)
+        })
 })
