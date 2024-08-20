@@ -1,3 +1,10 @@
+## [100.9.1](https://github.com/dhis2/data-exchange-app/compare/v100.9.0...v100.9.1) (2024-08-20)
+
+
+### Bug Fixes
+
+* trigger release ([#94](https://github.com/dhis2/data-exchange-app/issues/94)) ([83a02c0](https://github.com/dhis2/data-exchange-app/commit/83a02c03c9b68bf0408ae682af7edc17ac1fc7d0))
+
 # [100.9.0](https://github.com/dhis2/data-exchange-app/compare/v100.8.1...v100.9.0) (2024-08-13)
 
 
