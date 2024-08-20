@@ -15,7 +15,6 @@ import { Warning } from '../../common/index.js'
 import {
     SchemeSelector,
     Subsection,
-    AdvancedSubsection,
     AUTHENTICATION_TYPES,
     EXCHANGE_TYPES,
 } from '../shared/index.js'
@@ -37,7 +36,7 @@ const EnableExternalEditWarning = ({
                           'Editing the target setup will require you to reenter authentication details.'
                       )
                     : i18n.t(
-                          'Editing the advanced options will require you to reenter authentication details.'
+                          'Editing the input ID scheme options will require you to reenter authentication details.'
                       )}
             </div>
             <Button
@@ -47,7 +46,7 @@ const EnableExternalEditWarning = ({
             >
                 {targetSetup
                     ? i18n.t('Edit target setup')
-                    : i18n.t('Edit advanced options')}
+                    : i18n.t('Edit input ID scheme options')}
             </Button>
         </Warning>
     )
@@ -90,7 +89,6 @@ export const ExchangeFormContents = React.memo(
             subscription: { value: true },
         })
         const { value: authenticationValue } = authenticationType
-        const [showAdvanced, setShowAdvanced] = useState(false)
 
         const [editTargetSetupDisabled, setEditTargetSetupDisabled] = useState(
             () => typeValue === EXCHANGE_TYPES.external
@@ -294,56 +292,71 @@ export const ExchangeFormContents = React.memo(
                         deleteRequest={deleteRequest}
                     />
                 </Subsection>
-                <AdvancedSubsection
-                    text={i18n.t('Advanced options')}
-                    className={styles.advancedSection}
-                    onTextClick={() => {
-                        setShowAdvanced((prevShown) => !prevShown)
-                    }}
-                    open={showAdvanced}
-                >
-                    {showAdvanced && (
-                        <>
-                            <EnableExternalEditWarning
-                                editTargetSetupDisabled={
-                                    editTargetSetupDisabled
-                                }
-                                setEditTargetSetupDisabled={
-                                    setEditTargetSetupDisabled
-                                }
-                                targetSetup={false}
-                            />
-                            <SchemeSelector
-                                label={i18n.t('Input general ID scheme')}
-                                name="target_idScheme"
-                                disabled={editTargetSetupDisabled}
-                                dataTest="general-id-scheme-selector"
-                            />
-                            <SchemeSelector
-                                label={i18n.t('Input data element ID scheme')}
-                                name="target_dataElementIdScheme"
-                                disabled={editTargetSetupDisabled}
-                                dataTest="element-id-scheme-selector"
-                            />
-                            <SchemeSelector
-                                label={i18n.t(
-                                    'Input organisation unit ID scheme'
-                                )}
-                                name="target_orgUnitIdScheme"
-                                disabled={editTargetSetupDisabled}
-                                dataTest="org-unit-id-scheme-selector"
-                            />
-                            <SchemeSelector
-                                label={i18n.t(
-                                    'Input category option combo ID scheme'
-                                )}
-                                name="target_categoryOptionComboIdScheme"
-                                disabled={editTargetSetupDisabled}
-                                dataTest="category-option-combo-scheme-selector"
-                            />
-                        </>
+                <Subsection
+                    text={i18n.t('Input ID scheme options')}
+                    description={i18n.t(
+                        'Specify the scheme (ID, code, attribute value) used on the target system to match data coming from the source system.'
                     )}
-                </AdvancedSubsection>
+                    className={styles.idSchemeSection}
+                >
+                    <>
+                        <EnableExternalEditWarning
+                            editTargetSetupDisabled={editTargetSetupDisabled}
+                            setEditTargetSetupDisabled={
+                                setEditTargetSetupDisabled
+                            }
+                            targetSetup={false}
+                        />
+                        <SchemeSelector
+                            label={i18n.t('Input general ID scheme')}
+                            description={i18n.t(
+                                'Used as the default ID scheme for all items. If the chosen scheme is not available for an item, it will fall back to using ID.'
+                            )}
+                            name="target_idScheme"
+                            disabled={editTargetSetupDisabled}
+                            dataTest="general-id-scheme-selector"
+                        />
+                        <SchemeSelector
+                            label={i18n.t('Input data element ID scheme')}
+                            description={i18n.t('Applies to data elements.')}
+                            name="target_dataElementIdScheme"
+                            disabled={editTargetSetupDisabled}
+                            canBeNone={true}
+                            defaultIDSchemeName={i18n.t(
+                                'Input general ID scheme'
+                            )}
+                            dataTest="element-id-scheme-selector"
+                        />
+                        <SchemeSelector
+                            label={i18n.t('Input organisation unit ID scheme')}
+                            description={i18n.t(
+                                'Applies to organisation units.'
+                            )}
+                            name="target_orgUnitIdScheme"
+                            disabled={editTargetSetupDisabled}
+                            canBeNone={true}
+                            defaultIDSchemeName={i18n.t(
+                                'Input general ID scheme'
+                            )}
+                            dataTest="org-unit-id-scheme-selector"
+                        />
+                        <SchemeSelector
+                            label={i18n.t(
+                                'Input category option combo ID scheme'
+                            )}
+                            description={i18n.t(
+                                'Applies to category option combos.'
+                            )}
+                            name="target_categoryOptionComboIdScheme"
+                            disabled={editTargetSetupDisabled}
+                            canBeNone={true}
+                            defaultIDSchemeName={i18n.t(
+                                'Input general ID scheme'
+                            )}
+                            dataTest="category-option-combo-scheme-selector"
+                        />
+                    </>
+                </Subsection>
             </>
         )
     }

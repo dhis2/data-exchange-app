@@ -5,24 +5,24 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-06-03T14:01:27.882Z\n"
-"PO-Revision-Date: 2024-06-03T14:01:27.882Z\n"
+"POT-Creation-Date: 2024-08-15T11:49:42.468Z\n"
+"PO-Revision-Date: 2024-08-15T11:49:42.468Z\n"
 
 msgid "Editing the target setup will require you to reenter authentication details."
 msgstr "Editing the target setup will require you to reenter authentication details."
 
 msgid ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
+"Editing the input ID scheme options will require you to reenter "
+"authentication details."
 msgstr ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
+"Editing the input ID scheme options will require you to reenter "
+"authentication details."
 
 msgid "Edit target setup"
 msgstr "Edit target setup"
 
-msgid "Edit advanced options"
-msgstr "Edit advanced options"
+msgid "Edit input ID scheme options"
+msgstr "Edit input ID scheme options"
 
 msgid "Basic setup"
 msgstr "Basic setup"
@@ -87,20 +87,43 @@ msgstr "The password associated with the username specified above"
 msgid "Requests"
 msgstr "Requests"
 
-msgid "Advanced options"
-msgstr "Advanced options"
+msgid "Input ID scheme options"
+msgstr "Input ID scheme options"
+
+msgid ""
+"Specify the scheme (ID, code, attribute value) used on the target system to "
+"match data coming from the source system."
+msgstr ""
+"Specify the scheme (ID, code, attribute value) used on the target system to "
+"match data coming from the source system."
 
 msgid "Input general ID scheme"
 msgstr "Input general ID scheme"
 
+msgid ""
+"Used as the default ID scheme for all items. If the chosen scheme is not "
+"available for an item, it will fall back to using ID."
+msgstr ""
+"Used as the default ID scheme for all items. If the chosen scheme is not "
+"available for an item, it will fall back to using ID."
+
 msgid "Input data element ID scheme"
 msgstr "Input data element ID scheme"
+
+msgid "Applies to data elements."
+msgstr "Applies to data elements."
 
 msgid "Input organisation unit ID scheme"
 msgstr "Input organisation unit ID scheme"
 
+msgid "Applies to organisation units."
+msgstr "Applies to organisation units."
+
 msgid "Input category option combo ID scheme"
 msgstr "Input category option combo ID scheme"
+
+msgid "Applies to category option combos."
+msgstr "Applies to category option combos."
 
 msgid "Add exchange"
 msgstr "Add exchange"
@@ -229,14 +252,30 @@ msgstr "Data item select"
 msgid "Organisation units"
 msgstr "Organisation units"
 
+msgid "Output ID scheme options"
+msgstr "Output ID scheme options"
+
+msgid "Configure the formatting of source data before sending to the target system."
+msgstr "Configure the formatting of source data before sending to the target system."
+
 msgid "Output general ID scheme"
 msgstr "Output general ID scheme"
+
+msgid "Output data item ID scheme"
+msgstr "Output data item ID scheme"
+
+msgid "Applies to data elements, indicators, and program indicators."
+msgstr "Applies to data elements, indicators, and program indicators."
 
 msgid "Output data element ID scheme"
 msgstr "Output data element ID scheme"
 
-msgid "Output data item ID scheme"
-msgstr "Output data item ID scheme"
+msgid ""
+"Applies to data elements. For data elements, it will override the scheme "
+"specified by Output data item ID scheme."
+msgstr ""
+"Applies to data elements. For data elements, it will override the scheme "
+"specified by Output data item ID scheme."
 
 msgid "Output organisation unit ID scheme"
 msgstr "Output organisation unit ID scheme"
@@ -445,6 +484,9 @@ msgstr ""
 
 msgid "New line list"
 msgstr "New line list"
+
+msgid "None (follows {{defaultIDSchemeName}})"
+msgstr "None (follows {{defaultIDSchemeName}})"
 
 msgid "ID"
 msgstr "ID"

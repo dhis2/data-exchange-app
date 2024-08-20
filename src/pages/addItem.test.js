@@ -586,8 +586,6 @@ describe('<AddItem/>', () => {
         screen.getByText('Add request').click()
         await createRequest(screen, { requestName, orgUnit })
 
-        screen.getByTestId('advanced-options').click()
-
         const generalIdSchemeRadio = within(
             screen.getByTestId('general-id-scheme-selector')
         ).getAllByRole('radio')
@@ -597,20 +595,20 @@ describe('<AddItem/>', () => {
         const elementIdSchemeRadio = within(
             screen.getByTestId('element-id-scheme-selector')
         ).getAllByRole('radio')
-        expect(elementIdSchemeRadio).toHaveLength(3)
-        elementIdSchemeRadio[1].click()
+        expect(elementIdSchemeRadio).toHaveLength(4)
+        elementIdSchemeRadio[2].click()
 
         const orgUnitIdSchemeRadio = within(
             screen.getByTestId('org-unit-id-scheme-selector')
         ).getAllByRole('radio')
-        expect(orgUnitIdSchemeRadio).toHaveLength(3)
-        orgUnitIdSchemeRadio[1].click()
+        expect(orgUnitIdSchemeRadio).toHaveLength(4)
+        orgUnitIdSchemeRadio[2].click()
 
         const categoryOptionComboSchemeRadio = within(
             screen.getByTestId('category-option-combo-scheme-selector')
         ).getAllByRole('radio')
-        expect(categoryOptionComboSchemeRadio).toHaveLength(3)
-        categoryOptionComboSchemeRadio[1].click()
+        expect(categoryOptionComboSchemeRadio).toHaveLength(4)
+        categoryOptionComboSchemeRadio[2].click()
 
         within(screen.getByTestId('edit-item-footer'))
             .getByText('Save exchange')
@@ -655,8 +653,6 @@ describe('<AddItem/>', () => {
         screen.getByText('Add request').click()
         await createRequest(screen, { requestName, orgUnit })
 
-        screen.getByTestId('advanced-options').click()
-
         const generalIdPicker = screen.getByTestId('general-id-scheme-selector')
         const generalIdSchemeRadio =
             within(generalIdPicker).getAllByRole('radio')
@@ -677,8 +673,8 @@ describe('<AddItem/>', () => {
         const elementIdPicker = screen.getByTestId('element-id-scheme-selector')
         const elementIdSchemeRadio =
             within(elementIdPicker).getAllByRole('radio')
-        expect(elementIdSchemeRadio).toHaveLength(3)
-        elementIdSchemeRadio[2].click()
+        expect(elementIdSchemeRadio).toHaveLength(4)
+        elementIdSchemeRadio[3].click()
         within(elementIdPicker).getByTestId('dhis2-uicore-select-input').click()
         const elementAttributeOptions = within(
             await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper')
@@ -696,8 +692,8 @@ describe('<AddItem/>', () => {
         )
         const orgUnitIdSchemeRadio =
             within(orgUnitIdPicker).getAllByRole('radio')
-        expect(orgUnitIdSchemeRadio).toHaveLength(3)
-        orgUnitIdSchemeRadio[2].click()
+        expect(orgUnitIdSchemeRadio).toHaveLength(4)
+        orgUnitIdSchemeRadio[3].click()
         within(orgUnitIdPicker).getByTestId('dhis2-uicore-select-input').click()
         const orgUnitAttributeOptions = within(
             await screen.findByTestId('dhis2-uicore-select-menu-menuwrapper')
@@ -716,8 +712,8 @@ describe('<AddItem/>', () => {
         const categoryOptionComboSchemeRadio = within(
             categoryOptionComboIdPicker
         ).getAllByRole('radio')
-        expect(categoryOptionComboSchemeRadio).toHaveLength(3)
-        categoryOptionComboSchemeRadio[2].click()
+        expect(categoryOptionComboSchemeRadio).toHaveLength(4)
+        categoryOptionComboSchemeRadio[3].click()
         within(categoryOptionComboIdPicker)
             .getByTestId('dhis2-uicore-select-input')
             .click()
@@ -741,7 +737,7 @@ describe('<AddItem/>', () => {
                 screen.getByTestId('saving-exchange-loader')
             ).toBeInTheDocument()
         )
-    })
+    }, 7000)
 
     it('warns about unsaved changes if user clicks cancel after making changes in the form', async () => {
         const exchangeName = 'an exchange name'

@@ -19,6 +19,7 @@ export const testDataExchange = ({
     name = faker.company.name(),
     requests = [testRequest()],
     targetType = randomValueIn(['INTERNAL', 'EXTERNAL']),
+    inputIdSchemes = { idScheme: 'UID' },
     writeMetadataAccess = faker.datatype.boolean(),
     readMetadataAccess = faker.datatype.boolean(),
     writeDataAccess = faker.datatype.boolean(),
@@ -30,7 +31,11 @@ export const testDataExchange = ({
     displayName: name,
     name,
     source: { requests },
-    target: { type: targetType, api: { url: externalURL } },
+    target: {
+        type: targetType,
+        api: { url: externalURL },
+        request: inputIdSchemes,
+    },
     access: {
         write: writeMetadataAccess,
         read: readMetadataAccess,
