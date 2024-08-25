@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-03T14:01:27.882Z\n"
+"POT-Creation-Date: 2024-08-15T11:49:42.468Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -34,17 +34,15 @@ msgstr ""
 "datos de autenticación."
 
 msgid ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
+"Editing the input ID scheme options will require you to reenter "
+"authentication details."
 msgstr ""
-"Para modificar las opciones avanzadas, deberá volver a introducir los datos "
-"de autenticación."
 
 msgid "Edit target setup"
 msgstr "Editar la configuración del objetivo"
 
-msgid "Edit advanced options"
-msgstr "Editar opciones avanzadas"
+msgid "Edit input ID scheme options"
+msgstr ""
 
 msgid "Basic setup"
 msgstr "Configuración básica"
@@ -110,20 +108,39 @@ msgstr ""
 msgid "Requests"
 msgstr "Solicitudes"
 
-msgid "Advanced options"
-msgstr "Opciones avanzadas"
+msgid "Input ID scheme options"
+msgstr ""
+
+msgid ""
+"Specify the scheme (ID, code, attribute value) used on the target system to "
+"match data coming from the source system."
+msgstr ""
 
 msgid "Input general ID scheme"
 msgstr "Esquema general de ID de entrada"
 
+msgid ""
+"Used as the default ID scheme for all items. If the chosen scheme is not "
+"available for an item, it will fall back to using ID."
+msgstr ""
+
 msgid "Input data element ID scheme"
 msgstr "Esquema de identificación del elemento de datos de entrada"
+
+msgid "Applies to data elements."
+msgstr ""
 
 msgid "Input organisation unit ID scheme"
 msgstr "Esquema de identificación de la unidad de organización de entrada"
 
+msgid "Applies to organisation units."
+msgstr ""
+
 msgid "Input category option combo ID scheme"
 msgstr "Categoría de entrada opción combo esquema ID"
+
+msgid "Applies to category option combos."
+msgstr ""
 
 msgid "Add exchange"
 msgstr "Añadir intercambio"
@@ -255,13 +272,28 @@ msgstr "Selección de datos"
 msgid "Organisation units"
 msgstr "Unidades organizativas"
 
+msgid "Output ID scheme options"
+msgstr ""
+
+msgid ""
+"Configure the formatting of source data before sending to the target system."
+msgstr ""
+
 msgid "Output general ID scheme"
 msgstr "Salida del esquema general de identificación"
+
+msgid "Output data item ID scheme"
+msgstr ""
+
+msgid "Applies to data elements, indicators, and program indicators."
+msgstr ""
 
 msgid "Output data element ID scheme"
 msgstr "Esquema de identificación del elemento de datos de salida"
 
-msgid "Output data item ID scheme"
+msgid ""
+"Applies to data elements. For data elements, it will override the scheme "
+"specified by Output data item ID scheme."
 msgstr ""
 
 msgid "Output organisation unit ID scheme"
@@ -474,6 +506,9 @@ msgstr ""
 
 msgid "New line list"
 msgstr "Nuevo listado"
+
+msgid "None (follows {{defaultIDSchemeName}})"
+msgstr ""
 
 msgid "ID"
 msgstr "Identificador"

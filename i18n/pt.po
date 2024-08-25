@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-03T14:01:27.882Z\n"
+"POT-Creation-Date: 2024-08-15T11:49:42.468Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -27,14 +27,14 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
+"Editing the input ID scheme options will require you to reenter "
+"authentication details."
 msgstr ""
 
 msgid "Edit target setup"
 msgstr ""
 
-msgid "Edit advanced options"
+msgid "Edit input ID scheme options"
 msgstr ""
 
 msgid "Basic setup"
@@ -100,19 +100,38 @@ msgstr ""
 msgid "Requests"
 msgstr ""
 
-msgid "Advanced options"
-msgstr "Opções avançadas "
+msgid "Input ID scheme options"
+msgstr ""
+
+msgid ""
+"Specify the scheme (ID, code, attribute value) used on the target system to "
+"match data coming from the source system."
+msgstr ""
 
 msgid "Input general ID scheme"
+msgstr ""
+
+msgid ""
+"Used as the default ID scheme for all items. If the chosen scheme is not "
+"available for an item, it will fall back to using ID."
 msgstr ""
 
 msgid "Input data element ID scheme"
 msgstr ""
 
+msgid "Applies to data elements."
+msgstr ""
+
 msgid "Input organisation unit ID scheme"
 msgstr ""
 
+msgid "Applies to organisation units."
+msgstr ""
+
 msgid "Input category option combo ID scheme"
+msgstr ""
+
+msgid "Applies to category option combos."
 msgstr ""
 
 msgid "Add exchange"
@@ -240,13 +259,28 @@ msgstr ""
 msgid "Organisation units"
 msgstr "Unidades organizacionais"
 
+msgid "Output ID scheme options"
+msgstr ""
+
+msgid ""
+"Configure the formatting of source data before sending to the target system."
+msgstr ""
+
 msgid "Output general ID scheme"
+msgstr ""
+
+msgid "Output data item ID scheme"
+msgstr ""
+
+msgid "Applies to data elements, indicators, and program indicators."
 msgstr ""
 
 msgid "Output data element ID scheme"
 msgstr ""
 
-msgid "Output data item ID scheme"
+msgid ""
+"Applies to data elements. For data elements, it will override the scheme "
+"specified by Output data item ID scheme."
 msgstr ""
 
 msgid "Output organisation unit ID scheme"
@@ -432,6 +466,9 @@ msgid ""
 msgstr ""
 
 msgid "New line list"
+msgstr ""
+
+msgid "None (follows {{defaultIDSchemeName}})"
 msgstr ""
 
 msgid "ID"
