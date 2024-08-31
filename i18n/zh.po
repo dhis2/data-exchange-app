@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-03T14:01:27.882Z\n"
+"POT-Creation-Date: 2024-08-15T11:49:42.468Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2024\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -23,15 +23,15 @@ msgid ""
 msgstr "编辑目标设置需要重新输入身份验证详细信息。"
 
 msgid ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
-msgstr "编辑高级选项需要重新输入验证详细信息。"
+"Editing the input ID scheme options will require you to reenter "
+"authentication details."
+msgstr ""
 
 msgid "Edit target setup"
 msgstr "编辑目标设置"
 
-msgid "Edit advanced options"
-msgstr "编辑高级选项"
+msgid "Edit input ID scheme options"
+msgstr ""
 
 msgid "Basic setup"
 msgstr "基本设置"
@@ -96,20 +96,39 @@ msgstr "与上述用户名相关联的密码"
 msgid "Requests"
 msgstr "要求"
 
-msgid "Advanced options"
-msgstr "高级选项"
+msgid "Input ID scheme options"
+msgstr ""
+
+msgid ""
+"Specify the scheme (ID, code, attribute value) used on the target system to "
+"match data coming from the source system."
+msgstr ""
 
 msgid "Input general ID scheme"
 msgstr "输入一般 ID 方案"
 
+msgid ""
+"Used as the default ID scheme for all items. If the chosen scheme is not "
+"available for an item, it will fall back to using ID."
+msgstr ""
+
 msgid "Input data element ID scheme"
 msgstr "输入数据元素 ID 方案"
+
+msgid "Applies to data elements."
+msgstr ""
 
 msgid "Input organisation unit ID scheme"
 msgstr "输入组织单位标识方案"
 
+msgid "Applies to organisation units."
+msgstr ""
+
 msgid "Input category option combo ID scheme"
 msgstr "输入类别选项组合 ID 方案"
+
+msgid "Applies to category option combos."
+msgstr ""
 
 msgid "Add exchange"
 msgstr "增加交换"
@@ -236,14 +255,29 @@ msgstr "数据项目选择"
 msgid "Organisation units"
 msgstr "组织机构"
 
+msgid "Output ID scheme options"
+msgstr ""
+
+msgid ""
+"Configure the formatting of source data before sending to the target system."
+msgstr ""
+
 msgid "Output general ID scheme"
 msgstr "输出一般 ID 方案"
+
+msgid "Output data item ID scheme"
+msgstr "输出数据项 ID 方案"
+
+msgid "Applies to data elements, indicators, and program indicators."
+msgstr ""
 
 msgid "Output data element ID scheme"
 msgstr "输出数据元素 ID 方案"
 
-msgid "Output data item ID scheme"
-msgstr "输出数据项 ID 方案"
+msgid ""
+"Applies to data elements. For data elements, it will override the scheme "
+"specified by Output data item ID scheme."
+msgstr ""
 
 msgid "Output organisation unit ID scheme"
 msgstr "输出组织单位标识方案"
@@ -431,6 +465,9 @@ msgstr "未找到线路列表。请尝试调整搜索或过滤选项，以找到
 
 msgid "New line list"
 msgstr "新行列表"
+
+msgid "None (follows {{defaultIDSchemeName}})"
+msgstr ""
 
 msgid "ID"
 msgstr "Id"
