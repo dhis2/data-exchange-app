@@ -23,3 +23,10 @@ export const EXCHANGE_TYPES = {
 
 export const OU_GROUP_PREFIX = 'OU_GROUP-'
 export const OU_LEVEL_PREFIX = 'LEVEL-'
+
+export const IMPORT_STRATEGY_TYPES = {
+    create: 'CREATE',
+    update: 'UPDATE',
+    create_and_update: 'CREATE_AND_UPDATE',
+    delete: 'DELETE',
+}

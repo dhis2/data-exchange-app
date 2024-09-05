@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-15T11:49:42.468Z\n"
-"PO-Revision-Date: 2024-08-15T11:49:42.468Z\n"
+"POT-Creation-Date: 2024-09-05T12:44:43.533Z\n"
+"PO-Revision-Date: 2024-09-05T12:44:43.533Z\n"
 
 msgid "Editing the target setup will require you to reenter authentication details."
 msgstr "Editing the target setup will require you to reenter authentication details."
@@ -124,6 +124,24 @@ msgstr "Input category option combo ID scheme"
 
 msgid "Applies to category option combos."
 msgstr "Applies to category option combos."
+
+msgid "Advanced"
+msgstr "Advanced"
+
+msgid "Skip audit, meaning audit values will not be generated"
+msgstr "Skip audit, meaning audit values will not be generated"
+
+msgid "Improves performance at the cost of ability to audit changes."
+msgstr "Improves performance at the cost of ability to audit changes."
+
+msgid "Dry run"
+msgstr "Dry run"
+
+msgid "A dry run tests the import settings without importing any data."
+msgstr "A dry run tests the import settings without importing any data."
+
+msgid "Import strategy"
+msgstr "Import strategy"
 
 msgid "Add exchange"
 msgstr "Add exchange"

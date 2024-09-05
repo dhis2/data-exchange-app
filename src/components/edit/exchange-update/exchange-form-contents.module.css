@@ -21,6 +21,15 @@
     display: flex;
 }
 
+.radiosContainerVertical {
+    margin-block-end: var(--spacers-dp16);
+    display: flex;
+    flex-direction: column;
+}
+.radiosContainerVertical * {
+    margin-block-start: var(--spacers-dp4);
+}
+
 .radioItem {
     margin-left: var(--spacers-dp16);
 }
@@ -65,4 +74,20 @@
 
 .editWarningButton {
     margin: var(--spacers-dp8) 0 0 0;
+}
+
+/* move if using */
+.prefix {
+    font-family: monospace;
+    font-size: 13px;
+    color: var(--colors-grey800);
+    background: var(--colors-grey300);
+    padding: 2px var(--spacers-dp4);
+    margin-right: var(--spacers-dp4);
+    border-radius: 3px;
+}
+
+.prefixCritical {
+    color: var(--colors-red800);
+    background: var(--colors-red050);
 }

@@ -5,21 +5,74 @@ import {
     Field as FieldContainer,
     InputFieldFF,
     RadioFieldFF,
+    CheckboxFieldFF,
     ReactFinalForm,
     hasValue,
 } from '@dhis2/ui'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { Warning } from '../../common/index.js'
 import {
     SchemeSelector,
     Subsection,
     AUTHENTICATION_TYPES,
     EXCHANGE_TYPES,
+    IMPORT_STRATEGY_TYPES,
+    TogglableSubsection,
 } from '../shared/index.js'
 import styles from './exchange-form-contents.module.css'
 import { RequestsOverview } from './requests-overview.js'
+
+// move
+const importStrategyOptions = [
+    {
+        value: IMPORT_STRATEGY_TYPES.create_and_update,
+        prefix: 'Merge',
+        label: 'Import new values and update existing',
+    },
+    {
+        value: IMPORT_STRATEGY_TYPES.create,
+        prefix: 'Append',
+        label: 'Import new values only',
+    },
+    {
+        value: IMPORT_STRATEGY_TYPES.update,
+        prefix: 'Update',
+        label: 'Only update existing values, ignore new values',
+    },
+    {
+        value: IMPORT_STRATEGY_TYPES.delete,
+        prefix: 'Delete',
+        label: 'Remove values included in uploaded file',
+        type: 'critical',
+    },
+]
+// move this if actually using (copied from import/export app for now)
+const Label = ({ label, prefix, type }) => {
+    if (!prefix) {
+        return label
+    }
+
+    return (
+        <span>
+            <span
+                className={classnames(styles.prefix, {
+                    [styles.prefixCritical]: type === 'critical',
+                })}
+            >
+                {prefix}
+            </span>
+            {label}
+        </span>
+    )
+}
+
+Label.propTypes = {
+    label: PropTypes.string.isRequired,
+    prefix: PropTypes.string,
+    type: PropTypes.oneOf(['critical']),
+}
 
 const { Field, useField } = ReactFinalForm
 
@@ -93,6 +146,10 @@ export const ExchangeFormContents = React.memo(
         const [editTargetSetupDisabled, setEditTargetSetupDisabled] = useState(
             () => typeValue === EXCHANGE_TYPES.external
         )
+        const [advancedOpen, setAdvancedOpen] = useState(false)
+        const toggleAdvancedSection = useCallback(() => {
+            setAdvancedOpen((prev) => !prev)
+        }, [setAdvancedOpen])
 
         return (
             <>
@@ -357,6 +414,60 @@ export const ExchangeFormContents = React.memo(
                         />
                     </>
                 </Subsection>
+                <TogglableSubsection
+                    open={advancedOpen}
+                    onTextClick={toggleAdvancedSection}
+                    text={i18n.t('Advanced')}
+                >
+                    <div className={styles.subsectionField1000}>
+                        <Field
+                            name="skipAudit"
+                            type="checkbox"
+                            label={i18n.t(
+                                'Skip audit, meaning audit values will not be generated'
+                            )}
+                            helpText={i18n.t(
+                                'Improves performance at the cost of ability to audit changes.'
+                            )}
+                            component={CheckboxFieldFF}
+                        />
+                    </div>
+                    <div className={styles.subsectionField1000}>
+                        <Field
+                            name="dryRun"
+                            type="checkbox"
+                            label={i18n.t('Dry run')}
+                            helpText={i18n.t(
+                                'A dry run tests the import settings without importing any data.'
+                            )}
+                            component={CheckboxFieldFF}
+                        />
+                    </div>
+                    <div className={styles.subsectionField1000}>
+                        <FieldContainer label={i18n.t('Import strategy')}>
+                            <div className={styles.radiosContainerVertical}>
+                                {importStrategyOptions.map((iso) => (
+                                    <Field
+                                        key={`importStrategy_${
+                                            iso.prefix ?? iso.label
+                                        }`}
+                                        name="importStrategy"
+                                        type="radio"
+                                        component={RadioFieldFF}
+                                        label={
+                                            <Label
+                                                prefix={iso.prefix}
+                                                label={iso.label}
+                                                type={iso.type}
+                                            />
+                                        }
+                                        value={iso.value}
+                                    />
+                                ))}
+                            </div>
+                        </FieldContainer>
+                    </div>
+                </TogglableSubsection>
             </>
         )
     }
