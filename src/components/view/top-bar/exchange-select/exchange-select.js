@@ -6,21 +6,16 @@ import { useExchangeId } from '../../../../use-context-selection/use-context-sel
 import { MenuSelect } from '../menu-select/index.js'
 
 const ExchangeSelect = () => {
-    const { aggregateDataExchanges } = useAppContext()
+    const { readableExchangeOptions } = useAppContext()
     const [exchangeId, setExchangeId] = useExchangeId()
     const [exchangeSelectorOpen, setExchangeSelectorOpen] = useState(false)
-
-    const dataExchangeOptions = aggregateDataExchanges.map((exchange) => ({
-        value: exchange.id,
-        label: exchange.displayName,
-    }))
 
     return (
         <div data-test="data-exchange-selector">
             <SelectorBarItem
                 label={i18n.t('Data exchange')}
                 value={
-                    dataExchangeOptions.find(
+                    readableExchangeOptions.find(
                         (dExchange) => dExchange.value === exchangeId
                     )?.label
                 }
@@ -30,7 +25,7 @@ const ExchangeSelect = () => {
             >
                 <div data-test="data-exchange-selector-contents">
                     <MenuSelect
-                        values={dataExchangeOptions}
+                        values={readableExchangeOptions}
                         selected={exchangeId}
                         dataTest="exchange-selector-menu"
                         onChange={({ selected }) => {
