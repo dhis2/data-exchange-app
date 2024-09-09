@@ -9,10 +9,11 @@ import {
     ModalActions,
     ModalContent,
     ModalTitle,
+    NoticeBox,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import { useExchangeContext } from '../../../context/index.js'
+import { useExchangeContext, useUserContext } from '../../../context/index.js'
 import { Warning } from '../../common/index.js'
 import styles from './submit-modal.module.css'
 import { SuccessContent } from './success-content.js'
@@ -146,6 +147,7 @@ const ConfirmModalContent = ({ exchange, requests, onClose, onSubmit }) => {
     // this is very wordy, but did not have luck with i18nextscanner picking up from more compact versions...
     let reportTranslationsString
     const { systemInfo } = useConfig()
+    const { hasSkipAuditInfoAuthority } = useUserContext()
     const reportCount = requests.length
     const exchangeName = exchange?.displayName
     const exchangeURL =
@@ -153,6 +155,7 @@ const ConfirmModalContent = ({ exchange, requests, onClose, onSubmit }) => {
             ? systemInfo?.contextPath
             : exchange?.target?.api?.url
     const exchangeHostName = exchangeURL?.split('//')[1] ?? exchangeURL // remove protocol
+    const exchangeSkipAudit = Boolean(exchange?.target?.request?.skipAudit)
 
     if (exchange?.target?.type === 'INTERNAL') {
         if (requests.length > 1) {
@@ -212,6 +215,17 @@ const ConfirmModalContent = ({ exchange, requests, onClose, onSubmit }) => {
                             })}
                         </ul>
                     </div>
+
+                    {exchangeSkipAudit && !hasSkipAuditInfoAuthority && (
+                        <div className={styles.skipAuditWarning}>
+                            <NoticeBox warning>
+                                {i18n.t(
+                                    'This exchange is configured to skip audit information on submit, but you do not have the Skip data import audit authority. If you submit this exchange, the data will be ignored.'
+                                )}
+                            </NoticeBox>
+                        </div>
+                    )}
+
                     <div>
                         {i18n.t('Are you sure you want to submit this data?')}
                     </div>

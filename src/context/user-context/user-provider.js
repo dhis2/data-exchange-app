@@ -10,6 +10,7 @@ const EXCHANGE_AUTHORITIES_ADD = [
     'F_AGGREGATE_DATA_EXCHANGE_PUBLIC_ADD',
 ]
 const EXCHANGE_AUTHORITIES_DELETE = ['F_AGGREGATE_DATA_EXCHANGE_DELETE']
+const SKIP_DATA_IMPORT_AUDIT_AUTHORITIES = ['F_SKIP_DATA_IMPORT_AUDIT']
 const ALL_AUTHORITY = ['ALL']
 
 const query = {
@@ -59,10 +60,16 @@ const UserProvider = ({ children }) => {
         ...EXCHANGE_AUTHORITIES_DELETE,
     ].some((auth) => authorities.includes(auth))
 
+    const hasSkipAuditInfoAuthority = [
+        ...ALL_AUTHORITY,
+        ...SKIP_DATA_IMPORT_AUDIT_AUTHORITIES,
+    ].some((auth) => authorities.includes(auth))
+
     const providerValue = {
         id,
         canAddExchange,
         canDeleteExchange,
+        hasSkipAuditInfoAuthority,
         organisationUnits,
         keyUiLocale: settings.keyUiLocale,
     }

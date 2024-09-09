@@ -34,3 +34,7 @@
     margin: var(--spacers-dp8) 0 var(--spacers-dp16) 0;
     font-style: italic;
 }
+
+.skipAuditWarning {
+    margin-block: var(--spacers-dp8);
+}
