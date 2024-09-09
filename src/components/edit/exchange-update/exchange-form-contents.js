@@ -76,38 +76,51 @@ Label.propTypes = {
 
 const { Field, useField } = ReactFinalForm
 
+const sectionNameWarning = {
+    targetSetup: i18n.t(
+        'Editing the target setup will require you to reenter authentication details.'
+    ),
+    idSchemes: i18n.t(
+        'Editing the input ID scheme options will require you to reenter authentication details.'
+    ),
+    advancedOptions: i18n.t(
+        'Editing the advanced options will require you to reenter authentication details.'
+    ),
+}
+
+const sectionNameEdit = {
+    targetSetup: i18n.t('Edit target setup'),
+    idSchemes: i18n.t('Edit input ID scheme options'),
+    advancedOptions: i18n.t('Edit advanced options'),
+}
+
 const EnableExternalEditWarning = ({
     editTargetSetupDisabled,
     setEditTargetSetupDisabled,
-    targetSetup,
-}) =>
-    !editTargetSetupDisabled ? null : (
+    sectionName,
+}) => {
+    if (!editTargetSetupDisabled) {
+        return null
+    }
+
+    return (
         <Warning>
-            <div>
-                {targetSetup
-                    ? i18n.t(
-                          'Editing the target setup will require you to reenter authentication details.'
-                      )
-                    : i18n.t(
-                          'Editing the input ID scheme options will require you to reenter authentication details.'
-                      )}
-            </div>
+            <div>{sectionNameWarning[sectionName ?? 'targetSetup']}</div>
             <Button
                 className={styles.editWarningButton}
                 small
                 onClick={() => setEditTargetSetupDisabled(false)}
             >
-                {targetSetup
-                    ? i18n.t('Edit target setup')
-                    : i18n.t('Edit input ID scheme options')}
+                {sectionNameEdit[sectionName ?? 'targetSetup']}
             </Button>
         </Warning>
     )
+}
 
 EnableExternalEditWarning.propTypes = {
     editTargetSetupDisabled: PropTypes.bool,
+    sectionName: PropTypes.string,
     setEditTargetSetupDisabled: PropTypes.func,
-    targetSetup: PropTypes.bool,
 }
 
 const RadioDecorator = ({ label, helperText, currentSelected, children }) => (
@@ -132,7 +145,12 @@ RadioDecorator.propTypes = {
 }
 
 export const ExchangeFormContents = React.memo(
-    ({ requestsState, setRequestEditMode, deleteRequest }) => {
+    ({
+        requestsState,
+        setRequestEditMode,
+        deleteRequest,
+        skipAuditDryRunImportStrategyAvailable,
+    }) => {
         const { input: typeInput } = useField('type', {
             subscription: { value: true },
         })
@@ -224,7 +242,7 @@ export const ExchangeFormContents = React.memo(
                             setEditTargetSetupDisabled={
                                 setEditTargetSetupDisabled
                             }
-                            targetSetup={true}
+                            sectionName="targetSetup"
                         />
                         <div
                             className={styles.subsectionField600}
@@ -362,7 +380,7 @@ export const ExchangeFormContents = React.memo(
                             setEditTargetSetupDisabled={
                                 setEditTargetSetupDisabled
                             }
-                            targetSetup={false}
+                            sectionName="idSchemes"
                         />
                         <SchemeSelector
                             label={i18n.t('Input general ID scheme')}
@@ -414,60 +432,72 @@ export const ExchangeFormContents = React.memo(
                         />
                     </>
                 </Subsection>
-                <TogglableSubsection
-                    open={advancedOpen}
-                    onTextClick={toggleAdvancedSection}
-                    text={i18n.t('Advanced')}
-                >
-                    <div className={styles.subsectionField1000}>
-                        <Field
-                            name="skipAudit"
-                            type="checkbox"
-                            label={i18n.t(
-                                'Skip audit, meaning audit values will not be generated'
-                            )}
-                            helpText={i18n.t(
-                                'Improves performance at the cost of ability to audit changes.'
-                            )}
-                            component={CheckboxFieldFF}
+                {skipAuditDryRunImportStrategyAvailable && (
+                    <TogglableSubsection
+                        open={advancedOpen}
+                        onTextClick={toggleAdvancedSection}
+                        text={i18n.t('Advanced options')}
+                    >
+                        <EnableExternalEditWarning
+                            editTargetSetupDisabled={editTargetSetupDisabled}
+                            setEditTargetSetupDisabled={
+                                setEditTargetSetupDisabled
+                            }
+                            sectionName="advancedOptions"
                         />
-                    </div>
-                    <div className={styles.subsectionField1000}>
-                        <Field
-                            name="dryRun"
-                            type="checkbox"
-                            label={i18n.t('Dry run')}
-                            helpText={i18n.t(
-                                'A dry run tests the import settings without importing any data.'
-                            )}
-                            component={CheckboxFieldFF}
-                        />
-                    </div>
-                    <div className={styles.subsectionField1000}>
-                        <FieldContainer label={i18n.t('Import strategy')}>
-                            <div className={styles.radiosContainerVertical}>
-                                {importStrategyOptions.map((iso) => (
-                                    <Field
-                                        key={`importStrategy_${
-                                            iso.prefix ?? iso.label
-                                        }`}
-                                        name="importStrategy"
-                                        type="radio"
-                                        component={RadioFieldFF}
-                                        label={
-                                            <Label
-                                                prefix={iso.prefix}
-                                                label={iso.label}
-                                                type={iso.type}
-                                            />
-                                        }
-                                        value={iso.value}
-                                    />
-                                ))}
-                            </div>
-                        </FieldContainer>
-                    </div>
-                </TogglableSubsection>
+                        <div className={styles.subsectionField1000}>
+                            <Field
+                                name="skipAudit"
+                                type="checkbox"
+                                label={i18n.t(
+                                    'Skip audit, meaning audit values will not be generated'
+                                )}
+                                helpText={i18n.t(
+                                    'Improves performance at the cost of ability to audit changes.'
+                                )}
+                                component={CheckboxFieldFF}
+                                disabled={editTargetSetupDisabled}
+                            />
+                        </div>
+                        <div className={styles.subsectionField1000}>
+                            <Field
+                                name="dryRun"
+                                type="checkbox"
+                                label={i18n.t('Dry run')}
+                                helpText={i18n.t(
+                                    'A dry run tests the import settings without importing any data.'
+                                )}
+                                component={CheckboxFieldFF}
+                                disabled={editTargetSetupDisabled}
+                            />
+                        </div>
+                        <div className={styles.subsectionField1000}>
+                            <FieldContainer label={i18n.t('Import strategy')}>
+                                <div className={styles.radiosContainerVertical}>
+                                    {importStrategyOptions.map((iso) => (
+                                        <Field
+                                            key={`importStrategy_${
+                                                iso.prefix ?? iso.label
+                                            }`}
+                                            name="importStrategy"
+                                            type="radio"
+                                            component={RadioFieldFF}
+                                            label={
+                                                <Label
+                                                    prefix={iso.prefix}
+                                                    label={iso.label}
+                                                    type={iso.type}
+                                                />
+                                            }
+                                            value={iso.value}
+                                            disabled={editTargetSetupDisabled}
+                                        />
+                                    ))}
+                                </div>
+                            </FieldContainer>
+                        </div>
+                    </TogglableSubsection>
+                )}
             </>
         )
     }
@@ -477,4 +507,5 @@ ExchangeFormContents.propTypes = {
     deleteRequest: PropTypes.func,
     requestsState: PropTypes.array,
     setRequestEditMode: PropTypes.func,
+    skipAuditDryRunImportStrategyAvailable: PropTypes.bool,
 }

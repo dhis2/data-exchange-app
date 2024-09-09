@@ -2,6 +2,7 @@ import {
     SCHEME_TYPES,
     EXCHANGE_TYPES,
     AUTHENTICATION_TYPES,
+    IMPORT_STRATEGY_TYPES,
 } from '../shared/index.js'
 
 const removeRequestIDSchemeValuesOfNONE = ({ requests }) => {
@@ -48,6 +49,15 @@ const getTargetDetails = ({ values }) => {
             ...getFormIdSchemeValues({ values }),
         },
     }
+
+    // add advanced fields if they exist (will exist for v41+)
+    const advancedFields = ['skipAudit', 'dryRun', 'importStrategy']
+    for (const field of advancedFields) {
+        if (values[field] || values[field] === false) {
+            target.request[field] = values[field]
+        }
+    }
+
     if (values.type === EXCHANGE_TYPES.internal) {
         return target
     }
@@ -101,7 +111,26 @@ const getIdSchemeValues = ({ exchangeInfo }) => {
     }, {})
 }
 
-export const getInitialValuesFromExchange = ({ exchangeInfo }) => ({
+const getAdvancedValuesFromExchange = ({
+    exchangeInfo,
+    skipAuditDryRunImportStrategyAvailable,
+}) => {
+    if (!skipAuditDryRunImportStrategyAvailable) {
+        return {}
+    }
+    return {
+        importStrategy:
+            exchangeInfo?.target?.request?.importStrategy ??
+            IMPORT_STRATEGY_TYPES.create_and_update,
+        dryRun: exchangeInfo?.target?.request?.dryRun ?? false,
+        skipAudit: exchangeInfo?.target?.request?.skipAudit ?? false,
+    }
+}
+
+export const getInitialValuesFromExchange = ({
+    exchangeInfo,
+    skipAuditDryRunImportStrategyAvailable,
+}) => ({
     name: exchangeInfo.name,
     type: exchangeInfo.target?.type,
     authentication: exchangeInfo.target?.api?.username
@@ -110,4 +139,8 @@ export const getInitialValuesFromExchange = ({ exchangeInfo }) => ({
     url: exchangeInfo.target?.api?.url,
     username: exchangeInfo.target?.api?.username,
     ...getIdSchemeValues({ exchangeInfo }),
+    ...getAdvancedValuesFromExchange({
+        exchangeInfo,
+        skipAuditDryRunImportStrategyAvailable,
+    }),
 })

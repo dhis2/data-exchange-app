@@ -4,7 +4,11 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AttributeProvider, useAppContext } from '../../../context/index.js'
+import {
+    AttributeProvider,
+    useAppContext,
+    useFeatureToggleContext,
+} from '../../../context/index.js'
 import { Loader } from '../../common/index.js'
 import { RequestForm } from '../request-update/index.js'
 import { EditItemFooter, EditTitle } from '../shared/index.js'
@@ -43,6 +47,18 @@ export const ExchangeForm = ({ exchangeInfo, addMode }) => {
         setRequestsTouched,
     } = useRequests({ exchangeInfo })
 
+    const { skipAuditDryRunImportStrategyAvailable } = useFeatureToggleContext()
+    console.log(
+        'skipAuditDryRunImportStrategyAvailable',
+        skipAuditDryRunImportStrategyAvailable
+    )
+    console.log(
+        'initialValues',
+        getInitialValuesFromExchange({
+            exchangeInfo,
+            skipAuditDryRunImportStrategyAvailable,
+        })
+    )
     const { refetchExchanges } = useAppContext()
     const navigate = useNavigate()
     const onComplete = useCallback(async () => {
@@ -67,7 +83,10 @@ export const ExchangeForm = ({ exchangeInfo, addMode }) => {
                         newExchange: addMode,
                     })
                 }}
-                initialValues={getInitialValuesFromExchange({ exchangeInfo })}
+                initialValues={getInitialValuesFromExchange({
+                    exchangeInfo,
+                    skipAuditDryRunImportStrategyAvailable,
+                })}
             >
                 {({ handleSubmit }) => (
                     <>
@@ -113,6 +132,9 @@ export const ExchangeForm = ({ exchangeInfo, addMode }) => {
                                                     setRequestEditMode
                                                 }
                                                 deleteRequest={deleteRequest}
+                                                skipAuditDryRunImportStrategyAvailable={
+                                                    skipAuditDryRunImportStrategyAvailable
+                                                }
                                             />
                                         )}
                                     </Box>
