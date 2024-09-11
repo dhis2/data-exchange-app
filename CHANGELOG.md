@@ -1,3 +1,10 @@
+## [100.9.5](https://github.com/dhis2/data-exchange-app/compare/v100.9.4...v100.9.5) (2024-09-11)
+
+
+### Bug Fixes
+
+* persist update to personal access token [DHIS2-17382] ([#101](https://github.com/dhis2/data-exchange-app/issues/101)) ([db25fa4](https://github.com/dhis2/data-exchange-app/commit/db25fa4dd8f1558a64e1daf7135ac8ae558ba5b7))
+
 ## [100.9.4](https://github.com/dhis2/data-exchange-app/compare/v100.9.3...v100.9.4) (2024-09-11)
 
 
