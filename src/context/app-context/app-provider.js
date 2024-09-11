@@ -25,6 +25,14 @@ const query = {
     },
 }
 
+export const getReadableExchangeOptions = (aggregateDataExchanges) =>
+    aggregateDataExchanges
+        .filter((exchange) => exchange?.access?.data?.read !== false)
+        .map((exchange) => ({
+            value: exchange.id,
+            label: exchange.displayName,
+        }))
+
 const AppProvider = ({ children }) => {
     const {
         data,
@@ -61,6 +69,9 @@ const AppProvider = ({ children }) => {
 
     const providerValue = {
         aggregateDataExchanges,
+        readableExchangeOptions: getReadableExchangeOptions(
+            aggregateDataExchanges
+        ),
         refetchExchanges,
     }
 

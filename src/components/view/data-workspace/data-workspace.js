@@ -13,7 +13,7 @@ import { RequestsNavigation } from './requests-navigation/index.js'
 import { TitleBar } from './title-bar/title-bar.js'
 
 const DataWorkspace = () => {
-    const { aggregateDataExchanges } = useAppContext()
+    const { readableExchangeOptions } = useAppContext()
     const { exchange } = useExchangeContext()
     const [exchangeId] = useExchangeId()
     // memoize for stable reference?
@@ -33,10 +33,12 @@ const DataWorkspace = () => {
         }
     }, [exchangeId, requests, selectedRequest, setSelectedRequest])
 
-    if (aggregateDataExchanges.length === 0) {
+    if (readableExchangeOptions.length === 0) {
         return (
             <CenteredContent>
-                <span>{i18n.t('There are no exchanges available to you')}</span>
+                <span data-test="no-exchanges-screen-message">
+                    {i18n.t('There are no exchanges available to you')}
+                </span>
             </CenteredContent>
         )
     }
