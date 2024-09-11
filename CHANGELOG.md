@@ -1,3 +1,10 @@
+## [100.9.4](https://github.com/dhis2/data-exchange-app/compare/v100.9.3...v100.9.4) (2024-09-11)
+
+
+### Bug Fixes
+
+* remove request NONE id schemes [DHIS2-18013] ([#98](https://github.com/dhis2/data-exchange-app/issues/98)) ([307d522](https://github.com/dhis2/data-exchange-app/commit/307d5227d8e9dd00fb302a8b7bc97b704897202f))
+
 ## [100.9.3](https://github.com/dhis2/data-exchange-app/compare/v100.9.2...v100.9.3) (2024-09-01)
 
 
