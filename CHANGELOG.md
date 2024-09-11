@@ -1,3 +1,10 @@
+## [100.9.6](https://github.com/dhis2/data-exchange-app/compare/v100.9.5...v100.9.6) (2024-09-11)
+
+
+### Bug Fixes
+
+* exclude data non-readable exchanges from dropdown [DHIS2-18010] ([#99](https://github.com/dhis2/data-exchange-app/issues/99)) ([5e20cce](https://github.com/dhis2/data-exchange-app/commit/5e20ccee797eb5888775a9f9a7c2342b15f7cf8f))
+
 ## [100.9.5](https://github.com/dhis2/data-exchange-app/compare/v100.9.4...v100.9.5) (2024-09-11)
 
 
