@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { CustomDataProvider } from '@dhis2/app-runtime'
+import { Provider, CustomDataProvider } from '@dhis2/app-runtime'
 import { act, configure, render, waitFor, within } from '@testing-library/react'
 import React from 'react'
 import { MemoryRouter, Route } from 'react-router-dom'
@@ -32,19 +32,16 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
     disconnect: jest.fn(),
 }))
 
-jest.mock('@dhis2/app-runtime', () => ({
-    ...jest.requireActual('@dhis2/app-runtime'),
-    useConfig: () => ({
-        baseUrl: 'https://debug.dhis2.org/dev',
-        apiVersion: '41',
-        systemInfo: {
-            lastAnalyticsTableSuccess: mockLastAnalyticsTableSuccess,
-            serverDate: mockServerDate,
-            serverTimeZoneId: 'Etc/UTC',
-            contextPath: `https://${mockContextPath}`,
-        },
-    }),
-}))
+const CONFIG_DEFAULTS = {
+    baseUrl: 'https://debug.dhis2.org/dev',
+    apiVersion: '41',
+    systemInfo: {
+        lastAnalyticsTableSuccess: mockLastAnalyticsTableSuccess,
+        serverDate: mockServerDate,
+        serverTimeZoneId: 'Etc/UTC',
+        contextPath: `https://${mockContextPath}`,
+    },
+}
 
 const setUp = (
     ui,
@@ -78,28 +75,34 @@ const setUp = (
     }
 
     const screen = render(
-        <CustomDataProvider data={customerProviderData} queryClientOptions={{}}>
-            <MemoryRouter initialEntries={[routerParams]}>
-                <QueryParamProvider
-                    ReactRouterRoute={Route}
-                    adapter={ReactRouter6Adapter}
-                >
-                    <AppContext.Provider
-                        value={{
-                            aggregateDataExchanges,
-                            readableExchangeOptions: getReadableExchangeOptions(
-                                aggregateDataExchanges
-                            ),
-                            refetchExchanges: () => {},
-                        }}
+        <Provider config={CONFIG_DEFAULTS}>
+            <CustomDataProvider
+                data={customerProviderData}
+                queryClientOptions={{}}
+            >
+                <MemoryRouter initialEntries={[routerParams]}>
+                    <QueryParamProvider
+                        ReactRouterRoute={Route}
+                        adapter={ReactRouter6Adapter}
                     >
-                        <UserContext.Provider value={userContext}>
-                            {ui}
-                        </UserContext.Provider>
-                    </AppContext.Provider>
-                </QueryParamProvider>
-            </MemoryRouter>
-        </CustomDataProvider>
+                        <AppContext.Provider
+                            value={{
+                                aggregateDataExchanges,
+                                readableExchangeOptions:
+                                    getReadableExchangeOptions(
+                                        aggregateDataExchanges
+                                    ),
+                                refetchExchanges: () => {},
+                            }}
+                        >
+                            <UserContext.Provider value={userContext}>
+                                {ui}
+                            </UserContext.Provider>
+                        </AppContext.Provider>
+                    </QueryParamProvider>
+                </MemoryRouter>
+            </CustomDataProvider>
+        </Provider>
     )
 
     return { screen, aggregateDataExchanges }
@@ -302,8 +305,7 @@ describe('<DataPage/>', () => {
             `${anExchange.source.requests.length} data report`
         )
         const timeDifference = getRelativeTimeDifference({
-            startTimestamp: mockLastAnalyticsTableSuccess,
-            endTimestamp: mockServerDate,
+            startTimeDate: mockLastAnalyticsTableSuccess,
         })
         expect(titleBar).toHaveTextContent(
             `Source data was generated ${timeDifference} ago`

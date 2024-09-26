@@ -2,6 +2,7 @@ import '@testing-library/jest-dom'
 import { configure, render, within } from '@testing-library/react'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import { getCreatedDateString } from '../components/edit/overview/items-list.js'
 import { AppContext, UserContext } from '../context/index.js'
 import { testDataExchange, testUserContext } from '../utils/builders.js'
 import { EditPage } from './editOverview.js'
@@ -67,6 +68,19 @@ describe('<EditPage/>', () => {
             )
             expect(exchangeCard).toHaveTextContent(
                 `${aggregateDataExchanges[i].source.requests} requests`
+            )
+
+            // mock the fromServerDate that would be returned by useTimeZoneConversion hook
+            const fromServerDate = (d) => {
+                return {
+                    getClientZonedISOString: () => d,
+                }
+            }
+            expect(exchangeCard).toHaveTextContent(
+                getCreatedDateString({
+                    fromServerDate,
+                    createdDate: aggregateDataExchanges[i]?.created,
+                })
             )
         })
     })

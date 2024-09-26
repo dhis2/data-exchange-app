@@ -1,4 +1,4 @@
-import { useConfig } from '@dhis2/app-runtime'
+import { useConfig, useTimeZoneConversion } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { IconInfo16, IconDimensionDataSet16, Tooltip } from '@dhis2/ui'
 import moment from 'moment'
@@ -6,14 +6,12 @@ import React from 'react'
 import { useExchangeContext } from '../../../../context/index.js'
 import styles from './title-bar.module.css'
 
-export const getRelativeTimeDifference = ({ startTimestamp, endTimestamp }) => {
-    if (!startTimestamp || !endTimestamp) {
+export const getRelativeTimeDifference = ({ startTimeDate }) => {
+    if (!startTimeDate) {
         return undefined
     }
-    const startTime = new Date(startTimestamp)
-    const endTime = new Date(endTimestamp)
 
-    return moment(startTime).fromNow(endTime)
+    return moment(startTimeDate).fromNow(true)
 }
 
 // this formats to the styling specified by DHIS2 design principles
@@ -26,9 +24,12 @@ const formatTimestamp = ({ timestamp, timezone }) => {
 
 const TitleBar = () => {
     const { systemInfo } = useConfig()
-    const { lastAnalyticsTableSuccess, serverDate, serverTimeZoneId } =
-        systemInfo
+    const { lastAnalyticsTableSuccess, serverTimeZoneId } = systemInfo
     const { exchange } = useExchangeContext()
+    const { fromServerDate } = useTimeZoneConversion()
+    const lastAnalyticsTableSuccessClient = fromServerDate(
+        lastAnalyticsTableSuccess
+    )
     const requestsCount = exchange.source?.requests?.length
 
     return (
@@ -60,9 +61,8 @@ const TitleBar = () => {
                                 'Source data was generated {{timeDifference}} ago',
                                 {
                                     timeDifference: getRelativeTimeDifference({
-                                        startTimestamp:
-                                            lastAnalyticsTableSuccess,
-                                        endTimestamp: serverDate,
+                                        startTimeDate:
+                                            lastAnalyticsTableSuccessClient,
                                     }),
                                 }
                             )}
