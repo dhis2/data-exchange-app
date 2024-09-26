@@ -1,3 +1,10 @@
+## [100.9.7](https://github.com/dhis2/data-exchange-app/compare/v100.9.6...v100.9.7) (2024-09-26)
+
+
+### Bug Fixes
+
+* dates issues [DHIS2-18087] ([#102](https://github.com/dhis2/data-exchange-app/issues/102)) ([5fdfc25](https://github.com/dhis2/data-exchange-app/commit/5fdfc2512b86aae84a4efdf6d96c1505d2223edc))
+
 ## [100.9.6](https://github.com/dhis2/data-exchange-app/compare/v100.9.5...v100.9.6) (2024-09-11)
 
 
