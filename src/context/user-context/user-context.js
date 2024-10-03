@@ -6,6 +6,7 @@ const UserContext = createContext({
     canDeleteExchange: false,
     organisationUnits: [],
     keyUiLocale: 'en',
+    hasSkipAuditInfoAuthority: false,
 })
 
 export { UserContext }

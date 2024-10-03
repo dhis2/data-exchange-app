@@ -8,6 +8,7 @@ import {
     AttributeProvider,
     useAppContext,
     useFeatureToggleContext,
+    useUserContext,
 } from '../../../context/index.js'
 import { Loader } from '../../common/index.js'
 import { RequestForm } from '../request-update/index.js'
@@ -48,17 +49,9 @@ export const ExchangeForm = ({ exchangeInfo, addMode }) => {
     } = useRequests({ exchangeInfo })
 
     const { skipAuditDryRunImportStrategyAvailable } = useFeatureToggleContext()
-    console.log(
-        'skipAuditDryRunImportStrategyAvailable',
-        skipAuditDryRunImportStrategyAvailable
-    )
-    console.log(
-        'initialValues',
-        getInitialValuesFromExchange({
-            exchangeInfo,
-            skipAuditDryRunImportStrategyAvailable,
-        })
-    )
+
+    const { hasSkipAuditInfoAuthority } = useUserContext()
+
     const { refetchExchanges } = useAppContext()
     const navigate = useNavigate()
     const onComplete = useCallback(async () => {
@@ -81,6 +74,7 @@ export const ExchangeForm = ({ exchangeInfo, addMode }) => {
                         requests: requestsState,
                         requestsTouched,
                         newExchange: addMode,
+                        hasSkipAuditInfoAuthority,
                     })
                 }}
                 initialValues={getInitialValuesFromExchange({
@@ -134,6 +128,9 @@ export const ExchangeForm = ({ exchangeInfo, addMode }) => {
                                                 deleteRequest={deleteRequest}
                                                 skipAuditDryRunImportStrategyAvailable={
                                                     skipAuditDryRunImportStrategyAvailable
+                                                }
+                                                hasSkipAuditInfoAuthority={
+                                                    hasSkipAuditInfoAuthority
                                                 }
                                             />
                                         )}

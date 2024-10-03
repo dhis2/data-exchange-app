@@ -12,7 +12,7 @@ import {
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useCallback, useMemo, useState } from 'react'
-import { Warning } from '../../common/index.js'
+import { ConditionalTooltip, Warning } from '../../common/index.js'
 import {
     SchemeSelector,
     Subsection,
@@ -150,6 +150,7 @@ export const ExchangeFormContents = React.memo(
         setRequestEditMode,
         deleteRequest,
         skipAuditDryRunImportStrategyAvailable,
+        hasSkipAuditInfoAuthority,
     }) => {
         const { input: typeInput } = useField('type', {
             subscription: { value: true },
@@ -168,6 +169,8 @@ export const ExchangeFormContents = React.memo(
         const toggleAdvancedSection = useCallback(() => {
             setAdvancedOpen((prev) => !prev)
         }, [setAdvancedOpen])
+        const skipAuditFieldDisabled =
+            !hasSkipAuditInfoAuthority && typeValue === EXCHANGE_TYPES.internal
 
         return (
             <>
@@ -446,18 +449,29 @@ export const ExchangeFormContents = React.memo(
                             sectionName="advancedOptions"
                         />
                         <div className={styles.subsectionField1000}>
-                            <Field
-                                name="skipAudit"
-                                type="checkbox"
-                                label={i18n.t(
-                                    'Skip audit, meaning audit values will not be generated'
+                            <ConditionalTooltip
+                                condition={skipAuditFieldDisabled}
+                                content={i18n.t(
+                                    'You do not have the authority on your system to skip audits.'
                                 )}
-                                helpText={i18n.t(
-                                    'Improves performance at the cost of ability to audit changes.'
-                                )}
-                                component={CheckboxFieldFF}
-                                disabled={editTargetSetupDisabled}
-                            />
+                                placement="left"
+                            >
+                                <Field
+                                    name="skipAudit"
+                                    type="checkbox"
+                                    label={i18n.t(
+                                        'Skip audit, meaning audit values will not be generated'
+                                    )}
+                                    helpText={i18n.t(
+                                        'Improves performance at the cost of ability to audit changes.'
+                                    )}
+                                    component={CheckboxFieldFF}
+                                    disabled={
+                                        editTargetSetupDisabled ||
+                                        skipAuditFieldDisabled
+                                    }
+                                />
+                            </ConditionalTooltip>
                         </div>
                         <div className={styles.subsectionField1000}>
                             <Field
@@ -505,6 +519,7 @@ export const ExchangeFormContents = React.memo(
 
 ExchangeFormContents.propTypes = {
     deleteRequest: PropTypes.func,
+    hasSkipAuditInfoAuthority: PropTypes.bool,
     requestsState: PropTypes.array,
     setRequestEditMode: PropTypes.func,
     skipAuditDryRunImportStrategyAvailable: PropTypes.bool,

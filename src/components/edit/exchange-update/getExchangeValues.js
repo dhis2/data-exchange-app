@@ -65,7 +65,7 @@ const getFormIdSchemeValues = ({ values }) => {
     }, {})
 }
 
-const getTargetDetails = ({ values }) => {
+const getTargetDetails = ({ values, hasSkipAuditInfoAuthority }) => {
     const target = {
         type: values.type,
         request: {
@@ -78,6 +78,14 @@ const getTargetDetails = ({ values }) => {
     for (const field of advancedFields) {
         if (values[field] || values[field] === false) {
             target.request[field] = values[field]
+            // if user does not have skip audit authority, remove from internal exchange definition
+            if (
+                field === 'skipAudit' &&
+                !hasSkipAuditInfoAuthority &&
+                values.type === EXCHANGE_TYPES.internal
+            ) {
+                target.request['skipAudit'] = false
+            }
         }
     }
 
@@ -108,9 +116,13 @@ const getTargetDetails = ({ values }) => {
     }
 }
 
-export const getExchangeValuesFromForm = ({ values, requests }) => ({
+export const getExchangeValuesFromForm = ({
+    values,
+    requests,
+    hasSkipAuditInfoAuthority,
+}) => ({
     name: values.name,
-    target: getTargetDetails({ values }),
+    target: getTargetDetails({ values, hasSkipAuditInfoAuthority }),
     source: { requests: cleanUpRequests({ requests }) },
 })
 
