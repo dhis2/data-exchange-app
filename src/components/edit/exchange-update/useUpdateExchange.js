@@ -29,6 +29,7 @@ const getJsonPatch = ({ formattedValues, form, requestsTouched }) => {
     const targetFields = [
         'type',
         'authentication',
+        'accessToken',
         'url',
         'username',
         'dryRun',

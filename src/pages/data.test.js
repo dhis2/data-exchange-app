@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { CustomDataProvider } from '@dhis2/app-runtime'
+import { Provider, CustomDataProvider } from '@dhis2/app-runtime'
 import { act, configure, render, waitFor, within } from '@testing-library/react'
 import React from 'react'
 import { MemoryRouter, Route } from 'react-router-dom'
@@ -8,6 +8,7 @@ import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
 import { formatData } from '../components/view/data-workspace/requests-display/index.js'
 import { getRelativeTimeDifference } from '../components/view/data-workspace/title-bar/index.js'
 import { getReportText } from '../components/view/submit-modal/submit-modal.js'
+import { getReadableExchangeOptions } from '../context/app-context/app-provider.js'
 import { AppContext, UserContext } from '../context/index.js'
 import {
     addOnlyPermissionsUserContext,
@@ -31,24 +32,25 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
     disconnect: jest.fn(),
 }))
 
-jest.mock('@dhis2/app-runtime', () => ({
-    ...jest.requireActual('@dhis2/app-runtime'),
-    useConfig: () => ({
-        baseUrl: 'https://debug.dhis2.org/dev',
-        apiVersion: '41',
-        systemInfo: {
-            lastAnalyticsTableSuccess: mockLastAnalyticsTableSuccess,
-            serverDate: mockServerDate,
-            serverTimeZoneId: 'Etc/UTC',
-            contextPath: `https://${mockContextPath}`,
-        },
-    }),
-}))
+const CONFIG_DEFAULTS = {
+    baseUrl: 'https://debug.dhis2.org/dev',
+    apiVersion: '41',
+    systemInfo: {
+        lastAnalyticsTableSuccess: mockLastAnalyticsTableSuccess,
+        serverDate: mockServerDate,
+        serverTimeZoneId: 'Etc/UTC',
+        contextPath: `https://${mockContextPath}`,
+    },
+}
 
 const setUp = (
     ui,
     {
-        aggregateDataExchanges = [testDataExchange(), testDataExchange()],
+        aggregateDataExchanges = [
+            testDataExchange({ readDataAccess: true }),
+            testDataExchange({ readDataAccess: true }),
+            testDataExchange({ readDataAccess: false }),
+        ],
         exchangeId = null,
         exchangeData = [testDataExchangeSourceData()],
         importSummaryResponse = { importSummaries: [testImportSummary()] },
@@ -73,25 +75,34 @@ const setUp = (
     }
 
     const screen = render(
-        <CustomDataProvider data={customerProviderData} queryClientOptions={{}}>
-            <MemoryRouter initialEntries={[routerParams]}>
-                <QueryParamProvider
-                    ReactRouterRoute={Route}
-                    adapter={ReactRouter6Adapter}
-                >
-                    <AppContext.Provider
-                        value={{
-                            aggregateDataExchanges,
-                            refetchExchanges: () => {},
-                        }}
+        <Provider config={CONFIG_DEFAULTS}>
+            <CustomDataProvider
+                data={customerProviderData}
+                queryClientOptions={{}}
+            >
+                <MemoryRouter initialEntries={[routerParams]}>
+                    <QueryParamProvider
+                        ReactRouterRoute={Route}
+                        adapter={ReactRouter6Adapter}
                     >
-                        <UserContext.Provider value={userContext}>
-                            {ui}
-                        </UserContext.Provider>
-                    </AppContext.Provider>
-                </QueryParamProvider>
-            </MemoryRouter>
-        </CustomDataProvider>
+                        <AppContext.Provider
+                            value={{
+                                aggregateDataExchanges,
+                                readableExchangeOptions:
+                                    getReadableExchangeOptions(
+                                        aggregateDataExchanges
+                                    ),
+                                refetchExchanges: () => {},
+                            }}
+                        >
+                            <UserContext.Provider value={userContext}>
+                                {ui}
+                            </UserContext.Provider>
+                        </AppContext.Provider>
+                    </QueryParamProvider>
+                </MemoryRouter>
+            </CustomDataProvider>
+        </Provider>
     )
 
     return { screen, aggregateDataExchanges }
@@ -105,7 +116,48 @@ beforeEach(() => {
 
 describe('<DataPage/>', () => {
     it('should display a drop down to select an exchange', async () => {
-        const exchanges = [testDataExchange(), testDataExchange()]
+        const exchanges = [
+            testDataExchange({ readDataAccess: true }),
+            testDataExchange({ readDataAccess: true }),
+        ]
+        const { screen } = setUp(<DataPage />, {
+            aggregateDataExchanges: exchanges,
+        })
+
+        screen.getByTestId('dhis2-ui-selectorbaritem').click()
+        const menuItems = await screen.findAllByTestId('dhis2-uicore-menuitem')
+        expect(menuItems).toHaveLength(2)
+        menuItems.map((menuItem, i) => {
+            expect(menuItem).toHaveTextContent(exchanges[i].displayName)
+        })
+    })
+
+    it('should only display data readable exchanges for selection', async () => {
+        const exchanges = [
+            testDataExchange({ readDataAccess: true }),
+            testDataExchange({ readDataAccess: false }),
+            testDataExchange({ readDataAccess: true }),
+        ]
+        const readableExchanges = exchanges.filter(
+            (exchange) => exchange.access.data.read
+        )
+        const { screen } = setUp(<DataPage />, {
+            aggregateDataExchanges: exchanges,
+        })
+
+        screen.getByTestId('dhis2-ui-selectorbaritem').click()
+        const menuItems = await screen.findAllByTestId('dhis2-uicore-menuitem')
+        expect(menuItems).toHaveLength(2)
+        menuItems.map((menuItem, i) => {
+            expect(menuItem).toHaveTextContent(readableExchanges[i].displayName)
+        })
+    })
+
+    it('should include exchanges with undefined data access for selection', async () => {
+        const exchanges = [
+            testDataExchange({ includeDataAccess: false }),
+            testDataExchange({ includeDataAccess: false }),
+        ]
         const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
         })
@@ -122,6 +174,17 @@ describe('<DataPage/>', () => {
         const { screen } = setUp(<DataPage />)
 
         expect(screen.getByTestId('entry-screen-message')).toBeInTheDocument()
+    })
+
+    it('should display a message about no available exchanges if there are no data readable exchanges', async () => {
+        const exchanges = [testDataExchange({ readDataAccess: false })]
+        const { screen } = setUp(<DataPage />, {
+            aggregateDataExchanges: exchanges,
+        })
+
+        expect(
+            screen.getByTestId('no-exchanges-screen-message')
+        ).toBeInTheDocument()
     })
 
     it('should show an edit configurations button when the user all permissions', async () => {
@@ -151,8 +214,11 @@ describe('<DataPage/>', () => {
     })
 
     it('should select and clear the selected exchange', async () => {
-        const anExchange = testDataExchange()
-        const exchanges = [anExchange, testDataExchange()]
+        const anExchange = testDataExchange({ readDataAccess: true })
+        const exchanges = [
+            anExchange,
+            testDataExchange({ readDataAccess: true }),
+        ]
         const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
         })
@@ -178,7 +244,7 @@ describe('<DataPage/>', () => {
     })
 
     it('should show a progress bar when loading content', async () => {
-        const anExchange = testDataExchange()
+        const anExchange = testDataExchange({ readDataAccess: true })
         const exchanges = [anExchange]
 
         const { screen } = setUp(<DataPage />, {
@@ -191,7 +257,10 @@ describe('<DataPage/>', () => {
     })
 
     it('should display a warning if there are no requests', async () => {
-        const anExchange = testDataExchange({ requests: null })
+        const anExchange = testDataExchange({
+            requests: null,
+            readDataAccess: true,
+        })
         const exchanges = [anExchange, testDataExchange()]
         const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
@@ -204,7 +273,7 @@ describe('<DataPage/>', () => {
     })
 
     it('should display the correct exchange specified in url if the param is present', async () => {
-        const anExchange = testDataExchange()
+        const anExchange = testDataExchange({ readDataAccess: true })
         const exchanges = [anExchange, testDataExchange()]
         const { screen } = setUp(<DataPage />, {
             aggregateDataExchanges: exchanges,
@@ -220,7 +289,7 @@ describe('<DataPage/>', () => {
     })
 
     it('should display a preview table once an exchange is selected', async () => {
-        const anExchange = testDataExchange()
+        const anExchange = testDataExchange({ readDataAccess: true })
 
         const exchanges = [anExchange]
         const exchangeData = testDataExchangeSourceData()
@@ -236,8 +305,7 @@ describe('<DataPage/>', () => {
             `${anExchange.source.requests.length} data report`
         )
         const timeDifference = getRelativeTimeDifference({
-            startTimestamp: mockLastAnalyticsTableSuccess,
-            endTimestamp: mockServerDate,
+            startTimeDate: mockLastAnalyticsTableSuccess,
         })
         expect(titleBar).toHaveTextContent(
             `Source data was generated ${timeDifference} ago`
@@ -272,6 +340,7 @@ describe('<DataPage/>', () => {
     it('can show the correct data once another tab is clicked on', async () => {
         const anExchange = testDataExchange({
             requests: [testRequest(), testRequest()],
+            readDataAccess: true,
         })
 
         const exchanges = [anExchange]
@@ -309,10 +378,11 @@ describe('<DataPage/>', () => {
     })
 
     it('should show a submit modal for internal exchange when the user clicks on the submit data button', async () => {
-        const anExchangeRequest = testRequest()
+        const anExchangeRequest = testRequest({ readDataAccess: true })
         const anExchange = testDataExchange({
             targetType: 'INTERNAL',
             requests: [anExchangeRequest],
+            readDataAccess: true,
         })
 
         const exchanges = [anExchange]
@@ -343,11 +413,12 @@ describe('<DataPage/>', () => {
 
     it('should show a submit modal for external exchange when the user clicks on the submit data button', async () => {
         const externalURL = 'a/url'
-        const anExchangeRequest = testRequest()
+        const anExchangeRequest = testRequest({ readDataAccess: true })
         const anExchange = testDataExchange({
             targetType: 'EXTERNAL',
             externalURL: externalURL,
             requests: [anExchangeRequest],
+            readDataAccess: true,
         })
         const exchanges = [anExchange]
         const exchangeData = testDataExchangeSourceData()
@@ -379,6 +450,7 @@ describe('<DataPage/>', () => {
         const importSummaries = [testImportSummary(), testImportSummary()]
         const anExchange = testDataExchange({
             requests: [testRequest(), testRequest()],
+            readDataAccess: true,
         })
 
         const exchanges = [anExchange]
@@ -465,6 +537,7 @@ describe('<DataPage/>', () => {
         ]
         const anExchange = testDataExchange({
             requests: [testRequest(), testRequest()],
+            readDataAccess: true,
         })
 
         const exchanges = [anExchange]
@@ -502,7 +575,10 @@ describe('<DataPage/>', () => {
             testImportSummary({ status: 'ERROR' }),
         ]
         const anExchange = testDataExchange({
-            requests: [testRequest(), testRequest()],
+            requests: [
+                testRequest({ readDataAccess: true }),
+                testRequest({ readDataAccess: true }),
+            ],
         })
 
         const exchanges = [anExchange]

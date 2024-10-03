@@ -32,20 +32,24 @@ jest.mock('@dhis2/analytics', () => ({
     DataDimension: ({ onSelect }) => (
         <input
             data-test="fake-data-selector"
-            onInput={(e) => onSelect({ items: [e.target.value] })}
+            onInput={(e) =>
+                onSelect({ items: [{ id: 'anIdDe', name: e.target.value }] })
+            }
         />
     ),
     PeriodDimension: ({ onSelect }) => (
         <input
             data-test="fake-period-selector"
-            onInput={(e) => onSelect({ items: [e.target.value] })}
+            onInput={(e) =>
+                onSelect({ items: [{ id: 'anIdPe', name: e.target.value }] })
+            }
         />
     ),
     OrgUnitDimension: ({ onSelect }) => (
         <input
             data-test="fake-orgunit-selector"
             onInput={(e) =>
-                onSelect({ items: [{ id: 'anId', name: e.target.value }] })
+                onSelect({ items: [{ id: 'anIdOu', name: e.target.value }] })
             }
         />
     ),
@@ -66,6 +70,8 @@ jest.mock('@dhis2/app-runtime', () => ({
     }),
 }))
 
+const createExchangeMock = jest.fn()
+
 const setUp = (
     ui,
     {
@@ -75,8 +81,9 @@ const setUp = (
 ) => {
     const customerProviderData = {
         attributes: { attributes },
-        aggregateDataExchanges: (type) => {
+        aggregateDataExchanges: (type, query) => {
             if (type === 'create') {
+                createExchangeMock(query?.data)
                 return {}
             }
             return undefined
@@ -213,6 +220,32 @@ describe('<AddItem/>', () => {
                 screen.getByTestId('saving-exchange-loader')
             ).toBeInTheDocument()
         )
+
+        const expectedPayload = {
+            name: 'an exchange name',
+            source: {
+                requests: [
+                    {
+                        dx: ['anIdDe'],
+                        filters: [],
+                        inputIdScheme: 'UID',
+                        name: 'a request name',
+                        ou: ['anIdOu'],
+                        outputIdScheme: 'UID',
+                        pe: ['anIdPe'],
+                    },
+                ],
+            },
+            target: {
+                request: {
+                    idScheme: 'UID',
+                },
+                type: 'INTERNAL',
+            },
+        }
+
+        expect(createExchangeMock).toHaveBeenCalled()
+        expect(createExchangeMock).toHaveBeenCalledWith(expectedPayload)
     })
 
     it('does not create an internal exchange if the name is missing', async () => {
@@ -854,5 +887,26 @@ describe('<AddItem/>', () => {
             const warningModal = screen.queryByTestId('request-discard-modal')
             expect(warningModal).not.toBeInTheDocument()
         })
+    })
+
+    it('warns about unsaved changes if user clicks cancel after making changes in the request form', async () => {
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        screen.getByText('Add request').click()
+        const requestNameInput = await screen.findByLabelText('Request name')
+        fireEvent.input(requestNameInput, { target: { value: 'a request' } })
+
+        const footer = screen.getByTestId('edit-request-footer')
+        within(footer).getByText('Cancel').click()
+
+        const warningModal = await screen.findByTestId('request-discard-modal')
+        expect(warningModal).toBeVisible()
+        expect(warningModal).toHaveTextContent('Discard unsaved changes')
     })
 })

@@ -1,4 +1,8 @@
-import { useDataMutation, useTimeZoneConversion } from '@dhis2/app-runtime'
+import {
+    useDataMutation,
+    useTimeZoneConversion,
+    useConfig,
+} from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     Button,
@@ -17,6 +21,30 @@ import { useAppContext, useUserContext } from '../../../context/index.js'
 import { getNaturalCapitalization } from '../../../utils/helpers.js'
 import { DeleteConfirmation } from './delete-confirmation.js'
 import styles from './items-list.module.css'
+
+export const getCreatedDateString = ({
+    fromServerDate,
+    createdDate,
+    dateFormat = 'yyyy-mm-dd',
+}) => {
+    const createdClient = fromServerDate(createdDate)
+    const createdClientDate = new Date(createdClient.getClientZonedISOString())
+    const year = String(createdClientDate.getUTCFullYear())
+    const month = String(createdClientDate.getUTCMonth() + 1)
+    const day = String(createdClientDate.getUTCDate())
+
+    if (dateFormat === 'dd-mm-yyyy') {
+        return `${day.padStart(2, '0')}-${month.padStart(
+            2,
+            '0'
+        )}-${year.padStart(4, '0')}`
+    }
+
+    return `${year.padStart(4, '0')}-${month.padStart(2, '0')}-${day.padStart(
+        2,
+        '0'
+    )}`
+}
 
 const IconTextItem = ({ icon, text }) => (
     <div className={styles.iconText}>
@@ -50,19 +78,16 @@ const AggregateDataExchangeCard = React.memo(({ ade }) => {
         }
     )
     const { canAddExchange, canDeleteExchange, keyUiLocale } = useUserContext()
+    const { systemInfo = {} } = useConfig()
+    const { dateFormat } = systemInfo
 
     const { fromServerDate } = useTimeZoneConversion()
-    const createdClient = fromServerDate(ade?.created)
-    const createdClientDate = new Date(createdClient.getClientZonedISOString())
-
-    // keyUiLocale can be invalid, hence wrap in try/catch
-    let createdClientDateString
-    try {
-        createdClientDateString =
-            createdClientDate.toLocaleDateString(keyUiLocale)
-    } catch (e) {
-        createdClientDateString = createdClientDate.toLocaleDateString('en-GB')
-    }
+    const createdClientDateString = getCreatedDateString({
+        fromServerDate,
+        createdDate: ade.created,
+        dateFormat,
+        keyUiLocale,
+    })
 
     const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false)
     const [sharingSettingsOpen, setSharingSettingsOpen] = useState(false)

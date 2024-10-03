@@ -22,10 +22,11 @@ export const testDataExchange = ({
     inputIdSchemes = { idScheme: 'UID' },
     writeMetadataAccess = faker.datatype.boolean(),
     readMetadataAccess = faker.datatype.boolean(),
-    writeDataAccess = faker.datatype.boolean(),
     readDataAccess = faker.datatype.boolean(),
+    writeDataAccess = faker.datatype.boolean(),
     created = faker.date.recent(),
     externalURL = undefined,
+    includeDataAccess = true,
 } = {}) => ({
     id,
     displayName: name,
@@ -36,11 +37,16 @@ export const testDataExchange = ({
         api: { url: externalURL },
         request: inputIdSchemes,
     },
-    access: {
-        write: writeMetadataAccess,
-        read: readMetadataAccess,
-        data: { write: writeDataAccess, read: readDataAccess },
-    },
+    access: includeDataAccess
+        ? {
+              write: writeMetadataAccess,
+              read: readMetadataAccess,
+              data: { write: writeDataAccess, read: readDataAccess },
+          }
+        : {
+              write: writeMetadataAccess,
+              read: readMetadataAccess,
+          },
     created,
 })
 

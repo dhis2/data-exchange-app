@@ -708,70 +708,122 @@ describe('<EditItem/>', () => {
 
         expect(patchExchange).toHaveBeenCalled()
         expect(patchExchange).toHaveBeenCalledWith(expectedPayload)
-    }, 7000),
-        it('posts expected id schemes based on selections', async () => {
-            const request = testRequest()
-            const dataExchange = testDataExchange({
-                requests: [request],
-                targetType: 'INTERNAL',
-                inputIdSchemes: {
-                    idScheme: 'UID',
-                    categoryOptionComboIdScheme: 'ATTRIBUTE:snorkmaiden',
-                },
-            })
-            const attributes = [
-                testAttribute({
-                    name: 'Snorkmaiden',
-                    displayName: 'Snorkmaiden',
-                    id: 'snorkmaiden',
-                }),
-                testAttribute(),
-                testAttribute(),
-            ]
+    }, 7000)
 
-            const { screen } = setUp(<EditItem />, {
-                userContext: testUserContext({ canAddExchange: true }),
-                dataExchange,
-                attributes,
-            })
+    it('posts expected id schemes based on selections', async () => {
+        const request = testRequest()
+        const dataExchange = testDataExchange({
+            requests: [request],
+            targetType: 'INTERNAL',
+            inputIdSchemes: {
+                idScheme: 'UID',
+                categoryOptionComboIdScheme: 'ATTRIBUTE:snorkmaiden',
+            },
+        })
+        const attributes = [
+            testAttribute({
+                name: 'Snorkmaiden',
+                displayName: 'Snorkmaiden',
+                id: 'snorkmaiden',
+            }),
+            testAttribute(),
+            testAttribute(),
+        ]
 
-            const user = userEvent.setup()
+        const { screen } = setUp(<EditItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+            dataExchange,
+            attributes,
+        })
 
-            await screen.findByTestId('add-exchange-title')
+        const user = userEvent.setup()
 
-            const idElementIdSchemeRadio = within(
-                screen.getByTestId('element-id-scheme-selector')
-            ).getByRole('radio', { name: 'ID' })
-            await user.click(idElementIdSchemeRadio)
+        await screen.findByTestId('add-exchange-title')
 
-            const codeOrgUnitIdSchemeRadio = within(
-                screen.getByTestId('org-unit-id-scheme-selector')
-            ).getByRole('radio', { name: 'Code' })
-            await user.click(codeOrgUnitIdSchemeRadio)
+        const idElementIdSchemeRadio = within(
+            screen.getByTestId('element-id-scheme-selector')
+        ).getByRole('radio', { name: 'ID' })
+        await user.click(idElementIdSchemeRadio)
 
-            const saveExchange = within(
-                screen.getByTestId('edit-item-footer')
-            ).getByText('Save exchange')
-            await user.click(saveExchange)
+        const codeOrgUnitIdSchemeRadio = within(
+            screen.getByTestId('org-unit-id-scheme-selector')
+        ).getByRole('radio', { name: 'Code' })
+        await user.click(codeOrgUnitIdSchemeRadio)
 
-            const expectedPayload = [
-                {
-                    op: 'add',
-                    path: '/target',
-                    value: {
-                        type: 'INTERNAL',
-                        request: {
-                            categoryOptionComboIdScheme:
-                                'ATTRIBUTE:snorkmaiden',
-                            dataElementIdScheme: 'UID',
-                            idScheme: 'UID',
-                            orgUnitIdScheme: 'CODE',
-                        },
+        const saveExchange = within(
+            screen.getByTestId('edit-item-footer')
+        ).getByText('Save exchange')
+        await user.click(saveExchange)
+
+        const expectedPayload = [
+            {
+                op: 'add',
+                path: '/target',
+                value: {
+                    type: 'INTERNAL',
+                    request: {
+                        categoryOptionComboIdScheme: 'ATTRIBUTE:snorkmaiden',
+                        dataElementIdScheme: 'UID',
+                        idScheme: 'UID',
+                        orgUnitIdScheme: 'CODE',
                     },
                 },
-            ]
+            },
+        ]
 
-            expect(patchExchange).toHaveBeenCalled()
-            expect(patchExchange).toHaveBeenCalledWith(expectedPayload)
+        expect(patchExchange).toHaveBeenCalled()
+        expect(patchExchange).toHaveBeenCalledWith(expectedPayload)
+    })
+
+    it('posts change to target when access token is updated', async () => {
+        const user = userEvent.setup()
+        const request = testRequest()
+        const dataExchange = testDataExchange({
+            requests: [request],
+            targetType: 'EXTERNAL',
+            externalURL: 'a/url',
         })
+
+        const { screen } = setUp(<EditItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+            dataExchange,
+        })
+
+        await screen.findByTestId('add-exchange-title')
+
+        const confirmEditButton = within(
+            screen.getByTestId('target-setup')
+        ).queryByRole('button', {
+            name: 'Edit target setup',
+        })
+
+        await user.click(confirmEditButton)
+
+        const patInput = within(
+            screen.getByTestId('exchange-auth-pat')
+        ).getByLabelText('Access token')
+        await user.type(patInput, 'fake_pat')
+
+        const saveExchange = within(
+            screen.getByTestId('edit-item-footer')
+        ).getByText('Save exchange')
+        await user.click(saveExchange)
+
+        const expectedPayload = [
+            {
+                op: 'add',
+                path: '/target',
+                value: {
+                    type: 'EXTERNAL',
+                    request: {
+                        idScheme: 'UID',
+                    },
+                    api: { url: 'a/url', accessToken: 'fake_pat' },
+                },
+            },
+        ]
+
+        expect(patchExchange).toHaveBeenCalled()
+        expect(patchExchange).toHaveBeenCalledWith(expectedPayload)
+    })
 })

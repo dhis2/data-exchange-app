@@ -1,6 +1,6 @@
 {
     "name": "data-exchange-app",
-    "version": "100.9.3",
+    "version": "100.9.8",
     "description": "",
     "license": "BSD-3-Clause",
     "private": true,
@@ -8,7 +8,7 @@
         "build": "d2-app-scripts build",
         "start": "d2-app-scripts start",
         "start:nobrowser": "BROWSER=none d2-app-scripts start",
-        "test": "d2-app-scripts test",
+        "test": "TZ=Etc/UTC d2-app-scripts test",
         "deploy": "d2-app-scripts deploy",
         "lint": "d2-style check",
         "lint:staged": "d2-style check --staged",

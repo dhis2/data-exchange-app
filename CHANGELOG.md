@@ -1,3 +1,38 @@
+## [100.9.8](https://github.com/dhis2/data-exchange-app/compare/v100.9.7...v100.9.8) (2024-09-29)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c9e7729](https://github.com/dhis2/data-exchange-app/commit/c9e7729d86e723ce8cfa01cb01279e1182d4b782))
+
+## [100.9.7](https://github.com/dhis2/data-exchange-app/compare/v100.9.6...v100.9.7) (2024-09-26)
+
+
+### Bug Fixes
+
+* dates issues [DHIS2-18087] ([#102](https://github.com/dhis2/data-exchange-app/issues/102)) ([5fdfc25](https://github.com/dhis2/data-exchange-app/commit/5fdfc2512b86aae84a4efdf6d96c1505d2223edc))
+
+## [100.9.6](https://github.com/dhis2/data-exchange-app/compare/v100.9.5...v100.9.6) (2024-09-11)
+
+
+### Bug Fixes
+
+* exclude data non-readable exchanges from dropdown [DHIS2-18010] ([#99](https://github.com/dhis2/data-exchange-app/issues/99)) ([5e20cce](https://github.com/dhis2/data-exchange-app/commit/5e20ccee797eb5888775a9f9a7c2342b15f7cf8f))
+
+## [100.9.5](https://github.com/dhis2/data-exchange-app/compare/v100.9.4...v100.9.5) (2024-09-11)
+
+
+### Bug Fixes
+
+* persist update to personal access token [DHIS2-17382] ([#101](https://github.com/dhis2/data-exchange-app/issues/101)) ([db25fa4](https://github.com/dhis2/data-exchange-app/commit/db25fa4dd8f1558a64e1daf7135ac8ae558ba5b7))
+
+## [100.9.4](https://github.com/dhis2/data-exchange-app/compare/v100.9.3...v100.9.4) (2024-09-11)
+
+
+### Bug Fixes
+
+* remove request NONE id schemes [DHIS2-18013] ([#98](https://github.com/dhis2/data-exchange-app/issues/98)) ([307d522](https://github.com/dhis2/data-exchange-app/commit/307d5227d8e9dd00fb302a8b7bc97b704897202f))
+
 ## [100.9.3](https://github.com/dhis2/data-exchange-app/compare/v100.9.2...v100.9.3) (2024-09-01)
 
 

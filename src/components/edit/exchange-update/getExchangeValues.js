@@ -5,15 +5,38 @@ import {
     IMPORT_STRATEGY_TYPES,
 } from '../shared/index.js'
 
-const removeRequestIDSchemeValuesOfNONE = ({ requests }) => {
+// this filters out additional properties that are used by the app UI, but should not be sent to backend
+const validProperties = [
+    'name',
+    'visualization',
+    'dx',
+    'pe',
+    'ou',
+    'filters',
+    'inputIdScheme',
+    'outputDataElementIdScheme',
+    'outputOrgUnitIdScheme',
+    'outputIdScheme',
+    'outputDataItemIdScheme',
+]
+const copyRequestWithValidProperties = (request) =>
+    validProperties.reduce((requestCopy, prop) => {
+        if (request[prop]) {
+            requestCopy[prop] = request[prop]
+        }
+        return requestCopy
+    }, {})
+
+export const cleanUpRequests = ({ requests }) => {
     const idSchemeProps = [
-        'idScheme',
-        'dataElementIdScheme',
-        'orgUnitIdScheme',
-        'categoryOptionComboIdScheme',
+        'outputDataElementIdScheme',
+        'outputDataItemIdScheme',
+        'outputOrgUnitIdScheme',
     ]
     return requests.map((request) => {
-        const requestCopy = { ...request }
+        const requestCopy = copyRequestWithValidProperties(request)
+
+        // delete any ID Scheme prop with value of NONE
         for (const prop of idSchemeProps) {
             if (requestCopy[prop] === SCHEME_TYPES.none) {
                 delete requestCopy[prop]
@@ -88,7 +111,7 @@ const getTargetDetails = ({ values }) => {
 export const getExchangeValuesFromForm = ({ values, requests }) => ({
     name: values.name,
     target: getTargetDetails({ values }),
-    source: { requests: removeRequestIDSchemeValuesOfNONE({ requests }) },
+    source: { requests: cleanUpRequests({ requests }) },
 })
 
 const getIdSchemeValues = ({ exchangeInfo }) => {
