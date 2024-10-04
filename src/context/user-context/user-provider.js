@@ -71,7 +71,7 @@ const UserProvider = ({ children }) => {
         canDeleteExchange,
         hasSkipAuditInfoAuthority,
         organisationUnits,
-        keyUiLocale: settings.keyUiLocale,
+        keyUiLocale: settings?.keyUiLocale ?? 'en',
     }
 
     return (

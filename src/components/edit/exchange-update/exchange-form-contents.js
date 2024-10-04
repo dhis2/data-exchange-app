@@ -1,127 +1,27 @@
 import i18n from '@dhis2/d2-i18n'
 import {
     Box,
-    Button,
     Field as FieldContainer,
     InputFieldFF,
     RadioFieldFF,
-    CheckboxFieldFF,
     ReactFinalForm,
     hasValue,
 } from '@dhis2/ui'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
-import React, { useCallback, useMemo, useState } from 'react'
-import { ConditionalTooltip, Warning } from '../../common/index.js'
+import React, { useMemo, useState } from 'react'
 import {
     SchemeSelector,
     Subsection,
     AUTHENTICATION_TYPES,
     EXCHANGE_TYPES,
-    IMPORT_STRATEGY_TYPES,
-    TogglableSubsection,
 } from '../shared/index.js'
+import { AdvancedOptions } from './advanced-options.js'
 import styles from './exchange-form-contents.module.css'
+import { EnableExternalEditWarning } from './external-edit-warning.js'
 import { RequestsOverview } from './requests-overview.js'
 
-// move
-const importStrategyOptions = [
-    {
-        value: IMPORT_STRATEGY_TYPES.create_and_update,
-        prefix: 'Merge',
-        label: 'Import new values and update existing',
-    },
-    {
-        value: IMPORT_STRATEGY_TYPES.create,
-        prefix: 'Append',
-        label: 'Import new values only',
-    },
-    {
-        value: IMPORT_STRATEGY_TYPES.update,
-        prefix: 'Update',
-        label: 'Only update existing values, ignore new values',
-    },
-    {
-        value: IMPORT_STRATEGY_TYPES.delete,
-        prefix: 'Delete',
-        label: 'Remove values included in uploaded file',
-        type: 'critical',
-    },
-]
-// move this if actually using (copied from import/export app for now)
-const Label = ({ label, prefix, type }) => {
-    if (!prefix) {
-        return label
-    }
-
-    return (
-        <span>
-            <span
-                className={classnames(styles.prefix, {
-                    [styles.prefixCritical]: type === 'critical',
-                })}
-            >
-                {prefix}
-            </span>
-            {label}
-        </span>
-    )
-}
-
-Label.propTypes = {
-    label: PropTypes.string.isRequired,
-    prefix: PropTypes.string,
-    type: PropTypes.oneOf(['critical']),
-}
-
 const { Field, useField } = ReactFinalForm
-
-const sectionNameWarning = {
-    targetSetup: i18n.t(
-        'Editing the target setup will require you to reenter authentication details.'
-    ),
-    idSchemes: i18n.t(
-        'Editing the input ID scheme options will require you to reenter authentication details.'
-    ),
-    advancedOptions: i18n.t(
-        'Editing the advanced options will require you to reenter authentication details.'
-    ),
-}
-
-const sectionNameEdit = {
-    targetSetup: i18n.t('Edit target setup'),
-    idSchemes: i18n.t('Edit input ID scheme options'),
-    advancedOptions: i18n.t('Edit advanced options'),
-}
-
-const EnableExternalEditWarning = ({
-    editTargetSetupDisabled,
-    setEditTargetSetupDisabled,
-    sectionName,
-}) => {
-    if (!editTargetSetupDisabled) {
-        return null
-    }
-
-    return (
-        <Warning>
-            <div>{sectionNameWarning[sectionName ?? 'targetSetup']}</div>
-            <Button
-                className={styles.editWarningButton}
-                small
-                onClick={() => setEditTargetSetupDisabled(false)}
-            >
-                {sectionNameEdit[sectionName ?? 'targetSetup']}
-            </Button>
-        </Warning>
-    )
-}
-
-EnableExternalEditWarning.propTypes = {
-    editTargetSetupDisabled: PropTypes.bool,
-    sectionName: PropTypes.string,
-    setEditTargetSetupDisabled: PropTypes.func,
-}
 
 const RadioDecorator = ({ label, helperText, currentSelected, children }) => (
     <Box
@@ -145,13 +45,7 @@ RadioDecorator.propTypes = {
 }
 
 export const ExchangeFormContents = React.memo(
-    ({
-        requestsState,
-        setRequestEditMode,
-        deleteRequest,
-        skipAuditDryRunImportStrategyAvailable,
-        hasSkipAuditInfoAuthority,
-    }) => {
+    ({ requestsState, setRequestEditMode, deleteRequest }) => {
         const { input: typeInput } = useField('type', {
             subscription: { value: true },
         })
@@ -165,12 +59,6 @@ export const ExchangeFormContents = React.memo(
         const [editTargetSetupDisabled, setEditTargetSetupDisabled] = useState(
             () => typeValue === EXCHANGE_TYPES.external
         )
-        const [advancedOpen, setAdvancedOpen] = useState(false)
-        const toggleAdvancedSection = useCallback(() => {
-            setAdvancedOpen((prev) => !prev)
-        }, [setAdvancedOpen])
-        const skipAuditFieldDisabled =
-            !hasSkipAuditInfoAuthority && typeValue === EXCHANGE_TYPES.internal
 
         return (
             <>
@@ -435,83 +323,11 @@ export const ExchangeFormContents = React.memo(
                         />
                     </>
                 </Subsection>
-                {skipAuditDryRunImportStrategyAvailable && (
-                    <TogglableSubsection
-                        open={advancedOpen}
-                        onTextClick={toggleAdvancedSection}
-                        text={i18n.t('Advanced options')}
-                    >
-                        <EnableExternalEditWarning
-                            editTargetSetupDisabled={editTargetSetupDisabled}
-                            setEditTargetSetupDisabled={
-                                setEditTargetSetupDisabled
-                            }
-                            sectionName="advancedOptions"
-                        />
-                        <div className={styles.subsectionField1000}>
-                            <ConditionalTooltip
-                                condition={skipAuditFieldDisabled}
-                                content={i18n.t(
-                                    'You do not have the authority on your system to skip audits.'
-                                )}
-                                placement="left"
-                            >
-                                <Field
-                                    name="skipAudit"
-                                    type="checkbox"
-                                    label={i18n.t(
-                                        'Skip audit, meaning audit values will not be generated'
-                                    )}
-                                    helpText={i18n.t(
-                                        'Improves performance at the cost of ability to audit changes.'
-                                    )}
-                                    component={CheckboxFieldFF}
-                                    disabled={
-                                        editTargetSetupDisabled ||
-                                        skipAuditFieldDisabled
-                                    }
-                                />
-                            </ConditionalTooltip>
-                        </div>
-                        <div className={styles.subsectionField1000}>
-                            <Field
-                                name="dryRun"
-                                type="checkbox"
-                                label={i18n.t('Dry run')}
-                                helpText={i18n.t(
-                                    'A dry run tests the import settings without importing any data.'
-                                )}
-                                component={CheckboxFieldFF}
-                                disabled={editTargetSetupDisabled}
-                            />
-                        </div>
-                        <div className={styles.subsectionField1000}>
-                            <FieldContainer label={i18n.t('Import strategy')}>
-                                <div className={styles.radiosContainerVertical}>
-                                    {importStrategyOptions.map((iso) => (
-                                        <Field
-                                            key={`importStrategy_${
-                                                iso.prefix ?? iso.label
-                                            }`}
-                                            name="importStrategy"
-                                            type="radio"
-                                            component={RadioFieldFF}
-                                            label={
-                                                <Label
-                                                    prefix={iso.prefix}
-                                                    label={iso.label}
-                                                    type={iso.type}
-                                                />
-                                            }
-                                            value={iso.value}
-                                            disabled={editTargetSetupDisabled}
-                                        />
-                                    ))}
-                                </div>
-                            </FieldContainer>
-                        </div>
-                    </TogglableSubsection>
-                )}
+                <AdvancedOptions
+                    typeValue={typeValue}
+                    editTargetSetupDisabled={editTargetSetupDisabled}
+                    setEditTargetSetupDisabled={setEditTargetSetupDisabled}
+                />
             </>
         )
     }
@@ -519,8 +335,6 @@ export const ExchangeFormContents = React.memo(
 
 ExchangeFormContents.propTypes = {
     deleteRequest: PropTypes.func,
-    hasSkipAuditInfoAuthority: PropTypes.bool,
     requestsState: PropTypes.array,
     setRequestEditMode: PropTypes.func,
-    skipAuditDryRunImportStrategyAvailable: PropTypes.bool,
 }

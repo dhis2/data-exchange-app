@@ -1,5 +1,15 @@
+import '@testing-library/jest-dom'
 import { faker } from '@faker-js/faker'
-import { getReportText } from './submit-modal.js'
+import { render, screen } from '@testing-library/react'
+import React from 'react'
+import { useExchangeContext, useUserContext } from '../../../context/index.js'
+import { SubmitModal, getReportText } from './submit-modal.js'
+
+jest.mock('../../../context/index.js', () => ({
+    ...jest.requireActual('../../../context/index.js'),
+    useUserContext: jest.fn(() => ({})),
+    useExchangeContext: jest.fn(() => ({})),
+}))
 
 describe('getReportText', () => {
     it('returns the report name', () => {
@@ -64,5 +74,90 @@ describe('getReportText', () => {
                 periodsCounts - 3
             } more`
         )
+    })
+})
+
+const noop = () => {}
+
+const INTERNAL_WARNING =
+    'This exchange is configured to skip audit information on submit, but you do not have the Skip data import audit authority. If you submit this exchange, the data will be ignored.'
+const EXTERNAL_WARNING =
+    'This exchange is configured to skip audit information on submit. If the authentication for the external server does not have the Skip data import audit authority, the data will be ignored on submit.'
+
+describe('SubmitModal skipAudit warnings', () => {
+    afterEach(() => {
+        jest.clearAllMocks()
+    })
+
+    it('shows skip audit warning for internal type exchange, with skipAudit:true if is user is missing skip audit authority', () => {
+        useUserContext.mockImplementationOnce(() => ({
+            hasSkipAuditInfoAuthority: false,
+        }))
+
+        useExchangeContext.mockImplementationOnce(() => ({
+            exchange: {
+                target: { type: 'INTERNAL', request: { skipAudit: true } },
+            },
+            exchangeData: [],
+        }))
+
+        render(
+            <SubmitModal open={true} setDataSubmitted={noop} onClose={noop} />
+        )
+        expect(screen.getByText(INTERNAL_WARNING)).toBeInTheDocument()
+    })
+
+    it('does not skip audit warning for internal type exchange, with skipAudit:false if is user is missing skip audit authority', () => {
+        useUserContext.mockImplementationOnce(() => ({
+            hasSkipAuditInfoAuthority: false,
+        }))
+
+        useExchangeContext.mockImplementationOnce(() => ({
+            exchange: {
+                target: { type: 'INTERNAL', request: { skipAudit: false } },
+            },
+            exchangeData: [],
+        }))
+
+        render(
+            <SubmitModal open={true} setDataSubmitted={noop} onClose={noop} />
+        )
+        expect(screen.queryByText(INTERNAL_WARNING)).not.toBeInTheDocument()
+    })
+
+    it('does not show skip audit warning for internal type exchange, with skipAudit:true if is user has skip audit authority', () => {
+        useUserContext.mockImplementationOnce(() => ({
+            hasSkipAuditInfoAuthority: true,
+        }))
+
+        useExchangeContext.mockImplementationOnce(() => ({
+            exchange: {
+                target: { type: 'INTERNAL', request: { skipAudit: true } },
+            },
+            exchangeData: [],
+        }))
+
+        render(
+            <SubmitModal open={true} setDataSubmitted={noop} onClose={noop} />
+        )
+        expect(screen.queryByText(INTERNAL_WARNING)).not.toBeInTheDocument()
+    })
+
+    it('shows skip audit warning for external type exchange, with skipAudit:true', () => {
+        useUserContext.mockImplementationOnce(() => ({
+            hasSkipAuditInfoAuthority: true,
+        }))
+
+        useExchangeContext.mockImplementationOnce(() => ({
+            exchange: {
+                target: { type: 'EXTERNAL', request: { skipAudit: true } },
+            },
+            exchangeData: [],
+        }))
+
+        render(
+            <SubmitModal open={true} setDataSubmitted={noop} onClose={noop} />
+        )
+        expect(screen.getByText(EXTERNAL_WARNING)).toBeInTheDocument()
     })
 })

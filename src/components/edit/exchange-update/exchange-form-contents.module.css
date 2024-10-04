@@ -71,23 +71,3 @@
 .idSchemeSection {
     margin: var(--spacers-dp24) 0 var(--spacers-dp24) 0;
 }
-
-.editWarningButton {
-    margin: var(--spacers-dp8) 0 0 0;
-}
-
-/* move if using */
-.prefix {
-    font-family: monospace;
-    font-size: 13px;
-    color: var(--colors-grey800);
-    background: var(--colors-grey300);
-    padding: 2px var(--spacers-dp4);
-    margin-right: var(--spacers-dp4);
-    border-radius: 3px;
-}
-
-.prefixCritical {
-    color: var(--colors-red800);
-    background: var(--colors-red050);
-}

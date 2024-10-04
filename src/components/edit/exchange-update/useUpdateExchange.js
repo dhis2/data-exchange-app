@@ -66,7 +66,6 @@ export const useUpdateExchange = ({ onComplete }) => {
             requests,
             requestsTouched,
             newExchange,
-            hasSkipAuditInfoAuthority,
         }) => {
             // set to loading
             setLoading(true)
@@ -74,7 +73,6 @@ export const useUpdateExchange = ({ onComplete }) => {
                 const formattedValues = getExchangeValuesFromForm({
                     values,
                     requests,
-                    hasSkipAuditInfoAuthority,
                 })
                 if (newExchange) {
                     await engine.mutate({
