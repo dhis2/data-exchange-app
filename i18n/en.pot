@@ -5,34 +5,46 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-03T12:16:08.274Z\n"
-"PO-Revision-Date: 2024-10-03T12:16:08.275Z\n"
-
-msgid "Editing the target setup will require you to reenter authentication details."
-msgstr "Editing the target setup will require you to reenter authentication details."
+"POT-Creation-Date: 2024-10-04T14:15:28.356Z\n"
+"PO-Revision-Date: 2024-10-04T14:15:28.357Z\n"
 
 msgid ""
-"Editing the input ID scheme options will require you to reenter "
-"authentication details."
+"When selecting to skip audits, the authentication for the external server "
+"will need to have the Skip data import audit authority. If the "
+"authentication details do not have this authority, the data will be ignored "
+"on submit."
 msgstr ""
-"Editing the input ID scheme options will require you to reenter "
-"authentication details."
+"When selecting to skip audits, the authentication for the external server "
+"will need to have the Skip data import audit authority. If the "
+"authentication details do not have this authority, the data will be ignored "
+"on submit."
 
 msgid ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
+"You do not have the Skip data import audit authority. In order for the data "
+"to not be ignored on submit, the exchange will need to be executed by a "
+"user who has this authority."
 msgstr ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
+"You do not have the Skip data import audit authority. In order for the data "
+"to not be ignored on submit, the exchange will need to be executed by a "
+"user who has this authority."
 
-msgid "Edit target setup"
-msgstr "Edit target setup"
+msgid "Advanced options"
+msgstr "Advanced options"
 
-msgid "Edit input ID scheme options"
-msgstr "Edit input ID scheme options"
+msgid "Skip audit, meaning audit values will not be generated"
+msgstr "Skip audit, meaning audit values will not be generated"
 
-msgid "Edit advanced options"
-msgstr "Edit advanced options"
+msgid "Improves performance at the cost of ability to audit changes."
+msgstr "Improves performance at the cost of ability to audit changes."
+
+msgid "Dry run"
+msgstr "Dry run"
+
+msgid "A dry run tests the import settings without importing any data."
+msgstr "A dry run tests the import settings without importing any data."
+
+msgid "Import strategy"
+msgstr "Import strategy"
 
 msgid "Basic setup"
 msgstr "Basic setup"
@@ -135,24 +147,6 @@ msgstr "Input category option combo ID scheme"
 msgid "Applies to category option combos."
 msgstr "Applies to category option combos."
 
-msgid "Advanced options"
-msgstr "Advanced options"
-
-msgid "Skip audit, meaning audit values will not be generated"
-msgstr "Skip audit, meaning audit values will not be generated"
-
-msgid "Improves performance at the cost of ability to audit changes."
-msgstr "Improves performance at the cost of ability to audit changes."
-
-msgid "Dry run"
-msgstr "Dry run"
-
-msgid "A dry run tests the import settings without importing any data."
-msgstr "A dry run tests the import settings without importing any data."
-
-msgid "Import strategy"
-msgstr "Import strategy"
-
 msgid "Add exchange"
 msgstr "Add exchange"
 
@@ -161,6 +155,32 @@ msgstr "Edit exchange"
 
 msgid "Could not save"
 msgstr "Could not save"
+
+msgid "Editing the target setup will require you to reenter authentication details."
+msgstr "Editing the target setup will require you to reenter authentication details."
+
+msgid ""
+"Editing the input ID scheme options will require you to reenter "
+"authentication details."
+msgstr ""
+"Editing the input ID scheme options will require you to reenter "
+"authentication details."
+
+msgid ""
+"Editing the advanced options will require you to reenter authentication "
+"details."
+msgstr ""
+"Editing the advanced options will require you to reenter authentication "
+"details."
+
+msgid "Edit target setup"
+msgstr "Edit target setup"
+
+msgid "Edit input ID scheme options"
+msgstr "Edit input ID scheme options"
+
+msgid "Edit advanced options"
+msgstr "Edit advanced options"
 
 msgid "{{firstOuName}} and {{ouLength}} others"
 msgstr "{{firstOuName}} and {{ouLength}} others"
