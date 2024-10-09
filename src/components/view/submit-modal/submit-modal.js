@@ -9,14 +9,53 @@ import {
     ModalActions,
     ModalContent,
     ModalTitle,
+    NoticeBox,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import { useExchangeContext } from '../../../context/index.js'
+import { useExchangeContext, useUserContext } from '../../../context/index.js'
 import { Warning } from '../../common/index.js'
 import styles from './submit-modal.module.css'
 import { SuccessContent } from './success-content.js'
 import { useAggregateDataExchangeMutation } from './use-aggregate-data-exchange-mutation.js'
+
+const SkipAuditWarning = ({ exchangeSkipAudit, internalExchange }) => {
+    const { hasSkipAuditInfoAuthority } = useUserContext()
+
+    if (!exchangeSkipAudit) {
+        return null
+    }
+
+    if (!internalExchange) {
+        return (
+            <div className={styles.skipAuditWarning}>
+                <NoticeBox warning>
+                    {i18n.t(
+                        'This exchange is configured to skip audit information on submit. If the authentication for the external server does not have the Skip data import audit authority, the data will be ignored on submit.'
+                    )}
+                </NoticeBox>
+            </div>
+        )
+    }
+
+    if (!hasSkipAuditInfoAuthority) {
+        return (
+            <div className={styles.skipAuditWarning}>
+                <NoticeBox warning>
+                    {i18n.t(
+                        'This exchange is configured to skip audit information on submit, but you do not have the Skip data import audit authority. If you submit this exchange, the data will be ignored.'
+                    )}
+                </NoticeBox>
+            </div>
+        )
+    }
+
+    return null
+}
+SkipAuditWarning.propTypes = {
+    exchangeSkipAudit: PropTypes.bool,
+    internalExchange: PropTypes.bool,
+}
 
 const LoadingStateModalContent = () => (
     <>
@@ -148,11 +187,12 @@ const ConfirmModalContent = ({ exchange, requests, onClose, onSubmit }) => {
     const { systemInfo } = useConfig()
     const reportCount = requests.length
     const exchangeName = exchange?.displayName
-    const exchangeURL =
-        exchange?.target?.type === 'INTERNAL'
-            ? systemInfo?.contextPath
-            : exchange?.target?.api?.url
+    const internalExchange = exchange?.target?.type === 'INTERNAL'
+    const exchangeURL = internalExchange
+        ? systemInfo?.contextPath
+        : exchange?.target?.api?.url
     const exchangeHostName = exchangeURL?.split('//')[1] ?? exchangeURL // remove protocol
+    const exchangeSkipAudit = Boolean(exchange?.target?.request?.skipAudit)
 
     if (exchange?.target?.type === 'INTERNAL') {
         if (requests.length > 1) {
@@ -212,6 +252,10 @@ const ConfirmModalContent = ({ exchange, requests, onClose, onSubmit }) => {
                             })}
                         </ul>
                     </div>
+                    <SkipAuditWarning
+                        exchangeSkipAudit={exchangeSkipAudit}
+                        internalExchange={internalExchange}
+                    />
                     <div>
                         {i18n.t('Are you sure you want to submit this data?')}
                     </div>
