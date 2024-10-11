@@ -324,7 +324,6 @@ export const ExchangeFormContents = React.memo(
                     </>
                 </Subsection>
                 <AdvancedOptions
-                    typeValue={typeValue}
                     editTargetSetupDisabled={editTargetSetupDisabled}
                     setEditTargetSetupDisabled={setEditTargetSetupDisabled}
                 />

@@ -22,23 +22,7 @@ import { useAggregateDataExchangeMutation } from './use-aggregate-data-exchange-
 const SkipAuditWarning = ({ exchangeSkipAudit, internalExchange }) => {
     const { hasSkipAuditInfoAuthority } = useUserContext()
 
-    if (!exchangeSkipAudit) {
-        return null
-    }
-
-    if (!internalExchange) {
-        return (
-            <div className={styles.skipAuditWarning}>
-                <NoticeBox warning>
-                    {i18n.t(
-                        'This exchange is configured to skip audit information on submit. If the authentication for the external server does not have the Skip data import audit authority, the data will be ignored on submit.'
-                    )}
-                </NoticeBox>
-            </div>
-        )
-    }
-
-    if (!hasSkipAuditInfoAuthority) {
+    if (internalExchange && exchangeSkipAudit && !hasSkipAuditInfoAuthority) {
         return (
             <div className={styles.skipAuditWarning}>
                 <NoticeBox warning>

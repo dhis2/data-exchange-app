@@ -8,13 +8,8 @@ import {
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useCallback, useState } from 'react'
+import { useFeatureToggleContext } from '../../../context/index.js'
 import {
-    useFeatureToggleContext,
-    useUserContext,
-} from '../../../context/index.js'
-import { Warning } from '../../common/index.js'
-import {
-    EXCHANGE_TYPES,
     IMPORT_STRATEGY_OPTIONS,
     TogglableSubsection,
 } from '../shared/index.js'
@@ -46,59 +41,18 @@ Label.propTypes = {
     type: PropTypes.oneOf(['critical']),
 }
 
-const SkipAuditWarning = ({
-    hasSkipAuditInfoAuthority,
-    typeValue,
-    skipAuditValue,
-}) => {
-    if (!skipAuditValue) {
-        return null
-    }
-    if (typeValue === EXCHANGE_TYPES.internal && hasSkipAuditInfoAuthority) {
-        return null
-    }
-    const externalWarning = i18n.t(
-        'When selecting to skip audits, the authentication for the external server will need to have the Skip data import audit authority. If the authentication details do not have this authority, the data will be ignored on submit.'
-    )
-    const internalWarning = i18n.t(
-        'You do not have the Skip data import audit authority. In order for the data to not be ignored on submit, the exchange will need to be executed by a user who has this authority.'
-    )
-    return (
-        <div className={styles.skipAuditWarning}>
-            <Warning warning>
-                {typeValue === EXCHANGE_TYPES.internal
-                    ? internalWarning
-                    : externalWarning}
-            </Warning>
-        </div>
-    )
-}
-
-SkipAuditWarning.propTypes = {
-    hasSkipAuditInfoAuthority: PropTypes.bool,
-    skipAuditValue: PropTypes.bool,
-    typeValue: PropTypes.string,
-}
-
-const { Field, useField } = ReactFinalForm
+const { Field } = ReactFinalForm
 
 export const AdvancedOptions = ({
-    typeValue,
     editTargetSetupDisabled,
     setEditTargetSetupDisabled,
 }) => {
     const { skipAuditDryRunImportStrategyAvailable } = useFeatureToggleContext()
-    const { hasSkipAuditInfoAuthority } = useUserContext()
 
     const [advancedOpen, setAdvancedOpen] = useState(false)
     const toggleAdvancedSection = useCallback(() => {
         setAdvancedOpen((prev) => !prev)
     }, [setAdvancedOpen])
-
-    const { input: skipAuditInput } = useField('skipAudit', {
-        subscription: { value: true },
-    })
-    const { value: skipAuditValue } = skipAuditInput
 
     if (!skipAuditDryRunImportStrategyAvailable) {
         return null
@@ -127,11 +81,6 @@ export const AdvancedOptions = ({
                     )}
                     component={CheckboxFieldFF}
                     disabled={editTargetSetupDisabled}
-                />
-                <SkipAuditWarning
-                    hasSkipAuditInfoAuthority={hasSkipAuditInfoAuthority}
-                    typeValue={typeValue}
-                    skipAuditValue={skipAuditValue}
                 />
             </div>
             <div className={styles.subsectionField1000}>
@@ -178,5 +127,4 @@ export const AdvancedOptions = ({
 AdvancedOptions.propTypes = {
     editTargetSetupDisabled: PropTypes.bool,
     setEditTargetSetupDisabled: PropTypes.func,
-    typeValue: PropTypes.string,
 }

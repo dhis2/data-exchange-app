@@ -81,8 +81,6 @@ const noop = () => {}
 
 const INTERNAL_WARNING =
     'This exchange is configured to skip audit information on submit, but you do not have the Skip data import audit authority. If you submit this exchange, the data will be ignored.'
-const EXTERNAL_WARNING =
-    'This exchange is configured to skip audit information on submit. If the authentication for the external server does not have the Skip data import audit authority, the data will be ignored on submit.'
 
 describe('SubmitModal skipAudit warnings', () => {
     afterEach(() => {
@@ -143,7 +141,7 @@ describe('SubmitModal skipAudit warnings', () => {
         expect(screen.queryByText(INTERNAL_WARNING)).not.toBeInTheDocument()
     })
 
-    it('shows skip audit warning for external type exchange, with skipAudit:true', () => {
+    it('does not show skip audit warning for external type exchange, with skipAudit:true', () => {
         useUserContext.mockImplementationOnce(() => ({
             hasSkipAuditInfoAuthority: true,
         }))
@@ -158,6 +156,6 @@ describe('SubmitModal skipAudit warnings', () => {
         render(
             <SubmitModal open={true} setDataSubmitted={noop} onClose={noop} />
         )
-        expect(screen.getByText(EXTERNAL_WARNING)).toBeInTheDocument()
+        expect(screen.queryByText(INTERNAL_WARNING)).not.toBeInTheDocument()
     })
 })
