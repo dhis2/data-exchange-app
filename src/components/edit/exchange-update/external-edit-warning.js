@@ -3,7 +3,7 @@ import { Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Warning } from '../../common/index.js'
-import styles from './exchange-form-contents.module.css'
+import styles from './external-edit-warning.module.css'
 
 const sectionNameWarning = {
     targetSetup: i18n.t(

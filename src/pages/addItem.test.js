@@ -925,9 +925,6 @@ describe('<AddItem/>', () => {
     })
 
     it('does not show togglable advanced options if v40-', async () => {
-        const { screen } = setUp(<AddItem />, {
-            userContext: testUserContext({ canAddExchange: true }),
-        })
         useConfig.mockImplementationOnce(() => ({
             baseUrl: 'https://debug.dhis2.org/dev',
             apiVersion: '40',
@@ -939,10 +936,13 @@ describe('<AddItem/>', () => {
                 calendar: 'gregorian',
             },
         }))
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
         expect(
             await screen.findByTestId('add-exchange-title')
         ).toHaveTextContent('Add exchange')
-        expect(screen.queryByText('Advanced')).not.toBeInTheDocument()
+        expect(screen.queryByText('Advanced options')).not.toBeInTheDocument()
     })
 
     it('shows togglable advanced options if v41', async () => {

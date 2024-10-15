@@ -1,11 +1,11 @@
-/* move if using */
 .prefix {
     font-family: monospace;
     font-size: 13px;
     color: var(--colors-grey800);
     background: var(--colors-grey300);
-    padding: 2px var(--spacers-dp4);
-    margin-right: var(--spacers-dp4);
+    padding-block: 2px;
+    padding-inline: var(--spacers-dp4);
+    margin-inline-end: var(--spacers-dp4);
     border-radius: 3px;
 }
 

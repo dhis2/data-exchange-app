@@ -8,8 +8,7 @@ const FeatureToggleProvider = ({ children }) => {
 
     const providerValue = {
         outputDataItemIdSchemeAvailable: apiVersion >= 41,
-        // skipAuditDryRunImportStrategyAvailable: apiVersion >= 41,
-        skipAuditDryRunImportStrategyAvailable: true,
+        skipAuditDryRunImportStrategyAvailable: apiVersion >= 41,
     }
 
     return (
