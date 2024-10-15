@@ -1,3 +1,10 @@
+# [100.10.0](https://github.com/dhis2/data-exchange-app/compare/v100.9.9...v100.10.0) (2024-10-15)
+
+
+### Features
+
+* add skipAudit, dryRun, and import strategy to UI [DHIS2-17489] ([#100](https://github.com/dhis2/data-exchange-app/issues/100)) ([50854f8](https://github.com/dhis2/data-exchange-app/commit/50854f86dd335d41e063a6653cb0d11b71520646))
+
 ## [100.9.9](https://github.com/dhis2/data-exchange-app/compare/v100.9.8...v100.9.9) (2024-10-06)
 
 
