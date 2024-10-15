@@ -1,7 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import {
     Box,
-    Button,
     Field as FieldContainer,
     InputFieldFF,
     RadioFieldFF,
@@ -11,51 +10,18 @@ import {
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useMemo, useState } from 'react'
-import { Warning } from '../../common/index.js'
 import {
     SchemeSelector,
     Subsection,
     AUTHENTICATION_TYPES,
     EXCHANGE_TYPES,
 } from '../shared/index.js'
+import { AdvancedOptions } from './advanced-options.js'
 import styles from './exchange-form-contents.module.css'
+import { EnableExternalEditWarning } from './external-edit-warning.js'
 import { RequestsOverview } from './requests-overview.js'
 
 const { Field, useField } = ReactFinalForm
-
-const EnableExternalEditWarning = ({
-    editTargetSetupDisabled,
-    setEditTargetSetupDisabled,
-    targetSetup,
-}) =>
-    !editTargetSetupDisabled ? null : (
-        <Warning>
-            <div>
-                {targetSetup
-                    ? i18n.t(
-                          'Editing the target setup will require you to reenter authentication details.'
-                      )
-                    : i18n.t(
-                          'Editing the input ID scheme options will require you to reenter authentication details.'
-                      )}
-            </div>
-            <Button
-                className={styles.editWarningButton}
-                small
-                onClick={() => setEditTargetSetupDisabled(false)}
-            >
-                {targetSetup
-                    ? i18n.t('Edit target setup')
-                    : i18n.t('Edit input ID scheme options')}
-            </Button>
-        </Warning>
-    )
-
-EnableExternalEditWarning.propTypes = {
-    editTargetSetupDisabled: PropTypes.bool,
-    setEditTargetSetupDisabled: PropTypes.func,
-    targetSetup: PropTypes.bool,
-}
 
 const RadioDecorator = ({ label, helperText, currentSelected, children }) => (
     <Box
@@ -167,7 +133,7 @@ export const ExchangeFormContents = React.memo(
                             setEditTargetSetupDisabled={
                                 setEditTargetSetupDisabled
                             }
-                            targetSetup={true}
+                            sectionName="targetSetup"
                         />
                         <div
                             className={styles.subsectionField600}
@@ -305,7 +271,7 @@ export const ExchangeFormContents = React.memo(
                             setEditTargetSetupDisabled={
                                 setEditTargetSetupDisabled
                             }
-                            targetSetup={false}
+                            sectionName="idSchemes"
                         />
                         <SchemeSelector
                             label={i18n.t('Input general ID scheme')}
@@ -357,6 +323,10 @@ export const ExchangeFormContents = React.memo(
                         />
                     </>
                 </Subsection>
+                <AdvancedOptions
+                    editTargetSetupDisabled={editTargetSetupDisabled}
+                    setEditTargetSetupDisabled={setEditTargetSetupDisabled}
+                />
             </>
         )
     }

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { CustomDataProvider } from '@dhis2/app-runtime'
+import { CustomDataProvider, useConfig } from '@dhis2/app-runtime'
 import {
     configure,
     fireEvent,
@@ -7,11 +7,16 @@ import {
     waitFor,
     within,
 } from '@testing-library/react'
+import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import { MemoryRouter, Route } from 'react-router-dom'
 import { QueryParamProvider } from 'use-query-params'
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
-import { AppContext, UserContext } from '../context/index.js'
+import {
+    AppContext,
+    UserContext,
+    FeatureToggleProvider,
+} from '../context/index.js'
 import {
     noPermissionsUserContext,
     testAttribute,
@@ -57,9 +62,9 @@ jest.mock('@dhis2/analytics', () => ({
 
 jest.mock('@dhis2/app-runtime', () => ({
     ...jest.requireActual('@dhis2/app-runtime'),
-    useConfig: () => ({
+    useConfig: jest.fn(() => ({
         baseUrl: 'https://debug.dhis2.org/dev',
-        apiVersion: '41',
+        apiVersion: 41,
         systemInfo: {
             lastAnalyticsTableSuccess: mockLastAnalyticsTableSuccess,
             serverDate: mockServerDate,
@@ -67,7 +72,7 @@ jest.mock('@dhis2/app-runtime', () => ({
             contextPath: `https://${mockContextPath}`,
             calendar: 'gregorian',
         },
-    }),
+    })),
 }))
 
 const createExchangeMock = jest.fn()
@@ -106,19 +111,21 @@ const setUp = (
                     ReactRouterRoute={Route}
                     adapter={ReactRouter6Adapter}
                 >
-                    <AppContext.Provider
-                        value={{
-                            aggregateDataExchanges: [
-                                testDataExchange(),
-                                testDataExchange(),
-                            ],
-                            refetchExchanges: () => {},
-                        }}
-                    >
-                        <UserContext.Provider value={userContext}>
-                            {ui}
-                        </UserContext.Provider>
-                    </AppContext.Provider>
+                    <FeatureToggleProvider>
+                        <AppContext.Provider
+                            value={{
+                                aggregateDataExchanges: [
+                                    testDataExchange(),
+                                    testDataExchange(),
+                                ],
+                                refetchExchanges: () => {},
+                            }}
+                        >
+                            <UserContext.Provider value={userContext}>
+                                {ui}
+                            </UserContext.Provider>
+                        </AppContext.Provider>
+                    </FeatureToggleProvider>
                 </QueryParamProvider>
             </MemoryRouter>
         </CustomDataProvider>
@@ -131,6 +138,10 @@ beforeEach(() => {
     configure({
         testIdAttribute: 'data-test',
     })
+})
+
+afterEach(() => {
+    jest.clearAllMocks()
 })
 
 describe('<AddItem/>', () => {
@@ -239,6 +250,9 @@ describe('<AddItem/>', () => {
             target: {
                 request: {
                     idScheme: 'UID',
+                    dryRun: false,
+                    importStrategy: 'CREATE_AND_UPDATE',
+                    skipAudit: false,
                 },
                 type: 'INTERNAL',
             },
@@ -908,5 +922,146 @@ describe('<AddItem/>', () => {
         const warningModal = await screen.findByTestId('request-discard-modal')
         expect(warningModal).toBeVisible()
         expect(warningModal).toHaveTextContent('Discard unsaved changes')
+    })
+
+    it('does not show togglable advanced options if v40-', async () => {
+        useConfig.mockImplementationOnce(() => ({
+            baseUrl: 'https://debug.dhis2.org/dev',
+            apiVersion: '40',
+            systemInfo: {
+                lastAnalyticsTableSuccess: mockLastAnalyticsTableSuccess,
+                serverDate: mockServerDate,
+                serverTimeZoneId: 'Etc/UTC',
+                contextPath: `https://${mockContextPath}`,
+                calendar: 'gregorian',
+            },
+        }))
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+        expect(screen.queryByText('Advanced options')).not.toBeInTheDocument()
+    })
+
+    it('shows togglable advanced options if v41', async () => {
+        const user = userEvent.setup()
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        const advancedOptionsText = await screen.getByText('Advanced options')
+        expect(advancedOptionsText).toBeInTheDocument()
+
+        // click once to show options
+        await user.click(advancedOptionsText)
+
+        expect(
+            screen.getByText(
+                'Skip audit, meaning audit values will not be generated'
+            )
+        ).toBeInTheDocument()
+        expect(screen.getByText('Dry run')).toBeInTheDocument()
+        expect(screen.getByText('Import strategy')).toBeInTheDocument()
+
+        // click again to hide options
+        await user.click(advancedOptionsText)
+
+        expect(
+            screen.queryByText(
+                'Skip audit, meaning audit values will not be generated'
+            )
+        ).not.toBeInTheDocument()
+        expect(screen.queryByText('Dry run')).not.toBeInTheDocument()
+        expect(screen.queryByText('Import strategy')).not.toBeInTheDocument()
+    })
+
+    it('persists selected advanced options', async () => {
+        const user = userEvent.setup()
+        const { screen } = setUp(<AddItem />, {
+            userContext: testUserContext({ canAddExchange: true }),
+        })
+        expect(
+            await screen.findByTestId('add-exchange-title')
+        ).toHaveTextContent('Add exchange')
+
+        const advancedOptionsText = await screen.getByText('Advanced options')
+        expect(advancedOptionsText).toBeInTheDocument()
+
+        // click to show advanced options
+        await user.click(advancedOptionsText)
+        await user.click(
+            screen.getByText(
+                'Skip audit, meaning audit values will not be generated'
+            )
+        )
+        await user.click(screen.getByText('Dry run'))
+        await user.click(screen.getByText('Append'))
+
+        // add the other exchange info
+        const exchangeName = 'an exchange name'
+        const requestName = 'a request name'
+        const orgUnit = 'an org unit'
+
+        const exchangeNameInput = within(
+            screen.getByTestId('exchange-name-input')
+        ).getByLabelText('Exchange name')
+        fireEvent.input(exchangeNameInput, { target: { value: exchangeName } })
+
+        const typeRadio = within(
+            screen.getByTestId('exchange-types')
+        ).getAllByRole('radio')
+        expect(typeRadio[1].getAttribute('value')).toEqual('INTERNAL')
+        typeRadio[1].click()
+
+        screen.getByText('Add request').click()
+        await createRequest(screen, { requestName, orgUnit })
+
+        const requestRow = await screen.findByTestId('dhis2-uicore-tablerow')
+        expect(requestRow).toHaveTextContent(requestName)
+        expect(requestRow).toHaveTextContent(orgUnit)
+
+        within(screen.getByTestId('edit-item-footer'))
+            .getByText('Save exchange')
+            .click()
+
+        await waitFor(() =>
+            expect(
+                screen.getByTestId('saving-exchange-loader')
+            ).toBeInTheDocument()
+        )
+
+        const expectedPayload = {
+            name: 'an exchange name',
+            source: {
+                requests: [
+                    {
+                        dx: ['anIdDe'],
+                        filters: [],
+                        inputIdScheme: 'UID',
+                        name: 'a request name',
+                        ou: ['anIdOu'],
+                        outputIdScheme: 'UID',
+                        pe: ['anIdPe'],
+                    },
+                ],
+            },
+            target: {
+                request: {
+                    idScheme: 'UID',
+                    dryRun: true,
+                    importStrategy: 'CREATE',
+                    skipAudit: true,
+                },
+                type: 'INTERNAL',
+            },
+        }
+
+        expect(createExchangeMock).toHaveBeenCalled()
+        expect(createExchangeMock).toHaveBeenCalledWith(expectedPayload)
     })
 })

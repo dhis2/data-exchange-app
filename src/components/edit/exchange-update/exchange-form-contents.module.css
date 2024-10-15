@@ -21,6 +21,15 @@
     display: flex;
 }
 
+.radiosContainerVertical {
+    margin-block-end: var(--spacers-dp16);
+    display: flex;
+    flex-direction: column;
+}
+.radiosContainerVertical * {
+    margin-block-start: var(--spacers-dp4);
+}
+
 .radioItem {
     margin-left: var(--spacers-dp16);
 }
@@ -61,8 +70,4 @@
 
 .idSchemeSection {
     margin: var(--spacers-dp24) 0 var(--spacers-dp24) 0;
-}
-
-.editWarningButton {
-    margin: var(--spacers-dp8) 0 0 0;
 }

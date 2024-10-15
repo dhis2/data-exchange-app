@@ -32,6 +32,9 @@ const getJsonPatch = ({ formattedValues, form, requestsTouched }) => {
         'accessToken',
         'url',
         'username',
+        'dryRun',
+        'skipAudit',
+        'importStrategy',
         ...targetIdSchemesFields,
     ]
     if (targetFields.some((tf) => modifiedFields.has(tf))) {
