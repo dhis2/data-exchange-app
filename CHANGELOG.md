@@ -1,3 +1,10 @@
+## [100.10.2](https://github.com/dhis2/data-exchange-app/compare/v100.10.1...v100.10.2) (2024-10-22)
+
+
+### Bug Fixes
+
+* add missing file content ([3a2d65e](https://github.com/dhis2/data-exchange-app/commit/3a2d65ea35b3a104d3f13e83a8c4dc94b526c17d))
+
 ## [100.10.1](https://github.com/dhis2/data-exchange-app/compare/v100.10.0...v100.10.1) (2024-10-20)
 
 
