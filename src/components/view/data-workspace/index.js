@@ -1,1 +1,1 @@
-export * from './data-workspace.js'
+export * from './data-workspace.jsx'

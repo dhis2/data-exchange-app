@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { getDisplayNameByVisType, visTypeIcons } from './visTypes.js'
 /* eslint-disable-next-line import/order */
-import { CustomSelectOption } from './CustomSelectOption.js'
-import { VisTypeIcon } from './VTI.js'
+import { CustomSelectOption } from './CustomSelectOption.jsx'
+import { VisTypeIcon } from './VTI.jsx'
 
 export const VisTypeFilter = ({ visTypes, selected, onChange }) => (
     <SingleSelect

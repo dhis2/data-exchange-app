@@ -12,7 +12,7 @@ import {
 import { Loader } from '../../common/index.js'
 import { RequestForm } from '../request-update/index.js'
 import { EditItemFooter, EditTitle } from '../shared/index.js'
-import { ExchangeFormContents } from './exchange-form-contents.js'
+import { ExchangeFormContents } from './exchange-form-contents.jsx'
 import styles from './exchange-form.module.css'
 import { getInitialValuesFromExchange } from './getExchangeValues.js'
 import { useRequests } from './useRequests.js'

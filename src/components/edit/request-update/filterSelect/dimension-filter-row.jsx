@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styles from './dimension-filter-row.module.css'
-import DimensionItemsSelect from './dimension-items-select.js'
-import DimensionSelect from './dimension-select.js'
-import RemoveFilter from './remove-filter.js'
+import DimensionItemsSelect from './dimension-items-select.jsx'
+import DimensionSelect from './dimension-select.jsx'
+import RemoveFilter from './remove-filter.jsx'
 
 const DimensionFilterRow = ({
     dimension,

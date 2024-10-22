@@ -7,8 +7,8 @@ import { QueryParamProvider } from 'use-query-params'
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
 import { formatData } from '../components/view/data-workspace/requests-display/index.js'
 import { getRelativeTimeDifference } from '../components/view/data-workspace/title-bar/index.js'
-import { getReportText } from '../components/view/submit-modal/submit-modal.js'
-import { getReadableExchangeOptions } from '../context/app-context/app-provider.js'
+import { getReportText } from '../components/view/submit-modal/submit-modal.jsx'
+import { getReadableExchangeOptions } from '../context/app-context/app-provider.jsx'
 import { AppContext, UserContext } from '../context/index.js'
 import {
     addOnlyPermissionsUserContext,
@@ -20,7 +20,7 @@ import {
     testRequest,
     testUserContext,
 } from '../utils/builders.js'
-import { DataPage } from './data.js'
+import { DataPage } from './data.jsx'
 
 const mockLastAnalyticsTableSuccess = '2024-07-07T21:47:58.383'
 const mockServerDate = '2024-07-18T17:36:38.164'

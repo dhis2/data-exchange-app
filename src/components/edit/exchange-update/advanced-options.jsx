@@ -14,7 +14,7 @@ import {
     TogglableSubsection,
 } from '../shared/index.js'
 import styles from './advanced-options.module.css'
-import { EnableExternalEditWarning } from './external-edit-warning.js'
+import { EnableExternalEditWarning } from './external-edit-warning.jsx'
 
 const Label = ({ label, prefix, type }) => {
     if (!prefix) {
