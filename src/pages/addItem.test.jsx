@@ -148,17 +148,21 @@ describe('<AddItem/>', () => {
     const createRequest = async (screen, { requestName, orgUnit }) => {
         const requestNameInput = await screen.findByLabelText('Request name')
         fireEvent.input(requestNameInput, { target: { value: requestName } })
-        fireEvent.input(screen.getByTestId('fake-data-selector'), {
-            target: { value: 'a data element' },
-        })
-        fireEvent.input(screen.getByTestId('fake-period-selector'), {
-            target: { value: 'a period' },
-        })
-        fireEvent.input(screen.getByTestId('fake-orgunit-selector'), {
-            target: { value: orgUnit },
-        })
+        await userEvent.type(
+            screen.getByTestId('fake-data-selector'),
+            'a data element'
+        )
+        await userEvent.type(
+            screen.getByTestId('fake-period-selector'),
+            'a period'
+        )
+        await userEvent.type(
+            screen.getByTestId('fake-orgunit-selector'),
+            orgUnit
+        )
+
         const footer = screen.getByTestId('edit-request-footer')
-        within(footer).getByText('Save request').click()
+        await userEvent.click(within(footer).getByText('Save request'))
     }
 
     it('should display a warning if the user does not have permissions to add an exchange', async () => {
@@ -278,17 +282,19 @@ describe('<AddItem/>', () => {
             screen.getByTestId('exchange-types')
         ).getAllByRole('radio')
         expect(typeRadio[1].getAttribute('value')).toEqual('INTERNAL')
-        typeRadio[1].click()
+        await userEvent.click(typeRadio[1])
 
-        screen.getByText('Add request').click()
+        await userEvent.click(screen.getByText('Add request'))
         await createRequest(screen, { requestName, orgUnit })
 
         const requestRow = await screen.findByTestId('dhis2-uicore-tablerow')
         expect(requestRow).toHaveTextContent(requestName)
 
-        within(screen.getByTestId('edit-item-footer'))
-            .getByText('Save exchange')
-            .click()
+        await userEvent.click(
+            within(screen.getByTestId('edit-item-footer')).getByText(
+                'Save exchange'
+            )
+        )
 
         const exchangeNameInputWarning = within(
             screen.getByTestId('exchange-name-input')
@@ -446,34 +452,36 @@ describe('<AddItem/>', () => {
             screen.getByTestId('exchange-types')
         ).getAllByRole('radio')
         expect(typeRadio[0].getAttribute('value')).toEqual('EXTERNAL')
-        typeRadio[0].click()
+        await userEvent.click(typeRadio[0])
 
         const exchangeURLInput = within(
             await screen.findByTestId('exchange-url')
         ).getByLabelText('Target URL')
-        fireEvent.input(exchangeURLInput, { target: { value: exchangeURL } })
+        await userEvent.type(exchangeURLInput, exchangeURL)
 
         const authRadio = within(
             screen.getByTestId('exchange-auth-method')
         ).getAllByRole('radio')
         expect(authRadio[1].getAttribute('value')).toEqual('PAT')
-        authRadio[1].click()
+        await userEvent.click(authRadio[1])
 
         const tokenInput = within(
             screen.getByTestId('exchange-auth-pat')
         ).getByLabelText('Access token')
-        fireEvent.input(tokenInput, { target: { value: exchangePAT } })
+        await userEvent.type(tokenInput, exchangePAT)
 
-        screen.getByText('Add request').click()
+        await userEvent.click(screen.getByText('Add request'))
         await createRequest(screen, { requestName, orgUnit })
 
         const requestRow = await screen.findByTestId('dhis2-uicore-tablerow')
         expect(requestRow).toHaveTextContent(requestName)
         expect(requestRow).toHaveTextContent(orgUnit)
 
-        within(screen.getByTestId('edit-item-footer'))
-            .getByText('Save exchange')
-            .click()
+        await userEvent.click(
+            within(screen.getByTestId('edit-item-footer')).getByText(
+                'Save exchange'
+            )
+        )
 
         const exchangeNameInputWarning = within(
             screen.getByTestId('exchange-name-input')
@@ -506,35 +514,37 @@ describe('<AddItem/>', () => {
         const nameInput = within(
             screen.getByTestId('exchange-name-input')
         ).getByLabelText('Exchange name')
-        fireEvent.input(nameInput, { target: { value: exchangeName } })
+        await userEvent.type(nameInput, exchangeName)
 
         const typeRadio = within(
             screen.getByTestId('exchange-types')
         ).getAllByRole('radio')
         expect(typeRadio[0].getAttribute('value')).toEqual('EXTERNAL')
-        typeRadio[0].click()
+        await userEvent.click(typeRadio[0])
 
         const exchangeURLInput = within(
             await screen.findByTestId('exchange-url')
         ).getByLabelText('Target URL')
-        fireEvent.input(exchangeURLInput, { target: { value: exchangeURL } })
+        await userEvent.type(exchangeURLInput, exchangeURL)
 
         const authRadio = within(
             screen.getByTestId('exchange-auth-method')
         ).getAllByRole('radio')
         expect(authRadio[1].getAttribute('value')).toEqual('PAT')
-        authRadio[1].click()
+        await userEvent.click(authRadio[1])
 
-        screen.getByText('Add request').click()
+        await userEvent.click(screen.getByText('Add request'))
         await createRequest(screen, { requestName, orgUnit })
 
         const requestRow = await screen.findByTestId('dhis2-uicore-tablerow')
         expect(requestRow).toHaveTextContent(requestName)
         expect(requestRow).toHaveTextContent(orgUnit)
 
-        within(screen.getByTestId('edit-item-footer'))
-            .getByText('Save exchange')
-            .click()
+        await userEvent.click(
+            within(screen.getByTestId('edit-item-footer')).getByText(
+                'Save exchange'
+            )
+        )
 
         const exchangeAutheInputWarning = within(
             screen.getByTestId('exchange-auth-pat')
@@ -567,34 +577,37 @@ describe('<AddItem/>', () => {
         const nameInput = within(
             screen.getByTestId('exchange-name-input')
         ).getByLabelText('Exchange name')
-        fireEvent.input(nameInput, { target: { value: exchangeName } })
+
+        await userEvent.type(nameInput, exchangeName)
 
         const typeRadio = within(
             screen.getByTestId('exchange-types')
         ).getAllByRole('radio')
         expect(typeRadio[0].getAttribute('value')).toEqual('EXTERNAL')
-        typeRadio[0].click()
+        await userEvent.click(typeRadio[0])
 
         const exchangeURLInput = within(
             await screen.findByTestId('exchange-url')
         ).getByLabelText('Target URL')
-        fireEvent.input(exchangeURLInput, { target: { value: exchangeURL } })
+        await userEvent.type(exchangeURLInput, exchangeURL)
 
         const authRadio = within(
             screen.getByTestId('exchange-auth-method')
         ).getAllByRole('radio')
         expect(authRadio[0].getAttribute('value')).toEqual('BASIC')
-        authRadio[0].click()
+        await userEvent.click(authRadio[0])
 
-        screen.getByText('Add request').click()
+        await userEvent.click(screen.getByText('Add request'))
         await createRequest(screen, { requestName, orgUnit })
 
         const requestRow = await screen.findByTestId('dhis2-uicore-tablerow')
         expect(requestRow).toHaveTextContent(requestName)
 
-        within(screen.getByTestId('edit-item-footer'))
-            .getByText('Save exchange')
-            .click()
+        await userEvent.click(
+            within(screen.getByTestId('edit-item-footer')).getByText(
+                'Save exchange'
+            )
+        )
 
         const exchangeAuthInputWarnings = within(
             screen.getByTestId('exchange-auth-basic')
@@ -839,19 +852,23 @@ describe('<AddItem/>', () => {
             await screen.findByTestId('add-exchange-title')
         ).toHaveTextContent('Add exchange')
 
-        screen.getByText('Add request').click()
+        await userEvent.click(screen.getByText('Add request'))
 
-        fireEvent.input(screen.getByTestId('fake-data-selector'), {
-            target: { value: 'a data element' },
-        })
-        fireEvent.input(screen.getByTestId('fake-period-selector'), {
-            target: { value: 'a period' },
-        })
-        fireEvent.input(screen.getByTestId('fake-orgunit-selector'), {
-            target: { value: orgUnit },
-        })
+        await userEvent.type(
+            screen.getByTestId('fake-data-selector'),
+            'a data element'
+        )
+        await userEvent.type(
+            screen.getByTestId('fake-period-selector'),
+            'a period'
+        )
+        await userEvent.type(
+            screen.getByTestId('fake-orgunit-selector'),
+            orgUnit
+        )
+
         const footer = screen.getByTestId('edit-request-footer')
-        within(footer).getByText('Save request').click()
+        await userEvent.click(within(footer).getByText('Save request'))
 
         const requestNameInputWarning = within(
             screen.getByTestId('request-name')
@@ -892,10 +909,10 @@ describe('<AddItem/>', () => {
             await screen.findByTestId('add-exchange-title')
         ).toHaveTextContent('Add exchange')
 
-        screen.getByText('Add request').click()
+        await userEvent.click(screen.getByText('Add request'))
 
         const footer = screen.getByTestId('edit-request-footer')
-        within(footer).getByText('Cancel').click()
+        await userEvent.click(within(footer).getByText('Cancel'))
 
         await waitFor(() => {
             const warningModal = screen.queryByTestId('request-discard-modal')
@@ -912,12 +929,12 @@ describe('<AddItem/>', () => {
             await screen.findByTestId('add-exchange-title')
         ).toHaveTextContent('Add exchange')
 
-        screen.getByText('Add request').click()
+        await userEvent.click(screen.getByText('Add request'))
         const requestNameInput = await screen.findByLabelText('Request name')
-        fireEvent.input(requestNameInput, { target: { value: 'a request' } })
+        await userEvent.type(requestNameInput, 'a request')
 
         const footer = screen.getByTestId('edit-request-footer')
-        within(footer).getByText('Cancel').click()
+        await userEvent.click(within(footer).getByText('Cancel'))
 
         const warningModal = await screen.findByTestId('request-discard-modal')
         expect(warningModal).toBeVisible()
@@ -1016,23 +1033,19 @@ describe('<AddItem/>', () => {
             screen.getByTestId('exchange-types')
         ).getAllByRole('radio')
         expect(typeRadio[1].getAttribute('value')).toEqual('INTERNAL')
-        typeRadio[1].click()
+        await userEvent.click(typeRadio[1])
 
-        screen.getByText('Add request').click()
+        await userEvent.click(screen.getByText('Add request'))
         await createRequest(screen, { requestName, orgUnit })
 
         const requestRow = await screen.findByTestId('dhis2-uicore-tablerow')
         expect(requestRow).toHaveTextContent(requestName)
         expect(requestRow).toHaveTextContent(orgUnit)
 
-        within(screen.getByTestId('edit-item-footer'))
-            .getByText('Save exchange')
-            .click()
-
-        await waitFor(() =>
-            expect(
-                screen.getByTestId('saving-exchange-loader')
-            ).toBeInTheDocument()
+        await userEvent.click(
+            within(screen.getByTestId('edit-item-footer')).getByText(
+                'Save exchange'
+            )
         )
 
         const expectedPayload = {

@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { configure, render, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { getCreatedDateString } from '../components/edit/overview/items-list.jsx'
@@ -188,7 +189,9 @@ describe('<EditPage/>', () => {
             userContext: testUserContext({ canAddExchange: true }),
         })
         const exchangeCard = screen.queryByTestId('data-exchange-card')
-        within(exchangeCard).getByRole('button', { name: 'Sharing' }).click()
+        await userEvent.click(
+            within(exchangeCard).getByRole('button', { name: 'Sharing' })
+        )
 
         expect(screen.getByTestId('mock-sharing-dialog')).toBeInTheDocument()
     })
