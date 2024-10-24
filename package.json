@@ -23,8 +23,8 @@
     "devDependencies": {
         "@badeball/cypress-cucumber-preprocessor": "^16.0.0",
         "@cypress/webpack-preprocessor": "^5.17.0",
-        "@dhis2/cli-app-scripts": "^11.5.0",
-        "@dhis2/cli-style": "^10.4.3",
+        "@dhis2/cli-app-scripts": "^12.0.0-alpha.19",
+        "@dhis2/cli-style": "^10.7.4",
         "@dhis2/cypress-commands": "^10.0.6",
         "@dhis2/cypress-plugins": "^10.0.1",
         "@faker-js/faker": "^8.4.1",
@@ -39,7 +39,7 @@
     "dependencies": {
         "@dhis2/analytics": "^26.7.9",
         "@dhis2/app-runtime": "^3.10.4",
-        "@dhis2/ui": "^9.10.3",
+        "@dhis2/ui": "^9.11.8",
         "classnames": "^2.5.1",
         "react-router-dom": "^6.4.1",
         "use-query-params": "^2.1.1"
