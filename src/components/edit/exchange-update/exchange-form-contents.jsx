@@ -16,10 +16,10 @@ import {
     AUTHENTICATION_TYPES,
     EXCHANGE_TYPES,
 } from '../shared/index.js'
-import { AdvancedOptions } from './advanced-options.js'
+import { AdvancedOptions } from './advanced-options.jsx'
 import styles from './exchange-form-contents.module.css'
-import { EnableExternalEditWarning } from './external-edit-warning.js'
-import { RequestsOverview } from './requests-overview.js'
+import { EnableExternalEditWarning } from './external-edit-warning.jsx'
+import { RequestsOverview } from './requests-overview.jsx'
 
 const { Field, useField } = ReactFinalForm
 

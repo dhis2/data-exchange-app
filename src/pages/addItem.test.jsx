@@ -25,7 +25,7 @@ import {
     testOrganisationUnitLevels,
     testUserContext,
 } from '../utils/builders.js'
-import { AddItem } from './addItem.js'
+import { AddItem } from './addItem.jsx'
 
 const mockLastAnalyticsTableSuccess = '2024-07-07T21:47:58.383'
 const mockServerDate = '2024-07-18T17:36:38.164'
