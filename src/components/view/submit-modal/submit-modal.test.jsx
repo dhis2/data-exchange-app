@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker'
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 import { useExchangeContext, useUserContext } from '../../../context/index.js'
-import { SubmitModal, getReportText } from './submit-modal.js'
+import { SubmitModal, getReportText } from './submit-modal.jsx'
 
 jest.mock('../../../context/index.js', () => ({
     ...jest.requireActual('../../../context/index.js'),

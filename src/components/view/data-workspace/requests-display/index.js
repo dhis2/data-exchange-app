@@ -1,1 +1,1 @@
-export * from './requests-display.js'
+export * from './requests-display.jsx'

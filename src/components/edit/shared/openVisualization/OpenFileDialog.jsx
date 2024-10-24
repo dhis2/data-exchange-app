@@ -31,13 +31,13 @@ import {
     CREATED_BY_ALL,
     CREATED_BY_ALL_BUT_CURRENT_USER,
     CREATED_BY_CURRENT_USER,
-} from './CreatedByFilter.js'
-import { FileList } from './FileList.js'
-import { NameFilter } from './NameFilter.js'
+} from './CreatedByFilter.jsx'
+import { FileList } from './FileList.jsx'
+import { NameFilter } from './NameFilter.jsx'
 import { styles } from './OpenFileDialog.styles.js'
-import { PaginationControls } from './PaginationControls.js'
+import { PaginationControls } from './PaginationControls.jsx'
 import { getTranslatedString, AOTypeMap } from './utils.js'
-import { VisTypeFilter } from './VisTypeFilter.js'
+import { VisTypeFilter } from './VisTypeFilter.jsx'
 
 const getQuery = (type) => ({
     files: {

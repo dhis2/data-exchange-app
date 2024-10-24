@@ -1,1 +1,1 @@
-export { Warning } from './warning.js'
+export { Warning } from './warning.jsx'

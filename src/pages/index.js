@@ -1,4 +1,4 @@
-export { DataPage } from './data.js'
-export { EditPage } from './editOverview.js'
-export { EditItem } from './editItem.js'
-export { AddItem } from './addItem.js'
+export { DataPage } from './data.jsx'
+export { EditPage } from './editOverview.jsx'
+export { EditItem } from './editItem.jsx'
+export { AddItem } from './addItem.jsx'
