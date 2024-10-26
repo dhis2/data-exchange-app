@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-15T11:49:42.468Z\n"
+"POT-Creation-Date: 2024-10-11T11:26:20.632Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
 "Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2024\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
@@ -16,21 +16,22 @@ msgstr ""
 "Language: es_419\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
-msgid ""
-"Editing the target setup will require you to reenter authentication details."
-msgstr ""
-"Si edita la configuración del destino, tendrá que volver a introducir los "
-"datos de autenticación."
-
-msgid ""
-"Editing the input ID scheme options will require you to reenter "
-"authentication details."
+msgid "Advanced options"
 msgstr ""
 
-msgid "Edit target setup"
-msgstr "Editar la configuración del objetivo"
+msgid "Skip audit, meaning audit values will not be generated"
+msgstr ""
 
-msgid "Edit input ID scheme options"
+msgid "Improves performance at the cost of ability to audit changes."
+msgstr ""
+
+msgid "Dry run"
+msgstr "Proceso de prueba (Dry run)"
+
+msgid "A dry run tests the import settings without importing any data."
+msgstr ""
+
+msgid "Import strategy"
 msgstr ""
 
 msgid "Basic setup"
@@ -137,6 +138,31 @@ msgid "Edit exchange"
 msgstr ""
 
 msgid "Could not save"
+msgstr ""
+
+msgid ""
+"Editing the target setup will require you to reenter authentication details."
+msgstr ""
+"Si edita la configuración del destino, tendrá que volver a introducir los "
+"datos de autenticación."
+
+msgid ""
+"Editing the input ID scheme options will require you to reenter "
+"authentication details."
+msgstr ""
+
+msgid ""
+"Editing the advanced options will require you to reenter authentication "
+"details."
+msgstr ""
+
+msgid "Edit target setup"
+msgstr "Editar la configuración del objetivo"
+
+msgid "Edit input ID scheme options"
+msgstr ""
+
+msgid "Edit advanced options"
 msgstr ""
 
 msgid "{{firstOuName}} and {{ouLength}} others"
@@ -566,6 +592,12 @@ msgstr ""
 
 msgid "Value"
 msgstr "Valor"
+
+msgid ""
+"This exchange is configured to skip audit information on submit, but you do "
+"not have the Skip data import audit authority. If you submit this exchange, "
+"the data will be ignored."
+msgstr ""
 
 msgid "Submitting..."
 msgstr ""

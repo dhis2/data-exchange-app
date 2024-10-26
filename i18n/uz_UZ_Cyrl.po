@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-15T11:49:42.468Z\n"
+"POT-Creation-Date: 2024-10-11T11:26:20.632Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
 "Last-Translator: Khurshid Ibatov <Khurshid.Ibatov@tibbiysugurta.uz>, 2024\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -15,20 +15,23 @@ msgstr ""
 "Language: uz@Cyrl\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid ""
-"Editing the target setup will require you to reenter authentication details."
+msgid "Advanced options"
+msgstr "Мураккаб вариантлар"
+
+msgid "Skip audit, meaning audit values will not be generated"
+msgstr "Аудитни ўтказиб юборинг, яъни аудит қийматлари ҳосил бўлмайди"
+
+msgid "Improves performance at the cost of ability to audit changes."
 msgstr ""
 
-msgid ""
-"Editing the input ID scheme options will require you to reenter "
-"authentication details."
+msgid "Dry run"
+msgstr "Синовдан ўтказиш"
+
+msgid "A dry run tests the import settings without importing any data."
 msgstr ""
 
-msgid "Edit target setup"
-msgstr ""
-
-msgid "Edit input ID scheme options"
-msgstr ""
+msgid "Import strategy"
+msgstr "Импорт стратегияси"
 
 msgid "Basic setup"
 msgstr ""
@@ -134,6 +137,29 @@ msgid "Edit exchange"
 msgstr ""
 
 msgid "Could not save"
+msgstr ""
+
+msgid ""
+"Editing the target setup will require you to reenter authentication details."
+msgstr ""
+
+msgid ""
+"Editing the input ID scheme options will require you to reenter "
+"authentication details."
+msgstr ""
+
+msgid ""
+"Editing the advanced options will require you to reenter authentication "
+"details."
+msgstr ""
+
+msgid "Edit target setup"
+msgstr ""
+
+msgid "Edit input ID scheme options"
+msgstr ""
+
+msgid "Edit advanced options"
 msgstr ""
 
 msgid "{{firstOuName}} and {{ouLength}} others"
@@ -560,6 +586,12 @@ msgstr "Объект"
 
 msgid "Value"
 msgstr "Қиймат"
+
+msgid ""
+"This exchange is configured to skip audit information on submit, but you do "
+"not have the Skip data import audit authority. If you submit this exchange, "
+"the data will be ignored."
+msgstr ""
 
 msgid "Submitting..."
 msgstr "Топширилмоқда..."
