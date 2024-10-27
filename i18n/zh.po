@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-15T11:49:42.468Z\n"
+"POT-Creation-Date: 2024-10-11T11:26:20.632Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2024\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -18,20 +18,23 @@ msgstr ""
 "Language: zh\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid ""
-"Editing the target setup will require you to reenter authentication details."
-msgstr "编辑目标设置需要重新输入身份验证详细信息。"
+msgid "Advanced options"
+msgstr "高级选项"
 
-msgid ""
-"Editing the input ID scheme options will require you to reenter "
-"authentication details."
-msgstr "编辑输入 ID 方案选项需要重新输入身份验证详细信息。"
+msgid "Skip audit, meaning audit values will not be generated"
+msgstr "跳过审核，这意味着将不会生成审核值"
 
-msgid "Edit target setup"
-msgstr "编辑目标设置"
+msgid "Improves performance at the cost of ability to audit changes."
+msgstr "提高性能的代价是降低审核变更的能力。"
 
-msgid "Edit input ID scheme options"
-msgstr "编辑输入 ID 方案选项"
+msgid "Dry run"
+msgstr "空运行"
+
+msgid "A dry run tests the import settings without importing any data."
+msgstr "模拟运行测试导入设置，不导入任何数据。"
+
+msgid "Import strategy"
+msgstr "导入策略"
 
 msgid "Basic setup"
 msgstr "基本设置"
@@ -138,6 +141,29 @@ msgstr "编辑交换"
 
 msgid "Could not save"
 msgstr "无法保存"
+
+msgid ""
+"Editing the target setup will require you to reenter authentication details."
+msgstr "编辑目标设置需要重新输入身份验证详细信息。"
+
+msgid ""
+"Editing the input ID scheme options will require you to reenter "
+"authentication details."
+msgstr "编辑输入 ID 方案选项需要重新输入身份验证详细信息。"
+
+msgid ""
+"Editing the advanced options will require you to reenter authentication "
+"details."
+msgstr "编辑高级选项需要重新输入验证详细信息。"
+
+msgid "Edit target setup"
+msgstr "编辑目标设置"
+
+msgid "Edit input ID scheme options"
+msgstr "编辑输入 ID 方案选项"
+
+msgid "Edit advanced options"
+msgstr "编辑高级选项"
 
 msgid "{{firstOuName}} and {{ouLength}} others"
 msgstr "{{firstOuName}} 和 其他{{ouLength}} "
@@ -562,6 +588,12 @@ msgstr "目的"
 
 msgid "Value"
 msgstr "价值"
+
+msgid ""
+"This exchange is configured to skip audit information on submit, but you do "
+"not have the Skip data import audit authority. If you submit this exchange, "
+"the data will be ignored."
+msgstr "此交换配置为在提交时跳过审核信息，但您没有跳过数据导入审核权限。如果您提交此交换，数据将被忽略。"
 
 msgid "Submitting..."
 msgstr "正在提交..."
