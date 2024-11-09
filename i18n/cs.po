@@ -22,13 +22,13 @@ msgid "Skip audit, meaning audit values will not be generated"
 msgstr "Přeskočit audit, což znamená, že hodnoty auditu nebudou generovány"
 
 msgid "Improves performance at the cost of ability to audit changes."
-msgstr ""
+msgstr "Zlepšuje výkonnost na úkor schopnosti kontrolovat změny."
 
 msgid "Dry run"
 msgstr "Testovací spuštění"
 
 msgid "A dry run tests the import settings without importing any data."
-msgstr ""
+msgstr "Při zkušebním spuštění se otestuje nastavení importu bez importu dat."
 
 msgid "Import strategy"
 msgstr "Importní strategie"
@@ -120,19 +120,19 @@ msgid "Input data element ID scheme"
 msgstr "Schéma ID vstupního datového prvku"
 
 msgid "Applies to data elements."
-msgstr ""
+msgstr "Vztahuje se na datové prvky."
 
 msgid "Input organisation unit ID scheme"
-msgstr ""
+msgstr "Schéma ID vstupní organizační jednotky"
 
 msgid "Applies to organisation units."
-msgstr ""
+msgstr "Platí pro organizační jednotky."
 
 msgid "Input category option combo ID scheme"
-msgstr ""
+msgstr "Schéma ID kombinací možností vstupní kategorie"
 
 msgid "Applies to category option combos."
-msgstr ""
+msgstr "Platí pro kombinace možností kategorie."
 
 msgid "Add exchange"
 msgstr ""
@@ -186,6 +186,7 @@ msgstr "Žádné požadavky"
 
 msgid "Click the 'Add request' button to add a request to this exchange"
 msgstr ""
+"Kliknutím na tlačítko \"Přidat požadavek\" přidáte požadavek do této burzy."
 
 msgid "Delete"
 msgstr "Vymazat"
