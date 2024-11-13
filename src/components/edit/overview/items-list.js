@@ -169,6 +169,7 @@ const AggregateDataExchangeCard = React.memo(({ ade }) => {
                         setSharingSettingsOpen(false)
                     }}
                     type={'aggregateDataExchange'}
+                    dataSharing={true}
                 />
             )}
         </div>
