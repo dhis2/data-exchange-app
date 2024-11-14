@@ -1,3 +1,10 @@
+## [100.10.5](https://github.com/dhis2/data-exchange-app/compare/v100.10.4...v100.10.5) (2024-11-14)
+
+
+### Bug Fixes
+
+* add data sharing [DHIS2-18411] ([#111](https://github.com/dhis2/data-exchange-app/issues/111)) ([cdbfb5f](https://github.com/dhis2/data-exchange-app/commit/cdbfb5f4288aa27ed8cfac070beea89b7d894382))
+
 ## [100.10.4](https://github.com/dhis2/data-exchange-app/compare/v100.10.3...v100.10.4) (2024-11-10)
 
 
