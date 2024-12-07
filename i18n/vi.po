@@ -4,13 +4,14 @@
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2024
 # Philip Larsen Donnelly, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
+# Em Le <em.hispvietnam@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-03T14:01:27.882Z\n"
+"POT-Creation-Date: 2024-10-11T11:26:20.632Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
+"Last-Translator: Em Le <em.hispvietnam@gmail.com>, 2024\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,19 +19,22 @@ msgstr ""
 "Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid ""
-"Editing the target setup will require you to reenter authentication details."
+msgid "Advanced options"
 msgstr ""
 
-msgid ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
+msgid "Skip audit, meaning audit values will not be generated"
 msgstr ""
 
-msgid "Edit target setup"
+msgid "Improves performance at the cost of ability to audit changes."
 msgstr ""
 
-msgid "Edit advanced options"
+msgid "Dry run"
+msgstr ""
+
+msgid "A dry run tests the import settings without importing any data."
+msgstr ""
+
+msgid "Import strategy"
 msgstr ""
 
 msgid "Basic setup"
@@ -70,7 +74,7 @@ msgid "Authentication method"
 msgstr ""
 
 msgid "Basic"
-msgstr ""
+msgstr "Cơ bản"
 
 msgid "Personal Access token"
 msgstr ""
@@ -96,19 +100,38 @@ msgstr ""
 msgid "Requests"
 msgstr ""
 
-msgid "Advanced options"
+msgid "Input ID scheme options"
+msgstr ""
+
+msgid ""
+"Specify the scheme (ID, code, attribute value) used on the target system to "
+"match data coming from the source system."
 msgstr ""
 
 msgid "Input general ID scheme"
 msgstr ""
 
+msgid ""
+"Used as the default ID scheme for all items. If the chosen scheme is not "
+"available for an item, it will fall back to using ID."
+msgstr ""
+
 msgid "Input data element ID scheme"
+msgstr ""
+
+msgid "Applies to data elements."
 msgstr ""
 
 msgid "Input organisation unit ID scheme"
 msgstr ""
 
+msgid "Applies to organisation units."
+msgstr ""
+
 msgid "Input category option combo ID scheme"
+msgstr ""
+
+msgid "Applies to category option combos."
 msgstr ""
 
 msgid "Add exchange"
@@ -118,6 +141,29 @@ msgid "Edit exchange"
 msgstr ""
 
 msgid "Could not save"
+msgstr ""
+
+msgid ""
+"Editing the target setup will require you to reenter authentication details."
+msgstr ""
+
+msgid ""
+"Editing the input ID scheme options will require you to reenter "
+"authentication details."
+msgstr ""
+
+msgid ""
+"Editing the advanced options will require you to reenter authentication "
+"details."
+msgstr ""
+
+msgid "Edit target setup"
+msgstr ""
+
+msgid "Edit input ID scheme options"
+msgstr ""
+
+msgid "Edit advanced options"
 msgstr ""
 
 msgid "{{firstOuName}} and {{ouLength}} others"
@@ -236,13 +282,28 @@ msgstr ""
 msgid "Organisation units"
 msgstr "Đơn vị"
 
+msgid "Output ID scheme options"
+msgstr ""
+
+msgid ""
+"Configure the formatting of source data before sending to the target system."
+msgstr ""
+
 msgid "Output general ID scheme"
+msgstr ""
+
+msgid "Output data item ID scheme"
+msgstr ""
+
+msgid "Applies to data elements, indicators, and program indicators."
 msgstr ""
 
 msgid "Output data element ID scheme"
 msgstr ""
 
-msgid "Output data item ID scheme"
+msgid ""
+"Applies to data elements. For data elements, it will override the scheme "
+"specified by Output data item ID scheme."
 msgstr ""
 
 msgid "Output organisation unit ID scheme"
@@ -430,6 +491,9 @@ msgstr ""
 msgid "New line list"
 msgstr ""
 
+msgid "None (follows {{defaultIDSchemeName}})"
+msgstr ""
+
 msgid "ID"
 msgstr "Định danh"
 
@@ -451,7 +515,7 @@ msgid "No, go back"
 msgstr ""
 
 msgid "Yes, discard changes"
-msgstr ""
+msgstr "Có, hủy các thay đổi"
 
 msgid "Save exchange"
 msgstr ""
@@ -523,6 +587,12 @@ msgstr "Đối tượng"
 
 msgid "Value"
 msgstr "Giá trị"
+
+msgid ""
+"This exchange is configured to skip audit information on submit, but you do "
+"not have the Skip data import audit authority. If you submit this exchange, "
+"the data will be ignored."
+msgstr ""
 
 msgid "Submitting..."
 msgstr ""
