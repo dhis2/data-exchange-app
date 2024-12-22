@@ -214,7 +214,7 @@ msgid "No, cancel"
 msgstr "Không"
 
 msgid "Yes, delete"
-msgstr ""
+msgstr "Có, xóa"
 
 msgid "Exit configuration mode"
 msgstr ""
@@ -365,13 +365,13 @@ msgid "Anyone"
 msgstr "Bất kỳ ai"
 
 msgid "Only you"
-msgstr ""
+msgstr "Chỉ bạn"
 
 msgid "Others"
 msgstr "Khác"
 
 msgid "Not supported by this app yet"
-msgstr ""
+msgstr "Chưa được ứng dụng này hỗ trợ"
 
 msgid "Filter by name"
 msgstr "Lọc bằng tên"
@@ -389,7 +389,7 @@ msgid "Clear filters"
 msgstr "Xóa các bộ lọc"
 
 msgid "{{firstItemIndex}}-{{lastItemIndex}} of {{totalNumberOfItems}}"
-msgstr ""
+msgstr "{{firstItemIndex}}-{{lastItemIndex}} của {{totalNumberOfItems}}"
 
 msgid "Open"
 msgstr "Mở"
@@ -398,98 +398,117 @@ msgid "Loading"
 msgstr "Đang tải"
 
 msgid "Couldn't load items"
-msgstr ""
+msgstr "Không thể tải danh mục"
 
 msgid ""
 "There was a problem loading items. Try again or contact your system "
 "administrator."
 msgstr ""
+"Đã xảy ra sự cố khi tải mục. Hãy thử lại hoặc liên hệ với quản trị viên hệ "
+"thống của bạn."
 
 msgid "No items found. Create a new to get started."
-msgstr ""
+msgstr "Không tìm thấy mục nào. Hãy tạo một cái mới để bắt đầu."
 
 msgid ""
 "No items found. Try adjusting your search or filter options to find what "
 "you're looking for."
 msgstr ""
+"Không tìm thấy mục nào. Hãy thử điều chỉnh tùy chọn tìm kiếm hoặc bộ lọc để "
+"tìm những gì bạn đang tìm kiếm."
 
 msgid "Create new"
 msgstr "Tạo mới"
 
 msgid "Open a visualization"
-msgstr ""
+msgstr "Mở một hình ảnh trực quan"
 
 msgid "Loading visualizations"
-msgstr ""
+msgstr "Đang tải hình ảnh trực quan"
 
 msgid "Couldn't load visualizations"
-msgstr ""
+msgstr "Không thể tải hình ảnh trực quan"
 
 msgid ""
 "There was a problem loading visualizations. Try again or contact your system"
 " administrator."
 msgstr ""
+"Đã xảy ra sự cố khi tải hình ảnh trực quan. Hãy thử lại hoặc liên hệ với "
+"quản trị viên hệ thống của bạn."
 
 msgid "No visualizations found. Click New visualization to get started."
 msgstr ""
+"Không tìm thấy hình ảnh trực quan nào. Nhấp vào Hình ảnh trực quan mới để "
+"bắt đầu."
 
 msgid ""
 "No visualizations found. Try adjusting your search or filter options to find"
 " what you're looking for."
 msgstr ""
+"Không tìm thấy hình ảnh trực quan. Hãy thử điều chỉnh tùy chọn tìm kiếm hoặc"
+" bộ lọc để tìm nội dung bạn đang tìm kiếm."
 
 msgid "New visualization"
-msgstr ""
+msgstr "Hình ảnh trực quan mới"
 
 msgid "Open a map"
-msgstr ""
+msgstr "Mở một bản đồ"
 
 msgid "Loading maps"
-msgstr ""
+msgstr "Đang tải bản đồ"
 
 msgid "Couldn't load maps"
-msgstr ""
+msgstr "Không thể tải bản đồ"
 
 msgid ""
 "There was a problem loading maps. Try again or contact your system "
 "administrator."
 msgstr ""
+"Đã xảy ra sự cố khi tải bản đồ. Hãy thử lại hoặc liên hệ với quản trị viên "
+"hệ thống của bạn."
 
 msgid "No maps found. Click New map to get started."
-msgstr ""
+msgstr "Không tìm thấy bản đồ. Nhấp vào Bản đồ mới để bắt đầu."
 
 msgid ""
 "No maps found. Try adjusting your search or filter options to find what "
 "you're looking for."
 msgstr ""
+"Không tìm thấy bản đồ. Hãy thử điều chỉnh tùy chọn tìm kiếm hoặc bộ lọc để "
+"tìm thông tin bạn đang tìm kiếm."
 
 msgid "New map"
-msgstr ""
+msgstr "Bản đồ mới"
 
 msgid "Open a line list"
-msgstr ""
+msgstr "Mở một danh sách dòng"
 
 msgid "Loading line lists"
-msgstr ""
+msgstr "Đang tải danh sách dòng"
 
 msgid "Couldn't load line lists"
-msgstr ""
+msgstr "Không thể tải danh sách dòng"
 
 msgid ""
 "There was a problem loading line lists. Try again or contact your system "
 "administrator."
 msgstr ""
+"Đã xảy ra sự cố khi tải danh sách dòng. Hãy thử lại hoặc liên hệ với quản "
+"trị viên hệ thống của bạn."
 
 msgid "No line lists found. Click New line list to get started."
 msgstr ""
+"Không tìm thấy danh sách dòng nào. Bấm vào Danh sách dòng mới để bắt đầu."
 
 msgid ""
 "No line lists found. Try adjusting your search or filter options to find "
 "what you're looking for."
 msgstr ""
+"Không tìm thấy danh sách dòng nào. Hãy thử điều chỉnh tùy chọn tìm kiếm hoặc"
+" bộ lọc để tìm những gì bạn đang tìm kiếm."
 
 msgid "New line list"
-msgstr ""
+msgstr "Danh sách dòng mới"
 
 msgid "None (follows {{defaultIDSchemeName}})"
 msgstr ""
