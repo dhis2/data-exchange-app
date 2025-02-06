@@ -44,7 +44,5 @@
         "react-router-dom": "^6.4.1",
         "use-query-params": "^2.1.1"
     },
-    "resolutions": {
-        "@dhis2/ui": "^9.14.0"
-    }
+    "resolutions": {}
 }
