@@ -16,7 +16,7 @@ import React, { useEffect, useState } from 'react'
 import { useExchangeContext, useUserContext } from '../../../context/index.js'
 import { Warning } from '../../common/index.js'
 import styles from './submit-modal.module.css'
-import { SuccessContent } from './success-content.js'
+import { SuccessContent } from './success-content.jsx'
 import { useAggregateDataExchangeMutation } from './use-aggregate-data-exchange-mutation.js'
 
 const SkipAuditWarning = ({ exchangeSkipAudit, internalExchange }) => {

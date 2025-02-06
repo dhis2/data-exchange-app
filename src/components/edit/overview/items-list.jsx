@@ -19,7 +19,7 @@ import React, { useCallback, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppContext, useUserContext } from '../../../context/index.js'
 import { getNaturalCapitalization } from '../../../utils/helpers.js'
-import { DeleteConfirmation } from './delete-confirmation.js'
+import { DeleteConfirmation } from './delete-confirmation.jsx'
 import styles from './items-list.module.css'
 
 export const getCreatedDateString = ({

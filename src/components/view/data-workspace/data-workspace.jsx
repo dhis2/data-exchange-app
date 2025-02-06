@@ -7,10 +7,10 @@ import {
     useRequestIndex,
 } from '../../../use-context-selection/index.js'
 import { Warning } from '../../common/index.js'
-import { EntryScreen } from './entry-screen.js'
+import { EntryScreen } from './entry-screen.jsx'
 import { RequestsDisplay } from './requests-display/index.js'
 import { RequestsNavigation } from './requests-navigation/index.js'
-import { TitleBar } from './title-bar/title-bar.js'
+import { TitleBar } from './title-bar/title-bar.jsx'
 
 const DataWorkspace = () => {
     const { readableExchangeOptions } = useAppContext()

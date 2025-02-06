@@ -15,7 +15,7 @@ import {
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useExchangeContext } from '../../../context/index.js'
-import { ConflictsDetailsTable } from './conflicts-details-table.js'
+import { ConflictsDetailsTable } from './conflicts-details-table.jsx'
 import styles from './success-content.module.css'
 
 const importTypeConfig = {

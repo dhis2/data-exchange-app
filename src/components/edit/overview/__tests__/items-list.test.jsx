@@ -7,7 +7,7 @@ import { QueryParamProvider } from 'use-query-params'
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
 import { useAppContext } from '../../../../context/app-context/use-app-context.js'
 import { testDataExchange } from '../../../../utils/builders.js'
-import { EditItemsList } from '../items-list.js'
+import { EditItemsList } from '../items-list.jsx'
 
 const mockLastAnalyticsTableSuccess = '2024-07-07T12:00:00.000'
 const mockContextPath = 'debug.dhis2.org/dev'

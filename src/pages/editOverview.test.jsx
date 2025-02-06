@@ -2,10 +2,10 @@ import '@testing-library/jest-dom'
 import { configure, render, within } from '@testing-library/react'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { getCreatedDateString } from '../components/edit/overview/items-list.js'
+import { getCreatedDateString } from '../components/edit/overview/items-list.jsx'
 import { AppContext, UserContext } from '../context/index.js'
 import { testDataExchange, testUserContext } from '../utils/builders.js'
-import { EditPage } from './editOverview.js'
+import { EditPage } from './editOverview.jsx'
 
 jest.mock('@dhis2/ui', () => {
     const ui = jest.requireActual('@dhis2/ui')

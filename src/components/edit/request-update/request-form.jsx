@@ -9,7 +9,7 @@ import {
     getInitialValuesFromRequest,
     getRequestValuesFromForm,
 } from './getRequestValues.js'
-import { RequestFormContents } from './request-form-contents.js'
+import { RequestFormContents } from './request-form-contents.jsx'
 import styles from './request-form.module.css'
 
 const { Form } = ReactFinalForm
