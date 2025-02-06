@@ -1,3 +1,5 @@
+![React 18](https://img.shields.io/badge/react-18-blue)
+
 # Data exchange app
 
 [Live demo of the master branch](https://dhis2-data-exchange.netlify.app/#/)

@@ -23,7 +23,7 @@ const CustomSelectOptionItem = ({
         >
             {icon}
             <span className={cx({ label: icon })}>{label}</span>
-            {/* eslint-disable-next-line react/no-unknown-property */}
+            {}
             <style jsx>{styles}</style>
         </div>
         {insertDivider && <MenuDivider dense />}
