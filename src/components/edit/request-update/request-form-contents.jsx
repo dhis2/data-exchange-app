@@ -8,13 +8,13 @@ import {
 import React from 'react'
 import { useFeatureToggleContext } from '../../../context/index.js'
 import { Subsection, SchemeSelector } from '../shared/index.js'
-import { DataItemSelect } from './data-item-select.js'
-import { FilterSelect } from './filterSelect/filter-select.js'
-import { OrgUnitSelector } from './org-unit-select.js'
-import { PeriodSelector } from './period-select.js'
+import { DataItemSelect } from './data-item-select.jsx'
+import { FilterSelect } from './filterSelect/filter-select.jsx'
+import { OrgUnitSelector } from './org-unit-select.jsx'
+import { PeriodSelector } from './period-select.jsx'
 import styles from './request-form-contents.module.css'
 import { useValidators } from './useValidators.js'
-import { VisualizationSelect } from './visualization-select.js'
+import { VisualizationSelect } from './visualization-select.jsx'
 
 const { Field, useField } = ReactFinalForm
 

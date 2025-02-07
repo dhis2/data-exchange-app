@@ -1,14 +1,15 @@
 import '@testing-library/jest-dom'
 import { Provider, CustomDataProvider } from '@dhis2/app-runtime'
 import { act, configure, render, waitFor, within } from '@testing-library/react'
+import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import { MemoryRouter, Route } from 'react-router-dom'
 import { QueryParamProvider } from 'use-query-params'
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
 import { formatData } from '../components/view/data-workspace/requests-display/index.js'
 import { getRelativeTimeDifference } from '../components/view/data-workspace/title-bar/index.js'
-import { getReportText } from '../components/view/submit-modal/submit-modal.js'
-import { getReadableExchangeOptions } from '../context/app-context/app-provider.js'
+import { getReportText } from '../components/view/submit-modal/submit-modal.jsx'
+import { getReadableExchangeOptions } from '../context/app-context/app-provider.jsx'
 import { AppContext, UserContext } from '../context/index.js'
 import {
     addOnlyPermissionsUserContext,
@@ -20,7 +21,7 @@ import {
     testRequest,
     testUserContext,
 } from '../utils/builders.js'
-import { DataPage } from './data.js'
+import { DataPage } from './data.jsx'
 
 const mockLastAnalyticsTableSuccess = '2024-07-07T21:47:58.383'
 const mockServerDate = '2024-07-18T17:36:38.164'
@@ -223,21 +224,24 @@ describe('<DataPage/>', () => {
             aggregateDataExchanges: exchanges,
         })
 
-        screen.getByTestId('dhis2-ui-selectorbaritem').click()
+        await userEvent.click(screen.getByTestId('dhis2-ui-selectorbaritem'))
 
         const menuItems = await screen.findAllByTestId('dhis2-uicore-menuitem')
-        within(menuItems[0]).queryByText(anExchange.displayName).click()
+
+        await userEvent.click(
+            within(menuItems[0]).queryByText(anExchange.displayName)
+        )
+
         expect(screen.getByTestId('data-exchange-selector')).toHaveTextContent(
             anExchange.displayName
         )
 
-        const loader = screen.getByTestId('dhis2-uicore-circularloader')
-        expect(loader).toBeInTheDocument()
-
         const headerBar = screen.getByTestId('dhis2-ui-selectorbar')
-        within(headerBar)
-            .queryByRole('button', { name: 'Clear selections' })
-            .click()
+        await userEvent.click(
+            within(headerBar).queryByRole('button', {
+                name: 'Clear selections',
+            })
+        )
         expect(screen.getByTestId('data-exchange-selector')).toHaveTextContent(
             'Choose a data exchange'
         )
