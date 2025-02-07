@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { Provider, CustomDataProvider } from '@dhis2/app-runtime'
 import { act, configure, render, waitFor, within } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import { MemoryRouter, Route } from 'react-router-dom'
 import { QueryParamProvider } from 'use-query-params'

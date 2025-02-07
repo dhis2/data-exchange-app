@@ -11,7 +11,7 @@ import {
 } from './context/index.js'
 import { DataPage, EditPage, EditItem, AddItem } from './pages/index.js'
 
-const App = ({ router: Router }) => (
+const App = ({ router: Router = HashRouter }) => (
     <>
         <CssVariables spacers colors theme />
         <Router>
@@ -44,10 +44,6 @@ const App = ({ router: Router }) => (
         </Router>
     </>
 )
-
-App.defaultProps = {
-    router: HashRouter,
-}
 
 App.propTypes = {
     router: PropTypes.elementType,

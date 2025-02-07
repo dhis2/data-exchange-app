@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { configure, render, within } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { getCreatedDateString } from '../components/edit/overview/items-list.jsx'

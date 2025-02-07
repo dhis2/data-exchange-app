@@ -25,7 +25,7 @@ export const convertToObjectFormat = ({
     const objectFormat = {}
 
     if (Array.isArray(data?.rows)) {
-        for (const row of data?.rows) {
+        for (const row of data.rows) {
             const ouId = row[ou_index]
             const deId = row[dx_index]
             const peId = row[pe_index]
