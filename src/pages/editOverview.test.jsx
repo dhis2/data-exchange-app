@@ -1,11 +1,12 @@
 import '@testing-library/jest-dom'
 import { configure, render, within } from '@testing-library/react'
+import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { getCreatedDateString } from '../components/edit/overview/items-list.js'
+import { getCreatedDateString } from '../components/edit/overview/items-list.jsx'
 import { AppContext, UserContext } from '../context/index.js'
 import { testDataExchange, testUserContext } from '../utils/builders.js'
-import { EditPage } from './editOverview.js'
+import { EditPage } from './editOverview.jsx'
 
 jest.mock('@dhis2/ui', () => {
     const ui = jest.requireActual('@dhis2/ui')
@@ -188,7 +189,9 @@ describe('<EditPage/>', () => {
             userContext: testUserContext({ canAddExchange: true }),
         })
         const exchangeCard = screen.queryByTestId('data-exchange-card')
-        within(exchangeCard).getByRole('button', { name: 'Sharing' }).click()
+        await userEvent.click(
+            within(exchangeCard).getByRole('button', { name: 'Sharing' })
+        )
 
         expect(screen.getByTestId('mock-sharing-dialog')).toBeInTheDocument()
     })
