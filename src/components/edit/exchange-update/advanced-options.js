@@ -71,7 +71,6 @@ export const AdvancedOptions = () => {
                         'Improves performance at the cost of ability to audit changes.'
                     )}
                     component={CheckboxFieldFF}
-                    // disabled={editTargetSetupDisabled}
                 />
             </div>
             <div className={styles.subsectionField1000}>

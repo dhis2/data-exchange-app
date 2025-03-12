@@ -57,6 +57,9 @@ export const getJsonPatch = ({ formattedValues, form, requestsTouched }) => {
 
     // if target type changes, we need to replace everything on the target
     if (modifiedFields.has('type')) {
+        // this is not avalid for backend
+        delete formattedValues?.target?.api?.authentication
+
         changes.push(
             getChange({
                 field: 'target',

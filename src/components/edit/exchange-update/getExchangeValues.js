@@ -144,9 +144,10 @@ export const getInitialValuesFromExchange = ({
 }) => ({
     name: exchangeInfo.name,
     type: exchangeInfo.target?.type,
-    authentication: exchangeInfo.target?.api?.accessToken
-        ? AUTHENTICATION_TYPES.pat
-        : AUTHENTICATION_TYPES.basic,
+    authentication:
+        !exchangeInfo?.target?.api || exchangeInfo.target?.api?.username
+            ? AUTHENTICATION_TYPES.basic
+            : AUTHENTICATION_TYPES.pat,
     url: exchangeInfo.target?.api?.url,
     username: exchangeInfo.target?.api?.username,
     ...getIdSchemeValues({ exchangeInfo }),
