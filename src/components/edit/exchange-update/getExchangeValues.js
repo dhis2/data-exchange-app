@@ -87,25 +87,13 @@ const getTargetDetails = ({ values }) => {
     // upate to include api
     target.api = {
         url: values.url,
+        accessToken: values.accessToken,
+        username: values.username,
+        password: values.password,
+        authentication: values.authentication, // this will not actually be sent to backend
     }
 
-    if (values.authentication === AUTHENTICATION_TYPES.pat) {
-        return {
-            ...target,
-            api: {
-                ...target.api,
-                accessToken: values.accessToken,
-            },
-        }
-    }
-    return {
-        ...target,
-        api: {
-            ...target.api,
-            username: values.username,
-            password: values.password,
-        },
-    }
+    return target
 }
 
 export const getExchangeValuesFromForm = ({ values, requests }) => ({
@@ -156,9 +144,9 @@ export const getInitialValuesFromExchange = ({
 }) => ({
     name: exchangeInfo.name,
     type: exchangeInfo.target?.type,
-    authentication: exchangeInfo.target?.api?.username
-        ? AUTHENTICATION_TYPES.basic
-        : AUTHENTICATION_TYPES.pat,
+    authentication: exchangeInfo.target?.api?.accessToken
+        ? AUTHENTICATION_TYPES.pat
+        : AUTHENTICATION_TYPES.basic,
     url: exchangeInfo.target?.api?.url,
     username: exchangeInfo.target?.api?.username,
     ...getIdSchemeValues({ exchangeInfo }),

@@ -5,28 +5,9 @@ import React from 'react'
 import { Warning } from '../../common/index.js'
 import styles from './external-edit-warning.module.css'
 
-const sectionNameWarning = {
-    targetSetup: i18n.t(
-        'Editing the target setup will require you to reenter authentication details.'
-    ),
-    idSchemes: i18n.t(
-        'Editing the input ID scheme options will require you to reenter authentication details.'
-    ),
-    advancedOptions: i18n.t(
-        'Editing the advanced options will require you to reenter authentication details.'
-    ),
-}
-
-const sectionNameEdit = {
-    targetSetup: i18n.t('Edit target setup'),
-    idSchemes: i18n.t('Edit input ID scheme options'),
-    advancedOptions: i18n.t('Edit advanced options'),
-}
-
 export const EnableExternalEditWarning = ({
     editTargetSetupDisabled,
     setEditTargetSetupDisabled,
-    sectionName,
 }) => {
     if (!editTargetSetupDisabled) {
         return null
@@ -34,13 +15,17 @@ export const EnableExternalEditWarning = ({
 
     return (
         <Warning>
-            <div>{sectionNameWarning[sectionName ?? 'targetSetup']}</div>
+            <div>
+                {i18n.t(
+                    'You will need to reenter authentication details (password, api token) if you edit this information'
+                )}
+            </div>
             <Button
                 className={styles.editWarningButton}
                 small
                 onClick={() => setEditTargetSetupDisabled(false)}
             >
-                {sectionNameEdit[sectionName ?? 'targetSetup']}
+                {i18n.t('Edit authentication details')}
             </Button>
         </Warning>
     )
@@ -48,6 +33,5 @@ export const EnableExternalEditWarning = ({
 
 EnableExternalEditWarning.propTypes = {
     editTargetSetupDisabled: PropTypes.bool,
-    sectionName: PropTypes.string,
     setEditTargetSetupDisabled: PropTypes.func,
 }
