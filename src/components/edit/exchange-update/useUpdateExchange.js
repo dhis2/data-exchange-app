@@ -1,5 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { useCallback, useState } from 'react'
+import { AUTHENTICATION_TYPES, EXCHANGE_TYPES } from '../shared/constants.js'
 import { getExchangeValuesFromForm } from './getExchangeValues.js'
 
 const getChange = ({ field, value }) => ({
@@ -8,7 +9,12 @@ const getChange = ({ field, value }) => ({
     value: value ?? null,
 })
 
-const getJsonPatch = ({ formattedValues, form, requestsTouched }) => {
+const getDelete = ({ field }) => ({
+    op: 'remove',
+    path: '/' + field,
+})
+
+export const getJsonPatch = ({ formattedValues, form, requestsTouched }) => {
     const changes = []
     const modifiedFields = new Set(Object.keys(form.getState().dirtyFields))
 
@@ -26,21 +32,77 @@ const getJsonPatch = ({ formattedValues, form, requestsTouched }) => {
     const targetIdSchemesFields = targetIdSchemes.reduce((allNames, scheme) => {
         return [...allNames, `target_${scheme}`, `target_${scheme}_attribute`]
     }, [])
-    const targetFields = [
-        'type',
-        'authentication',
-        'accessToken',
-        'url',
-        'username',
+
+    const targetApiFieldsBasic = ['username', 'password']
+    const targetApiFieldsPAT = ['accessToken']
+    const targetApiFields =
+        formattedValues?.target?.api?.authentication ===
+        AUTHENTICATION_TYPES.pat
+            ? targetApiFieldsPAT
+            : targetApiFieldsBasic
+    const removeApiFields =
+        formattedValues.target.type === EXCHANGE_TYPES.internal
+            ? []
+            : formattedValues?.target?.api?.authentication ===
+              AUTHENTICATION_TYPES.pat
+            ? targetApiFieldsBasic
+            : targetApiFieldsPAT
+
+    const targetRequestFields = [
         'dryRun',
         'skipAudit',
         'importStrategy',
         ...targetIdSchemesFields,
     ]
-    if (targetFields.some((tf) => modifiedFields.has(tf))) {
+
+    // if target type changes, we need to replace everything on the target
+    if (modifiedFields.has('type')) {
+        // this is not avalid for backend
+        delete formattedValues?.target?.api?.authentication
+
         changes.push(
-            getChange({ field: 'target', value: formattedValues.target })
+            getChange({
+                field: 'target',
+                value: formattedValues.target,
+            })
         )
+    } else {
+        if (modifiedFields.has('url')) {
+            changes.push(
+                getChange({
+                    field: 'target/api/url',
+                    value: formattedValues.target.api.url,
+                })
+            )
+        }
+
+        targetApiFields.forEach((tf) => {
+            if (modifiedFields.has(tf)) {
+                changes.push(
+                    getChange({
+                        field: `target/api/${tf}`,
+                        value: formattedValues.target.api[tf],
+                    })
+                )
+            }
+        })
+
+        removeApiFields.forEach((tf) => {
+            changes.push(
+                getDelete({
+                    field: `target/api/${tf}`,
+                })
+            )
+        })
+
+        if (targetRequestFields.some((tf) => modifiedFields.has(tf))) {
+            changes.push(
+                getChange({
+                    field: 'target/request',
+                    value: formattedValues.target.request,
+                })
+            )
+        }
     }
 
     if (requestsTouched) {

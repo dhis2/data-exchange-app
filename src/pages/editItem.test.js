@@ -319,12 +319,13 @@ describe('<EditItem/>', () => {
         )
     })
 
-    it('can not edit an external exchange target setup if not explicitly specified', async () => {
+    it('can edit url, but not authentication details for an external exchange without confirming to edit authentication', async () => {
         const request = testRequest()
         const dataExchange = testDataExchange({
             requests: [request],
             targetType: 'EXTERNAL',
         })
+        dataExchange.target.api.accessToken = 'fake_access_token'
 
         const { screen } = setUp(<EditItem />, {
             userContext: testUserContext({ canAddExchange: true }),
@@ -338,10 +339,29 @@ describe('<EditItem/>', () => {
         const exchangeURLInput = within(
             await screen.findByTestId('exchange-url')
         ).getByLabelText('Target URL')
-        expect(exchangeURLInput).toBeDisabled()
+        expect(exchangeURLInput).not.toBeDisabled()
+
+        fireEvent.input(exchangeURLInput, {
+            target: { value: 'newExchangeUrl.com' },
+        })
+
+        const tokenInput = within(
+            screen.getByTestId('exchange-auth-pat')
+        ).getByLabelText('Access token')
+        expect(tokenInput).toBeDisabled()
+
+        within(screen.getByTestId('edit-item-footer'))
+            .getByText('Save exchange')
+            .click()
+
+        await waitFor(() =>
+            expect(
+                screen.getByTestId('saving-exchange-loader')
+            ).toBeInTheDocument()
+        )
     })
 
-    it('can edit an external exchange target setup if explicitly specified', async () => {
+    it('can edit an external exchange authentication setup if explicitly specified', async () => {
         const request = testRequest()
         const dataExchange = testDataExchange({
             requests: [request],
@@ -359,7 +379,7 @@ describe('<EditItem/>', () => {
 
         within(screen.getByTestId('target-setup'))
             .queryByRole('button', {
-                name: 'Edit target setup',
+                name: 'Edit authentication details',
             })
             .click()
 
@@ -394,7 +414,7 @@ describe('<EditItem/>', () => {
         )
     })
 
-    it('can not edit an external exchange input id scheme options if not explicitly specified', async () => {
+    it('can edit an external exchange input id scheme options without confirming to edit authentication details', async () => {
         const request = testRequest()
         const dataExchange = testDataExchange({
             requests: [request],
@@ -409,148 +429,27 @@ describe('<EditItem/>', () => {
         expect(
             await screen.findByTestId('add-exchange-title')
         ).toHaveTextContent('Edit exchange')
-
-        const generalIdSchemeRadio = within(
-            screen.getByTestId('general-id-scheme-selector')
-        ).getAllByRole('radio')
-        generalIdSchemeRadio.map((r) => expect(r).toBeDisabled())
-
-        const elementIdSchemeRadio = within(
-            screen.getByTestId('element-id-scheme-selector')
-        ).getAllByRole('radio')
-        elementIdSchemeRadio.map((r) => expect(r).toBeDisabled())
-
-        const orgUnitIdSchemeRadio = within(
-            screen.getByTestId('org-unit-id-scheme-selector')
-        ).getAllByRole('radio')
-        orgUnitIdSchemeRadio.map((r) => expect(r).toBeDisabled())
-
-        const categoryOptionComboSchemeRadio = within(
-            screen.getByTestId('category-option-combo-scheme-selector')
-        ).getAllByRole('radio')
-        categoryOptionComboSchemeRadio.map((r) => expect(r).toBeDisabled())
-    })
-
-    it('can not edit an external exchange target input id scheme options if explicitly specified but auth info is not re-entered ', async () => {
-        const request = testRequest()
-        const dataExchange = testDataExchange({
-            requests: [request],
-            targetType: 'EXTERNAL',
-            externalURL: 'a/url',
-        })
-        const { screen } = setUp(<EditItem />, {
-            userContext: testUserContext({ canAddExchange: true }),
-            dataExchange,
-        })
-
-        expect(
-            await screen.findByTestId('add-exchange-title')
-        ).toHaveTextContent('Edit exchange')
-
-        const editButton = await screen.findByRole('button', {
-            name: 'Edit input ID scheme options',
-        })
-
-        editButton.click()
 
         const generalIdSchemeRadio = within(
             screen.getByTestId('general-id-scheme-selector')
         ).getAllByRole('radio')
         generalIdSchemeRadio.map((r) => expect(r).not.toBeDisabled())
-        generalIdSchemeRadio[1].click()
 
         const elementIdSchemeRadio = within(
             screen.getByTestId('element-id-scheme-selector')
         ).getAllByRole('radio')
         elementIdSchemeRadio.map((r) => expect(r).not.toBeDisabled())
-        elementIdSchemeRadio[1].click()
 
         const orgUnitIdSchemeRadio = within(
             screen.getByTestId('org-unit-id-scheme-selector')
         ).getAllByRole('radio')
         orgUnitIdSchemeRadio.map((r) => expect(r).not.toBeDisabled())
-        orgUnitIdSchemeRadio[1].click()
 
         const categoryOptionComboSchemeRadio = within(
             screen.getByTestId('category-option-combo-scheme-selector')
         ).getAllByRole('radio')
         categoryOptionComboSchemeRadio.map((r) => expect(r).not.toBeDisabled())
         categoryOptionComboSchemeRadio[1].click()
-
-        within(screen.getByTestId('edit-item-footer'))
-            .getByText('Save exchange')
-            .click()
-
-        const exchangeAutheInputWarning = within(
-            screen.getByTestId('exchange-auth-pat')
-        ).getByTestId('dhis2-uiwidgets-inputfield-validation')
-        expect(exchangeAutheInputWarning).toBeInTheDocument()
-        expect(exchangeAutheInputWarning).toHaveTextContent(
-            'Please provide a value'
-        )
-        await waitFor(() =>
-            expect(
-                screen.queryByTestId('saving-exchange-loader')
-            ).not.toBeInTheDocument()
-        )
-    })
-
-    it('can edit an external exchange target input id scheme options if explicitly specified and auth info is re-entered', async () => {
-        const request = testRequest()
-        const dataExchange = testDataExchange({
-            requests: [request],
-            targetType: 'EXTERNAL',
-            externalURL: 'a/url',
-        })
-        const { screen } = setUp(<EditItem />, {
-            userContext: testUserContext({ canAddExchange: true }),
-            dataExchange,
-        })
-
-        expect(
-            await screen.findByTestId('add-exchange-title')
-        ).toHaveTextContent('Edit exchange')
-
-        const editButton = await screen.findByRole('button', {
-            name: 'Edit input ID scheme options',
-        })
-
-        editButton.click()
-
-        const generalIdSchemeRadio = within(
-            screen.getByTestId('general-id-scheme-selector')
-        ).getAllByRole('radio')
-        generalIdSchemeRadio.map((r) => expect(r).not.toBeDisabled())
-        generalIdSchemeRadio[1].click()
-
-        const elementIdSchemeRadio = within(
-            screen.getByTestId('element-id-scheme-selector')
-        ).getAllByRole('radio')
-        elementIdSchemeRadio.map((r) => expect(r).not.toBeDisabled())
-        elementIdSchemeRadio[1].click()
-
-        const orgUnitIdSchemeRadio = within(
-            screen.getByTestId('org-unit-id-scheme-selector')
-        ).getAllByRole('radio')
-        orgUnitIdSchemeRadio.map((r) => expect(r).not.toBeDisabled())
-        orgUnitIdSchemeRadio[1].click()
-
-        const categoryOptionComboSchemeRadio = within(
-            screen.getByTestId('category-option-combo-scheme-selector')
-        ).getAllByRole('radio')
-        categoryOptionComboSchemeRadio.map((r) => expect(r).not.toBeDisabled())
-        categoryOptionComboSchemeRadio[1].click()
-
-        const authRadio = within(
-            screen.getByTestId('exchange-auth-method')
-        ).getAllByRole('radio')
-        expect(authRadio[1].getAttribute('value')).toEqual('PAT')
-        authRadio[1].click()
-
-        const tokenInput = within(
-            screen.getByTestId('exchange-auth-pat')
-        ).getByLabelText('Access token')
-        fireEvent.input(tokenInput, { target: { value: 'exchangePAT' } })
 
         within(screen.getByTestId('edit-item-footer'))
             .getByText('Save exchange')
@@ -558,8 +457,8 @@ describe('<EditItem/>', () => {
 
         await waitFor(() =>
             expect(
-                screen.getByTestId('saving-exchange-loader')
-            ).toBeInTheDocument()
+                screen.queryByTestId('saving-exchange-loader')
+            ).not.toBeInTheDocument()
         )
     })
 
@@ -696,12 +595,9 @@ describe('<EditItem/>', () => {
         const expectedPayload = [
             {
                 op: 'add',
-                path: '/target',
+                path: '/target/request',
                 value: {
-                    type: 'INTERNAL',
-                    request: {
-                        idScheme: 'UID',
-                    },
+                    idScheme: 'UID',
                 },
             },
         ]
@@ -758,15 +654,12 @@ describe('<EditItem/>', () => {
         const expectedPayload = [
             {
                 op: 'add',
-                path: '/target',
+                path: '/target/request',
                 value: {
-                    type: 'INTERNAL',
-                    request: {
-                        categoryOptionComboIdScheme: 'ATTRIBUTE:snorkmaiden',
-                        dataElementIdScheme: 'UID',
-                        idScheme: 'UID',
-                        orgUnitIdScheme: 'CODE',
-                    },
+                    categoryOptionComboIdScheme: 'ATTRIBUTE:snorkmaiden',
+                    dataElementIdScheme: 'UID',
+                    idScheme: 'UID',
+                    orgUnitIdScheme: 'CODE',
                 },
             },
         ]
@@ -775,7 +668,7 @@ describe('<EditItem/>', () => {
         expect(patchExchange).toHaveBeenCalledWith(expectedPayload)
     })
 
-    it('posts change to target when access token is updated', async () => {
+    it('posts change to target when password is updated', async () => {
         const user = userEvent.setup()
         const request = testRequest()
         const dataExchange = testDataExchange({
@@ -783,6 +676,8 @@ describe('<EditItem/>', () => {
             targetType: 'EXTERNAL',
             externalURL: 'a/url',
         })
+        dataExchange.target.api.username = 'dog'
+        dataExchange.target.api.password = 'cat'
 
         const { screen } = setUp(<EditItem />, {
             userContext: testUserContext({ canAddExchange: true }),
@@ -794,15 +689,15 @@ describe('<EditItem/>', () => {
         const confirmEditButton = within(
             screen.getByTestId('target-setup')
         ).queryByRole('button', {
-            name: 'Edit target setup',
+            name: 'Edit authentication details',
         })
 
         await user.click(confirmEditButton)
 
-        const patInput = within(
-            screen.getByTestId('exchange-auth-pat')
-        ).getByLabelText('Access token')
-        await user.type(patInput, 'fake_pat')
+        const passwordInput = within(
+            screen.getByTestId('exchange-auth-basic')
+        ).getByLabelText('Password')
+        await user.type(passwordInput, 'dog_password')
 
         const saveExchange = within(
             screen.getByTestId('edit-item-footer')
@@ -812,14 +707,12 @@ describe('<EditItem/>', () => {
         const expectedPayload = [
             {
                 op: 'add',
-                path: '/target',
-                value: {
-                    type: 'EXTERNAL',
-                    request: {
-                        idScheme: 'UID',
-                    },
-                    api: { url: 'a/url', accessToken: 'fake_pat' },
-                },
+                path: '/target/api/password',
+                value: 'dog_password',
+            },
+            {
+                op: 'remove',
+                path: '/target/api/accessToken',
             },
         ]
 
