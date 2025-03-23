@@ -1,22 +1,22 @@
 # 
 # Translators:
 # Jason Pickering <jason@dhis2.org>, 2024
-# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
 # David Júnior <davidjr.mondlane@gmail.com>, 2024
 # Fernando Jorge Bade, 2024
 # Philip Larsen Donnelly, 2024
 # Sheila André <sandre@saudigitus.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
 # Ge Joao <gsimango@saudigitus.org>, 2024
-# Shelsea Chumaio, 2024
 # Helton Dias, 2024
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2025
+# Shelsea Chumaio, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-11T11:26:20.632Z\n"
+"POT-Creation-Date: 2025-03-11T15:50:18.656Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
-"Last-Translator: Helton Dias, 2024\n"
+"Last-Translator: Shelsea Chumaio, 2025\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -161,33 +161,12 @@ msgid "Could not save"
 msgstr "Não foi possível guardar"
 
 msgid ""
-"Editing the target setup will require you to reenter authentication details."
+"You will need to reenter authentication details (password, api token) if you"
+" edit this information"
 msgstr ""
-"Para editar a configuração do destino, é necessário introduzir novamente os "
-"detalhes de autenticação."
 
-msgid ""
-"Editing the input ID scheme options will require you to reenter "
-"authentication details."
+msgid "Edit authentication details"
 msgstr ""
-"Para editar as opções do esquema de ID de entrada, é necessário introduzir "
-"novamente os detalhes de autenticação."
-
-msgid ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
-msgstr ""
-"Para editar as opções avançadas, é necessário introduzir novamente os "
-"detalhes de autenticação."
-
-msgid "Edit target setup"
-msgstr "Editar a configuração do alvo"
-
-msgid "Edit input ID scheme options"
-msgstr "Editar opções do esquema de ID de entrada"
-
-msgid "Edit advanced options"
-msgstr "Editar opções avançadas"
 
 msgid "{{firstOuName}} and {{ouLength}} others"
 msgstr "{{firstOuName}} e {{ouLength}} outros"
@@ -549,6 +528,63 @@ msgstr ""
 
 msgid "New line list"
 msgstr "Nova lista de linhas"
+
+msgid "Pivot table"
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Stacked area"
+msgstr ""
+
+msgid "Bar"
+msgstr ""
+
+msgid "Stacked bar"
+msgstr ""
+
+msgid "Column"
+msgstr ""
+
+msgid "Year over year (column)"
+msgstr ""
+
+msgid "Stacked column"
+msgstr "Coluna empilhada"
+
+msgid "Gauge"
+msgstr ""
+
+msgid "Line"
+msgstr ""
+
+msgid "Line list"
+msgstr ""
+
+msgid "Year over year (line)"
+msgstr ""
+
+msgid "Pie"
+msgstr ""
+
+msgid "Radar"
+msgstr "Radar"
+
+msgid "Scatter"
+msgstr ""
+
+msgid "Single value"
+msgstr ""
+
+msgid "Outlier table"
+msgstr ""
+
+msgid "All types"
+msgstr "Todos os tipos"
+
+msgid "All charts"
+msgstr ""
 
 msgid "None (follows {{defaultIDSchemeName}})"
 msgstr "Nenhum (segue {{defaultIDSchemeName}})"
