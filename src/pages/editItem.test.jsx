@@ -1,6 +1,12 @@
 import '@testing-library/jest-dom'
 import { CustomDataProvider } from '@dhis2/app-runtime'
-import { configure, render, waitFor, within, fireEvent } from '@testing-library/react'
+import {
+    configure,
+    render,
+    waitFor,
+    within,
+    fireEvent,
+} from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import { MemoryRouter, Route } from 'react-router-dom'
