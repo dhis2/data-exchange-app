@@ -1,8 +1,8 @@
 import { DataTableRow, DataTableCell, colors } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { DateField } from './DateField.js'
-import { VisTypeIcon } from './VTI.js'
+import { DateField } from './DateField.jsx'
+import { VisTypeIcon } from './VTI.jsx'
 
 export const FileList = ({ data, onSelect, showVisTypeColumn }) => (
     <>

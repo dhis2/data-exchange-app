@@ -1,1 +1,1 @@
-export { Loader } from './loader.js'
+export { Loader } from './loader.jsx'

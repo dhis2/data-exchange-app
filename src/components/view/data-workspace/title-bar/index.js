@@ -1,1 +1,1 @@
-export * from './title-bar.js'
+export * from './title-bar.jsx'

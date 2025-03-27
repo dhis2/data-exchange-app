@@ -1,1 +1,1 @@
-export * from './menu-select.js'
+export * from './menu-select.jsx'

@@ -3,7 +3,12 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import css from './menu-select.module.css'
 
-const MenuSelect = ({ values, selected, dataTest, onChange }) => {
+const MenuSelect = ({
+    values,
+    selected,
+    dataTest = 'menu-select',
+    onChange,
+}) => {
     return (
         <div className={css.menuSelect} data-test={dataTest}>
             <Menu>
@@ -19,10 +24,6 @@ const MenuSelect = ({ values, selected, dataTest, onChange }) => {
             </Menu>
         </div>
     )
-}
-
-MenuSelect.defaultProps = {
-    dataTest: 'menu-select',
 }
 
 MenuSelect.propTypes = {
