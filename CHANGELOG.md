@@ -1,3 +1,17 @@
+# [100.11.0](https://github.com/dhis2/data-exchange-app/compare/v100.10.13...v100.11.0) (2025-03-27)
+
+
+### Bug Fixes
+
+* **app-platform:** upgrade platform tools to use vite and react 18 ([bf6d967](https://github.com/dhis2/data-exchange-app/commit/bf6d9673260dbe96fdcf3914ea4b39b4d7c172ad))
+* **i18n:** update POT creation and revision dates, add application title and description ([63902d5](https://github.com/dhis2/data-exchange-app/commit/63902d572851194ba4fb458cf2f7892ac0288d40))
+* manual updates for react/vite migration ([ab22430](https://github.com/dhis2/data-exchange-app/commit/ab22430fa784427c1bfab61bf07e782adfc3a8c0))
+
+
+### Features
+
+* **i18n:** update translation strings and add new chart types ([1f8da81](https://github.com/dhis2/data-exchange-app/commit/1f8da81d77ac40c91c78900cd58e63070d2d52f4))
+
 ## [100.10.13](https://github.com/dhis2/data-exchange-app/compare/v100.10.12...v100.10.13) (2025-03-23)
 
 
