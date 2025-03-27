@@ -14,7 +14,6 @@ import {
     TogglableSubsection,
 } from '../shared/index.js'
 import styles from './advanced-options.module.css'
-import { EnableExternalEditWarning } from './external-edit-warning.jsx'
 
 const Label = ({ label, prefix, type }) => {
     if (!prefix) {
@@ -43,10 +42,7 @@ Label.propTypes = {
 
 const { Field } = ReactFinalForm
 
-export const AdvancedOptions = ({
-    editTargetSetupDisabled,
-    setEditTargetSetupDisabled,
-}) => {
+export const AdvancedOptions = () => {
     const { skipAuditDryRunImportStrategyAvailable } = useFeatureToggleContext()
 
     const [advancedOpen, setAdvancedOpen] = useState(false)
@@ -64,11 +60,6 @@ export const AdvancedOptions = ({
             onTextClick={toggleAdvancedSection}
             text={i18n.t('Advanced options')}
         >
-            <EnableExternalEditWarning
-                editTargetSetupDisabled={editTargetSetupDisabled}
-                setEditTargetSetupDisabled={setEditTargetSetupDisabled}
-                sectionName="advancedOptions"
-            />
             <div className={styles.subsectionField1000}>
                 <Field
                     name="skipAudit"
@@ -80,7 +71,6 @@ export const AdvancedOptions = ({
                         'Improves performance at the cost of ability to audit changes.'
                     )}
                     component={CheckboxFieldFF}
-                    disabled={editTargetSetupDisabled}
                 />
             </div>
             <div className={styles.subsectionField1000}>
@@ -92,7 +82,6 @@ export const AdvancedOptions = ({
                         'A dry run tests the import settings without importing any data.'
                     )}
                     component={CheckboxFieldFF}
-                    disabled={editTargetSetupDisabled}
                 />
             </div>
             <div className={styles.subsectionField1000}>
@@ -114,7 +103,6 @@ export const AdvancedOptions = ({
                                     />
                                 }
                                 value={iso.value}
-                                disabled={editTargetSetupDisabled}
                             />
                         ))}
                     </div>
@@ -122,9 +110,4 @@ export const AdvancedOptions = ({
             </div>
         </TogglableSubsection>
     )
-}
-
-AdvancedOptions.propTypes = {
-    editTargetSetupDisabled: PropTypes.bool,
-    setEditTargetSetupDisabled: PropTypes.func,
 }

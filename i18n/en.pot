@@ -5,8 +5,13 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2025-03-26T17:02:04.243Z\n"
 "PO-Revision-Date: 2025-03-26T17:02:04.243Z\n"
+=======
+"POT-Creation-Date: 2025-03-11T15:50:18.656Z\n"
+"PO-Revision-Date: 2025-03-11T15:50:18.656Z\n"
+>>>>>>> 401920dd5693615d2ea7991591fafdff441ad987
 
 msgid "Advanced options"
 msgstr "Advanced options"
@@ -136,31 +141,15 @@ msgstr "Edit exchange"
 msgid "Could not save"
 msgstr "Could not save"
 
-msgid "Editing the target setup will require you to reenter authentication details."
-msgstr "Editing the target setup will require you to reenter authentication details."
-
 msgid ""
-"Editing the input ID scheme options will require you to reenter "
-"authentication details."
+"You will need to reenter authentication details (password, api token) if "
+"you edit this information"
 msgstr ""
-"Editing the input ID scheme options will require you to reenter "
-"authentication details."
+"You will need to reenter authentication details (password, api token) if "
+"you edit this information"
 
-msgid ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
-msgstr ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
-
-msgid "Edit target setup"
-msgstr "Edit target setup"
-
-msgid "Edit input ID scheme options"
-msgstr "Edit input ID scheme options"
-
-msgid "Edit advanced options"
-msgstr "Edit advanced options"
+msgid "Edit authentication details"
+msgstr "Edit authentication details"
 
 msgid "{{firstOuName}} and {{ouLength}} others"
 msgstr "{{firstOuName}} and {{ouLength}} others"

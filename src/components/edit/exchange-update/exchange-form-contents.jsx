@@ -128,13 +128,6 @@ export const ExchangeFormContents = React.memo(
                         text={i18n.t('Target setup')}
                         dataTest="target-setup"
                     >
-                        <EnableExternalEditWarning
-                            editTargetSetupDisabled={editTargetSetupDisabled}
-                            setEditTargetSetupDisabled={
-                                setEditTargetSetupDisabled
-                            }
-                            sectionName="targetSetup"
-                        />
                         <div
                             className={styles.subsectionField600}
                             data-test="exchange-url"
@@ -145,13 +138,20 @@ export const ExchangeFormContents = React.memo(
                                 helpText={i18n.t(
                                     'The URL of the target instance or data warehouse.'
                                 )}
-                                disabled={editTargetSetupDisabled}
                                 component={InputFieldFF}
                                 validate={hasValue}
                             />
                         </div>
 
                         <div>
+                            <EnableExternalEditWarning
+                                editTargetSetupDisabled={
+                                    editTargetSetupDisabled
+                                }
+                                setEditTargetSetupDisabled={
+                                    setEditTargetSetupDisabled
+                                }
+                            />
                             <FieldContainer
                                 label={i18n.t('Authentication method')}
                             >
@@ -266,27 +266,18 @@ export const ExchangeFormContents = React.memo(
                     className={styles.idSchemeSection}
                 >
                     <>
-                        <EnableExternalEditWarning
-                            editTargetSetupDisabled={editTargetSetupDisabled}
-                            setEditTargetSetupDisabled={
-                                setEditTargetSetupDisabled
-                            }
-                            sectionName="idSchemes"
-                        />
                         <SchemeSelector
                             label={i18n.t('Input general ID scheme')}
                             description={i18n.t(
                                 'Used as the default ID scheme for all items. If the chosen scheme is not available for an item, it will fall back to using ID.'
                             )}
                             name="target_idScheme"
-                            disabled={editTargetSetupDisabled}
                             dataTest="general-id-scheme-selector"
                         />
                         <SchemeSelector
                             label={i18n.t('Input data element ID scheme')}
                             description={i18n.t('Applies to data elements.')}
                             name="target_dataElementIdScheme"
-                            disabled={editTargetSetupDisabled}
                             canBeNone={true}
                             defaultIDSchemeName={i18n.t(
                                 'Input general ID scheme'
@@ -299,7 +290,6 @@ export const ExchangeFormContents = React.memo(
                                 'Applies to organisation units.'
                             )}
                             name="target_orgUnitIdScheme"
-                            disabled={editTargetSetupDisabled}
                             canBeNone={true}
                             defaultIDSchemeName={i18n.t(
                                 'Input general ID scheme'
@@ -314,7 +304,6 @@ export const ExchangeFormContents = React.memo(
                                 'Applies to category option combos.'
                             )}
                             name="target_categoryOptionComboIdScheme"
-                            disabled={editTargetSetupDisabled}
                             canBeNone={true}
                             defaultIDSchemeName={i18n.t(
                                 'Input general ID scheme'
@@ -323,10 +312,7 @@ export const ExchangeFormContents = React.memo(
                         />
                     </>
                 </Subsection>
-                <AdvancedOptions
-                    editTargetSetupDisabled={editTargetSetupDisabled}
-                    setEditTargetSetupDisabled={setEditTargetSetupDisabled}
-                />
+                <AdvancedOptions />
             </>
         )
     }
