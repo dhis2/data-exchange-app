@@ -43,7 +43,7 @@ msgid "A unique name helps people find the right data exchange."
 msgstr "Jedinečný název pomáhá lidem najít správnou výměnu dat."
 
 msgid "Exchange target type"
-msgstr ""
+msgstr "Typ cíle Exchange"
 
 msgid "External"
 msgstr "Externí"
@@ -97,7 +97,7 @@ msgid "Requests"
 msgstr "Žádosti"
 
 msgid "Input ID scheme options"
-msgstr ""
+msgstr "Možnosti vstupního schématu ID"
 
 msgid ""
 "Specify the scheme (ID, code, attribute value) used on the target system to "
@@ -135,10 +135,10 @@ msgid "Applies to category option combos."
 msgstr "Platí pro kombinace možností kategorie."
 
 msgid "Add exchange"
-msgstr ""
+msgstr "Přidat exchange"
 
 msgid "Edit exchange"
-msgstr ""
+msgstr "Úprava exchange"
 
 msgid "Could not save"
 msgstr "Nepodařilo se uložit"
@@ -147,9 +147,11 @@ msgid ""
 "You will need to reenter authentication details (password, api token) if you"
 " edit this information"
 msgstr ""
+"Pokud tyto informace upravíte, budete muset znovu zadat ověřovací údaje "
+"(heslo, api token)."
 
 msgid "Edit authentication details"
-msgstr ""
+msgstr "Úprava údajů o ověřování"
 
 msgid "{{firstOuName}} and {{ouLength}} others"
 msgstr "{{firstOuName}} a {{ouLength}} další"
@@ -189,12 +191,14 @@ msgid "Add request"
 msgstr "Přidat požadavek"
 
 msgid "Delete exchange"
-msgstr ""
+msgstr "Smazat exchange"
 
 msgid ""
 "Deleting this exchange will remove it for all users on this instance. This "
 "action cannot be undone. Are you sure?"
 msgstr ""
+"Odstranění této výměny ji odstraní pro všechny uživatele této instance. Tuto"
+" akci nelze vrátit zpět. Jste si jisti?"
 
 msgid "No, cancel"
 msgstr "Ne, zrušit"
@@ -206,10 +210,10 @@ msgid "Exit configuration mode"
 msgstr "Ukončit režim konfigurace"
 
 msgid "Data Exchange Configurations"
-msgstr ""
+msgstr "Konfigurace Data Exchange"
 
 msgid "New exchange configuration"
-msgstr ""
+msgstr "Nová konfigurace exchange"
 
 msgid "{{numberOfRequests}} requests"
 msgstr "{{numberOfRequests}} požadavků"
@@ -227,7 +231,7 @@ msgid "Sharing"
 msgstr "Sdílení"
 
 msgid "Search for an exchange"
-msgstr ""
+msgstr "Vyhledávání exchange"
 
 msgid "Items"
 msgstr "Položky"
@@ -274,6 +278,7 @@ msgstr ""
 msgid ""
 "Configure the formatting of source data before sending to the target system."
 msgstr ""
+"Konfigurace formátování zdrojových dat před odesláním do cílového systému."
 
 msgid "Output general ID scheme"
 msgstr ""
@@ -282,7 +287,7 @@ msgid "Output data item ID scheme"
 msgstr ""
 
 msgid "Applies to data elements, indicators, and program indicators."
-msgstr ""
+msgstr "Vztahuje se na datové prvky, indikátory a programové indikátory."
 
 msgid "Output data element ID scheme"
 msgstr ""
@@ -499,52 +504,52 @@ msgid "New line list"
 msgstr "Nový řádkový seznam"
 
 msgid "Pivot table"
-msgstr ""
+msgstr "Kontingenční tabulka"
 
 msgid "Area"
-msgstr ""
+msgstr "Oblast"
 
 msgid "Stacked area"
-msgstr ""
+msgstr "Skládaná plocha"
 
 msgid "Bar"
-msgstr ""
+msgstr "LIšta"
 
 msgid "Stacked bar"
-msgstr ""
+msgstr "Skládaný lištový graf"
 
 msgid "Column"
-msgstr ""
+msgstr "Sloupec"
 
 msgid "Year over year (column)"
-msgstr ""
+msgstr "Rok po roce (sloupce)"
 
 msgid "Stacked column"
 msgstr "Skládaný sloupec"
 
 msgid "Gauge"
-msgstr ""
+msgstr "Gauge"
 
 msgid "Line"
-msgstr ""
+msgstr "Linie"
 
 msgid "Line list"
-msgstr ""
+msgstr "Seznam řádků"
 
 msgid "Year over year (line)"
-msgstr ""
+msgstr "Rok po roce (řádek)"
 
 msgid "Pie"
-msgstr ""
+msgstr "Výsečový"
 
 msgid "Radar"
 msgstr "Radar"
 
 msgid "Scatter"
-msgstr ""
+msgstr "Rozptyl"
 
 msgid "Single value"
-msgstr ""
+msgstr "Jedna hodnota"
 
 msgid "Outlier table"
 msgstr ""
@@ -553,7 +558,7 @@ msgid "All types"
 msgstr "Všechny typy"
 
 msgid "All charts"
-msgstr ""
+msgstr "Všechny grafy"
 
 msgid "None (follows {{defaultIDSchemeName}})"
 msgstr ""
