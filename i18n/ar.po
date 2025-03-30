@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Philip Larsen Donnelly, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
-# Hamza Assada <7amza.it@gmail.com>, 2024
+# Hamza Assada <7amza.it@gmail.com>, 2025
+# Viktor Varland <viktor@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-11T11:26:20.632Z\n"
+"POT-Creation-Date: 2025-03-11T15:50:18.656Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
-"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
 "Language-Team: Arabic (https://app.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -142,26 +142,11 @@ msgid "Could not save"
 msgstr ""
 
 msgid ""
-"Editing the target setup will require you to reenter authentication details."
+"You will need to reenter authentication details (password, api token) if you"
+" edit this information"
 msgstr ""
 
-msgid ""
-"Editing the input ID scheme options will require you to reenter "
-"authentication details."
-msgstr ""
-
-msgid ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
-msgstr ""
-
-msgid "Edit target setup"
-msgstr ""
-
-msgid "Edit input ID scheme options"
-msgstr ""
-
-msgid "Edit advanced options"
+msgid "Edit authentication details"
 msgstr ""
 
 msgid "{{firstOuName}} and {{ouLength}} others"
@@ -487,6 +472,63 @@ msgid ""
 msgstr ""
 
 msgid "New line list"
+msgstr ""
+
+msgid "Pivot table"
+msgstr "جدول المحوري"
+
+msgid "Area"
+msgstr "مساحة"
+
+msgid "Stacked area"
+msgstr "منطقة مكدسة"
+
+msgid "Bar"
+msgstr "مخطط شريطي"
+
+msgid "Stacked bar"
+msgstr "شريط مكدس"
+
+msgid "Column"
+msgstr "العمود"
+
+msgid "Year over year (column)"
+msgstr "عام بعد عام (عمود)"
+
+msgid "Stacked column"
+msgstr "عمود مكدس"
+
+msgid "Gauge"
+msgstr "مخطط مقياس"
+
+msgid "Line"
+msgstr "مخطط خطي"
+
+msgid "Line list"
+msgstr "قائمة سطور"
+
+msgid "Year over year (line)"
+msgstr "عام بعد عام (خط)"
+
+msgid "Pie"
+msgstr "مخطط دائري"
+
+msgid "Radar"
+msgstr "مخطط رادار"
+
+msgid "Scatter"
+msgstr ""
+
+msgid "Single value"
+msgstr "قيمة مفردة"
+
+msgid "Outlier table"
+msgstr ""
+
+msgid "All types"
+msgstr "جميع الأنواع"
+
+msgid "All charts"
 msgstr ""
 
 msgid "None (follows {{defaultIDSchemeName}})"

@@ -1,16 +1,17 @@
 # 
 # Translators:
 # Nadiia <semchuk@aph.org.ua>, 2024
-# Éva Tamási, 2024
 # Philip Larsen Donnelly, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
+# Éva Tamási, 2025
+# Wanda <wanda@frontlineaids.org>, 2025
+# Viktor Varland <viktor@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-03T14:01:27.882Z\n"
+"POT-Creation-Date: 2025-03-11T15:50:18.656Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,19 +19,22 @@ msgstr ""
 "Language: uk\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-msgid ""
-"Editing the target setup will require you to reenter authentication details."
+msgid "Advanced options"
 msgstr ""
 
-msgid ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
+msgid "Skip audit, meaning audit values will not be generated"
 msgstr ""
 
-msgid "Edit target setup"
+msgid "Improves performance at the cost of ability to audit changes."
 msgstr ""
 
-msgid "Edit advanced options"
+msgid "Dry run"
+msgstr ""
+
+msgid "A dry run tests the import settings without importing any data."
+msgstr ""
+
+msgid "Import strategy"
 msgstr ""
 
 msgid "Basic setup"
@@ -96,19 +100,38 @@ msgstr ""
 msgid "Requests"
 msgstr ""
 
-msgid "Advanced options"
+msgid "Input ID scheme options"
+msgstr ""
+
+msgid ""
+"Specify the scheme (ID, code, attribute value) used on the target system to "
+"match data coming from the source system."
 msgstr ""
 
 msgid "Input general ID scheme"
 msgstr ""
 
+msgid ""
+"Used as the default ID scheme for all items. If the chosen scheme is not "
+"available for an item, it will fall back to using ID."
+msgstr ""
+
 msgid "Input data element ID scheme"
+msgstr ""
+
+msgid "Applies to data elements."
 msgstr ""
 
 msgid "Input organisation unit ID scheme"
 msgstr ""
 
+msgid "Applies to organisation units."
+msgstr ""
+
 msgid "Input category option combo ID scheme"
+msgstr ""
+
+msgid "Applies to category option combos."
 msgstr ""
 
 msgid "Add exchange"
@@ -118,6 +141,14 @@ msgid "Edit exchange"
 msgstr ""
 
 msgid "Could not save"
+msgstr ""
+
+msgid ""
+"You will need to reenter authentication details (password, api token) if you"
+" edit this information"
+msgstr ""
+
+msgid "Edit authentication details"
 msgstr ""
 
 msgid "{{firstOuName}} and {{ouLength}} others"
@@ -236,13 +267,28 @@ msgstr ""
 msgid "Organisation units"
 msgstr "Організаційні підрозділи"
 
+msgid "Output ID scheme options"
+msgstr ""
+
+msgid ""
+"Configure the formatting of source data before sending to the target system."
+msgstr ""
+
 msgid "Output general ID scheme"
+msgstr ""
+
+msgid "Output data item ID scheme"
+msgstr ""
+
+msgid "Applies to data elements, indicators, and program indicators."
 msgstr ""
 
 msgid "Output data element ID scheme"
 msgstr ""
 
-msgid "Output data item ID scheme"
+msgid ""
+"Applies to data elements. For data elements, it will override the scheme "
+"specified by Output data item ID scheme."
 msgstr ""
 
 msgid "Output organisation unit ID scheme"
@@ -430,6 +476,66 @@ msgstr ""
 msgid "New line list"
 msgstr ""
 
+msgid "Pivot table"
+msgstr "Зведена таблиця"
+
+msgid "Area"
+msgstr "З областями"
+
+msgid "Stacked area"
+msgstr "З областями з накопиченням"
+
+msgid "Bar"
+msgstr "Гістограма"
+
+msgid "Stacked bar"
+msgstr "Гістограма з накопиченням"
+
+msgid "Column"
+msgstr "Стовпчик"
+
+msgid "Year over year (column)"
+msgstr "Рік за роком (стовпчик)"
+
+msgid "Stacked column"
+msgstr "Стовпчаста з накопиченням"
+
+msgid "Gauge"
+msgstr "Індикатор"
+
+msgid "Line"
+msgstr "Лінійна"
+
+msgid "Line list"
+msgstr "Перелік рядків"
+
+msgid "Year over year (line)"
+msgstr "Рік за роком (лінія)"
+
+msgid "Pie"
+msgstr "Секторна"
+
+msgid "Radar"
+msgstr "Пелюсткова"
+
+msgid "Scatter"
+msgstr "Точкова"
+
+msgid "Single value"
+msgstr "Одне значення"
+
+msgid "Outlier table"
+msgstr ""
+
+msgid "All types"
+msgstr "Всі типи"
+
+msgid "All charts"
+msgstr ""
+
+msgid "None (follows {{defaultIDSchemeName}})"
+msgstr ""
+
 msgid "ID"
 msgstr "ID (ідентифікатор)"
 
@@ -523,6 +629,12 @@ msgstr "Об'єки"
 
 msgid "Value"
 msgstr "Значення"
+
+msgid ""
+"This exchange is configured to skip audit information on submit, but you do "
+"not have the Skip data import audit authority. If you submit this exchange, "
+"the data will be ignored."
+msgstr ""
 
 msgid "Submitting..."
 msgstr ""

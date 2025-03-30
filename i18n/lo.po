@@ -1,16 +1,17 @@
 # 
 # Translators:
-# Namwan Chanthavisouk, 2024
 # Philip Larsen Donnelly, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
-# Saysamone Sibounma, 2024
+# Saysamone Sibounma, 2025
+# Namwan Chanthavisouk, 2025
+# Phouthasinh PHEUAYSITHIPHONE, 2025
+# Viktor Varland <viktor@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-11T11:26:20.632Z\n"
+"POT-Creation-Date: 2025-03-11T15:50:18.656Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
-"Last-Translator: Saysamone Sibounma, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -143,26 +144,11 @@ msgid "Could not save"
 msgstr ""
 
 msgid ""
-"Editing the target setup will require you to reenter authentication details."
+"You will need to reenter authentication details (password, api token) if you"
+" edit this information"
 msgstr ""
 
-msgid ""
-"Editing the input ID scheme options will require you to reenter "
-"authentication details."
-msgstr ""
-
-msgid ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
-msgstr ""
-
-msgid "Edit target setup"
-msgstr ""
-
-msgid "Edit input ID scheme options"
-msgstr ""
-
-msgid "Edit advanced options"
+msgid "Edit authentication details"
 msgstr ""
 
 msgid "{{firstOuName}} and {{ouLength}} others"
@@ -498,6 +484,63 @@ msgstr ""
 
 msgid "New line list"
 msgstr "ເພີ່ມບັນຊີລາຍຊື່ໃໝ່"
+
+msgid "Pivot table"
+msgstr "ແບບຕາຕະລາງໄພວ໋ອດ"
+
+msgid "Area"
+msgstr "ພື້ນທີ່"
+
+msgid "Stacked area"
+msgstr "ພື້ນທີ່ຊ້ອນກັນ"
+
+msgid "Bar"
+msgstr "ແຖບ"
+
+msgid "Stacked bar"
+msgstr "ແຖບຊ້ອນກັນ"
+
+msgid "Column"
+msgstr "ຖັນ"
+
+msgid "Year over year (column)"
+msgstr "ປີຕໍ່ປີ (ຖັນ)"
+
+msgid "Stacked column"
+msgstr "ຖັນຊ້ອນກັນ"
+
+msgid "Gauge"
+msgstr "ເຄື່ອງວັດແທກ"
+
+msgid "Line"
+msgstr "ເສັ້ນ"
+
+msgid "Line list"
+msgstr "ລາຍການລາຍບຸກຄົນ"
+
+msgid "Year over year (line)"
+msgstr "ປີຕໍ່ປີ (ເສັ້ນ)"
+
+msgid "Pie"
+msgstr "ພາຍ"
+
+msgid "Radar"
+msgstr "ເຣດາ"
+
+msgid "Scatter"
+msgstr "ກະແຈກກະຈາຍ"
+
+msgid "Single value"
+msgstr "ຄ່າດຽວ"
+
+msgid "Outlier table"
+msgstr "ຕາຕະລາງທີ່ເກີນກວ່າ"
+
+msgid "All types"
+msgstr "ທຸກຊະນິດ"
+
+msgid "All charts"
+msgstr "ຕາຕະລາງທັງຫມົດ"
 
 msgid "None (follows {{defaultIDSchemeName}})"
 msgstr ""
