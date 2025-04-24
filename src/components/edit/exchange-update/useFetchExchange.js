@@ -58,10 +58,49 @@ const ANALYTICS_QUERY = {
     },
 }
 
-const getMetadataByRequest = async ({ engine, variables }) => {
-    return await engine.query(ANALYTICS_QUERY, {
-        variables,
-    })
+const CHUNK_SIZE = 50
+
+const getChunkedAnalyticsQueries = ({ engine, variables, index }) => {
+    const { ou, dx, pe } = variables
+
+    const chunks = []
+    for (const variableType of ['ou', 'dx', 'pe']) {
+        for (let i = 0; i < variables[variableType].length; i += CHUNK_SIZE) {
+            chunks.push({
+                dx: [dx[0]],
+                ou: [ou[0]],
+                pe: [pe[0]],
+                [variableType]: variables[variableType].slice(
+                    i,
+                    i + CHUNK_SIZE
+                ),
+            })
+        }
+    }
+
+    return chunks.map((chunk) => ({
+        request: engine.query(ANALYTICS_QUERY, {
+            variables: chunk,
+        }),
+        index,
+    }))
+}
+
+const getMetadataByRequest = ({ engine, variables, index }) => {
+    if (
+        variables.ou.length + variables.pe.length + variables.dx.length >
+        CHUNK_SIZE
+    ) {
+        return getChunkedAnalyticsQueries({ engine, variables, index })
+    }
+    return [
+        {
+            request: engine.query(ANALYTICS_QUERY, {
+                variables,
+            }),
+            index,
+        },
+    ]
 }
 
 export const useFetchExchange = () => {
@@ -81,28 +120,33 @@ export const useFetchExchange = () => {
                 })
 
                 // get metadata information for dx, pe
-                const metadataRequests = exchange.source.requests.map(
-                    ({ ou, dx, pe, inputIdScheme = 'UID' }) => {
+                const metadataRequests = exchange.source.requests
+                    .map(({ ou, dx, pe, inputIdScheme = 'UID' }, index) => {
                         return getMetadataByRequest({
                             engine,
                             variables: { ou, dx, pe, inputIdScheme },
+                            index,
                         })
-                    }
-                )
+                    })
+                    .flat()
 
-                const metadataResponses = await Promise.all(metadataRequests)
+                const metadataResponses = await Promise.all(
+                    metadataRequests.map(({ request }) => request)
+                )
                 const metadata = metadataResponses.reduce(
                     (allItems, md, index) => {
                         // if the inputIdScheme is 'code', we need to remap the items from id to code
+                        const originalIndex = metadataRequests[index].index
                         const inputIdScheme =
-                            exchange.source.requests[index]?.inputIdScheme ??
-                            SCHEME_TYPES.uid
+                            exchange.source.requests[originalIndex]
+                                ?.inputIdScheme ?? SCHEME_TYPES.uid
                         let currentItems = {}
                         if (inputIdScheme === SCHEME_TYPES.code) {
                             currentItems = getMetadataWithCode({
                                 originalCurrentItems:
                                     md.metadata.metaData.items,
-                                request: exchange.source.requests[index],
+                                request:
+                                    exchange.source.requests[originalIndex],
                                 md,
                             })
                         } else {
