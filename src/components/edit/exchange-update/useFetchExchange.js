@@ -43,7 +43,7 @@ const VISUALIZATIONS_QUERY = {
     },
 }
 
-const ANALYTICS_QUERY = {
+export const ANALYTICS_QUERY = {
     metadata: {
         resource: 'analytics',
         params: ({ ou, dx, pe, inputIdScheme }) => ({
@@ -58,22 +58,22 @@ const ANALYTICS_QUERY = {
     },
 }
 
-const CHUNK_SIZE = 50
-
-const getChunkedAnalyticsQueries = ({ engine, variables, index }) => {
+const getChunkedAnalyticsQueries = ({
+    engine,
+    variables,
+    index,
+    chunkSize,
+}) => {
     const { ou, dx, pe } = variables
 
     const chunks = []
     for (const variableType of ['ou', 'dx', 'pe']) {
-        for (let i = 0; i < variables[variableType].length; i += CHUNK_SIZE) {
+        for (let i = 0; i < variables[variableType].length; i += chunkSize) {
             chunks.push({
                 dx: [dx[0]],
                 ou: [ou[0]],
                 pe: [pe[0]],
-                [variableType]: variables[variableType].slice(
-                    i,
-                    i + CHUNK_SIZE
-                ),
+                [variableType]: variables[variableType].slice(i, i + chunkSize),
             })
         }
     }
@@ -86,12 +86,22 @@ const getChunkedAnalyticsQueries = ({ engine, variables, index }) => {
     }))
 }
 
-const getMetadataByRequest = ({ engine, variables, index }) => {
+export const getMetadataByRequest = ({
+    engine,
+    variables,
+    index,
+    chunkSize,
+}) => {
     if (
         variables.ou.length + variables.pe.length + variables.dx.length >
-        CHUNK_SIZE
+        chunkSize
     ) {
-        return getChunkedAnalyticsQueries({ engine, variables, index })
+        return getChunkedAnalyticsQueries({
+            engine,
+            variables,
+            index,
+            chunkSize,
+        })
     }
     return [
         {
@@ -126,6 +136,7 @@ export const useFetchExchange = () => {
                             engine,
                             variables: { ou, dx, pe, inputIdScheme },
                             index,
+                            chunkSize: 50,
                         })
                     })
                     .flat()
