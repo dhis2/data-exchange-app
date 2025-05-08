@@ -1,3 +1,10 @@
+## [100.11.2](https://github.com/dhis2/data-exchange-app/compare/v100.11.1...v100.11.2) (2025-05-08)
+
+
+### Bug Fixes
+
+* handle long metadata requests [DHIS2-18402] ([#123](https://github.com/dhis2/data-exchange-app/issues/123)) ([32a55fd](https://github.com/dhis2/data-exchange-app/commit/32a55fdea386dbd4597de628edf9b2e9e2228fae))
+
 ## [100.11.1](https://github.com/dhis2/data-exchange-app/compare/v100.11.0...v100.11.1) (2025-03-30)
 
 
