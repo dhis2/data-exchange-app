@@ -47,13 +47,13 @@ msgid "Exchange target type"
 msgstr ""
 
 msgid "External"
-msgstr ""
+msgstr "外部"
 
 msgid "Send data to another DHIS2 instance or data warehouse"
 msgstr ""
 
 msgid "Internal"
-msgstr ""
+msgstr "内部"
 
 msgid "Manipulate data and transfer it inside this DHIS2 instance"
 msgstr ""
@@ -554,7 +554,7 @@ msgid "No, go back"
 msgstr ""
 
 msgid "Yes, discard changes"
-msgstr ""
+msgstr "是的，放弃更改"
 
 msgid "Save exchange"
 msgstr ""
