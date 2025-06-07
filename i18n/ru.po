@@ -656,7 +656,7 @@ msgid "Close"
 msgstr "Закрыть"
 
 msgid "Try again"
-msgstr ""
+msgstr "Попробуйте еще раз"
 
 msgid "{{orgUnitCount}} organisation unit"
 msgstr ""
