@@ -330,7 +330,7 @@ msgid "Choose a visualization"
 msgstr ""
 
 msgid "Not available"
-msgstr ""
+msgstr "ບໍ່ມີ"
 
 msgid ""
 "The requested exchange does not exist, or you do not have the relevant "

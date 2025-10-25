@@ -252,7 +252,7 @@ msgid "Request name"
 msgstr "Název požadavku"
 
 msgid "Displayed in the Data Exchange app."
-msgstr ""
+msgstr "Zobrazuje se v aplikaci Výměna dat."
 
 msgid "Filter request"
 msgstr "Požadavek na filtr"
@@ -264,7 +264,7 @@ msgid "Link request to a visualization"
 msgstr "Požadavek na propojení s vizualizací"
 
 msgid "Request visualizations are shown when submitting exchanges."
-msgstr ""
+msgstr "Vizualizace požadavků se zobrazují při odesílání výměn."
 
 msgid "Data item select"
 msgstr "Výběr datové položky"
@@ -296,6 +296,8 @@ msgid ""
 "Applies to data elements. For data elements, it will override the scheme "
 "specified by Output data item ID scheme."
 msgstr ""
+"Vztahuje se na datové prvky. U datových prvků přepíše schéma zadané "
+"schématem Output data item ID."
 
 msgid "Output organisation unit ID scheme"
 msgstr ""
@@ -552,7 +554,7 @@ msgid "Single value"
 msgstr "Jedna hodnota"
 
 msgid "Outlier table"
-msgstr ""
+msgstr "Tabulka odlehlých hodnot"
 
 msgid "All types"
 msgstr "Všechny typy"
