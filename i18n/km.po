@@ -73,7 +73,7 @@ msgid "Authentication method"
 msgstr ""
 
 msgid "Basic"
-msgstr ""
+msgstr "មូលដ្ឋាន"
 
 msgid "Personal Access token"
 msgstr ""
@@ -556,7 +556,7 @@ msgid "No, go back"
 msgstr ""
 
 msgid "Yes, discard changes"
-msgstr ""
+msgstr "បាទ/ចាស, បោះបង់ការផ្លាស់ប្តូរ"
 
 msgid "Save exchange"
 msgstr ""

@@ -1,7 +1,7 @@
 # 
 # Translators:
 # Philip Larsen Donnelly, 2024
-# Hamza Assada <7amza.it@gmail.com>, 2025
+# Hamza <7amza.it@gmail.com>, 2025
 # Viktor Varland <viktor@dhis2.org>, 2025
 # 
 msgid ""
@@ -328,7 +328,7 @@ msgid "Choose a visualization"
 msgstr ""
 
 msgid "Not available"
-msgstr ""
+msgstr "غير متوفر"
 
 msgid ""
 "The requested exchange does not exist, or you do not have the relevant "
