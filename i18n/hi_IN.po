@@ -1,13 +1,14 @@
 # 
 # Translators:
 # Siddharth Agarwal, 2025
+# Rohit Wadhwani, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-11T11:26:20.632Z\n"
+"POT-Creation-Date: 2025-03-11T15:50:18.656Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
-"Last-Translator: Siddharth Agarwal, 2025\n"
+"Last-Translator: Rohit Wadhwani, 2025\n"
 "Language-Team: Hindi (India) (https://app.transifex.com/hisp-uio/teams/100509/hi_IN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -140,26 +141,11 @@ msgid "Could not save"
 msgstr ""
 
 msgid ""
-"Editing the target setup will require you to reenter authentication details."
+"You will need to reenter authentication details (password, api token) if you"
+" edit this information"
 msgstr ""
 
-msgid ""
-"Editing the input ID scheme options will require you to reenter "
-"authentication details."
-msgstr ""
-
-msgid ""
-"Editing the advanced options will require you to reenter authentication "
-"details."
-msgstr ""
-
-msgid "Edit target setup"
-msgstr ""
-
-msgid "Edit input ID scheme options"
-msgstr ""
-
-msgid "Edit advanced options"
+msgid "Edit authentication details"
 msgstr ""
 
 msgid "{{firstOuName}} and {{ouLength}} others"
@@ -207,7 +193,7 @@ msgid ""
 msgstr ""
 
 msgid "No, cancel"
-msgstr ""
+msgstr "नहीं, कैंसल"
 
 msgid "Yes, delete"
 msgstr ""
@@ -358,7 +344,7 @@ msgid "Created by"
 msgstr ""
 
 msgid "Anyone"
-msgstr ""
+msgstr "कोई भी"
 
 msgid "Only you"
 msgstr ""
@@ -376,7 +362,7 @@ msgid "Created"
 msgstr ""
 
 msgid "Last updated"
-msgstr ""
+msgstr "अंतिम अपडेट"
 
 msgid "Type"
 msgstr ""
@@ -391,7 +377,7 @@ msgid "Open"
 msgstr ""
 
 msgid "Loading"
-msgstr ""
+msgstr "लोड हो रहा है"
 
 msgid "Couldn't load items"
 msgstr ""
@@ -410,7 +396,7 @@ msgid ""
 msgstr ""
 
 msgid "Create new"
-msgstr ""
+msgstr "नया बनाएँ"
 
 msgid "Open a visualization"
 msgstr ""
@@ -485,6 +471,63 @@ msgid ""
 msgstr ""
 
 msgid "New line list"
+msgstr ""
+
+msgid "Pivot table"
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Stacked area"
+msgstr ""
+
+msgid "Bar"
+msgstr ""
+
+msgid "Stacked bar"
+msgstr ""
+
+msgid "Column"
+msgstr ""
+
+msgid "Year over year (column)"
+msgstr ""
+
+msgid "Stacked column"
+msgstr ""
+
+msgid "Gauge"
+msgstr ""
+
+msgid "Line"
+msgstr ""
+
+msgid "Line list"
+msgstr ""
+
+msgid "Year over year (line)"
+msgstr ""
+
+msgid "Pie"
+msgstr ""
+
+msgid "Radar"
+msgstr ""
+
+msgid "Scatter"
+msgstr ""
+
+msgid "Single value"
+msgstr ""
+
+msgid "Outlier table"
+msgstr ""
+
+msgid "All types"
+msgstr ""
+
+msgid "All charts"
 msgstr ""
 
 msgid "None (follows {{defaultIDSchemeName}})"
