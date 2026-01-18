@@ -13,14 +13,14 @@
 # Philip Larsen Donnelly, 2025
 # Cyrille Kabrane, 2025
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2025
-# Esther Tokouli, 2025
+# Esther Tokouli, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2025-03-11T15:50:18.656Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
-"Last-Translator: Esther Tokouli, 2025\n"
+"Last-Translator: Esther Tokouli, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -134,9 +134,9 @@ msgid ""
 "Used as the default ID scheme for all items. If the chosen scheme is not "
 "available for an item, it will fall back to using ID."
 msgstr ""
-"Utilisé comme schéma d'identification par défaut pour tous les éléments. Si "
-"le schéma choisi n'est pas disponible pour un élément, le système utilisera "
-"l'identifiant par défaut."
+"Il est utilisé comme schéma d'identification par défaut pour tous les "
+"éléments. Si le schéma choisi n'est pas disponible pour un élément, le "
+"système utilisera l'identifiant par défaut."
 
 msgid "Input data element ID scheme"
 msgstr "Schéma d'identification des éléments de données des entrées"
@@ -311,21 +311,21 @@ msgid "Output general ID scheme"
 msgstr "Schéma d'identification général de la sortie"
 
 msgid "Output data item ID scheme"
-msgstr "Schéma d'identification de l'élément de données de sortie"
+msgstr "Le schéma d'identification de l'élément de données de sortie"
 
 msgid "Applies to data elements, indicators, and program indicators."
 msgstr ""
-"S'applique aux éléments de données, aux indicateurs et aux indicateurs de "
-"programme."
+"Il s'applique aux éléments de données, aux indicateurs et aux indicateurs de"
+" programme."
 
 msgid "Output data element ID scheme"
-msgstr "Schéma d'identification des éléments de données de sortie"
+msgstr "Le schéma d'identification des éléments de données de sortie"
 
 msgid ""
 "Applies to data elements. For data elements, it will override the scheme "
 "specified by Output data item ID scheme."
 msgstr ""
-"S'applique aux éléments de données. Pour les éléments de données, cela "
+"Il s'applique aux éléments de données. Pour les éléments de données, cela "
 "remplacera le schéma spécifié par le schéma d'identification des éléments de"
 " données de sortie."
 
@@ -563,7 +563,7 @@ msgid "Column"
 msgstr "Colonne"
 
 msgid "Year over year (column)"
-msgstr "Année après année (barre)"
+msgstr "Année après année (colonne)"
 
 msgid "Stacked column"
 msgstr "Colonne empilée"
@@ -726,8 +726,8 @@ msgid ""
 "It was not possible to submit your data. The message below provides "
 "additional detail."
 msgstr ""
-"Il n'a pas été possible d'envoyer tes données. Le message ci-dessous fournit"
-" plus de détails."
+"Il était impossible d'envoyer tes données. Le message ci-dessous fournit "
+"plus de détails."
 
 msgid "Close"
 msgstr "Fermer"
