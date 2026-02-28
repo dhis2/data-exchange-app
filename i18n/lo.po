@@ -1,4 +1,3 @@
-# 
 # Translators:
 # Philip Larsen Donnelly, 2024
 # Namwan Chanthavisouk, 2025
@@ -182,7 +181,7 @@ msgid "Data items"
 msgstr "ລາຍການຂໍ້ມູນ"
 
 msgid "Visualization"
-msgstr ""
+msgstr "ການສະແດງຜົນ (Visualization)"
 
 msgid "Add request"
 msgstr ""
