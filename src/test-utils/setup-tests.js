@@ -1,4 +1,4 @@
-import Adapter from '@cfaester/enzyme-adapter-react-18'
-import { configure } from 'enzyme'
-
-configure({ adapter: new Adapter() })
+// jsdom doesn't implement CSS.supports, but Highcharts calls it at module load time
+Object.defineProperty(global, 'CSS', {
+    value: { supports: () => true },
+})

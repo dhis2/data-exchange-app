@@ -24,8 +24,8 @@
         "@badeball/cypress-cucumber-preprocessor": "^16.0.0",
         "@cfaester/enzyme-adapter-react-18": "^0.8.0",
         "@cypress/webpack-preprocessor": "^5.17.0",
-        "@dhis2/cli-app-scripts": "^12.3.0",
-        "@dhis2/cli-style": "^10.7.6",
+        "@dhis2/cli-app-scripts": "^12.11.0",
+        "@dhis2/cli-style": "^10.7.10",
         "@dhis2/cypress-commands": "^10.0.6",
         "@dhis2/cypress-plugins": "^10.0.1",
         "@faker-js/faker": "^8.4.1",
@@ -38,9 +38,10 @@
         "start-server-and-test": "^1.14.0"
     },
     "dependencies": {
-        "@dhis2/analytics": "^26.7.9",
-        "@dhis2/app-runtime": "^3.13.1",
-        "@dhis2/ui": "^10.1.11",
+        "@dhis2/analytics": "^29.5.0",
+        "@dhis2/app-runtime": "^3.17.0",
+        "@dhis2/data-engine": "^3.17.0",
+        "@dhis2/ui": "^10.14.0",
         "classnames": "^2.5.1",
         "react-router-dom": "^6.4.1",
         "use-query-params": "^2.1.1"
