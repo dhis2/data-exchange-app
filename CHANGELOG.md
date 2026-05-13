@@ -1,3 +1,10 @@
+## [100.11.7](https://github.com/dhis2/data-exchange-app/compare/v100.11.6...v100.11.7) (2026-05-13)
+
+
+### Bug Fixes
+
+* upgrade packages ([#130](https://github.com/dhis2/data-exchange-app/issues/130)) ([0819150](https://github.com/dhis2/data-exchange-app/commit/081915069787444ea6e0a5980257fe519b6f3727))
+
 ## [100.11.6](https://github.com/dhis2/data-exchange-app/compare/v100.11.5...v100.11.6) (2026-03-01)
 
 
