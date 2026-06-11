@@ -1,3 +1,10 @@
+## [100.11.8](https://github.com/dhis2/data-exchange-app/compare/v100.11.7...v100.11.8) (2026-06-11)
+
+
+### Bug Fixes
+
+* upgrade ui library ([#131](https://github.com/dhis2/data-exchange-app/issues/131)) ([56cd095](https://github.com/dhis2/data-exchange-app/commit/56cd095f0692a1fa7a7b3ee6664060a385e59a69))
+
 ## [100.11.7](https://github.com/dhis2/data-exchange-app/compare/v100.11.6...v100.11.7) (2026-05-13)
 
 
