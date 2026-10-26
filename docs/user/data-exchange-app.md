@@ -38,9 +38,9 @@ To exchange data:
 
 The **Submit data** button does not work in these cases:
 
-- The exchange has no data. The button is disabled, and a tooltip shows the message **There is no data to submit**.
-- You already submitted the exchange in this session. The button is disabled, and a tooltip shows the message **Data has already been submitted**.
-- You do not have data write access to the exchange. The button is disabled.
+-   The exchange has no data. The button is disabled, and a tooltip shows the message **There is no data to submit**.
+-   You already submitted the exchange in this session. The button is disabled, and a tooltip shows the message **Data has already been submitted**.
+-   You do not have data write access to the exchange. The button is disabled.
 
 If you submit an internal exchange that skips audit information, you need the **Skip data import audit** authority. Without it, the confirmation dialog shows a warning, and DHIS2 ignores the data that you submit.
 
@@ -127,10 +127,10 @@ An ID scheme tells DHIS2 which identifier to use for an object: **ID**, **Code**
 
 In the request, the output ID schemes set the identifiers of the data that the exchange sends:
 
-- **Output general ID scheme:** The default scheme for all items. If the chosen scheme is not available for an item, DHIS2 uses the ID.
-- **Output data item ID scheme:** The scheme for data elements, indicators, and program indicators.
-- **Output data element ID scheme:** The scheme for data elements. It overrides **Output data item ID scheme** for data elements.
-- **Output organisation unit ID scheme:** The scheme for organisation units.
+-   **Output general ID scheme:** The default scheme for all items. If the chosen scheme is not available for an item, DHIS2 uses the ID.
+-   **Output data item ID scheme:** The scheme for data elements, indicators, and program indicators.
+-   **Output data element ID scheme:** The scheme for data elements. It overrides **Output data item ID scheme** for data elements.
+-   **Output organisation unit ID scheme:** The scheme for organisation units.
 
 In the exchange, the input ID schemes set the identifiers that the target uses to match the data that it receives. The options are **Input general ID scheme** (default **ID**), **Input data element ID scheme**, **Input organisation unit ID scheme**, and **Input category option combo ID scheme**. For every scheme except the general scheme, choose the option that starts with **None** to follow the general scheme.
 
@@ -142,13 +142,13 @@ In the exchange, the input ID schemes set the identifiers that the target uses t
 
 Click **Advanced options** in the exchange form to change how the target imports the data:
 
-- **Skip audit, meaning audit values will not be generated:** Improves performance at the cost of the ability to audit changes.
-- **Dry run:** Tests the import settings without importing any data.
-- **Import strategy:** Choose one of the following:
-    - **Merge:** Import new values and update existing values. This is the default.
-    - **Append:** Import new values only.
-    - **Update:** Only update existing values, and ignore new values.
-    - **Delete:** Remove values that the exchange includes.
+-   **Skip audit, meaning audit values will not be generated:** Improves performance at the cost of the ability to audit changes.
+-   **Dry run:** Tests the import settings without importing any data.
+-   **Import strategy:** Choose one of the following:
+    -   **Merge:** Import new values and update existing values. This is the default.
+    -   **Append:** Import new values only.
+    -   **Update:** Only update existing values, and ignore new values.
+    -   **Delete:** Remove values that the exchange includes.
 
 ![Advanced options in the exchange form](resources/images/data_exchange/data-exchange-advanced-options.png)
 
