@@ -15,7 +15,7 @@ jobs:
     test:
         uses: dhis2/workflows-platform/.github/workflows/test.yml@v1
     e2e:
-        uses: dhis2/workflows-platform/.github/workflows/legacy-e2e.yml@v1
+        uses: ./.github/workflows/legacy-e2e.yml
         # Skips forks and dependabot PRs
         if: '!github.event.push.repository.fork'
         secrets: inherit

@@ -1,0 +1,34 @@
+# Local copy of dhis2/workflows-platform/.github/workflows/legacy-e2e.yml@v1
+# with cypress-io/github-action bumped from v6 to v7 (v6 fails immediately
+# with ERR_SOCKET_CLOSED_BEFORE_CONNECTION on Node.js >= 24.20, see
+# https://github.com/cypress-io/github-action/issues/1873).
+# Temporary: switch back to the shared workflow once it has been fixed upstream.
+on:
+    workflow_call:
+        inputs:
+            api_version:
+                description: The backend api version to test against
+                default: 41
+                required: false
+                type: number
+
+jobs:
+    e2e:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: yarn
+            - uses: cypress-io/github-action@v7
+              with:
+                  start: yarn d2-app-scripts start
+                  wait-on: 'http://localhost:3000'
+                  wait-on-timeout: 300
+              env:
+                  BROWSER: none
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  CYPRESS_dhis2BaseUrl: https://debug.dhis2.org/dev
+                  CYPRESS_dhis2ApiVersion: ${{ inputs.api_version }}
+                  CYPRESS_networkMode: stub
