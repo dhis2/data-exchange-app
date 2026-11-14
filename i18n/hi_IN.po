@@ -1,4 +1,3 @@
-# 
 # Translators:
 # Siddharth Agarwal, 2025
 # Rohit Wadhwani, 2026
@@ -6,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-03-11T15:50:18.656Z\n"
+"POT-Creation-Date: 2026-05-13T07:33:46.223Z\n"
 "PO-Revision-Date: 2023-08-04 06:21+0000\n"
 "Last-Translator: Rohit Wadhwani, 2026\n"
 "Language-Team: Hindi (India) (https://app.transifex.com/hisp-uio/teams/100509/hi_IN/)\n"
@@ -220,7 +219,7 @@ msgid "Deleting..."
 msgstr ""
 
 msgid "Sharing"
-msgstr ""
+msgstr "शेयर करें"
 
 msgid "Search for an exchange"
 msgstr ""
@@ -359,7 +358,7 @@ msgid "Filter by name"
 msgstr ""
 
 msgid "Created"
-msgstr ""
+msgstr "बनाया गया"
 
 msgid "Last updated"
 msgstr "अंतिम अपडेट"
@@ -374,7 +373,7 @@ msgid "{{firstItemIndex}}-{{lastItemIndex}} of {{totalNumberOfItems}}"
 msgstr ""
 
 msgid "Open"
-msgstr ""
+msgstr "खोलें"
 
 msgid "Loading"
 msgstr "लोड हो रहा है"
@@ -598,10 +597,10 @@ msgid "Learn more about data exchange"
 msgstr ""
 
 msgid "Data"
-msgstr ""
+msgstr "डेटा"
 
 msgid "No data"
-msgstr ""
+msgstr "कोई डेटा नहीं"
 
 msgid "There is no data for this report"
 msgstr ""
@@ -625,7 +624,7 @@ msgid "Object"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "वैल्यू"
 
 msgid ""
 "This exchange is configured to skip audit information on submit, but you do "
